@@ -11,7 +11,7 @@
 // Updated on 06/23/2022 by datlaunchystark on Mixxx 2.3.3 (mostly cleaned up the code)
 // https://github.com/datlaunchystark
 
-// **** MIXXX v2.3.0 ****
+// **** MIXXX v2.3.3 ****
 // Known Bugs:
 //	Each slide/knob needs to be moved on Mixxx startup to match levels with the Mixxx UI.
 //  Jog Wheel animations sometimes don't revert to original animation after scratching.  They also don't shut off/start when a track finishes or when interacting with the mouse/other controllers.

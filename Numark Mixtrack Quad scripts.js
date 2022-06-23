@@ -8,13 +8,13 @@
 // 30/10/2014  Einar Alex - einar@gmail.com
 //
 // 08/14/2021-08/17/2021 - Edited by datlaunchystark (DJ LaunchStar) and added 4 deck support/LEDs... yeah.
-// Updated on 06/22/2022 by datlaunchystark on Mixxx 2.3.3
+// Updated on 06/23/2022 by datlaunchystark on Mixxx 2.3.3 (mostly cleaned up the code)
 // https://github.com/datlaunchystark
 
 // **** MIXXX v2.3.0 ****
 // Known Bugs:
 //	Each slide/knob needs to be moved on Mixxx startup to match levels with the Mixxx UI.
-//  Jog Wheel animations sometimes don't revert to original animation after scratching.  They also don't shut off when a track finishes.
+//  Jog Wheel animations sometimes don't revert to original animation after scratching.  They also don't shut off/start when a track finishes or when interacting with the mouse/other controllers.
 //  Reverse button (mapped to 'Stutter') sometimes stickes on until repressed when stopped.
 //
 //  What should be working.
@@ -74,46 +74,9 @@ NumarkMixTrackQuad.init = function(id) {	// called when the MIDI device is opene
 	NumarkMixTrackQuad.leds = [
 		// Common
 		{ "directory": 0x4B, "file": 0x4C },
-		// Deck 1
-		{ "rate": 0x70, "scratchMode": 0x48, "manualLoop": 0x61, 
-		"loop_start_position": 0x53, "loop_end_position": 0x54, "reloop_exit": 0x55,
-		"deleteKey" : 0x59, "hotCue1" : 0x6D,"hotCue2" : 0x6E,"hotCue3" :  0x6F,
-		"stutter" : 0x4a, "Cue" : 0x33, "sync" : 0x40,
-		},
-		// Deck 2
-		{ "rate": 0x71, "scratchMode": 0x48, "manualLoop": 0x62, 
-		"loop_start_position": 0x56, "loop_end_position": 0x57, "reloop_exit": 0x58,
-		"deleteKey" : 0x5d, "hotCue1" : 0x6D, "hotCue2" : 0x6E, "hotCue3" :  0x6F,
-		"stutter" : 0x4c, "Cue" : 0x3c, "sync" : 0x47,
-		 }
 	];
-	
-	NumarkMixTrackQuad.ledTimers = {};
-
-	NumarkMixTrackQuad.LedTimer = function(id, led, count, state){
-		this.id = id;
-		this.led = led;
-		this.count = count;
-		this.state = state;
-	}
-
-	for (i=0x30; i<=0x73; i++) midi.sendShortMsg(0x90, i, 0x00); 	// Turn off all the lights
-
-	NumarkMixTrackQuad.hotCue = {
-			//Deck 1 
-			0x6D:"1", 0x6E:"2", 0x6F:"3",
-			//Deck 2
-			0x6D: "1", 0x6E:"2", 0x6F:"3"
-			};
-	NumarkMixTrackQuad.setLED(NumarkMixTrackQuad.leds[0]["file"], true);
-
-// Enable soft-takeover for Pitch slider
-
-	engine.softTakeover("[Channel1]", "rate", true);
-	engine.softTakeover("[Channel2]", "rate", true);
-
-
 }
+
 NumarkMixTrackQuad.setLED = function(value, status) {
 
 	status = status ? 0x7F : 0x00;
@@ -290,13 +253,6 @@ NumarkMixTrackQuad.jogWheel = function(channel, control, value, status, group) {
 NumarkMixTrackQuad.jogWheelStopScratch = function(deck) {
 	NumarkMixTrackQuad.scratchTimer[deck-1] = -1;
 	engine.scratchDisable(deck);
-
-		if (NumarkMixTrackQuad.isKeyLocked[deck-1] == 1) {
-			// Restore the previous state of the Keylock
-			engine.setValue("[Channel"+deck+"]", "keylock", NumarkMixTrackQuad.isKeyLocked[deck-1]);
-			NumarkMixTrackQuad.isKeyLocked[deck-1] = 0;
-		}
-		
 }
 
 NumarkMixTrackQuad.wheelTouch = function(channel, control, value, status, group){

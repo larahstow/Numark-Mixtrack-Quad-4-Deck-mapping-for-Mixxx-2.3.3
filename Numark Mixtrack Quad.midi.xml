@@ -1506,6 +1506,7 @@
                 <status>0x91</status>
                 <midino>0x55</midino>
                 <on>0x08</on>
+                <off>0x06</off>
                 <maximum>0.1</maximum>
             </output>
             <output>
@@ -1549,7 +1550,7 @@
                 <key>loop_double</key>
                 <status>0x91</status>
                 <midino>0x54</midino>
-                <on>0x00</on>
+                <on>0x0E</on>
                 <off>0x06</off>
                 <maximum>0.1</maximum>
             </output>
@@ -1559,6 +1560,7 @@
                 <status>0x91</status>
                 <midino>0x63</midino>
                 <on>0x01</on>
+                <off>0x06</off>
                 <maximum>0.1</maximum>
             </output>
             <output>
@@ -1566,7 +1568,7 @@
                 <key>loop_halve</key>
                 <status>0x91</status>
                 <midino>0x53</midino>
-                <on>0x00</on>
+                <on>0x0E</on>
                 <off>0x06</off>
                 <maximum>0.1</maximum>
             </output>
@@ -1628,6 +1630,7 @@
                 <status>0x92</status>
                 <midino>0x55</midino>
                 <on>0x08</on>
+                <off>0x06</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -1671,7 +1674,7 @@
                 <key>loop_double</key>
                 <status>0x92</status>
                 <midino>0x54</midino>
-                <on>0x00</on>
+                <on>0x0E</on>
                 <off>0x06</off>
                 <maximum>0</maximum>
             </output>
@@ -1681,6 +1684,7 @@
                 <status>0x92</status>
                 <midino>0x63</midino>
                 <on>0x01</on>
+                <off>0x06</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -1688,7 +1692,7 @@
                 <key>loop_halve</key>
                 <status>0x92</status>
                 <midino>0x53</midino>
-                <on>0x00</on>
+                <on>0x0E</on>
                 <off>0x06</off>
                 <maximum>0</maximum>
             </output>
@@ -1750,6 +1754,7 @@
                 <status>0x93</status>
                 <midino>0x55</midino>
                 <on>0x08</on>
+                <off>0x06</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -1793,7 +1798,7 @@
                 <key>loop_double</key>
                 <status>0x93</status>
                 <midino>0x54</midino>
-                <on>0x00</on>
+                <on>0x0E</on>
                 <off>0x06</off>
                 <maximum>0</maximum>
             </output>
@@ -1803,6 +1808,7 @@
                 <status>0x93</status>
                 <midino>0x63</midino>
                 <on>0x01</on>
+                <off>0x06</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -1810,7 +1816,7 @@
                 <key>loop_halve</key>
                 <status>0x93</status>
                 <midino>0x53</midino>
-                <on>0x00</on>
+                <on>0x0E</on>
                 <off>0x06</off>
                 <maximum>0</maximum>
             </output>
@@ -1872,6 +1878,7 @@
                 <status>0x94</status>
                 <midino>0x55</midino>
                 <on>0x08</on>
+                <off>0x06</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -1915,7 +1922,7 @@
                 <key>loop_double</key>
                 <status>0x94</status>
                 <midino>0x54</midino>
-                <on>0x00</on>
+                <on>0x0E</on>
                 <off>0x06</off>
                 <maximum>0</maximum>
             </output>
@@ -1925,6 +1932,7 @@
                 <status>0x94</status>
                 <midino>0x63</midino>
                 <on>0x01</on>
+                <off>0x06</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -1932,7 +1940,7 @@
                 <key>loop_halve</key>
                 <status>0x94</status>
                 <midino>0x53</midino>
-                <on>0x00</on>
+                <on>0x0E</on>
                 <off>0x06</off>
                 <maximum>0</maximum>
             </output>

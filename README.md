@@ -49,6 +49,8 @@ Known Bugs:
 
 Credits to:
 
+- datlaunchystark
+
 - Matteo <matteo@magm3.com>
 
 - James Ralston

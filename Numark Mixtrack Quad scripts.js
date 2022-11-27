@@ -10,11 +10,12 @@
 // 08/14/2021-08/17/2021 - Edited by datlaunchystark (DJ LaunchStar) and added 4 deck support/LEDs... yeah.
 // Updated on 06/23/2022 by datlaunchystark on Mixxx 2.3.3 (mostly cleaned up the code)
 // https://github.com/datlaunchystark
-
+//
+// Updated on 11/27/2022 by DJ KWKSND (changed a bunch of code) LEDs working better with scratching, reversing, end of tracks, and autoDJ (just press play on decks 1 and 2 then start autoDJ)-(to make this better it needs a timer for deck 1 and 2 to start with the script or with autoDJ but im unsure how to do that)
+//
 // **** MIXXX v2.3.3 ****
 // Known Bugs:
 //	Each slide/knob needs to be moved on Mixxx startup to match levels with the Mixxx UI.
-//  Jog Wheel animations sometimes don't revert to original animation after scratching.  They also don't shut off/start when a track finishes or when interacting with the mouse/other controllers.
 //  Reverse button (mapped to 'Stutter') sometimes stickes on until repressed when stopped.
 //
 //  What should be working.
@@ -23,7 +24,7 @@
 // 	---------------
 //	Library Browse knob + Load A/B
 //	Channel volume, cross fader, cue gain / mix, Master gain, filters, pitch and pitch bend
-// 	JogWheel 													(Animated LEDs :D)
+// 	JogWheel (Improved Animated LEDs :D)
 //  Scratch/CD mode toggle
 //	Headphone output toggle 
 //	Samples (Using 16 samples)
@@ -55,9 +56,7 @@ NumarkMixTrackQuad.init = function(id) {	// called when the MIDI device is opene
 	NumarkMixTrackQuad.jogled = [1];
 	NumarkMixTrackQuad.reverse = [1];
 	NumarkMixTrackQuad.flashOnceTimer = [0];
-	NumarkMixTrackQuad.channel = [0];
-	NumarkMixTrackQuad.jogledstatus = [0];
-	
+	NumarkMixTrackQuad.channel = [0];	
 	
 	// Turns off jogWheel LEDs
 	midi.sendShortMsg(0xB1, 0x3C, 0);
@@ -75,24 +74,22 @@ NumarkMixTrackQuad.init = function(id) {	// called when the MIDI device is opene
 		// Common
 		{ "directory": 0x4B, "file": 0x4C },
 	];
+	// could there be timers inserted here to start the leds with the script?	
+	// would require the deck and group vars at this stage, if not can it be set when autoDJ starts?
 }
 
 NumarkMixTrackQuad.setLED = function(value, status) {
-
 	status = status ? 0x7F : 0x00;
 	midi.sendShortMsg(0x90, value, status);
 }
 
 NumarkMixTrackQuad.groupToDeck = function(group) {
-
 	var matches = group.match(/^\[Channel(\d+)\]$/);
-
 	if (matches == null) {
 		return -1;
 	} else {
 		return matches[1];
 	}
-
 }
 
 NumarkMixTrackQuad.selectKnob = function(channel, control, value, status, group) {
@@ -111,37 +108,34 @@ NumarkMixTrackQuad.selectKnob = function(channel, control, value, status, group)
 		}
 	} else {
 		engine.setValue(group, "SelectTrackKnob", value);
-
 	}
 }
 
-NumarkMixTrackQuad.flashOnceOn = function(deck, control, value, group) {
-	NumarkMixTrackQuad.jogled[deck-1] = NumarkMixTrackQuad.jogled[deck-1] + NumarkMixTrackQuad.reverse[deck-1]
-	midi.sendShortMsg(0xB0+(NumarkMixTrackQuad.channel[deck-1]), 0x3D, NumarkMixTrackQuad.jogled[deck-1]);
-	NumarkMixTrackQuad.flashOnceTimer[deck-1] = engine.beginTimer(25, "NumarkMixTrackQuad.flashOnceOff(" + deck + ")", true);
-};
-
-NumarkMixTrackQuad.flashOnceOff = function(deck, control, value, group) {
-	if (NumarkMixTrackQuad.jogled[deck-1] >= 13) {
-		NumarkMixTrackQuad.jogled[deck-1] = 1;
-	}
-	if (NumarkMixTrackQuad.jogled[deck-1] < 1) {
-		NumarkMixTrackQuad.jogled[deck-1] = 12;
-	}
+NumarkMixTrackQuad.flashOnceOn = function(deck, group) {	
 	engine.stopTimer(NumarkMixTrackQuad.flashOnceTimer[deck-1]);
-	if (NumarkMixTrackQuad.jogledstatus[deck-1] == 1) {
-		NumarkMixTrackQuad.flashOnceOn(deck, value, group)
+	if (engine.getValue(group, "play", 1)) {
+		midi.sendShortMsg(0xB0+(NumarkMixTrackQuad.channel[deck-1]), 0x3D, NumarkMixTrackQuad.jogled[deck-1]);
+	}else{
+		midi.sendShortMsg(0xB0+(NumarkMixTrackQuad.channel[deck-1]), 0x3C, 0);
 	}
+	NumarkMixTrackQuad.flashOnceTimer[deck-1] = engine.beginTimer(50, "NumarkMixTrackQuad.flashOnceOff('" + deck + "', '" + group + "')", true);
 };
 
+NumarkMixTrackQuad.flashOnceOff = function(deck, group) {	
+	NumarkMixTrackQuad.jogled[deck-1] = NumarkMixTrackQuad.jogled[deck-1] + NumarkMixTrackQuad.reverse[deck-1]
+	if (NumarkMixTrackQuad.jogled[deck-1] > 12.99) {
+		NumarkMixTrackQuad.jogled[deck-1] = 1;
+	} else if (NumarkMixTrackQuad.jogled[deck-1] < 1) {
+		NumarkMixTrackQuad.jogled[deck-1] = 12.99;
+	}
+	NumarkMixTrackQuad.flashOnceOn(deck, group)
+};
 
 NumarkMixTrackQuad.playbutton = function(channel, control, value, status, group) {
 	if (!value) return;
 	
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
-	
-	NumarkMixTrackQuad.jogledstatus[deck-1] = 0
-	
+		
 	NumarkMixTrackQuad.flashOnceTimer[deck-1] = 0;
 	NumarkMixTrackQuad.jogled[deck-1] = 1;
 
@@ -150,15 +144,12 @@ NumarkMixTrackQuad.playbutton = function(channel, control, value, status, group)
 	}else{
 		engine.setValue(group, "play", 1);
 	}
-
 	if (engine.getValue(group, "play", 1)) {
 		NumarkMixTrackQuad.channel[deck-1] = channel;
-		NumarkMixTrackQuad.jogledstatus[deck-1] = 1
 		NumarkMixTrackQuad.reverse[deck-1] = 1;
-		NumarkMixTrackQuad.flashOnceOn(deck, control, value, group)
+		NumarkMixTrackQuad.flashOnceOn(deck, group)
 	}else{
 		NumarkMixTrackQuad.channel[deck-1] = 0
-		NumarkMixTrackQuad.jogledstatus[deck-1] = 0
 		midi.sendShortMsg(0xB0+(channel), 0x3C, 0);
 	}
 }
@@ -182,12 +173,10 @@ NumarkMixTrackQuad.reversebutton = function(channel, control, value, status, gro
 			engine.setValue(group, "reverse", 0);
 		}
 	}
-	
 }
 
 NumarkMixTrackQuad.cuebutton = function(channel, control, value, status, group) {
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
-	
 	// Don't set Cue accidentaly at the end of the song
 	if (engine.getValue(group, "playposition") <= 0.97) {
 			engine.setValue(group, "cue_default", value ? 1 : 0);
@@ -200,10 +189,10 @@ NumarkMixTrackQuad.cuebutton = function(channel, control, value, status, group) 
 
 NumarkMixTrackQuad.jogWheel = function(channel, control, value, status, group) {
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
-
+	NumarkMixTrackQuad.reverse[deck-1] = 0;
 	var adjustedJog = parseFloat(value);
 	var posNeg = 1;
-	if (adjustedJog > 63) {	// Counter-clockwise
+	if (adjustedJog > 65) {	// Counter-clockwise
 		posNeg = -1;
 		adjustedJog = value - 128;
 	}
@@ -211,7 +200,6 @@ NumarkMixTrackQuad.jogWheel = function(channel, control, value, status, group) {
 	if (engine.getValue(group, "play")) {
 
 		if (NumarkMixTrackQuad.scratchMode[deck-1] && posNeg == -1 && !NumarkMixTrackQuad.touch[deck-1]) {
-
 			if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
 			NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch(" + deck + ")", true);
 		} 
@@ -219,11 +207,9 @@ NumarkMixTrackQuad.jogWheel = function(channel, control, value, status, group) {
 	} else { 
 	
 		if (!NumarkMixTrackQuad.touch[deck-1]){
-
 			if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
 			NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch(" + deck + ")", true);
 		}
-
 	}
 
 	engine.scratchTick(deck, adjustedJog);
@@ -237,14 +223,18 @@ NumarkMixTrackQuad.jogWheel = function(channel, control, value, status, group) {
 		adjustedJog = posNeg * gammaOutputRange * Math.pow(Math.abs(adjustedJog) / (gammaInputRange * maxOutFraction), sensitivity);
 		engine.setValue(group, "jog", adjustedJog);
 		
-		if (NumarkMixTrackQuad.scratchMode[deck-1] == 1) {
-			NumarkMixTrackQuad.reverse[deck-1] = adjustedJog / 1.5;
+		if (NumarkMixTrackQuad.scratchMode[deck-1] == 1) { 
+			NumarkMixTrackQuad.reverse[deck-1] = 0;
+			if (posNeg < 0) {	// Counter-clockwise
+				NumarkMixTrackQuad.reverse[deck-1] = -0.25;
+			} else {
+				NumarkMixTrackQuad.reverse[deck-1] = 0.25;
+			}
 		}
 		if (NumarkMixTrackQuad.touch[deck-1] == 0) {
+			NumarkMixTrackQuad.reverse[deck-1] = 1;
 			if (engine.getValue(group,"reverse") == 1) {
 				NumarkMixTrackQuad.reverse[deck-1] = -1;
-			}else {
-				NumarkMixTrackQuad.reverse[deck-1] = 1;
 			}
 		}
 	}
@@ -253,15 +243,17 @@ NumarkMixTrackQuad.jogWheel = function(channel, control, value, status, group) {
 NumarkMixTrackQuad.jogWheelStopScratch = function(deck) {
 	NumarkMixTrackQuad.scratchTimer[deck-1] = -1;
 	engine.scratchDisable(deck);
+	NumarkMixTrackQuad.reverse[deck-1] = 1;
 }
 
 NumarkMixTrackQuad.wheelTouch = function(channel, control, value, status, group){
 
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
+			NumarkMixTrackQuad.reverse[deck-1] = 0;
 
 	if(!value){
 		if (engine.getValue(group, "play", 1)) {
-
+			
 		}else{
 			midi.sendShortMsg(0xB0+(channel), 0x3C, 0);
 		}

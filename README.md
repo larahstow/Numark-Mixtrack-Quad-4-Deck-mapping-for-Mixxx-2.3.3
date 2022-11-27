@@ -13,7 +13,7 @@ Or if you're on Mac:
 
 - Channel volume, cross fader, cue gain / mix, Master gain, filters, pitch and pitch bend
 
-- JogWheel 													(Animated LEDs :D)
+- JogWheel (IMPROVED Animated LEDs now work with scratching, end of track, play deck 1 and 2 then click pause on one then click autoDJ it works too!! :D)
 
 - Scratch/CD mode toggle
 
@@ -44,7 +44,6 @@ Or if you're on Mac:
 
 Known Bugs:
 -	Each slide/knob needs to be moved on Mixxx startup to match levels with the Mixxx UI.
-- Jog Wheel animations sometimes don't revert to original animation after scratching.  They also don't shut off when a track finishes.
 - Reverse button (mapped to 'Stutter') sometimes stickes on until repressed when stopped.
 
 

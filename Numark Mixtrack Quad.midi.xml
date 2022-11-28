@@ -1505,8 +1505,8 @@
                 <key>beatloop_activate</key>
                 <status>0x91</status>
                 <midino>0x55</midino>
-                <on>0x08</on>
-                <off>0x06</off>
+                <on>0x09</on>
+                <off>0x05</off>
                 <maximum>0.1</maximum>
             </output>
             <output>
@@ -1550,8 +1550,8 @@
                 <key>loop_double</key>
                 <status>0x91</status>
                 <midino>0x54</midino>
-                <on>0x0E</on>
-                <off>0x06</off>
+                <on>0x08</on>
+                <off>0x05</off>
                 <maximum>0.1</maximum>
             </output>
             <output>
@@ -1560,7 +1560,7 @@
                 <status>0x91</status>
                 <midino>0x63</midino>
                 <on>0x01</on>
-                <off>0x06</off>
+                <off>0x05</off>
                 <maximum>0.1</maximum>
             </output>
             <output>
@@ -1568,8 +1568,8 @@
                 <key>loop_halve</key>
                 <status>0x91</status>
                 <midino>0x53</midino>
-                <on>0x0E</on>
-                <off>0x06</off>
+                <on>0x08</on>
+                <off>0x05</off>
                 <maximum>0.1</maximum>
             </output>
             <output>
@@ -1629,8 +1629,8 @@
                 <key>beatloop_activate</key>
                 <status>0x92</status>
                 <midino>0x55</midino>
-                <on>0x08</on>
-                <off>0x06</off>
+                <on>0x09</on>
+                <off>0x05</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -1674,8 +1674,8 @@
                 <key>loop_double</key>
                 <status>0x92</status>
                 <midino>0x54</midino>
-                <on>0x0E</on>
-                <off>0x06</off>
+                <on>0x08</on>
+                <off>0x05</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -1684,7 +1684,7 @@
                 <status>0x92</status>
                 <midino>0x63</midino>
                 <on>0x01</on>
-                <off>0x06</off>
+                <off>0x05</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -1692,8 +1692,8 @@
                 <key>loop_halve</key>
                 <status>0x92</status>
                 <midino>0x53</midino>
-                <on>0x0E</on>
-                <off>0x06</off>
+                <on>0x08</on>
+                <off>0x05</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -1753,8 +1753,8 @@
                 <key>beatloop_activate</key>
                 <status>0x93</status>
                 <midino>0x55</midino>
-                <on>0x08</on>
-                <off>0x06</off>
+                <on>0x09</on>
+                <off>0x05</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -1798,8 +1798,8 @@
                 <key>loop_double</key>
                 <status>0x93</status>
                 <midino>0x54</midino>
-                <on>0x0E</on>
-                <off>0x06</off>
+                <on>0x06</on>
+                <off>0x08</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -1808,7 +1808,7 @@
                 <status>0x93</status>
                 <midino>0x63</midino>
                 <on>0x01</on>
-                <off>0x06</off>
+                <off>0x05</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -1816,8 +1816,8 @@
                 <key>loop_halve</key>
                 <status>0x93</status>
                 <midino>0x53</midino>
-                <on>0x0E</on>
-                <off>0x06</off>
+                <on>0x06</on>
+                <off>0x08</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -1877,8 +1877,8 @@
                 <key>beatloop_activate</key>
                 <status>0x94</status>
                 <midino>0x55</midino>
-                <on>0x08</on>
-                <off>0x06</off>
+                <on>0x09</on>
+                <off>0x05</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -1922,8 +1922,8 @@
                 <key>loop_double</key>
                 <status>0x94</status>
                 <midino>0x54</midino>
-                <on>0x0E</on>
-                <off>0x06</off>
+                <on>0x06</on>
+                <off>0x08</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -1932,7 +1932,7 @@
                 <status>0x94</status>
                 <midino>0x63</midino>
                 <on>0x01</on>
-                <off>0x06</off>
+                <off>0x05</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -1940,8 +1940,8 @@
                 <key>loop_halve</key>
                 <status>0x94</status>
                 <midino>0x53</midino>
-                <on>0x0E</on>
-                <off>0x06</off>
+                <on>0x06</on>
+                <off>0x08</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -2001,8 +2001,8 @@
                 <key>group_[Channel1]_enable</key>
                 <status>0x91</status>
                 <midino>0x5C</midino>
-                <on>0x00</on>
-                <off>0x06</off>
+                <on>0x02</on>
+                <off>0x05</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -2010,8 +2010,8 @@
                 <key>enabled</key>
                 <status>0x91</status>
                 <midino>0x59</midino>
-                <on>0x00</on>
-                <off>0x04</off>
+                <on>0x0A</on>
+                <off>0x05</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -2019,8 +2019,8 @@
                 <key>enabled</key>
                 <status>0x91</status>
                 <midino>0x5A</midino>
-                <on>0x00</on>
-                <off>0x04</off>
+                <on>0x0A</on>
+                <off>0x05</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -2028,8 +2028,8 @@
                 <key>enabled</key>
                 <status>0x91</status>
                 <midino>0x5B</midino>
-                <on>0x00</on>
-                <off>0x04</off>
+                <on>0x0A</on>
+                <off>0x05</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -2037,8 +2037,8 @@
                 <key>group_[Channel2]_enable</key>
                 <status>0x92</status>
                 <midino>0x5C</midino>
-                <on>0x00</on>
-                <off>0x06</off>
+                <on>0x02</on>
+                <off>0x05</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -2046,8 +2046,8 @@
                 <key>enabled</key>
                 <status>0x92</status>
                 <midino>0x59</midino>
-                <on>0x00</on>
-                <off>0x04</off>
+                <on>0x0A</on>
+                <off>0x05</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -2055,8 +2055,8 @@
                 <key>enabled</key>
                 <status>0x92</status>
                 <midino>0x5A</midino>
-                <on>0x00</on>
-                <off>0x04</off>
+                <on>0x0A</on>
+                <off>0x05</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -2064,8 +2064,8 @@
                 <key>enabled</key>
                 <status>0x92</status>
                 <midino>0x5B</midino>
-                <on>0x00</on>
-                <off>0x04</off>
+                <on>0x0A</on>
+                <off>0x05</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -2073,8 +2073,8 @@
                 <key>group_[Channel3]_enable</key>
                 <status>0x93</status>
                 <midino>0x5C</midino>
-                <on>0x00</on>
-                <off>0x06</off>
+                <on>0x02</on>
+                <off>0x08</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -2082,8 +2082,8 @@
                 <key>enabled</key>
                 <status>0x93</status>
                 <midino>0x59</midino>
-                <on>0x00</on>
-                <off>0x04</off>
+                <on>0x0A</on>
+                <off>0x08</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -2091,8 +2091,8 @@
                 <key>enabled</key>
                 <status>0x93</status>
                 <midino>0x5A</midino>
-                <on>0x00</on>
-                <off>0x04</off>
+                <on>0x0A</on>
+                <off>0x08</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -2100,8 +2100,8 @@
                 <key>enabled</key>
                 <status>0x93</status>
                 <midino>0x5B</midino>
-                <on>0x00</on>
-                <off>0x04</off>
+                <on>0x0A</on>
+                <off>0x08</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -2109,8 +2109,8 @@
                 <key>group_[Channel4]_enable</key>
                 <status>0x94</status>
                 <midino>0x5C</midino>
-                <on>0x00</on>
-                <off>0x06</off>
+                <on>0x02</on>
+                <off>0x08</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -2118,8 +2118,8 @@
                 <key>enabled</key>
                 <status>0x94</status>
                 <midino>0x59</midino>
-                <on>0x00</on>
-                <off>0x04</off>
+                <on>0x0A</on>
+                <off>0x08</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -2127,8 +2127,8 @@
                 <key>enabled</key>
                 <status>0x94</status>
                 <midino>0x5A</midino>
-                <on>0x00</on>
-                <off>0x04</off>
+                <on>0x0A</on>
+                <off>0x08</off>
                 <maximum>0</maximum>
             </output>
             <output>
@@ -2136,8 +2136,8 @@
                 <key>enabled</key>
                 <status>0x94</status>
                 <midino>0x5B</midino>
-                <on>0x00</on>
-                <off>0x04</off>
+                <on>0x0A</on>
+                <off>0x08</off>
                 <maximum>0</maximum>
             </output>
             <output>

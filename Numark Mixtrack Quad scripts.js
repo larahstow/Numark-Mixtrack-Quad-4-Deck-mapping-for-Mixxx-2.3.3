@@ -11,7 +11,10 @@
 // Updated on 06/23/2022 by datlaunchystark on Mixxx 2.3.3 (mostly cleaned up the code)
 // https://github.com/datlaunchystark
 //
-// Updated on 11/27/2022 by DJ KWKSND (changed a bunch of code) LEDs working better with scratching, reversing, end of tracks, and autoDJ (just press play on decks 1 and 2 then start autoDJ)-(to make this better it needs a timer for deck 1 and 2 to start with the script or with autoDJ but im unsure how to do that)
+// Updated on 11/27/2022 by DJ KWKSND (changed a bunch of code)
+// LEDs working better with scratching, reversing, end of tracks, and autoDJ
+// (load tracks, press play on decks 1 and 2(dj console), click pause on one deck(mouse), click start autoDJ(mouse))
+// (to make this better it needs the function for deck 1 and 2 to start with the script or with autoDJ but im unsure how to do that yet)
 //
 // **** MIXXX v2.3.3 ****
 // Known Bugs:
@@ -24,7 +27,7 @@
 // 	---------------
 //	Library Browse knob + Load A/B
 //	Channel volume, cross fader, cue gain / mix, Master gain, filters, pitch and pitch bend
-// 	JogWheel (Improved Animated LEDs :D)
+// 	JogWheel (Improved Animated LEDs by DJ KWKSND :D)
 //  Scratch/CD mode toggle
 //	Headphone output toggle 
 //	Samples (Using 16 samples)
@@ -38,7 +41,7 @@
 //			4. Loop Delete (Deactivates loop)
 //
 //  Sync
-//  Most of the LEDs are functional too. :)
+//  All of the LEDs are functional? :D
 
 function NumarkMixTrackQuad() {}
 
@@ -58,11 +61,311 @@ NumarkMixTrackQuad.init = function(id) {	// called when the MIDI device is opene
 	NumarkMixTrackQuad.flashOnceTimer = [0];
 	NumarkMixTrackQuad.channel = [0];	
 	
+	///---------- Animated Intro Turns On All LEDs ------------------>>
+	
+	// Turns on jogWheel LEDs
+	engine.beginTimer(100, "midi.sendShortMsg(0xB1, 0x3D, 1)", true);
+	engine.beginTimer(200, "midi.sendShortMsg(0xB1, 0x3D, 2)", true);
+	engine.beginTimer(300, "midi.sendShortMsg(0xB1, 0x3D, 3)", true);
+	engine.beginTimer(400, "midi.sendShortMsg(0xB1, 0x3D, 4)", true);
+	engine.beginTimer(500, "midi.sendShortMsg(0xB1, 0x3D, 5)", true);
+	engine.beginTimer(600, "midi.sendShortMsg(0xB1, 0x3D, 6)", true);
+	engine.beginTimer(700, "midi.sendShortMsg(0xB1, 0x3D, 7)", true);
+	engine.beginTimer(800, "midi.sendShortMsg(0xB1, 0x3D, 8)", true);
+	engine.beginTimer(900, "midi.sendShortMsg(0xB1, 0x3D, 9)", true);
+	engine.beginTimer(1000, "midi.sendShortMsg(0xB1, 0x3D, 10)", true);
+	engine.beginTimer(1100, "midi.sendShortMsg(0xB1, 0x3D, 11)", true);
+	engine.beginTimer(1200, "midi.sendShortMsg(0xB1, 0x3D, 12)", true);
+	engine.beginTimer(1300, "midi.sendShortMsg(0xB1, 0x3C, 1)", true);
+	engine.beginTimer(1400, "midi.sendShortMsg(0xB1, 0x3C, 2)", true);
+	engine.beginTimer(2200, "midi.sendShortMsg(0xB1, 0x3C, 3)", true);
+	engine.beginTimer(2300, "midi.sendShortMsg(0xB1, 0x3C, 4)", true);
+	engine.beginTimer(2400, "midi.sendShortMsg(0xB1, 0x3C, 5)", true);
+	engine.beginTimer(2500, "midi.sendShortMsg(0xB1, 0x3C, 6)", true);
+		
+	engine.beginTimer(100, "midi.sendShortMsg(0xB2, 0x3D, 12)", true);
+	engine.beginTimer(200, "midi.sendShortMsg(0xB2, 0x3D, 11)", true);
+	engine.beginTimer(300, "midi.sendShortMsg(0xB2, 0x3D, 10)", true);
+	engine.beginTimer(400, "midi.sendShortMsg(0xB2, 0x3D, 9)", true);
+	engine.beginTimer(500, "midi.sendShortMsg(0xB2, 0x3D, 8)", true);
+	engine.beginTimer(600, "midi.sendShortMsg(0xB2, 0x3D, 7)", true);
+	engine.beginTimer(700, "midi.sendShortMsg(0xB2, 0x3D, 6)", true);
+	engine.beginTimer(800, "midi.sendShortMsg(0xB2, 0x3D, 5)", true);
+	engine.beginTimer(900, "midi.sendShortMsg(0xB2, 0x3D, 4)", true);
+	engine.beginTimer(1000, "midi.sendShortMsg(0xB2, 0x3D, 3)", true);
+	engine.beginTimer(1100, "midi.sendShortMsg(0xB2, 0x3D, 2)", true);
+	engine.beginTimer(1200, "midi.sendShortMsg(0xB2, 0x3D, 1)", true);
+	engine.beginTimer(1300, "midi.sendShortMsg(0xB2, 0x3C, 1)", true);
+	engine.beginTimer(1400, "midi.sendShortMsg(0xB2, 0x3C, 2)", true);
+	engine.beginTimer(2200, "midi.sendShortMsg(0xB2, 0x3C, 3)", true);
+	engine.beginTimer(2300, "midi.sendShortMsg(0xB2, 0x3C, 4)", true);
+	engine.beginTimer(2400, "midi.sendShortMsg(0xB2, 0x3C, 5)", true);
+	engine.beginTimer(2500, "midi.sendShortMsg(0xB2, 0x3C, 6)", true);
+	
+	engine.beginTimer(100, "midi.sendShortMsg(0xB3, 0x3D, 1)", true);
+	engine.beginTimer(200, "midi.sendShortMsg(0xB3, 0x3D, 2)", true);
+	engine.beginTimer(300, "midi.sendShortMsg(0xB3, 0x3D, 3)", true);
+	engine.beginTimer(400, "midi.sendShortMsg(0xB3, 0x3D, 4)", true);
+	engine.beginTimer(500, "midi.sendShortMsg(0xB3, 0x3D, 5)", true);
+	engine.beginTimer(600, "midi.sendShortMsg(0xB3, 0x3D, 6)", true);
+	engine.beginTimer(700, "midi.sendShortMsg(0xB3, 0x3D, 7)", true);
+	engine.beginTimer(800, "midi.sendShortMsg(0xB3, 0x3D, 8)", true);
+	engine.beginTimer(900, "midi.sendShortMsg(0xB3, 0x3D, 9)", true);
+	engine.beginTimer(1000, "midi.sendShortMsg(0xB3, 0x3D, 10)", true);
+	engine.beginTimer(1100, "midi.sendShortMsg(0xB3, 0x3D, 11)", true);
+	engine.beginTimer(1200, "midi.sendShortMsg(0xB3, 0x3D, 12)", true);
+	engine.beginTimer(1300, "midi.sendShortMsg(0xB3, 0x3C, 1)", true);
+	engine.beginTimer(1400, "midi.sendShortMsg(0xB3, 0x3C, 2)", true);
+	engine.beginTimer(2200, "midi.sendShortMsg(0xB3, 0x3C, 3)", true);
+	engine.beginTimer(2300, "midi.sendShortMsg(0xB3, 0x3C, 4)", true);
+	engine.beginTimer(2400, "midi.sendShortMsg(0xB3, 0x3C, 5)", true);
+	engine.beginTimer(2500, "midi.sendShortMsg(0xB3, 0x3C, 6)", true);
+	
+	engine.beginTimer(100, "midi.sendShortMsg(0xB4, 0x3D, 12)", true);
+	engine.beginTimer(200, "midi.sendShortMsg(0xB4, 0x3D, 11)", true);
+	engine.beginTimer(300, "midi.sendShortMsg(0xB4, 0x3D, 10)", true);
+	engine.beginTimer(400, "midi.sendShortMsg(0xB4, 0x3D, 9)", true);
+	engine.beginTimer(500, "midi.sendShortMsg(0xB4, 0x3D, 8)", true);
+	engine.beginTimer(600, "midi.sendShortMsg(0xB4, 0x3D, 7)", true);
+	engine.beginTimer(700, "midi.sendShortMsg(0xB4, 0x3D, 6)", true);
+	engine.beginTimer(800, "midi.sendShortMsg(0xB4, 0x3D, 5)", true);
+	engine.beginTimer(900, "midi.sendShortMsg(0xB4, 0x3D, 4)", true);
+	engine.beginTimer(1000, "midi.sendShortMsg(0xB4, 0x3D, 3)", true);
+	engine.beginTimer(1100, "midi.sendShortMsg(0xB4, 0x3D, 2)", true);
+	engine.beginTimer(1200, "midi.sendShortMsg(0xB4, 0x3D, 1)", true);
+	engine.beginTimer(1300, "midi.sendShortMsg(0xB4, 0x3C, 1)", true);
+	engine.beginTimer(1400, "midi.sendShortMsg(0xB4, 0x3C, 2)", true);
+	engine.beginTimer(2200, "midi.sendShortMsg(0xB4, 0x3C, 3)", true);
+	engine.beginTimer(2300, "midi.sendShortMsg(0xB4, 0x3C, 4)", true);
+	engine.beginTimer(2400, "midi.sendShortMsg(0xB4, 0x3C, 5)", true);
+	engine.beginTimer(2500, "midi.sendShortMsg(0xB4, 0x3C, 6)", true);
+	// Hey did it just smile at me? :D
+	
+	// Turns on Scratch LEDs
+	engine.beginTimer(300, "midi.sendShortMsg(0x91, 0x48, 1)", true);
+	engine.beginTimer(300, "midi.sendShortMsg(0x92, 0x48, 1)", true);
+	engine.beginTimer(300, "midi.sendShortMsg(0x93, 0x48, 1)", true);
+	engine.beginTimer(300, "midi.sendShortMsg(0x94, 0x48, 1)", true);
+	
+	// Turns on Headphone LEDs
+	engine.beginTimer(500, "midi.sendShortMsg(0x91, 0x47, 1)", true);
+	engine.beginTimer(500, "midi.sendShortMsg(0x92, 0x47, 1)", true);
+	engine.beginTimer(400, "midi.sendShortMsg(0x93, 0x47, 1)", true);
+	engine.beginTimer(400, "midi.sendShortMsg(0x94, 0x47, 1)", true);
+	
+	// Turns on Sync LEDs
+	engine.beginTimer(800, "midi.sendShortMsg(0x91, 0x40, 1)", true);
+	engine.beginTimer(500, "midi.sendShortMsg(0x92, 0x40, 1)", true);
+	engine.beginTimer(800, "midi.sendShortMsg(0x93, 0x40, 1)", true);
+	engine.beginTimer(500, "midi.sendShortMsg(0x94, 0x40, 1)", true);
+	
+	// Turns on Cue LEDs
+	engine.beginTimer(700, "midi.sendShortMsg(0x91, 0x33, 1)", true);
+	engine.beginTimer(600, "midi.sendShortMsg(0x92, 0x33, 1)", true);
+	engine.beginTimer(700, "midi.sendShortMsg(0x93, 0x33, 1)", true);
+	engine.beginTimer(600, "midi.sendShortMsg(0x94, 0x33, 1)", true);
+
+	// Turns on Play/Pause LEDs
+	engine.beginTimer(600, "midi.sendShortMsg(0x91, 0x42, 1)", true);
+	engine.beginTimer(700, "midi.sendShortMsg(0x92, 0x42, 1)", true);
+	engine.beginTimer(600, "midi.sendShortMsg(0x93, 0x42, 1)", true);
+	engine.beginTimer(700, "midi.sendShortMsg(0x94, 0x42, 1)", true);
+	
+	// Turns on Stutter LEDs
+	engine.beginTimer(500, "midi.sendShortMsg(0x91, 0x4A, 1)", true);
+	engine.beginTimer(800, "midi.sendShortMsg(0x92, 0x4A, 1)", true);
+	engine.beginTimer(500, "midi.sendShortMsg(0x93, 0x4A, 1)", true);
+	engine.beginTimer(800, "midi.sendShortMsg(0x94, 0x4A, 1)", true);
+	
+	// Turns on Pitch LEDs
+	engine.beginTimer(900, "midi.sendShortMsg(0x91, 0x0D, 1)", true);
+	engine.beginTimer(900, "midi.sendShortMsg(0x92, 0x0D, 1)", true);
+	engine.beginTimer(900, "midi.sendShortMsg(0x93, 0x0D, 1)", true);
+	engine.beginTimer(900, "midi.sendShortMsg(0x94, 0x0D, 1)", true);
+		
+	// Turns on FX1 LEDs
+	engine.beginTimer(1000, "midi.sendShortMsg(0x91, 0x59, 1)", true);
+	engine.beginTimer(1300, "midi.sendShortMsg(0x92, 0x59, 5)", true);
+	engine.beginTimer(1000, "midi.sendShortMsg(0x93, 0x59, 1)", true);
+	engine.beginTimer(1300, "midi.sendShortMsg(0x94, 0x59, 5)", true);
+	
+	// Turns on FX2 LEDs
+	engine.beginTimer(1100, "midi.sendShortMsg(0x91, 0x5A, 2)", true);
+	engine.beginTimer(1200, "midi.sendShortMsg(0x92, 0x5A, 6)", true);
+	engine.beginTimer(1100, "midi.sendShortMsg(0x93, 0x5A, 2)", true);
+	engine.beginTimer(1200, "midi.sendShortMsg(0x94, 0x5A, 6)", true);
+	
+	// Turns on FX3 LEDs
+	engine.beginTimer(1200, "midi.sendShortMsg(0x91, 0x5B, 3)", true);
+	engine.beginTimer(1100, "midi.sendShortMsg(0x92, 0x5B, 7)", true);
+	engine.beginTimer(1200, "midi.sendShortMsg(0x93, 0x5B, 3)", true);
+	engine.beginTimer(1100, "midi.sendShortMsg(0x94, 0x5B, 7)", true);
+	
+	// Turns on Reset LEDs
+	engine.beginTimer(1300, "midi.sendShortMsg(0x91, 0x5C, 4)", true);
+	engine.beginTimer(1000, "midi.sendShortMsg(0x92, 0x5C, 8)", true);
+	engine.beginTimer(1300, "midi.sendShortMsg(0x93, 0x5C, 4)", true);
+	engine.beginTimer(1000, "midi.sendShortMsg(0x94, 0x5C, 8)", true);
+	
+	// Turns on Loop_IN LEDs
+	engine.beginTimer(1000, "midi.sendShortMsg(0x91, 0x53, 9)", true);
+	engine.beginTimer(1300, "midi.sendShortMsg(0x92, 0x53, 13)", true);
+	engine.beginTimer(1000, "midi.sendShortMsg(0x93, 0x53, 9)", true);
+	engine.beginTimer(1300, "midi.sendShortMsg(0x94, 0x53, 13)", true);
+	
+	// Turns on Loop_OUT LEDs
+	engine.beginTimer(1100, "midi.sendShortMsg(0x91, 0x54, 10)", true);
+	engine.beginTimer(1200, "midi.sendShortMsg(0x92, 0x54, 14)", true);
+	engine.beginTimer(1100, "midi.sendShortMsg(0x93, 0x54, 10)", true);
+	engine.beginTimer(1200, "midi.sendShortMsg(0x94, 0x54, 14)", true);
+	
+	// Turns on Reloop LEDs
+	engine.beginTimer(1200, "midi.sendShortMsg(0x91, 0x55, 11)", true);
+	engine.beginTimer(1100, "midi.sendShortMsg(0x92, 0x55, 15)", true);
+	engine.beginTimer(1200, "midi.sendShortMsg(0x93, 0x55, 11)", true);
+	engine.beginTimer(1100, "midi.sendShortMsg(0x94, 0x55, 15)", true);
+	
+	// Turns on Loop_Size LEDs
+	engine.beginTimer(1300, "midi.sendShortMsg(0x91, 0x63, 12)", true);
+	engine.beginTimer(1000, "midi.sendShortMsg(0x92, 0x63, 16)", true);
+	engine.beginTimer(1300, "midi.sendShortMsg(0x93, 0x63, 12)", true);
+	engine.beginTimer(1000, "midi.sendShortMsg(0x94, 0x63, 16)", true);
+	
+	// Turns on Folder/File LEDs
+	engine.beginTimer(1400, "midi.sendShortMsg(0x90, 0x4B, 1)", true);
+	engine.beginTimer(1400, "midi.sendShortMsg(0x90, 0x4C, 1)", true);
+	
+	///---------------- Turns off unused LEDs ----------------------->>
+	
+	// Turns off jogWheel LEDs
+	engine.beginTimer(3500, "midi.sendShortMsg(0xB1, 0x3C, 0)", true);
+	engine.beginTimer(3500, "midi.sendShortMsg(0xB2, 0x3C, 0)", true);
+	engine.beginTimer(3500, "midi.sendShortMsg(0xB3, 0x3C, 0)", true);
+	engine.beginTimer(3500, "midi.sendShortMsg(0xB4, 0x3C, 0)", true);
+	
+	// Turns off Scratch LEDs
+	engine.beginTimer(3600, "midi.sendShortMsg(0x91, 0x48, 0)", true);
+	engine.beginTimer(3600, "midi.sendShortMsg(0x92, 0x48, 0)", true);
+	engine.beginTimer(3600, "midi.sendShortMsg(0x93, 0x48, 0)", true);
+	engine.beginTimer(3600, "midi.sendShortMsg(0x94, 0x48, 0)", true);
+	
+	// Turns off Headphone LEDs
+	engine.beginTimer(3700, "midi.sendShortMsg(0x91, 0x47, 0)", true);
+	engine.beginTimer(3700, "midi.sendShortMsg(0x92, 0x47, 0)", true);
+	engine.beginTimer(3700, "midi.sendShortMsg(0x93, 0x47, 0)", true);
+	engine.beginTimer(3700, "midi.sendShortMsg(0x94, 0x47, 0)", true);
+	
+	// Turns off Sync LEDs
+	engine.beginTimer(3800, "midi.sendShortMsg(0x91, 0x40, 0)", true);
+	engine.beginTimer(3800, "midi.sendShortMsg(0x92, 0x40, 0)", true);
+	engine.beginTimer(3800, "midi.sendShortMsg(0x93, 0x40, 0)", true);
+	engine.beginTimer(3800, "midi.sendShortMsg(0x94, 0x40, 0)", true);
+		
+	// Turns off Play/Pause LEDs
+	engine.beginTimer(3900, "midi.sendShortMsg(0x91, 0x42, 0)", true);
+	engine.beginTimer(3900, "midi.sendShortMsg(0x92, 0x42, 0)", true);
+	engine.beginTimer(3900, "midi.sendShortMsg(0x93, 0x42, 0)", true);
+	engine.beginTimer(3900, "midi.sendShortMsg(0x94, 0x42, 0)", true);
+	
+	// Turns off Stutter LEDs
+	engine.beginTimer(4000, "midi.sendShortMsg(0x91, 0x4A, 0)", true);
+	engine.beginTimer(4000, "midi.sendShortMsg(0x92, 0x4A, 0)", true);
+	engine.beginTimer(4000, "midi.sendShortMsg(0x93, 0x4A, 0)", true);
+	engine.beginTimer(4000, "midi.sendShortMsg(0x94, 0x4A, 0)", true);
+	
+	// Turns off FX1 LEDs
+	engine.beginTimer(4100, "midi.sendShortMsg(0x91, 0x59, 0)", true);
+	engine.beginTimer(4100, "midi.sendShortMsg(0x92, 0x59, 0)", true);
+	engine.beginTimer(4100, "midi.sendShortMsg(0x93, 0x59, 0)", true);
+	engine.beginTimer(4100, "midi.sendShortMsg(0x94, 0x59, 0)", true);
+	
+	// Turns off FX2 LEDs
+	engine.beginTimer(4200, "midi.sendShortMsg(0x91, 0x5A, 0)", true);
+	engine.beginTimer(4200, "midi.sendShortMsg(0x92, 0x5A, 0)", true);
+	engine.beginTimer(4200, "midi.sendShortMsg(0x93, 0x5A, 0)", true);
+	engine.beginTimer(4200, "midi.sendShortMsg(0x94, 0x5A, 0)", true);
+	
+	// Turns off FX3 LEDs
+	engine.beginTimer(4300, "midi.sendShortMsg(0x91, 0x5B, 0)", true);
+	engine.beginTimer(4300, "midi.sendShortMsg(0x92, 0x5B, 0)", true);
+	engine.beginTimer(4300, "midi.sendShortMsg(0x93, 0x5B, 0)", true);
+	engine.beginTimer(4300, "midi.sendShortMsg(0x94, 0x5B, 0)", true);
+	
+	// Turns off Reset LEDs
+	engine.beginTimer(4400, "midi.sendShortMsg(0x91, 0x5C, 6)", true);
+	engine.beginTimer(4400, "midi.sendShortMsg(0x92, 0x5C, 6)", true);
+	engine.beginTimer(4400, "midi.sendShortMsg(0x93, 0x5C, 6)", true);
+	engine.beginTimer(4400, "midi.sendShortMsg(0x94, 0x5C, 6)", true);
+	
+	// Turns off Loop_IN LEDs
+	engine.beginTimer(4500, "midi.sendShortMsg(0x91, 0x53, 14)", true);
+	engine.beginTimer(4500, "midi.sendShortMsg(0x92, 0x53, 14)", true);
+	engine.beginTimer(4500, "midi.sendShortMsg(0x93, 0x53, 14)", true);
+	engine.beginTimer(4500, "midi.sendShortMsg(0x94, 0x53, 14)", true);
+	
+	// Turns off Loop_OUT LEDs
+	engine.beginTimer(4600, "midi.sendShortMsg(0x91, 0x54, 14)", true);
+	engine.beginTimer(4600, "midi.sendShortMsg(0x92, 0x54, 14)", true);
+	engine.beginTimer(4600, "midi.sendShortMsg(0x93, 0x54, 14)", true);
+	engine.beginTimer(4600, "midi.sendShortMsg(0x94, 0x54, 14)", true);
+	
+	// Turns off Reloop LEDs
+	engine.beginTimer(4700, "midi.sendShortMsg(0x91, 0x55, 8)", true);
+	engine.beginTimer(4700, "midi.sendShortMsg(0x92, 0x55, 8)", true);
+	engine.beginTimer(4700, "midi.sendShortMsg(0x93, 0x55, 8)", true);
+	engine.beginTimer(4700, "midi.sendShortMsg(0x94, 0x55, 8)", true);
+	
+	// Turns off Loop_Size LEDs
+	engine.beginTimer(4800, "midi.sendShortMsg(0x91, 0x63, 1)", true);
+	engine.beginTimer(4800, "midi.sendShortMsg(0x92, 0x63, 1)", true);
+	engine.beginTimer(4800, "midi.sendShortMsg(0x93, 0x63, 1)", true);
+	engine.beginTimer(4800, "midi.sendShortMsg(0x94, 0x63, 1)", true);
+	
+	// Turns off Folder/File LEDs
+	engine.beginTimer(4900, "midi.sendShortMsg(0x90, 0x4B, 0)", true);
+	engine.beginTimer(4900, "midi.sendShortMsg(0x90, 0x4C, 1)", true);
+	
+	NumarkMixTrackQuad.leds = [
+		// Common
+		{ "directory": 0x4B, "file": 0x4C },
+	];
+	// NumarkMixTrackQuad.flashOnceOn(deck, group) i need a way to add this line here for deck 1&2	
+	// would require the deck and group vars at this stage, if not can it be set when autoDJ starts?
+}
+
+NumarkMixTrackQuad.shutdown = function() {
+	
+	// Turns off all LEDs -------->>>
+   
 	// Turns off jogWheel LEDs
 	midi.sendShortMsg(0xB1, 0x3C, 0);
 	midi.sendShortMsg(0xB2, 0x3C, 0);
 	midi.sendShortMsg(0xB3, 0x3C, 0);
 	midi.sendShortMsg(0xB4, 0x3C, 0);
+	
+	// Turns off Sync LEDs
+	midi.sendShortMsg(0x91, 0x40, 0);
+	midi.sendShortMsg(0x92, 0x40, 0);
+	midi.sendShortMsg(0x93, 0x40, 0);
+	midi.sendShortMsg(0x94, 0x40, 0);
+	
+	// Turns off Cue LEDs
+	midi.sendShortMsg(0x91, 0x33, 0);
+	midi.sendShortMsg(0x92, 0x33, 0);
+	midi.sendShortMsg(0x93, 0x33, 0);
+	midi.sendShortMsg(0x94, 0x33, 0);
+
+	// Turns off Play/Pause LEDs
+	midi.sendShortMsg(0x91, 0x42, 0);
+	midi.sendShortMsg(0x92, 0x42, 0);
+	midi.sendShortMsg(0x93, 0x42, 0);
+	midi.sendShortMsg(0x94, 0x42, 0);
+	
+	// Turns off Stutter LEDs
+	midi.sendShortMsg(0x91, 0x4A, 0);
+	midi.sendShortMsg(0x92, 0x4A, 0);
+	midi.sendShortMsg(0x93, 0x4A, 0);
+	midi.sendShortMsg(0x94, 0x4A, 0);
 	
 	// Turns off Scratch LEDs
 	midi.sendShortMsg(0x91, 0x48, 0);
@@ -70,12 +373,69 @@ NumarkMixTrackQuad.init = function(id) {	// called when the MIDI device is opene
 	midi.sendShortMsg(0x93, 0x48, 0);
 	midi.sendShortMsg(0x94, 0x48, 0);
 	
-	NumarkMixTrackQuad.leds = [
-		// Common
-		{ "directory": 0x4B, "file": 0x4C },
-	];
-	// could there be timers inserted here to start the leds with the script?	
-	// would require the deck and group vars at this stage, if not can it be set when autoDJ starts?
+	// Turns off Pitch LEDs
+	midi.sendShortMsg(0x91, 0x0D, 0);
+	midi.sendShortMsg(0x92, 0x0D, 0);
+	midi.sendShortMsg(0x93, 0x0D, 0);
+	midi.sendShortMsg(0x94, 0x0D, 0);
+	
+	// Turns off Headphone LEDs
+	midi.sendShortMsg(0x91, 0x47, 0);
+	midi.sendShortMsg(0x92, 0x47, 0);
+	midi.sendShortMsg(0x93, 0x47, 0);
+	midi.sendShortMsg(0x94, 0x47, 0);
+	
+	// Turns off FX1 LEDs
+	midi.sendShortMsg(0x91, 0x59, 0);
+	midi.sendShortMsg(0x92, 0x59, 0);
+	midi.sendShortMsg(0x93, 0x59, 0);
+	midi.sendShortMsg(0x94, 0x59, 0);
+	
+	// Turns off FX2 LEDs
+	midi.sendShortMsg(0x91, 0x5A, 0);
+	midi.sendShortMsg(0x92, 0x5A, 0);
+	midi.sendShortMsg(0x93, 0x5A, 0);
+	midi.sendShortMsg(0x94, 0x5A, 0);
+	
+	// Turns off FX3 LEDs
+	midi.sendShortMsg(0x91, 0x5B, 0);
+	midi.sendShortMsg(0x92, 0x5B, 0);
+	midi.sendShortMsg(0x93, 0x5B, 0);
+	midi.sendShortMsg(0x94, 0x5B, 0);
+	
+	// Turns off Reset LEDs
+	midi.sendShortMsg(0x91, 0x5C, 0);
+	midi.sendShortMsg(0x92, 0x5C, 0);
+	midi.sendShortMsg(0x93, 0x5C, 0);
+	midi.sendShortMsg(0x94, 0x5C, 0);
+	
+	// Turns off Loop_IN LEDs
+	midi.sendShortMsg(0x91, 0x53, 0);
+	midi.sendShortMsg(0x92, 0x53, 0);
+	midi.sendShortMsg(0x93, 0x53, 0);
+	midi.sendShortMsg(0x94, 0x53, 0);
+	
+	// Turns off Loop_OUT LEDs
+	midi.sendShortMsg(0x91, 0x54, 0);
+	midi.sendShortMsg(0x92, 0x54, 0);
+	midi.sendShortMsg(0x93, 0x54, 0);
+	midi.sendShortMsg(0x94, 0x54, 0);
+	
+	// Turns off Reloop LEDs
+	midi.sendShortMsg(0x91, 0x55, 0);
+	midi.sendShortMsg(0x92, 0x55, 0);
+	midi.sendShortMsg(0x93, 0x55, 0);
+	midi.sendShortMsg(0x94, 0x55, 0);
+	
+	// Turns off Loop_Size LEDs
+	midi.sendShortMsg(0x91, 0x63, 0);
+	midi.sendShortMsg(0x92, 0x63, 0);
+	midi.sendShortMsg(0x93, 0x63, 0);
+	midi.sendShortMsg(0x94, 0x63, 0);
+	
+	// Turns off Folder/File LEDs
+	midi.sendShortMsg(0x90, 0x4B, 0);
+	midi.sendShortMsg(0x90, 0x4C, 0);
 }
 
 NumarkMixTrackQuad.setLED = function(value, status) {
@@ -192,7 +552,7 @@ NumarkMixTrackQuad.jogWheel = function(channel, control, value, status, group) {
 	NumarkMixTrackQuad.reverse[deck-1] = 0;
 	var adjustedJog = parseFloat(value);
 	var posNeg = 1;
-	if (adjustedJog > 65) {	// Counter-clockwise
+	if (adjustedJog > 63) {	// Counter-clockwise
 		posNeg = -1;
 		adjustedJog = value - 128;
 	}

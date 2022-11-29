@@ -597,55 +597,55 @@ NumarkMixTrackQuad.lightShow = function() {
 		engine.beginTimer(4000, "midi.sendShortMsg(0x93, 0x4A, 0)", true);
 		engine.beginTimer(4000, "midi.sendShortMsg(0x94, 0x4A, 0)", true);
 		
-		// Turns off FX1 LEDs
+		// Sets FX1 LEDs to match .xml
 		engine.beginTimer(4100, "midi.sendShortMsg(0x91, 0x59, 10)", true);
 		engine.beginTimer(4100, "midi.sendShortMsg(0x92, 0x59, 10)", true);
 		engine.beginTimer(4100, "midi.sendShortMsg(0x93, 0x59, 10)", true);
 		engine.beginTimer(4100, "midi.sendShortMsg(0x94, 0x59, 10)", true);
 		
-		// Turns off FX2 LEDs
+		// Sets FX2 LEDs to match .xml
 		engine.beginTimer(4200, "midi.sendShortMsg(0x91, 0x5A, 10)", true);
 		engine.beginTimer(4200, "midi.sendShortMsg(0x92, 0x5A, 10)", true);
 		engine.beginTimer(4200, "midi.sendShortMsg(0x93, 0x5A, 10)", true);
 		engine.beginTimer(4200, "midi.sendShortMsg(0x94, 0x5A, 10)", true);
 		
-		// Turns off FX3 LEDs
+		// Sets FX3 LEDs to match .xml
 		engine.beginTimer(4300, "midi.sendShortMsg(0x91, 0x5B, 10)", true);
 		engine.beginTimer(4300, "midi.sendShortMsg(0x92, 0x5B, 10)", true);
 		engine.beginTimer(4300, "midi.sendShortMsg(0x93, 0x5B, 10)", true);
 		engine.beginTimer(4300, "midi.sendShortMsg(0x94, 0x5B, 10)", true);
 		
-		// Turns off Reset LEDs
+		// Sets Reset LEDs to match .xml
 		engine.beginTimer(4400, "midi.sendShortMsg(0x91, 0x5C, 5)", true);
 		engine.beginTimer(4400, "midi.sendShortMsg(0x92, 0x5C, 5)", true);
 		engine.beginTimer(4400, "midi.sendShortMsg(0x93, 0x5C, 8)", true);
 		engine.beginTimer(4400, "midi.sendShortMsg(0x94, 0x5C, 8)", true);
 		
-		// Turns off Loop_IN LEDs
+		// Sets Loop_IN LEDs to match .xml
 		engine.beginTimer(4500, "midi.sendShortMsg(0x91, 0x53, 8)", true);
 		engine.beginTimer(4500, "midi.sendShortMsg(0x92, 0x53, 8)", true);
 		engine.beginTimer(4500, "midi.sendShortMsg(0x93, 0x53, 6)", true);
 		engine.beginTimer(4500, "midi.sendShortMsg(0x94, 0x53, 6)", true);
 		
-		// Turns off Loop_OUT LEDs
+		// Sets Loop_OUT LEDs to match .xml
 		engine.beginTimer(4600, "midi.sendShortMsg(0x91, 0x54, 8)", true);
 		engine.beginTimer(4600, "midi.sendShortMsg(0x92, 0x54, 8)", true);
 		engine.beginTimer(4600, "midi.sendShortMsg(0x93, 0x54, 6)", true);
 		engine.beginTimer(4600, "midi.sendShortMsg(0x94, 0x54, 6)", true);
 		
-		// Turns off Reloop LEDs
+		// Sets Reloop LEDs to match .xml
 		engine.beginTimer(4700, "midi.sendShortMsg(0x91, 0x55, 9)", true);
 		engine.beginTimer(4700, "midi.sendShortMsg(0x92, 0x55, 9)", true);
 		engine.beginTimer(4700, "midi.sendShortMsg(0x93, 0x55, 9)", true);
 		engine.beginTimer(4700, "midi.sendShortMsg(0x94, 0x55, 9)", true);
 		
-		// Turns off Loop_Size LEDs
+		// Sets Loop_Size LEDs to match .xml
 		engine.beginTimer(4800, "midi.sendShortMsg(0x91, 0x63, 1)", true);
 		engine.beginTimer(4800, "midi.sendShortMsg(0x92, 0x63, 1)", true);
 		engine.beginTimer(4800, "midi.sendShortMsg(0x93, 0x63, 1)", true);
 		engine.beginTimer(4800, "midi.sendShortMsg(0x94, 0x63, 1)", true);
 		
-		// Turns off Folder/File LEDs
+		// Sets Folder/File LEDs to match Mixxx app
 		engine.beginTimer(4900, "midi.sendShortMsg(0x90, 0x4B, 0)", true);
 		engine.beginTimer(4900, "midi.sendShortMsg(0x90, 0x4C, 1)", true);
 	}

@@ -1,17 +1,59 @@
-COLORS
-1 0x01 RED
-2 0x02 ORANGE
-3 0x03 L ORANGE
-4 0x04 YELLOW
-5 0x05 GREEN
-6 0x06 L GREEN
-7 0x07 G BLUE
-8 0x08 L BLUE
-9 0x09 BLUE
-10 0x0A PURPLE
-11 0x0B PINK
-12 0x0C L RED
-13 0x0D L PINK
-14 0x0E L YELLOW
-15 0x0F PEACH
-16 0x10 L PEACH
+Colors List For Pads on Numark Mix Track Quad
+
+.js .xml Color
+
+1   0x01 RED
+2   0x02 ORANGE
+3   0x03 L ORANGE
+4   0x04 YELLOW
+5   0x05 GREEN
+6   0x06 L GREEN
+7   0x07 G BLUE
+8   0x08 L BLUE
+9   0x09 BLUE
+10  0x0A PURPLE
+11  0x0B PINK
+12  0x0C L RED
+13  0x0D L PINK
+14  0x0E L YELLOW
+15  0x0F PEACH
+16  0x10 L PEACH
+
+Hate the colors i picked?
+Look in the .xml file about 2/3 of the way down it switches from <control> to <output> this is where you can change colors :D
+Look for:
+	<output>
+		<group>[EffectRack1_EffectUnit1]</group>
+               	<key>group_[Channel1]_enable</key>
+                <status>0x91</status>
+                <midino>0x5C</midino>
+                <on>0x02</on>
+                <off>0x05</off>
+                <maximum>0</maximum>
+	</output>
+The 0x05 above is the color green when the app and pad is in the off position
+
+Apply the codes from the above colors list but beware.
+If you change the colors in the .xml you may also have to change colors in the .js
+At the bottom of the NumarkMixTrackQuad.lightShow function after line 600 
+Look for:
+	// Sets Reset LEDs to match .xml
+	engine.beginTimer(4400, "midi.sendShortMsg(0x91, 0x5C, 5)", true);
+The 5 above is the color green
+
+It will be best if the color matches after the intro so youre all ready to dj
+
+Yes pay close attention these 2 bits of code refer to the same pad on the controller
+In the .xml the Mixxx app and what the pad does defines what the group is called
+	<group>[EffectRack1_EffectUnit1]</group>
+But
+The in the .js i grouped the code so its using the name of the button on the controller itself
+	// Sets Reset LEDs to match .xml
+It's easier read "Reset LEDs" than to read 0x91, 0x5C lol
+
+The easiest way to do a color change might be to decide your pads resting colors in the .js
+Take note of the old colors you remove and what you replced them with
+Then in the bottom 2/3 of the .xml search for the old color codes you removed and update them to match
+Make sure they are the same pad and in the same state on/off etc
+Its not too hard, but it also not to hard to mess it up lol, make backups.
+Have Fun DJ KWKSND

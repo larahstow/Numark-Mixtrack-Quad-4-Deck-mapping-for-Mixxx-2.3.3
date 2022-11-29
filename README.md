@@ -9,7 +9,7 @@ Or if you're on Mac:
 
 Whats New?
   - New Colors on Most Pads
-  - IMPROVED Animated LEDs, Beautiful intro on Mixxx startup, LEDs now work with scratching, end of track, and AutoDJ
+  - IMPROVED Animated LEDs, Beautiful intro on Mixxx startup, LEDs work with scratching, end of track, and AutoDJ
   - Shutdown added to shut off all possible LEDs on Mixxx shutdown 
 
 Features:

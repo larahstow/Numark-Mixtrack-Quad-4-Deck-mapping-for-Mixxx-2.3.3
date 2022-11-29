@@ -37,4 +37,5 @@ Credits to:
   - James Ralston
   - Darío José Freije <dario2004@gmail.com>
   - and Einar Alex (einaralex) https://github.com/einaralex/
+
 For the original code and the idea to get this controller functional in Mixxx.  You guys are awesome! :)

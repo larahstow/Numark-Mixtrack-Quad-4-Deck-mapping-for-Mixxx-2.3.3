@@ -248,8 +248,8 @@ NumarkMixTrackQuad.init = function(id) {	// called when the MIDI device is opene
 	engine.beginTimer(1000, "LSLEDsd", true); var cnt32 = 0; LSLEDsd = function() { colorTimer32 = engine.beginTimer(100, "LSLEDsd", true); cnt32 = cnt32 + 1; if (cnt32 > 16) { engine.stopTimer(colorTimer32); } midi.sendShortMsg(0x94, 0x63, cnt32);}
 	
 	// Turns on Folder/File LEDs
-	engine.beginTimer(1500, "midi.sendShortMsg(0x90, 0x4B, 1)", true);
-	engine.beginTimer(1500, "midi.sendShortMsg(0x90, 0x4C, 1)", true);
+	engine.beginTimer(3100, "midi.sendShortMsg(0x90, 0x4B, 1)", true);
+	engine.beginTimer(3100, "midi.sendShortMsg(0x90, 0x4C, 1)", true);
 	
 	//---------------- Turns off unused LEDs ----------------------->>
 	

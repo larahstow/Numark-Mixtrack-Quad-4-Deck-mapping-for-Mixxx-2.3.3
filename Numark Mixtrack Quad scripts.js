@@ -129,7 +129,6 @@ NumarkMixTrackQuad.flashOnceOff = function(deck, group) {
 };
 
 NumarkMixTrackQuad.playbutton = function(channel, control, value, status, group) {
-	alert(wtf)
 	NumarkMixTrackQuad.untouched = 0;
 	if (!value) return;
 	

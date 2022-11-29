@@ -42,7 +42,9 @@
 //
 //  Sync
 //  All of the LEDs are functional? :D
+
 engine.beginTimer(1, "NumarkMixTrackQuad.shutdown()", true);
+
 function NumarkMixTrackQuad() {}
 
 NumarkMixTrackQuad.init = function(id) {	// called when the MIDI device is opened & set up
@@ -58,299 +60,551 @@ NumarkMixTrackQuad.init = function(id) {	// called when the MIDI device is opene
 	NumarkMixTrackQuad.reverse = [1];
 	NumarkMixTrackQuad.flashOnceTimer = [0];
 	NumarkMixTrackQuad.channel = [0];	
-	
-	///---------- Animated Intro Turns On All LEDs ------------------>>
-	
-	//COLORS
-	//1 0x01 RED
-	//2 0x02 ORANGE
-	//3 0x03 L ORANGE
-	//4 0x04 YELLOW
-	//5 0x05 GREEN
-	//6 0x06 L GREEN
-	//7 0x07 G BLUE
-	//8 0x08 L BLUE
-	//9 0x09 BLUE
-	//10 0x0A PURPLE
-	//11 0x0B PINK
-	//12 0x0C L RED
-	//13 0x0D L PINK
-	//14 0x0E L YELLOW
-	//15 0x0F PEACH
-	//16 0x10 L PEACH
-	
-	// Turns on jogWheel LEDs
-	engine.beginTimer(100, "midi.sendShortMsg(0xB1, 0x3D, 1)", true);
-	engine.beginTimer(200, "midi.sendShortMsg(0xB1, 0x3D, 2)", true);
-	engine.beginTimer(300, "midi.sendShortMsg(0xB1, 0x3D, 3)", true);
-	engine.beginTimer(400, "midi.sendShortMsg(0xB1, 0x3D, 4)", true);
-	engine.beginTimer(500, "midi.sendShortMsg(0xB1, 0x3D, 5)", true);
-	engine.beginTimer(600, "midi.sendShortMsg(0xB1, 0x3D, 6)", true);
-	engine.beginTimer(700, "midi.sendShortMsg(0xB1, 0x3D, 7)", true);
-	engine.beginTimer(800, "midi.sendShortMsg(0xB1, 0x3D, 8)", true);
-	engine.beginTimer(900, "midi.sendShortMsg(0xB1, 0x3D, 9)", true);
-	engine.beginTimer(1000, "midi.sendShortMsg(0xB1, 0x3D, 10)", true);
-	engine.beginTimer(1100, "midi.sendShortMsg(0xB1, 0x3D, 11)", true);
-	engine.beginTimer(1200, "midi.sendShortMsg(0xB1, 0x3D, 12)", true);
-	engine.beginTimer(1300, "midi.sendShortMsg(0xB1, 0x3C, 1)", true);
-	engine.beginTimer(1400, "midi.sendShortMsg(0xB1, 0x3C, 2)", true);
-	engine.beginTimer(2200, "midi.sendShortMsg(0xB1, 0x3C, 3)", true);
-	engine.beginTimer(2300, "midi.sendShortMsg(0xB1, 0x3C, 4)", true);
-	engine.beginTimer(2400, "midi.sendShortMsg(0xB1, 0x3C, 5)", true);
-	engine.beginTimer(2500, "midi.sendShortMsg(0xB1, 0x3C, 6)", true);
-		
-	engine.beginTimer(100, "midi.sendShortMsg(0xB2, 0x3D, 12)", true);
-	engine.beginTimer(200, "midi.sendShortMsg(0xB2, 0x3D, 11)", true);
-	engine.beginTimer(300, "midi.sendShortMsg(0xB2, 0x3D, 10)", true);
-	engine.beginTimer(400, "midi.sendShortMsg(0xB2, 0x3D, 9)", true);
-	engine.beginTimer(500, "midi.sendShortMsg(0xB2, 0x3D, 8)", true);
-	engine.beginTimer(600, "midi.sendShortMsg(0xB2, 0x3D, 7)", true);
-	engine.beginTimer(700, "midi.sendShortMsg(0xB2, 0x3D, 6)", true);
-	engine.beginTimer(800, "midi.sendShortMsg(0xB2, 0x3D, 5)", true);
-	engine.beginTimer(900, "midi.sendShortMsg(0xB2, 0x3D, 4)", true);
-	engine.beginTimer(1000, "midi.sendShortMsg(0xB2, 0x3D, 3)", true);
-	engine.beginTimer(1100, "midi.sendShortMsg(0xB2, 0x3D, 2)", true);
-	engine.beginTimer(1200, "midi.sendShortMsg(0xB2, 0x3D, 1)", true);
-	engine.beginTimer(1300, "midi.sendShortMsg(0xB2, 0x3C, 1)", true);
-	engine.beginTimer(1400, "midi.sendShortMsg(0xB2, 0x3C, 2)", true);
-	engine.beginTimer(2200, "midi.sendShortMsg(0xB2, 0x3C, 3)", true);
-	engine.beginTimer(2300, "midi.sendShortMsg(0xB2, 0x3C, 4)", true);
-	engine.beginTimer(2400, "midi.sendShortMsg(0xB2, 0x3C, 5)", true);
-	engine.beginTimer(2500, "midi.sendShortMsg(0xB2, 0x3C, 6)", true);
-	
-	engine.beginTimer(100, "midi.sendShortMsg(0xB3, 0x3D, 1)", true);
-	engine.beginTimer(200, "midi.sendShortMsg(0xB3, 0x3D, 2)", true);
-	engine.beginTimer(300, "midi.sendShortMsg(0xB3, 0x3D, 3)", true);
-	engine.beginTimer(400, "midi.sendShortMsg(0xB3, 0x3D, 4)", true);
-	engine.beginTimer(500, "midi.sendShortMsg(0xB3, 0x3D, 5)", true);
-	engine.beginTimer(600, "midi.sendShortMsg(0xB3, 0x3D, 6)", true);
-	engine.beginTimer(700, "midi.sendShortMsg(0xB3, 0x3D, 7)", true);
-	engine.beginTimer(800, "midi.sendShortMsg(0xB3, 0x3D, 8)", true);
-	engine.beginTimer(900, "midi.sendShortMsg(0xB3, 0x3D, 9)", true);
-	engine.beginTimer(1000, "midi.sendShortMsg(0xB3, 0x3D, 10)", true);
-	engine.beginTimer(1100, "midi.sendShortMsg(0xB3, 0x3D, 11)", true);
-	engine.beginTimer(1200, "midi.sendShortMsg(0xB3, 0x3D, 12)", true);
-	engine.beginTimer(1300, "midi.sendShortMsg(0xB3, 0x3C, 1)", true);
-	engine.beginTimer(1400, "midi.sendShortMsg(0xB3, 0x3C, 2)", true);
-	engine.beginTimer(2200, "midi.sendShortMsg(0xB3, 0x3C, 3)", true);
-	engine.beginTimer(2300, "midi.sendShortMsg(0xB3, 0x3C, 4)", true);
-	engine.beginTimer(2400, "midi.sendShortMsg(0xB3, 0x3C, 5)", true);
-	engine.beginTimer(2500, "midi.sendShortMsg(0xB3, 0x3C, 6)", true);
-	
-	engine.beginTimer(100, "midi.sendShortMsg(0xB4, 0x3D, 12)", true);
-	engine.beginTimer(200, "midi.sendShortMsg(0xB4, 0x3D, 11)", true);
-	engine.beginTimer(300, "midi.sendShortMsg(0xB4, 0x3D, 10)", true);
-	engine.beginTimer(400, "midi.sendShortMsg(0xB4, 0x3D, 9)", true);
-	engine.beginTimer(500, "midi.sendShortMsg(0xB4, 0x3D, 8)", true);
-	engine.beginTimer(600, "midi.sendShortMsg(0xB4, 0x3D, 7)", true);
-	engine.beginTimer(700, "midi.sendShortMsg(0xB4, 0x3D, 6)", true);
-	engine.beginTimer(800, "midi.sendShortMsg(0xB4, 0x3D, 5)", true);
-	engine.beginTimer(900, "midi.sendShortMsg(0xB4, 0x3D, 4)", true);
-	engine.beginTimer(1000, "midi.sendShortMsg(0xB4, 0x3D, 3)", true);
-	engine.beginTimer(1100, "midi.sendShortMsg(0xB4, 0x3D, 2)", true);
-	engine.beginTimer(1200, "midi.sendShortMsg(0xB4, 0x3D, 1)", true);
-	engine.beginTimer(1300, "midi.sendShortMsg(0xB4, 0x3C, 1)", true);
-	engine.beginTimer(1400, "midi.sendShortMsg(0xB4, 0x3C, 2)", true);
-	engine.beginTimer(2200, "midi.sendShortMsg(0xB4, 0x3C, 3)", true);
-	engine.beginTimer(2300, "midi.sendShortMsg(0xB4, 0x3C, 4)", true);
-	engine.beginTimer(2400, "midi.sendShortMsg(0xB4, 0x3C, 5)", true);
-	engine.beginTimer(2500, "midi.sendShortMsg(0xB4, 0x3C, 6)", true);
-	// Hey did it just smile at me? :D
-	
-	// Turns on Scratch LEDs
-	engine.beginTimer(300, "midi.sendShortMsg(0x91, 0x48, 1)", true);
-	engine.beginTimer(300, "midi.sendShortMsg(0x92, 0x48, 1)", true);
-	engine.beginTimer(300, "midi.sendShortMsg(0x93, 0x48, 1)", true);
-	engine.beginTimer(300, "midi.sendShortMsg(0x94, 0x48, 1)", true);
-	
-	// Turns on Headphone LEDs
-	engine.beginTimer(500, "midi.sendShortMsg(0x91, 0x47, 1)", true);
-	engine.beginTimer(500, "midi.sendShortMsg(0x92, 0x47, 1)", true);
-	engine.beginTimer(400, "midi.sendShortMsg(0x93, 0x47, 1)", true);
-	engine.beginTimer(400, "midi.sendShortMsg(0x94, 0x47, 1)", true);
-	
-	// Turns on Sync LEDs
-	engine.beginTimer(800, "midi.sendShortMsg(0x91, 0x40, 1)", true);
-	engine.beginTimer(500, "midi.sendShortMsg(0x92, 0x40, 1)", true);
-	engine.beginTimer(800, "midi.sendShortMsg(0x93, 0x40, 1)", true);
-	engine.beginTimer(500, "midi.sendShortMsg(0x94, 0x40, 1)", true);
-	
-	// Turns on Cue LEDs
-	engine.beginTimer(700, "midi.sendShortMsg(0x91, 0x33, 1)", true);
-	engine.beginTimer(600, "midi.sendShortMsg(0x92, 0x33, 1)", true);
-	engine.beginTimer(700, "midi.sendShortMsg(0x93, 0x33, 1)", true);
-	engine.beginTimer(600, "midi.sendShortMsg(0x94, 0x33, 1)", true);
-
-	// Turns on Play/Pause LEDs
-	engine.beginTimer(600, "midi.sendShortMsg(0x91, 0x42, 1)", true);
-	engine.beginTimer(700, "midi.sendShortMsg(0x92, 0x42, 1)", true);
-	engine.beginTimer(600, "midi.sendShortMsg(0x93, 0x42, 1)", true);
-	engine.beginTimer(700, "midi.sendShortMsg(0x94, 0x42, 1)", true);
-	
-	// Turns on Stutter LEDs
-	engine.beginTimer(500, "midi.sendShortMsg(0x91, 0x4A, 1)", true);
-	engine.beginTimer(800, "midi.sendShortMsg(0x92, 0x4A, 1)", true);
-	engine.beginTimer(500, "midi.sendShortMsg(0x93, 0x4A, 1)", true);
-	engine.beginTimer(800, "midi.sendShortMsg(0x94, 0x4A, 1)", true);
-	
-	// Turns on Pitch LEDs
-	engine.beginTimer(900, "midi.sendShortMsg(0x91, 0x0D, 1)", true);
-	engine.beginTimer(900, "midi.sendShortMsg(0x92, 0x0D, 1)", true);
-	engine.beginTimer(900, "midi.sendShortMsg(0x93, 0x0D, 1)", true);
-	engine.beginTimer(900, "midi.sendShortMsg(0x94, 0x0D, 1)", true);
-		
-	// Turns on FX1 LEDs
-	engine.beginTimer(1100, "FX1a", true); var cnt1 = 0; FX1a = function() { colorTimer1 = engine.beginTimer(100, "FX1a", true); cnt1 = cnt1 + 1; if (cnt1 > 16) { engine.stopTimer(colorTimer1); } midi.sendShortMsg(0x91, 0x59, cnt1);}
-	engine.beginTimer(1400, "FX1b", true); var cnt2 = 0; FX1b = function() { colorTimer2 = engine.beginTimer(100, "FX1b", true); cnt2 = cnt2 + 1; if (cnt2 > 16) { engine.stopTimer(colorTimer2); } midi.sendShortMsg(0x92, 0x59, cnt2);}
-	engine.beginTimer(1100, "FX1c", true); var cnt3 = 0; FX1c = function() { colorTimer3 = engine.beginTimer(100, "FX1c", true); cnt3 = cnt3 + 1; if (cnt3 > 16) { engine.stopTimer(colorTimer3); } midi.sendShortMsg(0x93, 0x59, cnt3);}
-	engine.beginTimer(1400, "FX1d", true); var cnt4 = 0; FX1d = function() { colorTimer4 = engine.beginTimer(100, "FX1d", true); cnt4 = cnt4 + 1; if (cnt4 > 16) { engine.stopTimer(colorTimer4); } midi.sendShortMsg(0x94, 0x59, cnt4);}
-
-	// Turns on FX2 LEDs
-	engine.beginTimer(1200, "FX2a", true); var cnt5 = 0; FX2a = function() { colorTimer5 = engine.beginTimer(100, "FX2a", true); cnt5 = cnt5 + 1; if (cnt5 > 16) { engine.stopTimer(colorTimer5); } midi.sendShortMsg(0x91, 0x5A, cnt5);}
-	engine.beginTimer(1300, "FX2b", true); var cnt6 = 0; FX2b = function() { colorTimer6 = engine.beginTimer(100, "FX2b", true); cnt6 = cnt6 + 1; if (cnt6 > 16) { engine.stopTimer(colorTimer6); } midi.sendShortMsg(0x92, 0x5A, cnt6);}
-	engine.beginTimer(1200, "FX2c", true); var cnt7 = 0; FX2c = function() { colorTimer7 = engine.beginTimer(100, "FX2c", true); cnt7 = cnt7 + 1; if (cnt7 > 16) { engine.stopTimer(colorTimer7); } midi.sendShortMsg(0x93, 0x5A, cnt7);}
-	engine.beginTimer(1300, "FX2d", true); var cnt8 = 0; FX2d = function() { colorTimer8 = engine.beginTimer(100, "FX2d", true); cnt8 = cnt8 + 1; if (cnt8 > 16) { engine.stopTimer(colorTimer8); } midi.sendShortMsg(0x94, 0x5A, cnt8);}
-
-	// Turns on FX3 LEDs
-	engine.beginTimer(1300, "FX3a", true); var cnt9 = 0; FX3a = function() { colorTimer9 = engine.beginTimer(100, "FX3a", true); cnt9 = cnt9 + 1; if (cnt9 > 16) { engine.stopTimer(colorTimer9); } midi.sendShortMsg(0x91, 0x5B, cnt9);}
-	engine.beginTimer(1200, "FX3b", true); var cnt10 = 0; FX3b = function() { colorTimer10 = engine.beginTimer(100, "FX3b", true); cnt10 = cnt10 + 1; if (cnt10 > 16) { engine.stopTimer(colorTimer10); } midi.sendShortMsg(0x92, 0x5B, cnt10);}
-	engine.beginTimer(1300, "FX3c", true); var cnt11 = 0; FX3c = function() { colorTimer11 = engine.beginTimer(100, "FX3c", true); cnt11 = cnt11 + 1; if (cnt11 > 16) { engine.stopTimer(colorTimer11); } midi.sendShortMsg(0x93, 0x5B, cnt11);}
-	engine.beginTimer(1200, "FX3d", true); var cnt12 = 0; FX3d = function() { colorTimer12 = engine.beginTimer(100, "FX3d", true); cnt12 = cnt12 + 1; if (cnt12 > 16) { engine.stopTimer(colorTimer12); } midi.sendShortMsg(0x94, 0x5B, cnt12);}
-
-	// Turns on Reset LEDs
-	engine.beginTimer(1400, "RLEDsa", true); var cnt13 = 0; RLEDsa = function() { colorTimer13 = engine.beginTimer(100, "RLEDsa", true); cnt13 = cnt13 + 1; if (cnt13 > 16) { engine.stopTimer(colorTimer13); } midi.sendShortMsg(0x91, 0x5C, cnt13);}
-	engine.beginTimer(1100, "RLEDsb", true); var cnt14 = 0; RLEDsb = function() { colorTimer14 = engine.beginTimer(100, "RLEDsb", true); cnt14 = cnt14 + 1; if (cnt14 > 16) { engine.stopTimer(colorTimer14); } midi.sendShortMsg(0x92, 0x5C, cnt14);}
-	engine.beginTimer(1400, "RLEDsc", true); var cnt15 = 0; RLEDsc = function() { colorTimer15 = engine.beginTimer(100, "RLEDsc", true); cnt15 = cnt15 + 1; if (cnt15 > 16) { engine.stopTimer(colorTimer15); } midi.sendShortMsg(0x93, 0x5C, cnt15);}
-	engine.beginTimer(1100, "RLEDsd", true); var cnt16 = 0; RLEDsd = function() { colorTimer16 = engine.beginTimer(100, "RLEDsd", true); cnt16 = cnt16 + 1; if (cnt16 > 16) { engine.stopTimer(colorTimer16); } midi.sendShortMsg(0x94, 0x5C, cnt16);}
-
-	// Turns on Loop_IN LEDs
-	engine.beginTimer(1000, "LILEDsa", true); var cnt17 = 0; LILEDsa = function() { colorTimer17 = engine.beginTimer(100, "LILEDsa", true); cnt17 = cnt17 + 1; if (cnt17 > 16) { engine.stopTimer(colorTimer17); } midi.sendShortMsg(0x91, 0x53, cnt17);}
-	engine.beginTimer(1300, "LILEDsb", true); var cnt18 = 0; LILEDsb = function() { colorTimer18 = engine.beginTimer(100, "LILEDsb", true); cnt18 = cnt18 + 1; if (cnt18 > 16) { engine.stopTimer(colorTimer18); } midi.sendShortMsg(0x92, 0x53, cnt18);}
-	engine.beginTimer(1000, "LILEDsc", true); var cnt19 = 0; LILEDsc = function() { colorTimer19 = engine.beginTimer(100, "LILEDsc", true); cnt19 = cnt19 + 1; if (cnt19 > 16) { engine.stopTimer(colorTimer19); } midi.sendShortMsg(0x93, 0x53, cnt19);}
-	engine.beginTimer(1300, "LILEDsd", true); var cnt20 = 0; LILEDsd = function() { colorTimer20 = engine.beginTimer(100, "LILEDsd", true); cnt20 = cnt20 + 1; if (cnt20 > 16) { engine.stopTimer(colorTimer20); } midi.sendShortMsg(0x94, 0x53, cnt20);}
-
-	// Turns on Loop_OUT LEDs
-	engine.beginTimer(1100, "LOLEDsa", true); var cnt21 = 0; LOLEDsa = function() { colorTimer21 = engine.beginTimer(100, "LOLEDsa", true); cnt21 = cnt21 + 1; if (cnt21 > 16) { engine.stopTimer(colorTimer21); } midi.sendShortMsg(0x91, 0x54, cnt21);}
-	engine.beginTimer(1200, "LOLEDsb", true); var cnt22 = 0; LOLEDsb = function() { colorTimer22 = engine.beginTimer(100, "LOLEDsb", true); cnt22 = cnt22 + 1; if (cnt22 > 16) { engine.stopTimer(colorTimer22); } midi.sendShortMsg(0x92, 0x54, cnt22);}
-	engine.beginTimer(1100, "LOLEDsc", true); var cnt23 = 0; LOLEDsc = function() { colorTimer23 = engine.beginTimer(100, "LOLEDsc", true); cnt23 = cnt23 + 1; if (cnt23 > 16) { engine.stopTimer(colorTimer23); } midi.sendShortMsg(0x93, 0x54, cnt23);}
-	engine.beginTimer(1200, "LOLEDsd", true); var cnt24 = 0; LOLEDsd = function() { colorTimer24 = engine.beginTimer(100, "LOLEDsd", true); cnt24 = cnt24 + 1; if (cnt24 > 16) { engine.stopTimer(colorTimer24); } midi.sendShortMsg(0x94, 0x54, cnt24);}
-
-	// Turns on Reloop LEDs
-	engine.beginTimer(1200, "RLLEDsa", true); var cnt25 = 0; RLLEDsa = function() { colorTimer25 = engine.beginTimer(100, "RLLEDsa", true); cnt25 = cnt25 + 1; if (cnt25 > 16) { engine.stopTimer(colorTimer25); } midi.sendShortMsg(0x91, 0x55, cnt25);}
-	engine.beginTimer(1100, "RLLEDsb", true); var cnt26 = 0; RLLEDsb = function() { colorTimer26 = engine.beginTimer(100, "RLLEDsb", true); cnt26 = cnt26 + 1; if (cnt26 > 16) { engine.stopTimer(colorTimer26); } midi.sendShortMsg(0x92, 0x55, cnt26);}
-	engine.beginTimer(1200, "RLLEDsc", true); var cnt27 = 0; RLLEDsc = function() { colorTimer27 = engine.beginTimer(100, "RLLEDsc", true); cnt27 = cnt27 + 1; if (cnt27 > 16) { engine.stopTimer(colorTimer27); } midi.sendShortMsg(0x93, 0x55, cnt27);}
-	engine.beginTimer(1100, "RLLEDsd", true); var cnt28 = 0; RLLEDsd = function() { colorTimer28 = engine.beginTimer(100, "RLLEDsd", true); cnt28 = cnt28 + 1; if (cnt28 > 16) { engine.stopTimer(colorTimer28); } midi.sendShortMsg(0x94, 0x55, cnt28);}
-
-	// Turns on Loop_Size LEDs
-	engine.beginTimer(1300, "LSLEDsa", true); var cnt29 = 0; LSLEDsa = function() { colorTimer29 = engine.beginTimer(100, "LSLEDsa", true); cnt29 = cnt29 + 1; if (cnt29 > 16) { engine.stopTimer(colorTimer29); } midi.sendShortMsg(0x91, 0x63, cnt29);}
-	engine.beginTimer(1000, "LSLEDsb", true); var cnt30 = 0; LSLEDsb = function() { colorTimer30 = engine.beginTimer(100, "LSLEDsb", true); cnt30 = cnt30 + 1; if (cnt30 > 16) { engine.stopTimer(colorTimer30); } midi.sendShortMsg(0x92, 0x63, cnt30);}
-	engine.beginTimer(1300, "LSLEDsc", true); var cnt31 = 0; LSLEDsc = function() { colorTimer31 = engine.beginTimer(100, "LSLEDsc", true); cnt31 = cnt31 + 1; if (cnt31 > 16) { engine.stopTimer(colorTimer31); } midi.sendShortMsg(0x93, 0x63, cnt31);}
-	engine.beginTimer(1000, "LSLEDsd", true); var cnt32 = 0; LSLEDsd = function() { colorTimer32 = engine.beginTimer(100, "LSLEDsd", true); cnt32 = cnt32 + 1; if (cnt32 > 16) { engine.stopTimer(colorTimer32); } midi.sendShortMsg(0x94, 0x63, cnt32);}
-	
-	// Turns on Folder/File LEDs
-	engine.beginTimer(3100, "midi.sendShortMsg(0x90, 0x4B, 1)", true);
-	engine.beginTimer(3100, "midi.sendShortMsg(0x90, 0x4C, 1)", true);
-	
-	//---------------- Turns off unused LEDs ----------------------->>
-	
-	// Turns off jogWheel LEDs
-	engine.beginTimer(3500, "midi.sendShortMsg(0xB1, 0x3C, 0)", true);
-	engine.beginTimer(3500, "midi.sendShortMsg(0xB2, 0x3C, 0)", true);
-	engine.beginTimer(3500, "midi.sendShortMsg(0xB3, 0x3C, 0)", true);
-	engine.beginTimer(3500, "midi.sendShortMsg(0xB4, 0x3C, 0)", true);
-	
-	// Turns off Scratch LEDs
-	engine.beginTimer(3600, "midi.sendShortMsg(0x91, 0x48, 0)", true);
-	engine.beginTimer(3600, "midi.sendShortMsg(0x92, 0x48, 0)", true);
-	engine.beginTimer(3600, "midi.sendShortMsg(0x93, 0x48, 0)", true);
-	engine.beginTimer(3600, "midi.sendShortMsg(0x94, 0x48, 0)", true);
-	
-	// Turns off Headphone LEDs
-	engine.beginTimer(3700, "midi.sendShortMsg(0x91, 0x47, 0)", true);
-	engine.beginTimer(3700, "midi.sendShortMsg(0x92, 0x47, 0)", true);
-	engine.beginTimer(3700, "midi.sendShortMsg(0x93, 0x47, 0)", true);
-	engine.beginTimer(3700, "midi.sendShortMsg(0x94, 0x47, 0)", true);
-	
-	// Turns off Sync LEDs
-	engine.beginTimer(3800, "midi.sendShortMsg(0x91, 0x40, 0)", true);
-	engine.beginTimer(3800, "midi.sendShortMsg(0x92, 0x40, 0)", true);
-	engine.beginTimer(3800, "midi.sendShortMsg(0x93, 0x40, 0)", true);
-	engine.beginTimer(3800, "midi.sendShortMsg(0x94, 0x40, 0)", true);
-		
-	// Turns off Play/Pause LEDs
-	engine.beginTimer(3900, "midi.sendShortMsg(0x91, 0x42, 0)", true);
-	engine.beginTimer(3900, "midi.sendShortMsg(0x92, 0x42, 0)", true);
-	engine.beginTimer(3900, "midi.sendShortMsg(0x93, 0x42, 0)", true);
-	engine.beginTimer(3900, "midi.sendShortMsg(0x94, 0x42, 0)", true);
-	
-	// Turns off Stutter LEDs
-	engine.beginTimer(4000, "midi.sendShortMsg(0x91, 0x4A, 0)", true);
-	engine.beginTimer(4000, "midi.sendShortMsg(0x92, 0x4A, 0)", true);
-	engine.beginTimer(4000, "midi.sendShortMsg(0x93, 0x4A, 0)", true);
-	engine.beginTimer(4000, "midi.sendShortMsg(0x94, 0x4A, 0)", true);
-	
-	// Turns off FX1 LEDs
-	engine.beginTimer(4100, "midi.sendShortMsg(0x91, 0x59, 10)", true);
-	engine.beginTimer(4100, "midi.sendShortMsg(0x92, 0x59, 10)", true);
-	engine.beginTimer(4100, "midi.sendShortMsg(0x93, 0x59, 10)", true);
-	engine.beginTimer(4100, "midi.sendShortMsg(0x94, 0x59, 10)", true);
-	
-	// Turns off FX2 LEDs
-	engine.beginTimer(4200, "midi.sendShortMsg(0x91, 0x5A, 10)", true);
-	engine.beginTimer(4200, "midi.sendShortMsg(0x92, 0x5A, 10)", true);
-	engine.beginTimer(4200, "midi.sendShortMsg(0x93, 0x5A, 10)", true);
-	engine.beginTimer(4200, "midi.sendShortMsg(0x94, 0x5A, 10)", true);
-	
-	// Turns off FX3 LEDs
-	engine.beginTimer(4300, "midi.sendShortMsg(0x91, 0x5B, 10)", true);
-	engine.beginTimer(4300, "midi.sendShortMsg(0x92, 0x5B, 10)", true);
-	engine.beginTimer(4300, "midi.sendShortMsg(0x93, 0x5B, 10)", true);
-	engine.beginTimer(4300, "midi.sendShortMsg(0x94, 0x5B, 10)", true);
-	
-	// Turns off Reset LEDs
-	engine.beginTimer(4400, "midi.sendShortMsg(0x91, 0x5C, 5)", true);
-	engine.beginTimer(4400, "midi.sendShortMsg(0x92, 0x5C, 5)", true);
-	engine.beginTimer(4400, "midi.sendShortMsg(0x93, 0x5C, 8)", true);
-	engine.beginTimer(4400, "midi.sendShortMsg(0x94, 0x5C, 8)", true);
-	
-	// Turns off Loop_IN LEDs
-	engine.beginTimer(4500, "midi.sendShortMsg(0x91, 0x53, 8)", true);
-	engine.beginTimer(4500, "midi.sendShortMsg(0x92, 0x53, 8)", true);
-	engine.beginTimer(4500, "midi.sendShortMsg(0x93, 0x53, 6)", true);
-	engine.beginTimer(4500, "midi.sendShortMsg(0x94, 0x53, 6)", true);
-	
-	// Turns off Loop_OUT LEDs
-	engine.beginTimer(4600, "midi.sendShortMsg(0x91, 0x54, 8)", true);
-	engine.beginTimer(4600, "midi.sendShortMsg(0x92, 0x54, 8)", true);
-	engine.beginTimer(4600, "midi.sendShortMsg(0x93, 0x54, 6)", true);
-	engine.beginTimer(4600, "midi.sendShortMsg(0x94, 0x54, 6)", true);
-	
-	// Turns off Reloop LEDs
-	engine.beginTimer(4700, "midi.sendShortMsg(0x91, 0x55, 9)", true);
-	engine.beginTimer(4700, "midi.sendShortMsg(0x92, 0x55, 9)", true);
-	engine.beginTimer(4700, "midi.sendShortMsg(0x93, 0x55, 9)", true);
-	engine.beginTimer(4700, "midi.sendShortMsg(0x94, 0x55, 9)", true);
-	
-	// Turns off Loop_Size LEDs
-	engine.beginTimer(4800, "midi.sendShortMsg(0x91, 0x63, 1)", true);
-	engine.beginTimer(4800, "midi.sendShortMsg(0x92, 0x63, 1)", true);
-	engine.beginTimer(4800, "midi.sendShortMsg(0x93, 0x63, 1)", true);
-	engine.beginTimer(4800, "midi.sendShortMsg(0x94, 0x63, 1)", true);
-	
-	// Turns off Folder/File LEDs
-	engine.beginTimer(4900, "midi.sendShortMsg(0x90, 0x4B, 0)", true);
-	engine.beginTimer(4900, "midi.sendShortMsg(0x90, 0x4C, 1)", true);
+	NumarkMixTrackQuad.untouched = [1];
+	NumarkMixTrackQuad.lightShow ()
 
 	NumarkMixTrackQuad.leds = [
 		// Common
 		{ "directory": 0x4B, "file": 0x4C },
 	];
-	
-	// NumarkMixTrackQuad.flashOnceOn(deck, group) i need a way to add this line here for deck 1&2	
-	// would require the deck and group vars at this stage, if not can it be set when autoDJ starts?
+		
+	//engine.beginTimer(4000, "var deck1 = '1'; NumarkMixTrackQuad.flashOnceOn(deck1, '[Channel1]')", true); // passing correct info but not working ?
+	//engine.beginTimer(4000, "var deck2 = '2'; NumarkMixTrackQuad.flashOnceOn(deck2, '[Channel2]')", true); // passing correct info but not working ?
+	// i need a way to add these lines here for deck 1&2	
+	// if not can it be set when autoDJ starts?
 }
 
-//var cnt = 0; engine.beginTimer(100, "test", true); test = function() { colorTimer1 = engine.beginTimer(100, "test", true); cnt = cnt +1; if (cnt > 16) {engine.stopTimer(colorTimer1);} midi.sendShortMsg(0x91, 0x63, cnt); }
+NumarkMixTrackQuad.setLED = function(value, status) {
+	status = status ? 0x7F : 0x00;
+	midi.sendShortMsg(0x90, value, status);
+}
+
+NumarkMixTrackQuad.groupToDeck = function(group) {
+	var matches = group.match(/^\[Channel(\d+)\]$/);
+	if (matches == null) {
+		return -1;
+	} else {
+		return matches[1];
+	}
+}
+
+NumarkMixTrackQuad.selectKnob = function(channel, control, value, status, group) {
+	NumarkMixTrackQuad.untouched = 0;
+	if (value > 63) {
+		value = value - 128;
+	}
+	if (NumarkMixTrackQuad.directoryMode) {
+		if (value > 0) {
+			for (var i = 0; i < value; i++) {
+				engine.setValue(group, "SelectNextPlaylist", 1);
+			}
+		} else {
+			for (var i = 0; i < -value; i++) {
+				engine.setValue(group, "SelectPrevPlaylist", 1);
+			}
+		}
+	} else {
+		engine.setValue(group, "SelectTrackKnob", value);
+	}
+}
+
+NumarkMixTrackQuad.flashOnceOn = function(deck, group) {
+	engine.stopTimer(NumarkMixTrackQuad.flashOnceTimer[deck-1]);
+	if (engine.getValue(group, "play", 1)) {
+		midi.sendShortMsg(0xB0+(NumarkMixTrackQuad.channel[deck-1]), 0x3D, NumarkMixTrackQuad.jogled[deck-1]);
+	}else{
+		midi.sendShortMsg(0xB0+(NumarkMixTrackQuad.channel[deck-1]), 0x3C, 0);
+	}
+	NumarkMixTrackQuad.flashOnceTimer[deck-1] = engine.beginTimer(50, "NumarkMixTrackQuad.flashOnceOff('" + deck + "', '" + group + "')", true);
+};
+
+NumarkMixTrackQuad.flashOnceOff = function(deck, group) {	
+	NumarkMixTrackQuad.jogled[deck-1] = NumarkMixTrackQuad.jogled[deck-1] + NumarkMixTrackQuad.reverse[deck-1]
+	if (NumarkMixTrackQuad.jogled[deck-1] > 12.99) {
+		NumarkMixTrackQuad.jogled[deck-1] = 1;
+	} else if (NumarkMixTrackQuad.jogled[deck-1] < 1) {
+		NumarkMixTrackQuad.jogled[deck-1] = 12.99;
+	}
+	NumarkMixTrackQuad.flashOnceOn(deck, group)
+};
+
+NumarkMixTrackQuad.playbutton = function(channel, control, value, status, group) {
+	NumarkMixTrackQuad.untouched = 0;
+	if (!value) return;
+	
+	var deck = NumarkMixTrackQuad.groupToDeck(group);
+		
+	NumarkMixTrackQuad.flashOnceTimer[deck-1] = 0;
+	NumarkMixTrackQuad.jogled[deck-1] = 1;
+
+	if (engine.getValue(group, "play")) {
+		engine.setValue(group, "play", 0);
+	}else{
+		engine.setValue(group, "play", 1);
+	}
+	if (engine.getValue(group, "play", 1)) {
+		NumarkMixTrackQuad.channel[deck-1] = channel;
+		NumarkMixTrackQuad.reverse[deck-1] = 1;
+		NumarkMixTrackQuad.flashOnceOn(deck, group)
+	}else{
+		NumarkMixTrackQuad.channel[deck-1] = 0
+		midi.sendShortMsg(0xB0+(channel), 0x3C, 0);
+	}
+}
+
+NumarkMixTrackQuad.reversebutton = function(channel, control, value, status, group) {
+	NumarkMixTrackQuad.untouched = 0;
+	var deck = NumarkMixTrackQuad.groupToDeck(group);
+	if (engine.getValue(group, "play")) {
+		if (engine.getValue(group, "reverse")) {
+			engine.setValue(group, "reverse", 0);
+		}else{
+			engine.setValue(group, "reverse", 1);
+		}
+
+		if (engine.getValue(group, "reverse", 1)) {
+			NumarkMixTrackQuad.reverse[deck-1] = -1;
+		}else{
+			NumarkMixTrackQuad.reverse[deck-1] = 1;
+		}
+	}else{
+		if (engine.getValue(group, "reverse"), 1) {
+			engine.setValue(group, "reverse", 0);
+		}
+	}
+}
+
+NumarkMixTrackQuad.cuebutton = function(channel, control, value, status, group) {
+	NumarkMixTrackQuad.untouched = 0;
+	var deck = NumarkMixTrackQuad.groupToDeck(group);
+	// Don't set Cue accidentaly at the end of the song
+	if (engine.getValue(group, "playposition") <= 0.97) {
+			engine.setValue(group, "cue_default", value ? 1 : 0);
+			NumarkMixTrackQuad.channel[deck-1] = 0;
+			midi.sendShortMsg(0xB0+(channel), 0x3C, 0);
+	} else {
+		engine.setValue(group, "cue_preview", value ? 1 : 0);
+	}
+}
+
+NumarkMixTrackQuad.jogWheel = function(channel, control, value, status, group) {
+	NumarkMixTrackQuad.untouched = 0;
+	var deck = NumarkMixTrackQuad.groupToDeck(group);
+	NumarkMixTrackQuad.reverse[deck-1] = 0;
+	var adjustedJog = parseFloat(value);
+	var posNeg = 1;
+	if (adjustedJog > 63) {	// Counter-clockwise
+		posNeg = -1;
+		adjustedJog = value - 128;
+	}
+
+	if (engine.getValue(group, "play")) {
+
+		if (NumarkMixTrackQuad.scratchMode[deck-1] && posNeg == -1 && !NumarkMixTrackQuad.touch[deck-1]) {
+			if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
+			NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch(" + deck + ")", true);
+		} 
+
+	} else { 
+	
+		if (!NumarkMixTrackQuad.touch[deck-1]){
+			if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
+			NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch(" + deck + ")", true);
+		}
+	}
+
+	engine.scratchTick(deck, adjustedJog);
+
+	if (engine.getValue(group,"play")) {
+		var gammaInputRange = 13;	// Max jog speed
+		var maxOutFraction = 0.8;	// Where on the curve it should peak; 0.5 is half-way
+		var sensitivity = 0.5;		// Adjustment gamma
+		var gammaOutputRange = 2;	// Max rate change
+
+		adjustedJog = posNeg * gammaOutputRange * Math.pow(Math.abs(adjustedJog) / (gammaInputRange * maxOutFraction), sensitivity);
+		engine.setValue(group, "jog", adjustedJog);
+		
+		if (NumarkMixTrackQuad.scratchMode[deck-1] == 1) { 
+			NumarkMixTrackQuad.reverse[deck-1] = 0;
+			if (posNeg < 0) {	// Counter-clockwise
+				NumarkMixTrackQuad.reverse[deck-1] = -0.25;
+			} else {
+				NumarkMixTrackQuad.reverse[deck-1] = 0.25;
+			}
+		}
+		if (NumarkMixTrackQuad.touch[deck-1] == 0) {
+			NumarkMixTrackQuad.reverse[deck-1] = 1;
+			if (engine.getValue(group,"reverse") == 1) {
+				NumarkMixTrackQuad.reverse[deck-1] = -1;
+			}
+		}
+	}
+}
+
+NumarkMixTrackQuad.jogWheelStopScratch = function(deck) {
+	NumarkMixTrackQuad.scratchTimer[deck-1] = -1;
+	engine.scratchDisable(deck);
+	NumarkMixTrackQuad.reverse[deck-1] = 1;
+}
+
+NumarkMixTrackQuad.wheelTouch = function(channel, control, value, status, group){
+	NumarkMixTrackQuad.untouched = 0;
+
+	var deck = NumarkMixTrackQuad.groupToDeck(group);
+			NumarkMixTrackQuad.reverse[deck-1] = 0;
+
+	if(!value){
+		if (engine.getValue(group, "play", 1)) {
+			
+		}else{
+			midi.sendShortMsg(0xB0+(channel), 0x3C, 0);
+		}
+		NumarkMixTrackQuad.touch[deck-1]= false;
+
+		if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
+
+		NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch(" + deck + ")", true);
+
+	} else {
+		if (engine.getValue(group, "play", 1)) {
+			
+		}else{
+			midi.sendShortMsg(0xB0+(channel), 0x3C, 6);
+		}
+		if (!NumarkMixTrackQuad.scratchMode[deck-1] && engine.getValue(group, "play")) return;
+
+		// Save the current state of the keylock
+		NumarkMixTrackQuad.isKeyLocked[deck-1] = engine.getValue(group, "keylock");
+		// Turn the Keylock off for scratching
+		if (NumarkMixTrackQuad.isKeyLocked[deck-1]){
+			engine.setValue(group, "keylock", 0);
+		}
+
+
+		if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
+
+		// change the 600 value for sensibility
+		engine.scratchEnable(deck, 600, 33+1/3, 1.0/8, (1.0/8)/32);
+
+		NumarkMixTrackQuad.touch[deck-1]= true;
+	}
+}
+
+NumarkMixTrackQuad.toggleDirectoryMode = function(channel, control, value, status, group) {
+	// Toggle setting and light
+	if (value) {
+		NumarkMixTrackQuad.directoryMode = !NumarkMixTrackQuad.directoryMode;
+
+		NumarkMixTrackQuad.setLED(NumarkMixTrackQuad.leds[0]["directory"], NumarkMixTrackQuad.directoryMode);
+		NumarkMixTrackQuad.setLED(NumarkMixTrackQuad.leds[0]["file"], !NumarkMixTrackQuad.directoryMode);
+	}
+}
+
+NumarkMixTrackQuad.toggleScratchMode = function(channel, control, value, status, group) {
+	NumarkMixTrackQuad.untouched = 0;
+	if (!value) return;
+
+	var deck = NumarkMixTrackQuad.groupToDeck(group);
+	// Toggle setting and light
+	NumarkMixTrackQuad.scratchMode[deck-1] = !NumarkMixTrackQuad.scratchMode[deck-1];
+	if(NumarkMixTrackQuad.scratchMode[deck-1])
+	{
+		midi.sendShortMsg(status, control, 0x7F); 
+	}
+	else 
+	{
+		midi.sendShortMsg(status, control, 0x00);
+	}
+}
+
+NumarkMixTrackQuad.lightShow = function() {
+	if (NumarkMixTrackQuad.untouched == 1) {
+		NumarkMixTrackQuad.shutdown()
+		engine.beginTimer(60000, "NumarkMixTrackQuad.lightShow()", true);
+
+		///---------- Animated Intro Turns On All LEDs ------------------>>
+		
+		//COLORS
+		//1 0x01 RED
+		//2 0x02 ORANGE
+		//3 0x03 L ORANGE
+		//4 0x04 YELLOW
+		//5 0x05 GREEN
+		//6 0x06 L GREEN
+		//7 0x07 G BLUE
+		//8 0x08 L BLUE
+		//9 0x09 BLUE
+		//10 0x0A PURPLE
+		//11 0x0B PINK
+		//12 0x0C L RED
+		//13 0x0D L PINK
+		//14 0x0E L YELLOW
+		//15 0x0F PEACH
+		//16 0x10 L PEACH
+		
+		// Turns on jogWheel LEDs
+		engine.beginTimer(100, "midi.sendShortMsg(0xB1, 0x3D, 1)", true);
+		engine.beginTimer(200, "midi.sendShortMsg(0xB1, 0x3D, 2)", true);
+		engine.beginTimer(300, "midi.sendShortMsg(0xB1, 0x3D, 3)", true);
+		engine.beginTimer(400, "midi.sendShortMsg(0xB1, 0x3D, 4)", true);
+		engine.beginTimer(500, "midi.sendShortMsg(0xB1, 0x3D, 5)", true);
+		engine.beginTimer(600, "midi.sendShortMsg(0xB1, 0x3D, 6)", true);
+		engine.beginTimer(700, "midi.sendShortMsg(0xB1, 0x3D, 7)", true);
+		engine.beginTimer(800, "midi.sendShortMsg(0xB1, 0x3D, 8)", true);
+		engine.beginTimer(900, "midi.sendShortMsg(0xB1, 0x3D, 9)", true);
+		engine.beginTimer(1000, "midi.sendShortMsg(0xB1, 0x3D, 10)", true);
+		engine.beginTimer(1100, "midi.sendShortMsg(0xB1, 0x3D, 11)", true);
+		engine.beginTimer(1200, "midi.sendShortMsg(0xB1, 0x3D, 12)", true);
+		engine.beginTimer(1300, "midi.sendShortMsg(0xB1, 0x3C, 1)", true);
+		engine.beginTimer(1400, "midi.sendShortMsg(0xB1, 0x3C, 2)", true);
+		engine.beginTimer(2200, "midi.sendShortMsg(0xB1, 0x3C, 3)", true);
+		engine.beginTimer(2300, "midi.sendShortMsg(0xB1, 0x3C, 4)", true);
+		engine.beginTimer(2400, "midi.sendShortMsg(0xB1, 0x3C, 5)", true);
+		engine.beginTimer(2500, "midi.sendShortMsg(0xB1, 0x3C, 6)", true);
+			
+		engine.beginTimer(100, "midi.sendShortMsg(0xB2, 0x3D, 12)", true);
+		engine.beginTimer(200, "midi.sendShortMsg(0xB2, 0x3D, 11)", true);
+		engine.beginTimer(300, "midi.sendShortMsg(0xB2, 0x3D, 10)", true);
+		engine.beginTimer(400, "midi.sendShortMsg(0xB2, 0x3D, 9)", true);
+		engine.beginTimer(500, "midi.sendShortMsg(0xB2, 0x3D, 8)", true);
+		engine.beginTimer(600, "midi.sendShortMsg(0xB2, 0x3D, 7)", true);
+		engine.beginTimer(700, "midi.sendShortMsg(0xB2, 0x3D, 6)", true);
+		engine.beginTimer(800, "midi.sendShortMsg(0xB2, 0x3D, 5)", true);
+		engine.beginTimer(900, "midi.sendShortMsg(0xB2, 0x3D, 4)", true);
+		engine.beginTimer(1000, "midi.sendShortMsg(0xB2, 0x3D, 3)", true);
+		engine.beginTimer(1100, "midi.sendShortMsg(0xB2, 0x3D, 2)", true);
+		engine.beginTimer(1200, "midi.sendShortMsg(0xB2, 0x3D, 1)", true);
+		engine.beginTimer(1300, "midi.sendShortMsg(0xB2, 0x3C, 1)", true);
+		engine.beginTimer(1400, "midi.sendShortMsg(0xB2, 0x3C, 2)", true);
+		engine.beginTimer(2200, "midi.sendShortMsg(0xB2, 0x3C, 3)", true);
+		engine.beginTimer(2300, "midi.sendShortMsg(0xB2, 0x3C, 4)", true);
+		engine.beginTimer(2400, "midi.sendShortMsg(0xB2, 0x3C, 5)", true);
+		engine.beginTimer(2500, "midi.sendShortMsg(0xB2, 0x3C, 6)", true);
+		
+		engine.beginTimer(100, "midi.sendShortMsg(0xB3, 0x3D, 1)", true);
+		engine.beginTimer(200, "midi.sendShortMsg(0xB3, 0x3D, 2)", true);
+		engine.beginTimer(300, "midi.sendShortMsg(0xB3, 0x3D, 3)", true);
+		engine.beginTimer(400, "midi.sendShortMsg(0xB3, 0x3D, 4)", true);
+		engine.beginTimer(500, "midi.sendShortMsg(0xB3, 0x3D, 5)", true);
+		engine.beginTimer(600, "midi.sendShortMsg(0xB3, 0x3D, 6)", true);
+		engine.beginTimer(700, "midi.sendShortMsg(0xB3, 0x3D, 7)", true);
+		engine.beginTimer(800, "midi.sendShortMsg(0xB3, 0x3D, 8)", true);
+		engine.beginTimer(900, "midi.sendShortMsg(0xB3, 0x3D, 9)", true);
+		engine.beginTimer(1000, "midi.sendShortMsg(0xB3, 0x3D, 10)", true);
+		engine.beginTimer(1100, "midi.sendShortMsg(0xB3, 0x3D, 11)", true);
+		engine.beginTimer(1200, "midi.sendShortMsg(0xB3, 0x3D, 12)", true);
+		engine.beginTimer(1300, "midi.sendShortMsg(0xB3, 0x3C, 1)", true);
+		engine.beginTimer(1400, "midi.sendShortMsg(0xB3, 0x3C, 2)", true);
+		engine.beginTimer(2200, "midi.sendShortMsg(0xB3, 0x3C, 3)", true);
+		engine.beginTimer(2300, "midi.sendShortMsg(0xB3, 0x3C, 4)", true);
+		engine.beginTimer(2400, "midi.sendShortMsg(0xB3, 0x3C, 5)", true);
+		engine.beginTimer(2500, "midi.sendShortMsg(0xB3, 0x3C, 6)", true);
+		
+		engine.beginTimer(100, "midi.sendShortMsg(0xB4, 0x3D, 12)", true);
+		engine.beginTimer(200, "midi.sendShortMsg(0xB4, 0x3D, 11)", true);
+		engine.beginTimer(300, "midi.sendShortMsg(0xB4, 0x3D, 10)", true);
+		engine.beginTimer(400, "midi.sendShortMsg(0xB4, 0x3D, 9)", true);
+		engine.beginTimer(500, "midi.sendShortMsg(0xB4, 0x3D, 8)", true);
+		engine.beginTimer(600, "midi.sendShortMsg(0xB4, 0x3D, 7)", true);
+		engine.beginTimer(700, "midi.sendShortMsg(0xB4, 0x3D, 6)", true);
+		engine.beginTimer(800, "midi.sendShortMsg(0xB4, 0x3D, 5)", true);
+		engine.beginTimer(900, "midi.sendShortMsg(0xB4, 0x3D, 4)", true);
+		engine.beginTimer(1000, "midi.sendShortMsg(0xB4, 0x3D, 3)", true);
+		engine.beginTimer(1100, "midi.sendShortMsg(0xB4, 0x3D, 2)", true);
+		engine.beginTimer(1200, "midi.sendShortMsg(0xB4, 0x3D, 1)", true);
+		engine.beginTimer(1300, "midi.sendShortMsg(0xB4, 0x3C, 1)", true);
+		engine.beginTimer(1400, "midi.sendShortMsg(0xB4, 0x3C, 2)", true);
+		engine.beginTimer(2200, "midi.sendShortMsg(0xB4, 0x3C, 3)", true);
+		engine.beginTimer(2300, "midi.sendShortMsg(0xB4, 0x3C, 4)", true);
+		engine.beginTimer(2400, "midi.sendShortMsg(0xB4, 0x3C, 5)", true);
+		engine.beginTimer(2500, "midi.sendShortMsg(0xB4, 0x3C, 6)", true);
+		// Hey did it just smile at me? :D
+		
+		// Turns on Scratch LEDs
+		engine.beginTimer(300, "midi.sendShortMsg(0x91, 0x48, 1)", true);
+		engine.beginTimer(300, "midi.sendShortMsg(0x92, 0x48, 1)", true);
+		engine.beginTimer(300, "midi.sendShortMsg(0x93, 0x48, 1)", true);
+		engine.beginTimer(300, "midi.sendShortMsg(0x94, 0x48, 1)", true);
+		
+		// Turns on Headphone LEDs
+		engine.beginTimer(500, "midi.sendShortMsg(0x91, 0x47, 1)", true);
+		engine.beginTimer(500, "midi.sendShortMsg(0x92, 0x47, 1)", true);
+		engine.beginTimer(400, "midi.sendShortMsg(0x93, 0x47, 1)", true);
+		engine.beginTimer(400, "midi.sendShortMsg(0x94, 0x47, 1)", true);
+		
+		// Turns on Sync LEDs
+		engine.beginTimer(800, "midi.sendShortMsg(0x91, 0x40, 1)", true);
+		engine.beginTimer(500, "midi.sendShortMsg(0x92, 0x40, 1)", true);
+		engine.beginTimer(800, "midi.sendShortMsg(0x93, 0x40, 1)", true);
+		engine.beginTimer(500, "midi.sendShortMsg(0x94, 0x40, 1)", true);
+		
+		// Turns on Cue LEDs
+		engine.beginTimer(700, "midi.sendShortMsg(0x91, 0x33, 1)", true);
+		engine.beginTimer(600, "midi.sendShortMsg(0x92, 0x33, 1)", true);
+		engine.beginTimer(700, "midi.sendShortMsg(0x93, 0x33, 1)", true);
+		engine.beginTimer(600, "midi.sendShortMsg(0x94, 0x33, 1)", true);
+
+		// Turns on Play/Pause LEDs
+		engine.beginTimer(600, "midi.sendShortMsg(0x91, 0x42, 1)", true);
+		engine.beginTimer(700, "midi.sendShortMsg(0x92, 0x42, 1)", true);
+		engine.beginTimer(600, "midi.sendShortMsg(0x93, 0x42, 1)", true);
+		engine.beginTimer(700, "midi.sendShortMsg(0x94, 0x42, 1)", true);
+		
+		// Turns on Stutter LEDs
+		engine.beginTimer(500, "midi.sendShortMsg(0x91, 0x4A, 1)", true);
+		engine.beginTimer(800, "midi.sendShortMsg(0x92, 0x4A, 1)", true);
+		engine.beginTimer(500, "midi.sendShortMsg(0x93, 0x4A, 1)", true);
+		engine.beginTimer(800, "midi.sendShortMsg(0x94, 0x4A, 1)", true);
+		
+		// Turns on Pitch LEDs
+		engine.beginTimer(900, "midi.sendShortMsg(0x91, 0x0D, 1)", true);
+		engine.beginTimer(900, "midi.sendShortMsg(0x92, 0x0D, 1)", true);
+		engine.beginTimer(900, "midi.sendShortMsg(0x93, 0x0D, 1)", true);
+		engine.beginTimer(900, "midi.sendShortMsg(0x94, 0x0D, 1)", true);
+			
+		// Turns on FX1 LEDs
+		engine.beginTimer(1100, "FX1a", true); var cnt1 = 0; FX1a = function() { colorTimer1 = engine.beginTimer(100, "FX1a", true); cnt1 = cnt1 + 1; if (cnt1 > 16) { engine.stopTimer(colorTimer1); } midi.sendShortMsg(0x91, 0x59, cnt1);}
+		engine.beginTimer(1400, "FX1b", true); var cnt2 = 0; FX1b = function() { colorTimer2 = engine.beginTimer(100, "FX1b", true); cnt2 = cnt2 + 1; if (cnt2 > 16) { engine.stopTimer(colorTimer2); } midi.sendShortMsg(0x92, 0x59, cnt2);}
+		engine.beginTimer(1100, "FX1c", true); var cnt3 = 0; FX1c = function() { colorTimer3 = engine.beginTimer(100, "FX1c", true); cnt3 = cnt3 + 1; if (cnt3 > 16) { engine.stopTimer(colorTimer3); } midi.sendShortMsg(0x93, 0x59, cnt3);}
+		engine.beginTimer(1400, "FX1d", true); var cnt4 = 0; FX1d = function() { colorTimer4 = engine.beginTimer(100, "FX1d", true); cnt4 = cnt4 + 1; if (cnt4 > 16) { engine.stopTimer(colorTimer4); } midi.sendShortMsg(0x94, 0x59, cnt4);}
+
+		// Turns on FX2 LEDs
+		engine.beginTimer(1200, "FX2a", true); var cnt5 = 0; FX2a = function() { colorTimer5 = engine.beginTimer(100, "FX2a", true); cnt5 = cnt5 + 1; if (cnt5 > 16) { engine.stopTimer(colorTimer5); } midi.sendShortMsg(0x91, 0x5A, cnt5);}
+		engine.beginTimer(1300, "FX2b", true); var cnt6 = 0; FX2b = function() { colorTimer6 = engine.beginTimer(100, "FX2b", true); cnt6 = cnt6 + 1; if (cnt6 > 16) { engine.stopTimer(colorTimer6); } midi.sendShortMsg(0x92, 0x5A, cnt6);}
+		engine.beginTimer(1200, "FX2c", true); var cnt7 = 0; FX2c = function() { colorTimer7 = engine.beginTimer(100, "FX2c", true); cnt7 = cnt7 + 1; if (cnt7 > 16) { engine.stopTimer(colorTimer7); } midi.sendShortMsg(0x93, 0x5A, cnt7);}
+		engine.beginTimer(1300, "FX2d", true); var cnt8 = 0; FX2d = function() { colorTimer8 = engine.beginTimer(100, "FX2d", true); cnt8 = cnt8 + 1; if (cnt8 > 16) { engine.stopTimer(colorTimer8); } midi.sendShortMsg(0x94, 0x5A, cnt8);}
+
+		// Turns on FX3 LEDs
+		engine.beginTimer(1300, "FX3a", true); var cnt9 = 0; FX3a = function() { colorTimer9 = engine.beginTimer(100, "FX3a", true); cnt9 = cnt9 + 1; if (cnt9 > 16) { engine.stopTimer(colorTimer9); } midi.sendShortMsg(0x91, 0x5B, cnt9);}
+		engine.beginTimer(1200, "FX3b", true); var cnt10 = 0; FX3b = function() { colorTimer10 = engine.beginTimer(100, "FX3b", true); cnt10 = cnt10 + 1; if (cnt10 > 16) { engine.stopTimer(colorTimer10); } midi.sendShortMsg(0x92, 0x5B, cnt10);}
+		engine.beginTimer(1300, "FX3c", true); var cnt11 = 0; FX3c = function() { colorTimer11 = engine.beginTimer(100, "FX3c", true); cnt11 = cnt11 + 1; if (cnt11 > 16) { engine.stopTimer(colorTimer11); } midi.sendShortMsg(0x93, 0x5B, cnt11);}
+		engine.beginTimer(1200, "FX3d", true); var cnt12 = 0; FX3d = function() { colorTimer12 = engine.beginTimer(100, "FX3d", true); cnt12 = cnt12 + 1; if (cnt12 > 16) { engine.stopTimer(colorTimer12); } midi.sendShortMsg(0x94, 0x5B, cnt12);}
+
+		// Turns on Reset LEDs
+		engine.beginTimer(1400, "RLEDsa", true); var cnt13 = 0; RLEDsa = function() { colorTimer13 = engine.beginTimer(100, "RLEDsa", true); cnt13 = cnt13 + 1; if (cnt13 > 16) { engine.stopTimer(colorTimer13); } midi.sendShortMsg(0x91, 0x5C, cnt13);}
+		engine.beginTimer(1100, "RLEDsb", true); var cnt14 = 0; RLEDsb = function() { colorTimer14 = engine.beginTimer(100, "RLEDsb", true); cnt14 = cnt14 + 1; if (cnt14 > 16) { engine.stopTimer(colorTimer14); } midi.sendShortMsg(0x92, 0x5C, cnt14);}
+		engine.beginTimer(1400, "RLEDsc", true); var cnt15 = 0; RLEDsc = function() { colorTimer15 = engine.beginTimer(100, "RLEDsc", true); cnt15 = cnt15 + 1; if (cnt15 > 16) { engine.stopTimer(colorTimer15); } midi.sendShortMsg(0x93, 0x5C, cnt15);}
+		engine.beginTimer(1100, "RLEDsd", true); var cnt16 = 0; RLEDsd = function() { colorTimer16 = engine.beginTimer(100, "RLEDsd", true); cnt16 = cnt16 + 1; if (cnt16 > 16) { engine.stopTimer(colorTimer16); } midi.sendShortMsg(0x94, 0x5C, cnt16);}
+
+		// Turns on Loop_IN LEDs
+		engine.beginTimer(1000, "LILEDsa", true); var cnt17 = 0; LILEDsa = function() { colorTimer17 = engine.beginTimer(100, "LILEDsa", true); cnt17 = cnt17 + 1; if (cnt17 > 16) { engine.stopTimer(colorTimer17); } midi.sendShortMsg(0x91, 0x53, cnt17);}
+		engine.beginTimer(1300, "LILEDsb", true); var cnt18 = 0; LILEDsb = function() { colorTimer18 = engine.beginTimer(100, "LILEDsb", true); cnt18 = cnt18 + 1; if (cnt18 > 16) { engine.stopTimer(colorTimer18); } midi.sendShortMsg(0x92, 0x53, cnt18);}
+		engine.beginTimer(1000, "LILEDsc", true); var cnt19 = 0; LILEDsc = function() { colorTimer19 = engine.beginTimer(100, "LILEDsc", true); cnt19 = cnt19 + 1; if (cnt19 > 16) { engine.stopTimer(colorTimer19); } midi.sendShortMsg(0x93, 0x53, cnt19);}
+		engine.beginTimer(1300, "LILEDsd", true); var cnt20 = 0; LILEDsd = function() { colorTimer20 = engine.beginTimer(100, "LILEDsd", true); cnt20 = cnt20 + 1; if (cnt20 > 16) { engine.stopTimer(colorTimer20); } midi.sendShortMsg(0x94, 0x53, cnt20);}
+
+		// Turns on Loop_OUT LEDs
+		engine.beginTimer(1100, "LOLEDsa", true); var cnt21 = 0; LOLEDsa = function() { colorTimer21 = engine.beginTimer(100, "LOLEDsa", true); cnt21 = cnt21 + 1; if (cnt21 > 16) { engine.stopTimer(colorTimer21); } midi.sendShortMsg(0x91, 0x54, cnt21);}
+		engine.beginTimer(1200, "LOLEDsb", true); var cnt22 = 0; LOLEDsb = function() { colorTimer22 = engine.beginTimer(100, "LOLEDsb", true); cnt22 = cnt22 + 1; if (cnt22 > 16) { engine.stopTimer(colorTimer22); } midi.sendShortMsg(0x92, 0x54, cnt22);}
+		engine.beginTimer(1100, "LOLEDsc", true); var cnt23 = 0; LOLEDsc = function() { colorTimer23 = engine.beginTimer(100, "LOLEDsc", true); cnt23 = cnt23 + 1; if (cnt23 > 16) { engine.stopTimer(colorTimer23); } midi.sendShortMsg(0x93, 0x54, cnt23);}
+		engine.beginTimer(1200, "LOLEDsd", true); var cnt24 = 0; LOLEDsd = function() { colorTimer24 = engine.beginTimer(100, "LOLEDsd", true); cnt24 = cnt24 + 1; if (cnt24 > 16) { engine.stopTimer(colorTimer24); } midi.sendShortMsg(0x94, 0x54, cnt24);}
+
+		// Turns on Reloop LEDs
+		engine.beginTimer(1200, "RLLEDsa", true); var cnt25 = 0; RLLEDsa = function() { colorTimer25 = engine.beginTimer(100, "RLLEDsa", true); cnt25 = cnt25 + 1; if (cnt25 > 16) { engine.stopTimer(colorTimer25); } midi.sendShortMsg(0x91, 0x55, cnt25);}
+		engine.beginTimer(1100, "RLLEDsb", true); var cnt26 = 0; RLLEDsb = function() { colorTimer26 = engine.beginTimer(100, "RLLEDsb", true); cnt26 = cnt26 + 1; if (cnt26 > 16) { engine.stopTimer(colorTimer26); } midi.sendShortMsg(0x92, 0x55, cnt26);}
+		engine.beginTimer(1200, "RLLEDsc", true); var cnt27 = 0; RLLEDsc = function() { colorTimer27 = engine.beginTimer(100, "RLLEDsc", true); cnt27 = cnt27 + 1; if (cnt27 > 16) { engine.stopTimer(colorTimer27); } midi.sendShortMsg(0x93, 0x55, cnt27);}
+		engine.beginTimer(1100, "RLLEDsd", true); var cnt28 = 0; RLLEDsd = function() { colorTimer28 = engine.beginTimer(100, "RLLEDsd", true); cnt28 = cnt28 + 1; if (cnt28 > 16) { engine.stopTimer(colorTimer28); } midi.sendShortMsg(0x94, 0x55, cnt28);}
+
+		// Turns on Loop_Size LEDs
+		engine.beginTimer(1300, "LSLEDsa", true); var cnt29 = 0; LSLEDsa = function() { colorTimer29 = engine.beginTimer(100, "LSLEDsa", true); cnt29 = cnt29 + 1; if (cnt29 > 16) { engine.stopTimer(colorTimer29); } midi.sendShortMsg(0x91, 0x63, cnt29);}
+		engine.beginTimer(1000, "LSLEDsb", true); var cnt30 = 0; LSLEDsb = function() { colorTimer30 = engine.beginTimer(100, "LSLEDsb", true); cnt30 = cnt30 + 1; if (cnt30 > 16) { engine.stopTimer(colorTimer30); } midi.sendShortMsg(0x92, 0x63, cnt30);}
+		engine.beginTimer(1300, "LSLEDsc", true); var cnt31 = 0; LSLEDsc = function() { colorTimer31 = engine.beginTimer(100, "LSLEDsc", true); cnt31 = cnt31 + 1; if (cnt31 > 16) { engine.stopTimer(colorTimer31); } midi.sendShortMsg(0x93, 0x63, cnt31);}
+		engine.beginTimer(1000, "LSLEDsd", true); var cnt32 = 0; LSLEDsd = function() { colorTimer32 = engine.beginTimer(100, "LSLEDsd", true); cnt32 = cnt32 + 1; if (cnt32 > 16) { engine.stopTimer(colorTimer32); } midi.sendShortMsg(0x94, 0x63, cnt32);}
+		
+		// Turns on Folder/File LEDs
+		engine.beginTimer(3100, "midi.sendShortMsg(0x90, 0x4B, 1)", true);
+		engine.beginTimer(3100, "midi.sendShortMsg(0x90, 0x4C, 1)", true);
+		
+		//---------------- Turns off unused LEDs ----------------------->>
+		
+		// Turns off jogWheel LEDs
+		engine.beginTimer(3500, "midi.sendShortMsg(0xB1, 0x3C, 0)", true);
+		engine.beginTimer(3500, "midi.sendShortMsg(0xB2, 0x3C, 0)", true);
+		engine.beginTimer(3500, "midi.sendShortMsg(0xB3, 0x3C, 0)", true);
+		engine.beginTimer(3500, "midi.sendShortMsg(0xB4, 0x3C, 0)", true);
+		
+		// Turns off Scratch LEDs
+		engine.beginTimer(3600, "midi.sendShortMsg(0x91, 0x48, 0)", true);
+		engine.beginTimer(3600, "midi.sendShortMsg(0x92, 0x48, 0)", true);
+		engine.beginTimer(3600, "midi.sendShortMsg(0x93, 0x48, 0)", true);
+		engine.beginTimer(3600, "midi.sendShortMsg(0x94, 0x48, 0)", true);
+		
+		// Turns off Headphone LEDs
+		engine.beginTimer(3700, "midi.sendShortMsg(0x91, 0x47, 0)", true);
+		engine.beginTimer(3700, "midi.sendShortMsg(0x92, 0x47, 0)", true);
+		engine.beginTimer(3700, "midi.sendShortMsg(0x93, 0x47, 0)", true);
+		engine.beginTimer(3700, "midi.sendShortMsg(0x94, 0x47, 0)", true);
+		
+		// Turns off Sync LEDs
+		engine.beginTimer(3800, "midi.sendShortMsg(0x91, 0x40, 0)", true);
+		engine.beginTimer(3800, "midi.sendShortMsg(0x92, 0x40, 0)", true);
+		engine.beginTimer(3800, "midi.sendShortMsg(0x93, 0x40, 0)", true);
+		engine.beginTimer(3800, "midi.sendShortMsg(0x94, 0x40, 0)", true);
+			
+		// Turns off Play/Pause LEDs
+		engine.beginTimer(3900, "midi.sendShortMsg(0x91, 0x42, 0)", true);
+		engine.beginTimer(3900, "midi.sendShortMsg(0x92, 0x42, 0)", true);
+		engine.beginTimer(3900, "midi.sendShortMsg(0x93, 0x42, 0)", true);
+		engine.beginTimer(3900, "midi.sendShortMsg(0x94, 0x42, 0)", true);
+		
+		// Turns off Stutter LEDs
+		engine.beginTimer(4000, "midi.sendShortMsg(0x91, 0x4A, 0)", true);
+		engine.beginTimer(4000, "midi.sendShortMsg(0x92, 0x4A, 0)", true);
+		engine.beginTimer(4000, "midi.sendShortMsg(0x93, 0x4A, 0)", true);
+		engine.beginTimer(4000, "midi.sendShortMsg(0x94, 0x4A, 0)", true);
+		
+		// Turns off FX1 LEDs
+		engine.beginTimer(4100, "midi.sendShortMsg(0x91, 0x59, 10)", true);
+		engine.beginTimer(4100, "midi.sendShortMsg(0x92, 0x59, 10)", true);
+		engine.beginTimer(4100, "midi.sendShortMsg(0x93, 0x59, 10)", true);
+		engine.beginTimer(4100, "midi.sendShortMsg(0x94, 0x59, 10)", true);
+		
+		// Turns off FX2 LEDs
+		engine.beginTimer(4200, "midi.sendShortMsg(0x91, 0x5A, 10)", true);
+		engine.beginTimer(4200, "midi.sendShortMsg(0x92, 0x5A, 10)", true);
+		engine.beginTimer(4200, "midi.sendShortMsg(0x93, 0x5A, 10)", true);
+		engine.beginTimer(4200, "midi.sendShortMsg(0x94, 0x5A, 10)", true);
+		
+		// Turns off FX3 LEDs
+		engine.beginTimer(4300, "midi.sendShortMsg(0x91, 0x5B, 10)", true);
+		engine.beginTimer(4300, "midi.sendShortMsg(0x92, 0x5B, 10)", true);
+		engine.beginTimer(4300, "midi.sendShortMsg(0x93, 0x5B, 10)", true);
+		engine.beginTimer(4300, "midi.sendShortMsg(0x94, 0x5B, 10)", true);
+		
+		// Turns off Reset LEDs
+		engine.beginTimer(4400, "midi.sendShortMsg(0x91, 0x5C, 5)", true);
+		engine.beginTimer(4400, "midi.sendShortMsg(0x92, 0x5C, 5)", true);
+		engine.beginTimer(4400, "midi.sendShortMsg(0x93, 0x5C, 8)", true);
+		engine.beginTimer(4400, "midi.sendShortMsg(0x94, 0x5C, 8)", true);
+		
+		// Turns off Loop_IN LEDs
+		engine.beginTimer(4500, "midi.sendShortMsg(0x91, 0x53, 8)", true);
+		engine.beginTimer(4500, "midi.sendShortMsg(0x92, 0x53, 8)", true);
+		engine.beginTimer(4500, "midi.sendShortMsg(0x93, 0x53, 6)", true);
+		engine.beginTimer(4500, "midi.sendShortMsg(0x94, 0x53, 6)", true);
+		
+		// Turns off Loop_OUT LEDs
+		engine.beginTimer(4600, "midi.sendShortMsg(0x91, 0x54, 8)", true);
+		engine.beginTimer(4600, "midi.sendShortMsg(0x92, 0x54, 8)", true);
+		engine.beginTimer(4600, "midi.sendShortMsg(0x93, 0x54, 6)", true);
+		engine.beginTimer(4600, "midi.sendShortMsg(0x94, 0x54, 6)", true);
+		
+		// Turns off Reloop LEDs
+		engine.beginTimer(4700, "midi.sendShortMsg(0x91, 0x55, 9)", true);
+		engine.beginTimer(4700, "midi.sendShortMsg(0x92, 0x55, 9)", true);
+		engine.beginTimer(4700, "midi.sendShortMsg(0x93, 0x55, 9)", true);
+		engine.beginTimer(4700, "midi.sendShortMsg(0x94, 0x55, 9)", true);
+		
+		// Turns off Loop_Size LEDs
+		engine.beginTimer(4800, "midi.sendShortMsg(0x91, 0x63, 1)", true);
+		engine.beginTimer(4800, "midi.sendShortMsg(0x92, 0x63, 1)", true);
+		engine.beginTimer(4800, "midi.sendShortMsg(0x93, 0x63, 1)", true);
+		engine.beginTimer(4800, "midi.sendShortMsg(0x94, 0x63, 1)", true);
+		
+		// Turns off Folder/File LEDs
+		engine.beginTimer(4900, "midi.sendShortMsg(0x90, 0x4B, 0)", true);
+		engine.beginTimer(4900, "midi.sendShortMsg(0x90, 0x4C, 1)", true);
+	}
+}
 
 NumarkMixTrackQuad.shutdown = function() {
 	
@@ -455,240 +709,4 @@ NumarkMixTrackQuad.shutdown = function() {
 	// Turns off Folder/File LEDs
 	midi.sendShortMsg(0x90, 0x4B, 0);
 	midi.sendShortMsg(0x90, 0x4C, 0);
-}
-
-NumarkMixTrackQuad.setLED = function(value, status) {
-	status = status ? 0x7F : 0x00;
-	midi.sendShortMsg(0x90, value, status);
-}
-
-NumarkMixTrackQuad.groupToDeck = function(group) {
-	var matches = group.match(/^\[Channel(\d+)\]$/);
-	if (matches == null) {
-		return -1;
-	} else {
-		return matches[1];
-	}
-}
-
-NumarkMixTrackQuad.selectKnob = function(channel, control, value, status, group) {
-	if (value > 63) {
-		value = value - 128;
-	}
-	if (NumarkMixTrackQuad.directoryMode) {
-		if (value > 0) {
-			for (var i = 0; i < value; i++) {
-				engine.setValue(group, "SelectNextPlaylist", 1);
-			}
-		} else {
-			for (var i = 0; i < -value; i++) {
-				engine.setValue(group, "SelectPrevPlaylist", 1);
-			}
-		}
-	} else {
-		engine.setValue(group, "SelectTrackKnob", value);
-	}
-}
-
-NumarkMixTrackQuad.flashOnceOn = function(deck, group) {	
-	engine.stopTimer(NumarkMixTrackQuad.flashOnceTimer[deck-1]);
-	if (engine.getValue(group, "play", 1)) {
-		midi.sendShortMsg(0xB0+(NumarkMixTrackQuad.channel[deck-1]), 0x3D, NumarkMixTrackQuad.jogled[deck-1]);
-	}else{
-		midi.sendShortMsg(0xB0+(NumarkMixTrackQuad.channel[deck-1]), 0x3C, 0);
-	}
-	NumarkMixTrackQuad.flashOnceTimer[deck-1] = engine.beginTimer(50, "NumarkMixTrackQuad.flashOnceOff('" + deck + "', '" + group + "')", true);
-};
-
-NumarkMixTrackQuad.flashOnceOff = function(deck, group) {	
-	NumarkMixTrackQuad.jogled[deck-1] = NumarkMixTrackQuad.jogled[deck-1] + NumarkMixTrackQuad.reverse[deck-1]
-	if (NumarkMixTrackQuad.jogled[deck-1] > 12.99) {
-		NumarkMixTrackQuad.jogled[deck-1] = 1;
-	} else if (NumarkMixTrackQuad.jogled[deck-1] < 1) {
-		NumarkMixTrackQuad.jogled[deck-1] = 12.99;
-	}
-	NumarkMixTrackQuad.flashOnceOn(deck, group)
-};
-
-NumarkMixTrackQuad.playbutton = function(channel, control, value, status, group) {
-	if (!value) return;
-	
-	var deck = NumarkMixTrackQuad.groupToDeck(group);
-		
-	NumarkMixTrackQuad.flashOnceTimer[deck-1] = 0;
-	NumarkMixTrackQuad.jogled[deck-1] = 1;
-
-	if (engine.getValue(group, "play")) {
-		engine.setValue(group, "play", 0);
-	}else{
-		engine.setValue(group, "play", 1);
-	}
-	if (engine.getValue(group, "play", 1)) {
-		NumarkMixTrackQuad.channel[deck-1] = channel;
-		NumarkMixTrackQuad.reverse[deck-1] = 1;
-		NumarkMixTrackQuad.flashOnceOn(deck, group)
-	}else{
-		NumarkMixTrackQuad.channel[deck-1] = 0
-		midi.sendShortMsg(0xB0+(channel), 0x3C, 0);
-	}
-}
-
-NumarkMixTrackQuad.reversebutton = function(channel, control, value, status, group) {
-	var deck = NumarkMixTrackQuad.groupToDeck(group);
-	if (engine.getValue(group, "play")) {
-		if (engine.getValue(group, "reverse")) {
-			engine.setValue(group, "reverse", 0);
-		}else{
-			engine.setValue(group, "reverse", 1);
-		}
-
-		if (engine.getValue(group, "reverse", 1)) {
-			NumarkMixTrackQuad.reverse[deck-1] = -1;
-		}else{
-			NumarkMixTrackQuad.reverse[deck-1] = 1;
-		}
-	}else{
-		if (engine.getValue(group, "reverse"), 1) {
-			engine.setValue(group, "reverse", 0);
-		}
-	}
-}
-
-NumarkMixTrackQuad.cuebutton = function(channel, control, value, status, group) {
-	var deck = NumarkMixTrackQuad.groupToDeck(group);
-	// Don't set Cue accidentaly at the end of the song
-	if (engine.getValue(group, "playposition") <= 0.97) {
-			engine.setValue(group, "cue_default", value ? 1 : 0);
-			NumarkMixTrackQuad.channel[deck-1] = 0;
-			midi.sendShortMsg(0xB0+(channel), 0x3C, 0);
-	} else {
-		engine.setValue(group, "cue_preview", value ? 1 : 0);
-	}
-}
-
-NumarkMixTrackQuad.jogWheel = function(channel, control, value, status, group) {
-	var deck = NumarkMixTrackQuad.groupToDeck(group);
-	NumarkMixTrackQuad.reverse[deck-1] = 0;
-	var adjustedJog = parseFloat(value);
-	var posNeg = 1;
-	if (adjustedJog > 63) {	// Counter-clockwise
-		posNeg = -1;
-		adjustedJog = value - 128;
-	}
-
-	if (engine.getValue(group, "play")) {
-
-		if (NumarkMixTrackQuad.scratchMode[deck-1] && posNeg == -1 && !NumarkMixTrackQuad.touch[deck-1]) {
-			if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
-			NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch(" + deck + ")", true);
-		} 
-
-	} else { 
-	
-		if (!NumarkMixTrackQuad.touch[deck-1]){
-			if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
-			NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch(" + deck + ")", true);
-		}
-	}
-
-	engine.scratchTick(deck, adjustedJog);
-
-	if (engine.getValue(group,"play")) {
-		var gammaInputRange = 13;	// Max jog speed
-		var maxOutFraction = 0.8;	// Where on the curve it should peak; 0.5 is half-way
-		var sensitivity = 0.5;		// Adjustment gamma
-		var gammaOutputRange = 2;	// Max rate change
-
-		adjustedJog = posNeg * gammaOutputRange * Math.pow(Math.abs(adjustedJog) / (gammaInputRange * maxOutFraction), sensitivity);
-		engine.setValue(group, "jog", adjustedJog);
-		
-		if (NumarkMixTrackQuad.scratchMode[deck-1] == 1) { 
-			NumarkMixTrackQuad.reverse[deck-1] = 0;
-			if (posNeg < 0) {	// Counter-clockwise
-				NumarkMixTrackQuad.reverse[deck-1] = -0.25;
-			} else {
-				NumarkMixTrackQuad.reverse[deck-1] = 0.25;
-			}
-		}
-		if (NumarkMixTrackQuad.touch[deck-1] == 0) {
-			NumarkMixTrackQuad.reverse[deck-1] = 1;
-			if (engine.getValue(group,"reverse") == 1) {
-				NumarkMixTrackQuad.reverse[deck-1] = -1;
-			}
-		}
-	}
-}
-
-NumarkMixTrackQuad.jogWheelStopScratch = function(deck) {
-	NumarkMixTrackQuad.scratchTimer[deck-1] = -1;
-	engine.scratchDisable(deck);
-	NumarkMixTrackQuad.reverse[deck-1] = 1;
-}
-
-NumarkMixTrackQuad.wheelTouch = function(channel, control, value, status, group){
-
-	var deck = NumarkMixTrackQuad.groupToDeck(group);
-			NumarkMixTrackQuad.reverse[deck-1] = 0;
-
-	if(!value){
-		if (engine.getValue(group, "play", 1)) {
-			
-		}else{
-			midi.sendShortMsg(0xB0+(channel), 0x3C, 0);
-		}
-		NumarkMixTrackQuad.touch[deck-1]= false;
-
-		if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
-
-		NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch(" + deck + ")", true);
-
-	} else {
-		if (engine.getValue(group, "play", 1)) {
-			
-		}else{
-			midi.sendShortMsg(0xB0+(channel), 0x3C, 6);
-		}
-		if (!NumarkMixTrackQuad.scratchMode[deck-1] && engine.getValue(group, "play")) return;
-
-		// Save the current state of the keylock
-		NumarkMixTrackQuad.isKeyLocked[deck-1] = engine.getValue(group, "keylock");
-		// Turn the Keylock off for scratching
-		if (NumarkMixTrackQuad.isKeyLocked[deck-1]){
-			engine.setValue(group, "keylock", 0);
-		}
-
-
-		if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
-
-		// change the 600 value for sensibility
-		engine.scratchEnable(deck, 600, 33+1/3, 1.0/8, (1.0/8)/32);
-
-		NumarkMixTrackQuad.touch[deck-1]= true;
-	}
-}
-
-NumarkMixTrackQuad.toggleDirectoryMode = function(channel, control, value, status, group) {
-	// Toggle setting and light
-	if (value) {
-		NumarkMixTrackQuad.directoryMode = !NumarkMixTrackQuad.directoryMode;
-
-		NumarkMixTrackQuad.setLED(NumarkMixTrackQuad.leds[0]["directory"], NumarkMixTrackQuad.directoryMode);
-		NumarkMixTrackQuad.setLED(NumarkMixTrackQuad.leds[0]["file"], !NumarkMixTrackQuad.directoryMode);
-	}
-}
-
-NumarkMixTrackQuad.toggleScratchMode = function(channel, control, value, status, group) {
-	if (!value) return;
-
-	var deck = NumarkMixTrackQuad.groupToDeck(group);
-	// Toggle setting and light
-	NumarkMixTrackQuad.scratchMode[deck-1] = !NumarkMixTrackQuad.scratchMode[deck-1];
-	if(NumarkMixTrackQuad.scratchMode[deck-1])
-	{
-		midi.sendShortMsg(status, control, 0x7F); 
-	}
-	else 
-	{
-		midi.sendShortMsg(status, control, 0x00);
-	}
 }

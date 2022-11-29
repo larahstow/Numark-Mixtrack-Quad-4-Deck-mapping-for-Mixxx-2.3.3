@@ -11,9 +11,9 @@ Features:
   - Supports 4 decks
   - Library Browse knob + Load A/B
   - Channel volume, cross fader, cue gain / mix, Master gain, filters, pitch and pitch bend
-  - IMPROVED Animated LEDs, Beautiful intro on Mixxx startup, LEDs now work with scratching, end of track, and AutoDJ 
+  - IMPROVED Animated LEDs, Beautiful intro on Mixxx startup, LEDs now work with scratching, end of track, and AutoDJ
     (Load tracks play deck 1 and 2(console) then click pause on one deck(mouse) then click AutoDJ(mouse) it works!! :D)
-    Shutdown added to shut off all possible LEDs on Mixxx shutdown 
+  - Shutdown added to shut off all possible LEDs on Mixxx shutdown 
   - Scratch/CD mode toggle
   - Headphone output toggle 
   - Samples (Using 16 samples)

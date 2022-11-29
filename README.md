@@ -31,7 +31,7 @@ Features:
 Known Bugs:
   -	Each slide/knob needs to be moved on Mixxx startup to match levels with the Mixxx UI.
   - Reverse button (mapped to 'Stutter') sometimes stickes on until repressed when stopped.
-  - Jogwheel LEDs wont animate on AutoDJ? 
+  - LEDs wont animate on AutoDJ? 
     (Load tracks, play deck 1&2(controller), click pause(mouse), click AutoDJ)
 
 Credits to:

@@ -67,7 +67,7 @@ NumarkMixTrackQuad.init = function(id) {	// called when the MIDI device is opene
 		// Common
 		{ "directory": 0x4B, "file": 0x4C },
 	];
-		
+	
 	//engine.beginTimer(4000, "var deck1 = '1'; NumarkMixTrackQuad.flashOnceOn(deck1, '[Channel1]')", true); // passing correct info but not working ?
 	//engine.beginTimer(4000, "var deck2 = '2'; NumarkMixTrackQuad.flashOnceOn(deck2, '[Channel2]')", true); // passing correct info but not working ?
 	// i need a way to add these lines here for deck 1&2	
@@ -129,6 +129,7 @@ NumarkMixTrackQuad.flashOnceOff = function(deck, group) {
 };
 
 NumarkMixTrackQuad.playbutton = function(channel, control, value, status, group) {
+	alert(wtf)
 	NumarkMixTrackQuad.untouched = 0;
 	if (!value) return;
 	
@@ -355,12 +356,23 @@ NumarkMixTrackQuad.lightShow = function() {
 		engine.beginTimer(1000, "midi.sendShortMsg(0xB1, 0x3D, 10)", true);
 		engine.beginTimer(1100, "midi.sendShortMsg(0xB1, 0x3D, 11)", true);
 		engine.beginTimer(1200, "midi.sendShortMsg(0xB1, 0x3D, 12)", true);
-		engine.beginTimer(1300, "midi.sendShortMsg(0xB1, 0x3C, 1)", true);
-		engine.beginTimer(1400, "midi.sendShortMsg(0xB1, 0x3C, 2)", true);
-		engine.beginTimer(2200, "midi.sendShortMsg(0xB1, 0x3C, 3)", true);
-		engine.beginTimer(2300, "midi.sendShortMsg(0xB1, 0x3C, 4)", true);
-		engine.beginTimer(2400, "midi.sendShortMsg(0xB1, 0x3C, 5)", true);
-		engine.beginTimer(2500, "midi.sendShortMsg(0xB1, 0x3C, 6)", true);
+		engine.beginTimer(1300, "midi.sendShortMsg(0xB1, 0x3D, 1)", true);
+		engine.beginTimer(1400, "midi.sendShortMsg(0xB1, 0x3D, 2)", true);
+		engine.beginTimer(1500, "midi.sendShortMsg(0xB1, 0x3D, 3)", true);
+		engine.beginTimer(1600, "midi.sendShortMsg(0xB1, 0x3D, 4)", true);
+		engine.beginTimer(1700, "midi.sendShortMsg(0xB1, 0x3D, 5)", true);
+		engine.beginTimer(1800, "midi.sendShortMsg(0xB1, 0x3D, 6)", true);
+		engine.beginTimer(1900, "midi.sendShortMsg(0xB1, 0x3C, 1)", true);
+		engine.beginTimer(2000, "midi.sendShortMsg(0xB1, 0x3C, 2)", true);
+		engine.beginTimer(3000, "midi.sendShortMsg(0xB1, 0x3C, 3)", true);
+		engine.beginTimer(3100, "midi.sendShortMsg(0xB1, 0x3C, 4)", true);
+		engine.beginTimer(3150, "midi.sendShortMsg(0xB1, 0x3C, 5)", true);
+		engine.beginTimer(3200, "midi.sendShortMsg(0xB1, 0x3C, 6)", true);
+		engine.beginTimer(3250, "midi.sendShortMsg(0xB1, 0x3C, 5)", true);
+		engine.beginTimer(3300, "midi.sendShortMsg(0xB1, 0x3C, 4)", true);
+		engine.beginTimer(3350, "midi.sendShortMsg(0xB1, 0x3C, 3)", true);
+		engine.beginTimer(3400, "midi.sendShortMsg(0xB1, 0x3C, 2)", true);
+		engine.beginTimer(3450, "midi.sendShortMsg(0xB1, 0x3C, 1)", true);
 			
 		engine.beginTimer(100, "midi.sendShortMsg(0xB2, 0x3D, 12)", true);
 		engine.beginTimer(200, "midi.sendShortMsg(0xB2, 0x3D, 11)", true);
@@ -374,12 +386,23 @@ NumarkMixTrackQuad.lightShow = function() {
 		engine.beginTimer(1000, "midi.sendShortMsg(0xB2, 0x3D, 3)", true);
 		engine.beginTimer(1100, "midi.sendShortMsg(0xB2, 0x3D, 2)", true);
 		engine.beginTimer(1200, "midi.sendShortMsg(0xB2, 0x3D, 1)", true);
-		engine.beginTimer(1300, "midi.sendShortMsg(0xB2, 0x3C, 1)", true);
-		engine.beginTimer(1400, "midi.sendShortMsg(0xB2, 0x3C, 2)", true);
-		engine.beginTimer(2200, "midi.sendShortMsg(0xB2, 0x3C, 3)", true);
-		engine.beginTimer(2300, "midi.sendShortMsg(0xB2, 0x3C, 4)", true);
-		engine.beginTimer(2400, "midi.sendShortMsg(0xB2, 0x3C, 5)", true);
-		engine.beginTimer(2500, "midi.sendShortMsg(0xB2, 0x3C, 6)", true);
+		engine.beginTimer(1300, "midi.sendShortMsg(0xB2, 0x3D, 12)", true);
+		engine.beginTimer(1400, "midi.sendShortMsg(0xB2, 0x3D, 11)", true);
+		engine.beginTimer(1500, "midi.sendShortMsg(0xB2, 0x3D, 10)", true);
+		engine.beginTimer(1600, "midi.sendShortMsg(0xB2, 0x3D, 9)", true);
+		engine.beginTimer(1700, "midi.sendShortMsg(0xB2, 0x3D, 8)", true);
+		engine.beginTimer(1800, "midi.sendShortMsg(0xB2, 0x3D, 7)", true);
+		engine.beginTimer(1900, "midi.sendShortMsg(0xB2, 0x3C, 1)", true);
+		engine.beginTimer(2000, "midi.sendShortMsg(0xB2, 0x3C, 2)", true);
+		engine.beginTimer(3000, "midi.sendShortMsg(0xB2, 0x3C, 3)", true);
+		engine.beginTimer(3100, "midi.sendShortMsg(0xB2, 0x3C, 4)", true);
+		engine.beginTimer(3150, "midi.sendShortMsg(0xB2, 0x3C, 5)", true);
+		engine.beginTimer(3200, "midi.sendShortMsg(0xB2, 0x3C, 6)", true);
+		engine.beginTimer(3250, "midi.sendShortMsg(0xB2, 0x3C, 5)", true);
+		engine.beginTimer(3300, "midi.sendShortMsg(0xB2, 0x3C, 4)", true);
+		engine.beginTimer(3350, "midi.sendShortMsg(0xB2, 0x3C, 3)", true);
+		engine.beginTimer(3400, "midi.sendShortMsg(0xB2, 0x3C, 2)", true);
+		engine.beginTimer(3450, "midi.sendShortMsg(0xB2, 0x3C, 1)", true);
 		
 		engine.beginTimer(100, "midi.sendShortMsg(0xB3, 0x3D, 1)", true);
 		engine.beginTimer(200, "midi.sendShortMsg(0xB3, 0x3D, 2)", true);
@@ -393,12 +416,23 @@ NumarkMixTrackQuad.lightShow = function() {
 		engine.beginTimer(1000, "midi.sendShortMsg(0xB3, 0x3D, 10)", true);
 		engine.beginTimer(1100, "midi.sendShortMsg(0xB3, 0x3D, 11)", true);
 		engine.beginTimer(1200, "midi.sendShortMsg(0xB3, 0x3D, 12)", true);
-		engine.beginTimer(1300, "midi.sendShortMsg(0xB3, 0x3C, 1)", true);
-		engine.beginTimer(1400, "midi.sendShortMsg(0xB3, 0x3C, 2)", true);
-		engine.beginTimer(2200, "midi.sendShortMsg(0xB3, 0x3C, 3)", true);
-		engine.beginTimer(2300, "midi.sendShortMsg(0xB3, 0x3C, 4)", true);
-		engine.beginTimer(2400, "midi.sendShortMsg(0xB3, 0x3C, 5)", true);
-		engine.beginTimer(2500, "midi.sendShortMsg(0xB3, 0x3C, 6)", true);
+		engine.beginTimer(1300, "midi.sendShortMsg(0xB3, 0x3D, 1)", true);
+		engine.beginTimer(1400, "midi.sendShortMsg(0xB3, 0x3D, 2)", true);
+		engine.beginTimer(1500, "midi.sendShortMsg(0xB3, 0x3D, 3)", true);
+		engine.beginTimer(1600, "midi.sendShortMsg(0xB3, 0x3D, 4)", true);
+		engine.beginTimer(1700, "midi.sendShortMsg(0xB3, 0x3D, 5)", true);
+		engine.beginTimer(1800, "midi.sendShortMsg(0xB3, 0x3D, 6)", true);
+		engine.beginTimer(1900, "midi.sendShortMsg(0xB3, 0x3C, 1)", true);
+		engine.beginTimer(2000, "midi.sendShortMsg(0xB3, 0x3C, 2)", true);
+		engine.beginTimer(3000, "midi.sendShortMsg(0xB3, 0x3C, 3)", true);
+		engine.beginTimer(3100, "midi.sendShortMsg(0xB3, 0x3C, 4)", true);
+		engine.beginTimer(3150, "midi.sendShortMsg(0xB3, 0x3C, 5)", true);
+		engine.beginTimer(3200, "midi.sendShortMsg(0xB3, 0x3C, 6)", true);
+		engine.beginTimer(3250, "midi.sendShortMsg(0xB3, 0x3C, 5)", true);
+		engine.beginTimer(3300, "midi.sendShortMsg(0xB3, 0x3C, 4)", true);
+		engine.beginTimer(3350, "midi.sendShortMsg(0xB3, 0x3C, 3)", true);
+		engine.beginTimer(3400, "midi.sendShortMsg(0xB3, 0x3C, 2)", true);
+		engine.beginTimer(3450, "midi.sendShortMsg(0xB3, 0x3C, 1)", true);
 		
 		engine.beginTimer(100, "midi.sendShortMsg(0xB4, 0x3D, 12)", true);
 		engine.beginTimer(200, "midi.sendShortMsg(0xB4, 0x3D, 11)", true);
@@ -412,12 +446,23 @@ NumarkMixTrackQuad.lightShow = function() {
 		engine.beginTimer(1000, "midi.sendShortMsg(0xB4, 0x3D, 3)", true);
 		engine.beginTimer(1100, "midi.sendShortMsg(0xB4, 0x3D, 2)", true);
 		engine.beginTimer(1200, "midi.sendShortMsg(0xB4, 0x3D, 1)", true);
-		engine.beginTimer(1300, "midi.sendShortMsg(0xB4, 0x3C, 1)", true);
-		engine.beginTimer(1400, "midi.sendShortMsg(0xB4, 0x3C, 2)", true);
-		engine.beginTimer(2200, "midi.sendShortMsg(0xB4, 0x3C, 3)", true);
-		engine.beginTimer(2300, "midi.sendShortMsg(0xB4, 0x3C, 4)", true);
-		engine.beginTimer(2400, "midi.sendShortMsg(0xB4, 0x3C, 5)", true);
-		engine.beginTimer(2500, "midi.sendShortMsg(0xB4, 0x3C, 6)", true);
+		engine.beginTimer(1300, "midi.sendShortMsg(0xB4, 0x3D, 12)", true);
+		engine.beginTimer(1400, "midi.sendShortMsg(0xB4, 0x3D, 11)", true);
+		engine.beginTimer(1500, "midi.sendShortMsg(0xB4, 0x3D, 10)", true);
+		engine.beginTimer(1600, "midi.sendShortMsg(0xB4, 0x3D, 9)", true);
+		engine.beginTimer(1700, "midi.sendShortMsg(0xB4, 0x3D, 8)", true);
+		engine.beginTimer(1800, "midi.sendShortMsg(0xB4, 0x3D, 7)", true);
+		engine.beginTimer(1900, "midi.sendShortMsg(0xB4, 0x3C, 1)", true);
+		engine.beginTimer(2000, "midi.sendShortMsg(0xB4, 0x3C, 2)", true);
+		engine.beginTimer(3000, "midi.sendShortMsg(0xB4, 0x3C, 3)", true);
+		engine.beginTimer(3100, "midi.sendShortMsg(0xB4, 0x3C, 4)", true);
+		engine.beginTimer(3150, "midi.sendShortMsg(0xB4, 0x3C, 5)", true);
+		engine.beginTimer(3200, "midi.sendShortMsg(0xB4, 0x3C, 6)", true);
+		engine.beginTimer(3250, "midi.sendShortMsg(0xB4, 0x3C, 5)", true);
+		engine.beginTimer(3300, "midi.sendShortMsg(0xB4, 0x3C, 4)", true);
+		engine.beginTimer(3350, "midi.sendShortMsg(0xB4, 0x3C, 3)", true);
+		engine.beginTimer(3400, "midi.sendShortMsg(0xB4, 0x3C, 2)", true);
+		engine.beginTimer(3450, "midi.sendShortMsg(0xB4, 0x3C, 1)", true);
 		// Hey did it just smile at me? :D
 		
 		// Turns on Scratch LEDs

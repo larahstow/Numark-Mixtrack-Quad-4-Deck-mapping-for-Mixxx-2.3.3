@@ -10,7 +10,6 @@ Or if you're on Mac:
 Whats New?
   - New Colors on Most Pads
   - IMPROVED Animated LEDs, Beautiful intro on Mixxx startup, LEDs now work with scratching, end of track, and AutoDJ
-    ( Load tracks, play deck 1 & 2(controller), click pause on one deck(mouse), click AutoDJ(mouse), it works!! :D )
   - Shutdown added to shut off all possible LEDs on Mixxx shutdown 
 
 Features:
@@ -32,7 +31,7 @@ Features:
 Known Bugs:
   -	Each slide/knob needs to be moved on Mixxx startup to match levels with the Mixxx UI.
   - Reverse button (mapped to 'Stutter') sometimes stickes on until repressed when stopped.
-  - Jogwheel LEDs wont animate on AutoDJ?
+  - Jogwheel LEDs wont animate on AutoDJ? 
     ( First load tracks, play deck 1 and 2(controller), click pause on one deck(mouse), click AutoDJ(mouse) )
 
 Credits to:

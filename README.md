@@ -9,8 +9,8 @@ Or if you're on Mac:
 
 Whats New?
   - New Colors on Most Pads
-  - IMPROVED Animated LEDs, Beautiful intro on Mixxx startup, LEDs work with scratching, end of track, and AutoDJ
-  - Shutdown added to shut off all possible LEDs on Mixxx shutdown 
+  - Fully Animated LEDs, Beautiful intro on Mixxx startup, LEDs work with scratching, end of track, and AutoDJ
+  - Shutdown function added to turn off all possible LEDs with Mixxx app shutdown 
 
 Features:
   - Supports 4 decks

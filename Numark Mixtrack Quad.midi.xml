@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
 <MixxxControllerPreset mixxxVersion="" schemaVersion="1">
     <info>
-        <name>Numark Mixtrack Quad</name>
-        <author>datlaunchystark (credit to Einar Alex, Matteo, James Ralston, and Darío José Freije for the original script) Just modified it a bit ya know..</author>
+        <name>Numark Mixtrack Quad new</name>
+        <author>DJ KWKSND (credit to datlaunchystark, Einar Alex, Matteo, James Ralston, and Darío José Freije for the original script) Just modified it a bit more..</author>
         <description>4 Decks baby!!  Mostly functionable with some minor querks... yeah.</description>
     </info>
     <controller id="MixTrack_Quad">
         <scriptfiles>
-            <file filename="Numark Mixtrack Quad scripts.js" functionprefix="NumarkMixTrackQuad"/>
+            <file functionprefix="NumarkMixTrackQuad" filename="Numark Mixtrack Quad scripts.js"/>
         </scriptfiles>
         <controls>
             <control>
@@ -288,122 +288,122 @@
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit1_Effect1]</group>
-                <key>meta</key>
-                <description>MIDI Learned from 220 messages.</description>
+                <key>effect_selector</key>
+                <description>MIDI Learned from 2 messages.</description>
                 <status>0xB1</status>
                 <midino>0x26</midino>
                 <options>
-                    <hercjog/>
+                    <selectknob/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit2_Effect1]</group>
-                <key>meta</key>
-                <description>MIDI Learned from 227 messages.</description>
+                <key>effect_selector</key>
+                <description>MIDI Learned from 6 messages.</description>
                 <status>0xB2</status>
                 <midino>0x26</midino>
                 <options>
-                    <hercjog/>
+                    <selectknob/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit3_Effect1]</group>
-                <key>meta</key>
-                <description>MIDI Learned from 225 messages.</description>
+                <key>effect_selector</key>
+                <description>MIDI Learned from 8 messages.</description>
                 <status>0xB3</status>
                 <midino>0x26</midino>
                 <options>
-                    <hercjog/>
+                    <selectknob/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit4_Effect1]</group>
-                <key>meta</key>
-                <description>MIDI Learned from 221 messages.</description>
+                <key>effect_selector</key>
+                <description>MIDI Learned from 7 messages.</description>
                 <status>0xB4</status>
                 <midino>0x26</midino>
                 <options>
-                    <hercjog/>
+                    <selectknob/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit1_Effect2]</group>
-                <key>meta</key>
-                <description>MIDI Learned from 223 messages.</description>
+                <key>effect_selector</key>
+                <description>MIDI Learned from 10 messages.</description>
                 <status>0xB1</status>
                 <midino>0x27</midino>
                 <options>
-                    <hercjog/>
+                    <selectknob/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit2_Effect2]</group>
-                <key>meta</key>
-                <description>MIDI Learned from 227 messages.</description>
+                <key>effect_selector</key>
+                <description>MIDI Learned from 8 messages.</description>
                 <status>0xB2</status>
                 <midino>0x27</midino>
                 <options>
-                    <hercjog/>
+                    <selectknob/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit3_Effect2]</group>
-                <key>meta</key>
-                <description>MIDI Learned from 217 messages.</description>
+                <key>effect_selector</key>
+                <description>MIDI Learned from 3 messages.</description>
                 <status>0xB3</status>
                 <midino>0x27</midino>
                 <options>
-                    <hercjog/>
+                    <selectknob/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit4_Effect2]</group>
-                <key>meta</key>
-                <description>MIDI Learned from 222 messages.</description>
+                <key>effect_selector</key>
+                <description>MIDI Learned from 2 messages.</description>
                 <status>0xB4</status>
                 <midino>0x27</midino>
                 <options>
-                    <hercjog/>
+                    <selectknob/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit1_Effect3]</group>
-                <key>meta</key>
-                <description>MIDI Learned from 224 messages.</description>
+                <key>effect_selector</key>
+                <description>MIDI Learned from 4 messages.</description>
                 <status>0xB1</status>
                 <midino>0x28</midino>
                 <options>
-                    <hercjog/>
+                    <selectknob/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit2_Effect3]</group>
-                <key>meta</key>
-                <description>MIDI Learned from 245 messages.</description>
+                <key>effect_selector</key>
+                <description>MIDI Learned from 3 messages.</description>
                 <status>0xB2</status>
                 <midino>0x28</midino>
                 <options>
-                    <hercjog/>
+                    <selectknob/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit3_Effect3]</group>
-                <key>meta</key>
-                <description>MIDI Learned from 217 messages.</description>
+                <key>effect_selector</key>
+                <description>MIDI Learned from 7 messages.</description>
                 <status>0xB3</status>
                 <midino>0x28</midino>
                 <options>
-                    <hercjog/>
+                    <selectknob/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit4_Effect3]</group>
-                <key>meta</key>
-                <description>MIDI Learned from 267 messages.</description>
+                <key>effect_selector</key>
+                <description>MIDI Learned from 5 messages.</description>
                 <status>0xB4</status>
                 <midino>0x28</midino>
                 <options>
-                    <hercjog/>
+                    <selectknob/>
                 </options>
             </control>
             <control>
@@ -1499,7 +1499,6 @@
                 </options>
             </control>
         </controls>
-		
         <outputs>
             <output>
                 <group>[Channel1]</group>
@@ -1809,7 +1808,7 @@
                 <status>0x93</status>
                 <midino>0x63</midino>
                 <on>0x0A</on>
-                <off>0x1</off>
+                <off>0x01</off>
                 <maximum>0</maximum>
             </output>
             <output>

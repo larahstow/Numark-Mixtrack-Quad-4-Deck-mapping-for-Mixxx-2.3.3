@@ -24,6 +24,7 @@
 //	Headphone output toggle 
 //	Samples (Using 16 samples)
 //	Effects (Using 4 effect units)
+//  FX knobs 123 now change what effect is assigned to the pad, 4th knob still controls gain so it works great
 //	Cue
 //			1-4. Hot cue
 //	Loops

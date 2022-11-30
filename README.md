@@ -11,13 +11,13 @@ Whats New?
   - New Colors on Most Pads
   - Fully Animated LEDs, Beautiful intro on Mixxx startup, LEDs work with scratching, end of track, and AutoDJ
   - Shutdown function added to turn off all possible LEDs with Mixxx app shutdown 
+  - Improved controls and LED animation with scratching especially in reverse
 
 Features:
   - Supports 4 decks
   - Library Browse knob + Load A/B
   - Channel volume, cross fader, cue gain / mix, Master gain, filters, pitch and pitch bend
   - Scratch/CD mode toggle
-  - Improved controls and LED animation with scratching especially in reverse
   - Headphone output toggle 
   - Samples (Using 16 samples)
   - Effects (Using 4 effect units)

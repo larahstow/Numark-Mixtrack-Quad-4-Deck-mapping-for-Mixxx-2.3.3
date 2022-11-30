@@ -8,22 +8,23 @@ Or if you're on Mac:
 `Applications/Mixxx.app/Contents/Resources/controllers`
 
 Whats New?
-  - New Colors on Most Pads
-  - Fully Animated LEDs, Beautiful intro on Mixxx startup, LEDs work with scratching, end of track, and AutoDJ
+  - New colors on most pads
+  - Fully animated LEDs
+  - Beautiful intro on Mixxx startup
+  - LEDs work with scratching, end of track, and AutoDJ
   - Shutdown function added to turn off all possible LEDs with Mixxx app shutdown 
   - Improved controls and LED animation with scratching especially in reverse
-  - FX 123 knobs now change what effect is assigned to the pad, 4th knob still controls gain so it works great
+  - FX 123 knobs change what effect is assigned to the pad, 4th knob still controls gain it works great
   
 Features:
   - Supports 4 decks
-  - Library Browse knob + Load A/B
+  - Library browse knob + load A/B
   - Channel volume, cross fader, cue gain / mix, Master gain, filters, pitch and pitch bend
   - Scratch/CD mode toggle
   - Headphone output toggle 
   - Samples (Using 16 samples)
   - Effects (Using 4 effect units)
-  - Cue
-  - 1-4. Hot cue
+  - Cue 1-4. hot cues
   - Loops
     - (1) Loop in (Loop halves)
     - (2) Loop out (Loop double)
@@ -42,4 +43,4 @@ Credits to:
   - Darío José Freije <dario2004@gmail.com>
   - and Einar Alex (einaralex) https://github.com/einaralex/
 
-For the original code and the idea to get this controller functional in Mixxx.  You guys are awesome! :)
+For the original code and the idea to get this controller functional in Mixxx. You guys are awesome! :)

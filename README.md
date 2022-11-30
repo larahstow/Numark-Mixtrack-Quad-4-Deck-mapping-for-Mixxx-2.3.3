@@ -12,7 +12,7 @@ Whats New?
   - Fully Animated LEDs, Beautiful intro on Mixxx startup, LEDs work with scratching, end of track, and AutoDJ
   - Shutdown function added to turn off all possible LEDs with Mixxx app shutdown 
   - Improved controls and LED animation with scratching especially in reverse
-  - FX knobs 123 now change what effect is assigned to the pad, 4th knob still controls gain so it works great
+  - FX 123 knobs now change what effect is assigned to the pad, 4th knob still controls gain so it works great
   
 Features:
   - Supports 4 decks

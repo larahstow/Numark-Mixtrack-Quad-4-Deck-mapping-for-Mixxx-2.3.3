@@ -17,6 +17,7 @@ Features:
   - Library Browse knob + Load A/B
   - Channel volume, cross fader, cue gain / mix, Master gain, filters, pitch and pitch bend
   - Scratch/CD mode toggle
+  - Improved controls and LED animation with scratching especially in reverse
   - Headphone output toggle 
   - Samples (Using 16 samples)
   - Effects (Using 4 effect units)
@@ -27,11 +28,11 @@ Features:
     - (2) Loop out (Loop double)
     - (3) Re-loop (Starts loop at current playback point)
     - (4) Loop Delete (Deactivates loop)
-
+    
 Known Bugs:
   -	Each slide/knob needs to be moved on Mixxx startup to match levels with the Mixxx UI.
-  - LEDs wont animate on AutoDJ? 
-    (Load tracks, play deck 1&2(controller), click pause(mouse), click AutoDJ)
+  - LEDs wont animate on deck 2 with AutoDJ? 
+    (Load track in deck 2, play deck 2(controller), click AutoDJ)
 
 Credits to:
   - Datlaunchystark

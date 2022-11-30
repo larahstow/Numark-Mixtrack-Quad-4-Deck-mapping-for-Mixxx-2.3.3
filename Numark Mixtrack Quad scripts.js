@@ -70,7 +70,7 @@ NumarkMixTrackQuad.init = function(id) {	// called when the MIDI device is opene
 	
 	//engine.beginTimer(4000, "var deck1 = '1'; NumarkMixTrackQuad.flashOnceOn(deck1, '[Channel1]')", true); // passing correct info but not working ?
 	//engine.beginTimer(4000, "var deck2 = '2'; NumarkMixTrackQuad.flashOnceOn(deck2, '[Channel2]')", true); // passing correct info but not working ?
-	// i need a way to add these lines here for deck 1&2	
+	// i need a way to add these lines here for deck 1&2 to work with autodj 	
 	// if not can it be set when autoDJ starts?
 }
 
@@ -158,14 +158,10 @@ NumarkMixTrackQuad.reversebutton = function(channel, control, value, status, gro
 	if (engine.getValue(group, "play")) {
 		if (engine.getValue(group, "reverse")) {
 			engine.setValue(group, "reverse", 0);
+			NumarkMixTrackQuad.reverse[deck-1] = 1;
 		}else{
 			engine.setValue(group, "reverse", 1);
-		}
-
-		if (engine.getValue(group, "reverse", 1)) {
 			NumarkMixTrackQuad.reverse[deck-1] = -1;
-		}else{
-			NumarkMixTrackQuad.reverse[deck-1] = 1;
 		}
 	}else{
 		if (engine.getValue(group, "reverse"), 1) {
@@ -190,7 +186,6 @@ NumarkMixTrackQuad.cuebutton = function(channel, control, value, status, group) 
 NumarkMixTrackQuad.jogWheel = function(channel, control, value, status, group) {
 	NumarkMixTrackQuad.untouched = 0;
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
-	NumarkMixTrackQuad.reverse[deck-1] = 0;
 	var adjustedJog = parseFloat(value);
 	var posNeg = 1;
 	if (adjustedJog > 63) {	// Counter-clockwise
@@ -202,14 +197,14 @@ NumarkMixTrackQuad.jogWheel = function(channel, control, value, status, group) {
 
 		if (NumarkMixTrackQuad.scratchMode[deck-1] && posNeg == -1 && !NumarkMixTrackQuad.touch[deck-1]) {
 			if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
-			NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch(" + deck + ")", true);
+			NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch('" + deck + "', '" + group + "')", true);
 		} 
 
 	} else { 
 	
 		if (!NumarkMixTrackQuad.touch[deck-1]){
 			if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
-			NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch(" + deck + ")", true);
+			NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch('" + deck + "', '" + group + "')", true);
 		}
 	}
 
@@ -220,39 +215,72 @@ NumarkMixTrackQuad.jogWheel = function(channel, control, value, status, group) {
 		var maxOutFraction = 0.8;	// Where on the curve it should peak; 0.5 is half-way
 		var sensitivity = 0.5;		// Adjustment gamma
 		var gammaOutputRange = 2;	// Max rate change
-
-		adjustedJog = posNeg * gammaOutputRange * Math.pow(Math.abs(adjustedJog) / (gammaInputRange * maxOutFraction), sensitivity);
+		if (engine.getValue(group,"reverse") == 0) {
+			adjustedJog = posNeg * gammaOutputRange * Math.pow(Math.abs(adjustedJog) / (gammaInputRange * maxOutFraction), sensitivity);   // Clockwise
+		} else {
+			adjustedJog = posNeg * gammaOutputRange * Math.pow(Math.abs(adjustedJog) / (gammaInputRange * maxOutFraction), sensitivity) * -1;	// Counter-clockwise
+		}
 		engine.setValue(group, "jog", adjustedJog);
-		
-		if (NumarkMixTrackQuad.scratchMode[deck-1] == 1) { 
+		if (NumarkMixTrackQuad.isKeyLocked[deck-1] == 0){
 			NumarkMixTrackQuad.reverse[deck-1] = 0;
+		}
+		if ((NumarkMixTrackQuad.scratchMode[deck-1] == 1) && (NumarkMixTrackQuad.touch[deck-1] == 1)) { 
+			engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
+			NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch('" + deck + "', '" + group + "')", true);
 			if (posNeg < 0) {	// Counter-clockwise
-				NumarkMixTrackQuad.reverse[deck-1] = -0.25;
-			} else {
-				NumarkMixTrackQuad.reverse[deck-1] = 0.25;
+				NumarkMixTrackQuad.reverse[deck-1] = -0.30;
+			} else {	// Clockwise
+				NumarkMixTrackQuad.reverse[deck-1] = 0.30;
 			}
+		} else {		
+				engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
+				NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch('" + deck + "', '" + group + "')", true);
+				if ((posNeg < 0) && (engine.getValue(group,"reverse") == 0)) {	// Clockwise
+					NumarkMixTrackQuad.reverse[deck-1] = 0.5;
+				} else if (engine.getValue(group,"reverse") == 0) {
+					NumarkMixTrackQuad.reverse[deck-1] = 1.25;
+				} else if ((posNeg < 0) && (engine.getValue(group,"reverse") == 1)) {	// Counter-clockwise
+					NumarkMixTrackQuad.reverse[deck-1] = -1.25;
+				} else if (engine.getValue(group,"reverse") == 1) {
+					NumarkMixTrackQuad.reverse[deck-1] = -0.5;
+				}		
 		}
 		if (NumarkMixTrackQuad.touch[deck-1] == 0) {
-			NumarkMixTrackQuad.reverse[deck-1] = 1;
-			if (engine.getValue(group,"reverse") == 1) {
-				NumarkMixTrackQuad.reverse[deck-1] = -1;
+			if (NumarkMixTrackQuad.scratchMode[deck-1] == 1) { 
+			
+			} else {
+				engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
+				NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch('" + deck + "', '" + group + "')", true);
+				if ((posNeg < 0) && (engine.getValue(group,"reverse") == 0)) {	// Clockwise
+					NumarkMixTrackQuad.reverse[deck-1] = 0.5;
+				} else if (engine.getValue(group,"reverse") == 0) {
+					NumarkMixTrackQuad.reverse[deck-1] = 1.25;
+				} else if ((posNeg < 0) && (engine.getValue(group,"reverse") == 1)) {	// Counter-clockwise
+					NumarkMixTrackQuad.reverse[deck-1] = -1.25;
+				} else if (engine.getValue(group,"reverse") == 1) {
+					NumarkMixTrackQuad.reverse[deck-1] = -0.5;
+				}						
 			}
 		}
 	}
 }
 
-NumarkMixTrackQuad.jogWheelStopScratch = function(deck) {
-	NumarkMixTrackQuad.scratchTimer[deck-1] = -1;
-	engine.scratchDisable(deck);
-	NumarkMixTrackQuad.reverse[deck-1] = 1;
+NumarkMixTrackQuad.jogWheelStopScratch = function(deck, group) {
+	if (NumarkMixTrackQuad.touch[deck-1] == 0) {
+		NumarkMixTrackQuad.scratchTimer[deck-1] = 1;
+		if (engine.getValue(group,"reverse") == 1) {
+			NumarkMixTrackQuad.reverse[deck-1] = -1;
+		} else {
+			NumarkMixTrackQuad.reverse[deck-1] = 1;
+		}
+	} else {
+		NumarkMixTrackQuad.reverse[deck-1] = 0;
+	}
 }
 
 NumarkMixTrackQuad.wheelTouch = function(channel, control, value, status, group){
 	NumarkMixTrackQuad.untouched = 0;
-
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
-			NumarkMixTrackQuad.reverse[deck-1] = 0;
-
 	if(!value){
 		if (engine.getValue(group, "play", 1)) {
 			
@@ -260,11 +288,9 @@ NumarkMixTrackQuad.wheelTouch = function(channel, control, value, status, group)
 			midi.sendShortMsg(0xB0+(channel), 0x3C, 0);
 		}
 		NumarkMixTrackQuad.touch[deck-1]= false;
-
 		if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
-
 		NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch(" + deck + ")", true);
-
+		engine.scratchDisable(deck);
 	} else {
 		if (engine.getValue(group, "play", 1)) {
 			
@@ -279,13 +305,9 @@ NumarkMixTrackQuad.wheelTouch = function(channel, control, value, status, group)
 		if (NumarkMixTrackQuad.isKeyLocked[deck-1]){
 			engine.setValue(group, "keylock", 0);
 		}
-
-
 		if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
-
 		// change the 600 value for sensibility
 		engine.scratchEnable(deck, 600, 33+1/3, 1.0/8, (1.0/8)/32);
-
 		NumarkMixTrackQuad.touch[deck-1]= true;
 	}
 }
@@ -294,7 +316,6 @@ NumarkMixTrackQuad.toggleDirectoryMode = function(channel, control, value, statu
 	// Toggle setting and light
 	if (value) {
 		NumarkMixTrackQuad.directoryMode = !NumarkMixTrackQuad.directoryMode;
-
 		NumarkMixTrackQuad.setLED(NumarkMixTrackQuad.leds[0]["directory"], NumarkMixTrackQuad.directoryMode);
 		NumarkMixTrackQuad.setLED(NumarkMixTrackQuad.leds[0]["file"], !NumarkMixTrackQuad.directoryMode);
 	}
@@ -303,7 +324,6 @@ NumarkMixTrackQuad.toggleDirectoryMode = function(channel, control, value, statu
 NumarkMixTrackQuad.toggleScratchMode = function(channel, control, value, status, group) {
 	NumarkMixTrackQuad.untouched = 0;
 	if (!value) return;
-
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
 	// Toggle setting and light
 	NumarkMixTrackQuad.scratchMode[deck-1] = !NumarkMixTrackQuad.scratchMode[deck-1];

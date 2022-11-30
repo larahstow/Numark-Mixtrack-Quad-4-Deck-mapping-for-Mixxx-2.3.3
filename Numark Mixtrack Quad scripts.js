@@ -20,6 +20,7 @@
 //  New colors on most pads
 //  Fully animated LEDs
 //  Beautiful intro on Mixxx startup
+//  Idle Mode added to keep the LED show going until you start DJing
 //  LEDs work with scratching, end of track, and AutoDJ
 //  Shutdown function added to turn off all possible LEDs with Mixxx app shutdown
 //  Improved controls and LED animation with scratching especially in reverse

@@ -14,32 +14,36 @@
 // Updated on 11/27/2022 by DJ KWKSND (changed a bunch of code)
 // LEDs working better with scratching, reversing, end of tracks, and autoDJ
 //
-// **** MIXXX v2.3.3 ****
-// Supports 4 decks
-// ---------------
-//	Library browse knob + load A/B
-//	Channel volume, cross fader, cue gain / mix, master gain, filters, pitch and pitch bend
-// 	JogWheel (Improved Animated LEDs by DJ KWKSND :D)
-//  Scratch/CD mode toggle
-//	Headphone output toggle 
-//	Samples (Using 16 samples)
-//	Effects (Using 4 effect units)
-//  FX knobs 123 now change what effect is assigned to the pad, 4th knob still controls gain so it works great
-//	Cue
-//			1-4. Hot cue
-//	Loops
-//			1. Loop in (Loop halves)
-//			2. Loop out (Loop double)
-//			3. Re-loop (Starts loop at current playback point)
-//			4. Loop Delete (Deactivates loop)
+// Numark Mixtrack Quad 4 Deck mapping for Mixxx 2.3.3
 //
-//  Sync
-//  All of the LEDs are functional? :D
+// Whats New?
+//  New colors on most pads
+//  Fully animated LEDs
+//  Beautiful intro on Mixxx startup
+//  LEDs work with scratching, end of track, and AutoDJ
+//  Shutdown function added to turn off all possible LEDs with Mixxx app shutdown
+//  Improved controls and LED animation with scratching especially in reverse
+//  FX 123 knobs now change what effects are assigned to the pads, 4th knob still controls gain so it works great
+//
+// Features:
+//  Supports 4 decks
+//  Library browse knob + load A/B
+//  Channel volume, cross fader, cue gain / mix, Master gain, filters, pitch and pitch bend
+//  Scratch/CD mode toggle
+//  Headphone output toggle
+//  Samples (Using 16 samples)
+//  Effects (Using 4 effect units)
+//  Cue 1-4 hot cues
+//
+//  Loops
+//   (1) Loop in (Loop halves)
+//   (2) Loop out (Loop double)
+//   (3) Re-loop (Starts loop at current playback point)
+//   (4) Loop Delete (Deactivates loop)
 //
 // Known Bugs:
-//	Each slide/knob needs to be moved on Mixxx startup to match levels with the Mixxx UI.
-//	LEDs not working with autoDJ deck2
-// 	(load track in deck 2, press play on deck 2(dj controller), click start autoDJ(mouse))
+//  Each slide/knob needs to be moved on Mixxx startup to match levels with the Mixxx UI.
+//  LEDs wont animate on deck 2 with AutoDJ? (Load track in deck 2, play deck 2(controller), click AutoDJ)
 
 engine.beginTimer(1, "NumarkMixTrackQuad.shutdown()", true);
 function NumarkMixTrackQuad() {}

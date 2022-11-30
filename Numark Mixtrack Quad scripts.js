@@ -13,20 +13,12 @@
 //
 // Updated on 11/27/2022 by DJ KWKSND (changed a bunch of code)
 // LEDs working better with scratching, reversing, end of tracks, and autoDJ
-// (load tracks, press play on decks 1 and 2(dj console), click pause on one deck(mouse), click start autoDJ(mouse))
-// (to make this better it needs the function for deck 1 and 2 to start with the script or with autoDJ but im unsure how to do that yet)
 //
 // **** MIXXX v2.3.3 ****
-// Known Bugs:
-//	Each slide/knob needs to be moved on Mixxx startup to match levels with the Mixxx UI.
-//  Reverse button (mapped to 'Stutter') sometimes stickes on until repressed when stopped.
-//
-//  What should be working.
-//	
-//	Supports 4 decks
-// 	---------------
-//	Library Browse knob + Load A/B
-//	Channel volume, cross fader, cue gain / mix, Master gain, filters, pitch and pitch bend
+// Supports 4 decks
+// ---------------
+//	Library browse knob + load A/B
+//	Channel volume, cross fader, cue gain / mix, master gain, filters, pitch and pitch bend
 // 	JogWheel (Improved Animated LEDs by DJ KWKSND :D)
 //  Scratch/CD mode toggle
 //	Headphone output toggle 
@@ -42,9 +34,13 @@
 //
 //  Sync
 //  All of the LEDs are functional? :D
+//
+// Known Bugs:
+//	Each slide/knob needs to be moved on Mixxx startup to match levels with the Mixxx UI.
+//	LEDs not working with autoDJ deck2
+// 	(load track in deck 2, press play on deck 2(dj controller), click start autoDJ(mouse))
 
 engine.beginTimer(1, "NumarkMixTrackQuad.shutdown()", true);
-
 function NumarkMixTrackQuad() {}
 
 NumarkMixTrackQuad.init = function(id) {	// called when the MIDI device is opened & set up
@@ -64,14 +60,22 @@ NumarkMixTrackQuad.init = function(id) {	// called when the MIDI device is opene
 	NumarkMixTrackQuad.lightShow ()
 
 	NumarkMixTrackQuad.leds = [
-		// Common
 		{ "directory": 0x4B, "file": 0x4C },
 	];
 	
-	//engine.beginTimer(4000, "var deck1 = '1'; NumarkMixTrackQuad.flashOnceOn(deck1, '[Channel1]')", true); // passing correct info but not working ?
-	//engine.beginTimer(4000, "var deck2 = '2'; NumarkMixTrackQuad.flashOnceOn(deck2, '[Channel2]')", true); // passing correct info but not working ?
-	// i need a way to add these lines here for deck 1&2 to work with autodj 	
-	// if not can it be set when autoDJ starts?
+	engine.beginTimer(5000, "NumarkMixTrackQuad.kwkautodjfix('[Channel1]') ", true); // FINALLY got deck 1 working with autoDJ no input required
+	engine.beginTimer(5000, "NumarkMixTrackQuad.kwkautodjfix('[Channel2]') ", true); // WTF why does deck2 not work with the same code OMG
+}
+
+NumarkMixTrackQuad.kwkautodjfix = function(group) {
+	var deck = NumarkMixTrackQuad.groupToDeck(group);
+	if (group == '[Channel1]') {
+		NumarkMixTrackQuad.channel[deck-1] = 1;
+	}
+	if (group == '[Channel2]') {
+		NumarkMixTrackQuad.channel[deck-1] = 2;  // how does this not work? wtf my head hertz :(
+	}
+	NumarkMixTrackQuad.flashOnceOn(deck, group)
 }
 
 NumarkMixTrackQuad.setLED = function(value, status) {
@@ -109,14 +113,16 @@ NumarkMixTrackQuad.selectKnob = function(channel, control, value, status, group)
 }
 
 NumarkMixTrackQuad.flashOnceOn = function(deck, group) {
-	engine.stopTimer(NumarkMixTrackQuad.flashOnceTimer[deck-1]);
+	if (NumarkMixTrackQuad.flashOnceTimer[deck-1]) {
+		engine.stopTimer(NumarkMixTrackQuad.flashOnceTimer[deck-1]);
+	}
 	if (engine.getValue(group, "play", 1)) {
 		midi.sendShortMsg(0xB0+(NumarkMixTrackQuad.channel[deck-1]), 0x3D, NumarkMixTrackQuad.jogled[deck-1]);
 	}else{
 		midi.sendShortMsg(0xB0+(NumarkMixTrackQuad.channel[deck-1]), 0x3C, 0);
 	}
 	NumarkMixTrackQuad.flashOnceTimer[deck-1] = engine.beginTimer(50, "NumarkMixTrackQuad.flashOnceOff('" + deck + "', '" + group + "')", true);
-};
+}
 
 NumarkMixTrackQuad.flashOnceOff = function(deck, group) {	
 	NumarkMixTrackQuad.jogled[deck-1] = NumarkMixTrackQuad.jogled[deck-1] + NumarkMixTrackQuad.reverse[deck-1]
@@ -126,29 +132,23 @@ NumarkMixTrackQuad.flashOnceOff = function(deck, group) {
 		NumarkMixTrackQuad.jogled[deck-1] = 12.99;
 	}
 	NumarkMixTrackQuad.flashOnceOn(deck, group)
-};
+}
 
 NumarkMixTrackQuad.playbutton = function(channel, control, value, status, group) {
 	NumarkMixTrackQuad.untouched = 0;
 	if (!value) return;
-	
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
-		
 	NumarkMixTrackQuad.flashOnceTimer[deck-1] = 0;
 	NumarkMixTrackQuad.jogled[deck-1] = 1;
-
 	if (engine.getValue(group, "play")) {
 		engine.setValue(group, "play", 0);
+		NumarkMixTrackQuad.channel[deck-1] = 0;
+		midi.sendShortMsg(0xB0+(channel), 0x3C, 0);
 	}else{
 		engine.setValue(group, "play", 1);
-	}
-	if (engine.getValue(group, "play", 1)) {
 		NumarkMixTrackQuad.channel[deck-1] = channel;
 		NumarkMixTrackQuad.reverse[deck-1] = 1;
-		NumarkMixTrackQuad.flashOnceOn(deck, group)
-	}else{
-		NumarkMixTrackQuad.channel[deck-1] = 0
-		midi.sendShortMsg(0xB0+(channel), 0x3C, 0);
+		NumarkMixTrackQuad.flashOnceOn(deck, group);
 	}
 }
 
@@ -362,7 +362,7 @@ NumarkMixTrackQuad.lightShow = function() {
 		//15 0x0F PEACH
 		//16 0x10 L PEACH
 		
-		// Turns on jogWheel LEDs
+		// Animates jogWheel LEDs
 		engine.beginTimer(100, "midi.sendShortMsg(0xB1, 0x3D, 1)", true);
 		engine.beginTimer(200, "midi.sendShortMsg(0xB1, 0x3D, 2)", true);
 		engine.beginTimer(300, "midi.sendShortMsg(0xB1, 0x3D, 3)", true);

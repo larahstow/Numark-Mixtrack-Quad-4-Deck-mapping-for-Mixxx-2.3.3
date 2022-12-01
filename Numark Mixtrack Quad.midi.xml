@@ -7,7 +7,7 @@
     </info>
     <controller id="MixTrack_Quad">
         <scriptfiles>
-            <file functionprefix="NumarkMixTrackQuad" filename="Numark Mixtrack Quad scripts.js"/>
+            <file functionprefix="NumarkMixTrackQuad" filename="Numark Mixtrack Quad.scripts.js"/>
         </scriptfiles>
         <controls>
             <control>

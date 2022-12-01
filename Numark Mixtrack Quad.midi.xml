@@ -2,12 +2,12 @@
 <MixxxControllerPreset mixxxVersion="" schemaVersion="1">
     <info>
         <name>Numark Mixtrack Quad by DJ KWKSND</name>
-        <author>DJ KWKSND (credit to datlaunchystark, Einar Alex, Matteo, James Ralston, and Darío José Freije for the original script) Just modified it a bit more..</author>
-        <description>4 Decks baby!!  Mostly functionable with some minor querks... yeah.</description>
+        <author>DJ KWKSND (credit to datlaunchystark, Einar Alex, Matteo, James Ralston, and Darío José Freije for the original script) Just modified it a lot..</author>
+        <description>4 Decks, Full LED Light Show, Idle Mode And Shutdown. It Is The Best Mixtrack Quad Mapping Ever !!</description>
     </info>
     <controller id="MixTrack_Quad">
         <scriptfiles>
-            <file functionprefix="NumarkMixTrackQuad" filename="Numark Mixtrack Quad.scripts.js"/>
+            <file filename="Numark Mixtrack Quad.scripts.js" functionprefix="NumarkMixTrackQuad"/>
         </scriptfiles>
         <controls>
             <control>
@@ -251,7 +251,7 @@
                 </options>
             </control>
             <control>
-                <group>[Channel1]</group>
+				<group>[Channel1]</group>
                 <key>NumarkMixTrackQuad.jogWheel</key>
                 <status>0xB1</status>
                 <midino>0x25</midino>
@@ -269,7 +269,7 @@
                 </options>
             </control>
             <control>
-                <group>[Channel3]</group>
+				<group>[Channel3]</group>
                 <key>NumarkMixTrackQuad.jogWheel</key>
                 <status>0xB3</status>
                 <midino>0x25</midino>
@@ -579,7 +579,7 @@
             <control>
                 <group>[Channel1]</group>
                 <key>rate_temp_down</key>
-                <description>MIDI Learned from 4 messages.</description>
+                <description>MIDI Learned from 2 messages.</description>
                 <status>0x91</status>
                 <midino>0x43</midino>
                 <options>

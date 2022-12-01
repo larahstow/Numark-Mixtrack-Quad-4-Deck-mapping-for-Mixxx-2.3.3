@@ -12,7 +12,6 @@
 // https://github.com/datlaunchystark
 //
 // Updated on 11/27/2022 by DJ KWKSND (changed a bunch of code)
-// LEDs working better with scratching, reversing, end of tracks, and autoDJ
 //
 // Numark Mixtrack Quad 4 Deck mapping for Mixxx 2.3.3
 //
@@ -46,7 +45,6 @@
 //  Each slide/knob needs to be moved on Mixxx startup to match levels with the Mixxx UI.
 //  LEDs wont animate on deck 2 with AutoDJ? (Load track in deck 2, play deck 2(controller), click AutoDJ)
 
-engine.beginTimer(1, "NumarkMixTrackQuad.shutdown()", true);
 function NumarkMixTrackQuad() {}
 
 NumarkMixTrackQuad.init = function(id) {	// called when the MIDI device is opened & set up
@@ -63,14 +61,16 @@ NumarkMixTrackQuad.init = function(id) {	// called when the MIDI device is opene
 	NumarkMixTrackQuad.flashOnceTimer = [0];
 	NumarkMixTrackQuad.channel = [0];	
 	NumarkMixTrackQuad.untouched = [1];
-	NumarkMixTrackQuad.lightShow ()
-
+	NumarkMixTrackQuad.interuptLEDShow = [0];
+	
 	NumarkMixTrackQuad.leds = [
 		{ "directory": 0x4B, "file": 0x4C },
 	];
 	
-	engine.beginTimer(5000, "NumarkMixTrackQuad.kwkautodjfix('[Channel1]') ", true); // FINALLY got deck 1 working with autoDJ no input required
-	engine.beginTimer(5000, "NumarkMixTrackQuad.kwkautodjfix('[Channel2]') ", true); // WTF why does deck2 not work with the same code OMG
+	engine.beginTimer(20, "NumarkMixTrackQuad.shutdown()", true);
+	engine.beginTimer(100, "NumarkMixTrackQuad.lightShow ()" , true);
+	engine.beginTimer(5000, "NumarkMixTrackQuad.kwkautodjfix('[Channel1]') ", true); // FINALLY got deck 1 working with autoDJ no user input required
+	engine.beginTimer(5000, "NumarkMixTrackQuad.kwkautodjfix('[Channel2]') ", true); // WTF why does deck2 not work with the same code OMG user input still required(press play with loaded track deck2)
 }
 
 NumarkMixTrackQuad.kwkautodjfix = function(group) {
@@ -79,7 +79,7 @@ NumarkMixTrackQuad.kwkautodjfix = function(group) {
 		NumarkMixTrackQuad.channel[deck-1] = 1;
 	}
 	if (group == '[Channel2]') {
-		NumarkMixTrackQuad.channel[deck-1] = 2;  // how does this not work? wtf my head hertz :(
+		NumarkMixTrackQuad.channel[deck-1] = 2;  // how the hell does this not work? wtf my head hertz :(
 	}
 	NumarkMixTrackQuad.flashOnceOn(deck, group)
 }
@@ -118,16 +118,17 @@ NumarkMixTrackQuad.selectKnob = function(channel, control, value, status, group)
 	}
 }
 
+
 NumarkMixTrackQuad.flashOnceOn = function(deck, group) {
-	if (NumarkMixTrackQuad.flashOnceTimer[deck-1]) {
-		engine.stopTimer(NumarkMixTrackQuad.flashOnceTimer[deck-1]);
+	NumarkMixTrackQuad.peakIndicator();
+	if (NumarkMixTrackQuad.interuptLEDShow == 1) {
+		if (engine.getValue(group, "play", 1) || NumarkMixTrackQuad.touch[deck-1] == 1) {
+			midi.sendShortMsg(0xB0+(NumarkMixTrackQuad.channel[deck-1]), 0x3D, NumarkMixTrackQuad.jogled[deck-1]);
+		}else{
+			midi.sendShortMsg(0xB0+(NumarkMixTrackQuad.channel[deck-1]), 0x3C, 0);
+		}
 	}
-	if (engine.getValue(group, "play", 1)) {
-		midi.sendShortMsg(0xB0+(NumarkMixTrackQuad.channel[deck-1]), 0x3D, NumarkMixTrackQuad.jogled[deck-1]);
-	}else{
-		midi.sendShortMsg(0xB0+(NumarkMixTrackQuad.channel[deck-1]), 0x3C, 0);
-	}
-	NumarkMixTrackQuad.flashOnceTimer[deck-1] = engine.beginTimer(50, "NumarkMixTrackQuad.flashOnceOff('" + deck + "', '" + group + "')", true);
+	NumarkMixTrackQuad.flashOnceTimer[deck-1] = engine.beginTimer(50, "NumarkMixTrackQuad.flashOnceOff('" + deck + "', '" + group + "')", true); // make this timer shorter if you want faster LEDs 
 }
 
 NumarkMixTrackQuad.flashOnceOff = function(deck, group) {	
@@ -144,7 +145,6 @@ NumarkMixTrackQuad.playbutton = function(channel, control, value, status, group)
 	NumarkMixTrackQuad.untouched = 0;
 	if (!value) return;
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
-	NumarkMixTrackQuad.flashOnceTimer[deck-1] = 0;
 	NumarkMixTrackQuad.jogled[deck-1] = 1;
 	if (engine.getValue(group, "play")) {
 		engine.setValue(group, "play", 0);
@@ -154,6 +154,7 @@ NumarkMixTrackQuad.playbutton = function(channel, control, value, status, group)
 		engine.setValue(group, "play", 1);
 		NumarkMixTrackQuad.channel[deck-1] = channel;
 		NumarkMixTrackQuad.reverse[deck-1] = 1;
+		if (NumarkMixTrackQuad.flashOnceTimer[deck-1]) {engine.stopTimer(NumarkMixTrackQuad.flashOnceTimer[deck-1]); NumarkMixTrackQuad.flashOnceTimer[deck-1] = 0};
 		NumarkMixTrackQuad.flashOnceOn(deck, group);
 	}
 }
@@ -198,30 +199,24 @@ NumarkMixTrackQuad.jogWheel = function(channel, control, value, status, group) {
 		posNeg = -1;
 		adjustedJog = value - 128;
 	}
-
 	if (engine.getValue(group, "play")) {
-
 		if (NumarkMixTrackQuad.scratchMode[deck-1] && posNeg == -1 && !NumarkMixTrackQuad.touch[deck-1]) {
 			if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
 			NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch('" + deck + "', '" + group + "')", true);
 		} 
-
 	} else { 
-	
 		if (!NumarkMixTrackQuad.touch[deck-1]){
 			if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
 			NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch('" + deck + "', '" + group + "')", true);
 		}
 	}
-
 	engine.scratchTick(deck, adjustedJog);
-
 	if (engine.getValue(group,"play")) {
 		var gammaInputRange = 13;	// Max jog speed
 		var maxOutFraction = 0.8;	// Where on the curve it should peak; 0.5 is half-way
 		var sensitivity = 0.5;		// Adjustment gamma
 		var gammaOutputRange = 2;	// Max rate change
-		if (engine.getValue(group,"reverse") == 0) {
+		if (engine.getValue(group, "reverse"), 0) {
 			adjustedJog = posNeg * gammaOutputRange * Math.pow(Math.abs(adjustedJog) / (gammaInputRange * maxOutFraction), sensitivity);   // Clockwise
 		} else {
 			adjustedJog = posNeg * gammaOutputRange * Math.pow(Math.abs(adjustedJog) / (gammaInputRange * maxOutFraction), sensitivity) * -1;	// Counter-clockwise
@@ -231,53 +226,62 @@ NumarkMixTrackQuad.jogWheel = function(channel, control, value, status, group) {
 			NumarkMixTrackQuad.reverse[deck-1] = 0;
 		}
 		if ((NumarkMixTrackQuad.scratchMode[deck-1] == 1) && (NumarkMixTrackQuad.touch[deck-1] == 1)) { 
-			engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
+			if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
 			NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch('" + deck + "', '" + group + "')", true);
 			if (posNeg < 0) {	// Counter-clockwise
-				NumarkMixTrackQuad.reverse[deck-1] = -0.30;
+				NumarkMixTrackQuad.reverse[deck-1] = -0.40;
 			} else {	// Clockwise
-				NumarkMixTrackQuad.reverse[deck-1] = 0.30;
+				NumarkMixTrackQuad.reverse[deck-1] = 0.40;
 			}
-		} else {		
-				engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
-				NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch('" + deck + "', '" + group + "')", true);
-				if ((posNeg < 0) && (engine.getValue(group,"reverse") == 0)) {	// Clockwise
-					NumarkMixTrackQuad.reverse[deck-1] = 0.5;
-				} else if (engine.getValue(group,"reverse") == 0) {
-					NumarkMixTrackQuad.reverse[deck-1] = 1.25;
-				} else if ((posNeg < 0) && (engine.getValue(group,"reverse") == 1)) {	// Counter-clockwise
-					NumarkMixTrackQuad.reverse[deck-1] = -1.25;
-				} else if (engine.getValue(group,"reverse") == 1) {
-					NumarkMixTrackQuad.reverse[deck-1] = -0.5;
-				}		
+		} else {
+			if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
+			NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch('" + deck + "', '" + group + "')", true);
+			if ((posNeg < 0) && (engine.getValue(group, "reverse"), 0)) {	// Clockwise
+				NumarkMixTrackQuad.reverse[deck-1] = -0.5;
+			} else if (engine.getValue(group, "reverse"), 0) {
+				NumarkMixTrackQuad.reverse[deck-1] = -1.15;
+			} else if ((posNeg > 0) && (engine.getValue(group, "reverse"), 1)) {	// Counter-clockwise
+				NumarkMixTrackQuad.reverse[deck-1] = 1.15;
+			} else if (engine.getValue(group, "reverse"), 1) {
+				NumarkMixTrackQuad.reverse[deck-1] = 0.5;
+			}		
 		}
 		if (NumarkMixTrackQuad.touch[deck-1] == 0) {
 			if (NumarkMixTrackQuad.scratchMode[deck-1] == 1) { 
 			
 			} else {
-				engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
+				if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
 				NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch('" + deck + "', '" + group + "')", true);
-				if ((posNeg < 0) && (engine.getValue(group,"reverse") == 0)) {	// Clockwise
-					NumarkMixTrackQuad.reverse[deck-1] = 0.5;
-				} else if (engine.getValue(group,"reverse") == 0) {
-					NumarkMixTrackQuad.reverse[deck-1] = 1.25;
-				} else if ((posNeg < 0) && (engine.getValue(group,"reverse") == 1)) {	// Counter-clockwise
-					NumarkMixTrackQuad.reverse[deck-1] = -1.25;
-				} else if (engine.getValue(group,"reverse") == 1) {
+				if ((posNeg < 0) && (engine.getValue(group, "reverse"), 0)) {	// Clockwise
 					NumarkMixTrackQuad.reverse[deck-1] = -0.5;
+				} else if (engine.getValue(group, "reverse"), 0) {
+					NumarkMixTrackQuad.reverse[deck-1] = -1.15;
+				} else if ((posNeg > 0) && (engine.getValue(group, "reverse"), 1)) {	// Counter-clockwise
+					NumarkMixTrackQuad.reverse[deck-1] = 1.15;
+				} else if (engine.getValue(group, "reverse"), 1) {
+					NumarkMixTrackQuad.reverse[deck-1] = 0.5;
 				}						
 			}
 		}
+		engine.setValue(group, "jog", adjustedJog*-1);	
+	} else {
+		if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
+		NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch('" + deck + "', '" + group + "')", true);
+		if ((posNeg < 0)) {	// Clockwise
+			NumarkMixTrackQuad.reverse[deck-1] = -0.5;
+		} else if ((posNeg > 0)) {	// Counter-clockwise
+			NumarkMixTrackQuad.reverse[deck-1] = 0.5;
+		}						
 	}
 }
 
 NumarkMixTrackQuad.jogWheelStopScratch = function(deck, group) {
 	if (NumarkMixTrackQuad.touch[deck-1] == 0) {
 		NumarkMixTrackQuad.scratchTimer[deck-1] = 1;
-		if (engine.getValue(group,"reverse") == 1) {
-			NumarkMixTrackQuad.reverse[deck-1] = -1;
-		} else {
+		if (engine.getValue(group, "reverse"), 1) {
 			NumarkMixTrackQuad.reverse[deck-1] = 1;
+		} else {
+			NumarkMixTrackQuad.reverse[deck-1] = -1;
 		}
 	} else {
 		NumarkMixTrackQuad.reverse[deck-1] = 0;
@@ -298,21 +302,13 @@ NumarkMixTrackQuad.wheelTouch = function(channel, control, value, status, group)
 		NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch(" + deck + ")", true);
 		engine.scratchDisable(deck);
 	} else {
-		if (engine.getValue(group, "play", 1)) {
-			
-		}else{
-			midi.sendShortMsg(0xB0+(channel), 0x3C, 6);
-		}
 		if (!NumarkMixTrackQuad.scratchMode[deck-1] && engine.getValue(group, "play")) return;
 
-		// Save the current state of the keylock
 		NumarkMixTrackQuad.isKeyLocked[deck-1] = engine.getValue(group, "keylock");
-		// Turn the Keylock off for scratching
 		if (NumarkMixTrackQuad.isKeyLocked[deck-1]){
 			engine.setValue(group, "keylock", 0);
 		}
 		if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
-		// change the 600 value for sensibility
 		engine.scratchEnable(deck, 600, 33+1/3, 1.0/8, (1.0/8)/32);
 		NumarkMixTrackQuad.touch[deck-1]= true;
 	}
@@ -375,6 +371,7 @@ NumarkMixTrackQuad.lightShow = function() {
 		//engine.beginTimer(4500, "midi.sendShortMsg(0x91, 0x5C, 10)", true);
 		
 		// Animates jogWheel LEDs
+		NumarkMixTrackQuad.interuptLEDShow = [0];
 		engine.beginTimer(100, "midi.sendShortMsg(0xB1, 0x3D, 1)", true);
 		engine.beginTimer(200, "midi.sendShortMsg(0xB1, 0x3D, 2)", true);
 		engine.beginTimer(300, "midi.sendShortMsg(0xB1, 0x3D, 3)", true);
@@ -598,7 +595,7 @@ NumarkMixTrackQuad.lightShow = function() {
 		engine.beginTimer(3500, "midi.sendShortMsg(0xB3, 0x3C, 0)", true);
 		engine.beginTimer(3500, "midi.sendShortMsg(0xB4, 0x3C, 0)", true);
 		
-		// Turns off Scratch LEDs
+		// Sets State off Scratch LEDs to match app
 		engine.beginTimer(3600, "midi.sendShortMsg(0x91, 0x48, 0)", true);
 		engine.beginTimer(3600, "midi.sendShortMsg(0x92, 0x48, 0)", true);
 		engine.beginTimer(3600, "midi.sendShortMsg(0x93, 0x48, 0)", true);
@@ -630,12 +627,13 @@ NumarkMixTrackQuad.lightShow = function() {
 		
 		//----------- Sets LEDs to startup colors ----------------------->>
 		
-		// Sets FX1 LEDs to match .xml
+		// Sets FX1 LEDs to match app
 		engine.beginTimer(4100, "midi.sendShortMsg(0x91, 0x59, 9)", true);
 		engine.beginTimer(4100, "midi.sendShortMsg(0x92, 0x59, 9)", true);
 		engine.beginTimer(4100, "midi.sendShortMsg(0x93, 0x59, 9)", true);
 		engine.beginTimer(4100, "midi.sendShortMsg(0x94, 0x59, 9)", true);
-		
+		//engine.beginTimer(4100, "NumarkMixTrackQuad.restoreFX1LEDsState()", true);
+
 		// Sets FX2 LEDs to match .xml
 		engine.beginTimer(4200, "midi.sendShortMsg(0x91, 0x5A, 9)", true);
 		engine.beginTimer(4200, "midi.sendShortMsg(0x92, 0x5A, 9)", true);
@@ -679,8 +677,8 @@ NumarkMixTrackQuad.lightShow = function() {
 		engine.beginTimer(4800, "midi.sendShortMsg(0x94, 0x63, 10)", true);
 		
 		// Sets Folder/File LEDs to match Mixxx app
-		engine.beginTimer(4900, "midi.sendShortMsg(0x90, 0x4B, 0)", true);
-		engine.beginTimer(4900, "midi.sendShortMsg(0x90, 0x4C, 1)", true);
+		engine.beginTimer(4800, "NumarkMixTrackQuad.restoreDLEDsState()", true);
+		engine.beginTimer(4800, "NumarkMixTrackQuad.interuptLEDShow = [1]", true);
 	}
 }
 
@@ -787,4 +785,78 @@ NumarkMixTrackQuad.shutdown = function() {
 	// Turns off Folder/File LEDs
 	midi.sendShortMsg(0x90, 0x4B, 0);
 	midi.sendShortMsg(0x90, 0x4C, 0);
+}
+
+NumarkMixTrackQuad.restoreDLEDsState = function(){
+	NumarkMixTrackQuad.setLED(NumarkMixTrackQuad.leds[0]["directory"], NumarkMixTrackQuad.directoryMode);
+	NumarkMixTrackQuad.setLED(NumarkMixTrackQuad.leds[0]["file"], !NumarkMixTrackQuad.directoryMode);
+}
+
+NumarkMixTrackQuad.restoreHLEDsState = function(){
+	var statePLF1 = engine.getValue('[Channel1]', "pfl");
+	var statePLF2 = engine.getValue('[Channel2]', "pfl");
+	var statePLF3 = engine.getValue('[Channel3]', "pfl");
+	var statePLF4 = engine.getValue('[Channel4]', "pfl");
+	midi.sendShortMsg(0x91, 0x47, statePLF1 );
+	midi.sendShortMsg(0x92, 0x47, statePLF2 );
+	midi.sendShortMsg(0x93, 0x47, statePLF3 );
+	midi.sendShortMsg(0x94, 0x47, statePLF4 );
+}
+
+//NumarkMixTrackQuad.restoreFX1LEDsState = function(){
+//var stateFX1 = engine.getValue('[QuickEffectRack_[EffectUnit1]_Effect1]', "enabled");
+	//if (stateFX1 == 1) {	
+	
+	//	midi.sendShortMsg(0x91, 0x59, 5) // make sure to match .xml
+	//} else {
+	//	midi.sendShortMsg(0x91, 0x59, 9)  // make sure to match .xml
+	//}
+	//var stateFX2 = engine.getValue('[EffectRack1_EffectUnit2_Effect1]', 1);
+	//if (stateFX2) {	
+	//	midi.sendShortMsg(0x92, 0x59, 5)  // make sure to match .xml
+	//} else {
+	//	midi.sendShortMsg(0x92, 0x59, 9)  // make sure to match .xml
+	//}
+	
+	//var stateFX3 = engine.getValue('[EffectRack1_EffectUnit3_Effect1]', 1);
+	//if (stateFX3) {	
+	//	midi.sendShortMsg(0x93, 0x59, 8)  // make sure to match .xml
+	//} else {
+	//	midi.sendShortMsg(0x93, 0x59, 9)  // make sure to match .xml
+	//}
+	
+	//var stateFX4 = engine.getValue('[EffectRack1_EffectUnit4_Effect1]', 1);
+	//if (stateFX1) {	
+	//	midi.sendShortMsg(0x94, 0x59, 8)  // make sure to match .xml
+	//} else {
+	//	midi.sendShortMsg(0x94, 0x59, 9)  // make sure to match .xml
+	//}
+//} -- still need to figure out
+
+NumarkMixTrackQuad.peakIndicator = function(){
+	var peakLedsInd = engine.getValue('[Master]', "PeakIndicator");
+	var peakLedsInd1 = engine.getValue('[Channel1]', "PeakIndicator");
+	var peakLedsInd2= engine.getValue('[Channel2]', "PeakIndicator");
+	var peakLedsInd3 = engine.getValue('[Channel3]', "PeakIndicator");
+	var peakLedsInd4= engine.getValue('[Channel4]', "PeakIndicator");
+	if (engine.getValue('[Master]', "PeakIndicator")) {
+		midi.sendShortMsg(0x90, 0x4B, 0);
+		midi.sendShortMsg(0x90, 0x4C, 0);
+		midi.sendShortMsg(0x90, 0x4B, peakLedsInd );
+		midi.sendShortMsg(0x90, 0x4C, peakLedsInd );
+	} else {
+		NumarkMixTrackQuad.restoreDLEDsState ();
+	}
+	if (engine.getValue('[Channel1]', "PeakIndicator") || engine.getValue('[Channel2]', "PeakIndicator") || engine.getValue('[Channel3]', "PeakIndicator") || engine.getValue('[Channel4]', "PeakIndicator")) {
+		midi.sendShortMsg(0x91, 0x47, 0);
+		midi.sendShortMsg(0x92, 0x47, 0);
+		midi.sendShortMsg(0x93, 0x47, 0);
+		midi.sendShortMsg(0x94, 0x47, 0);
+		midi.sendShortMsg(0x91, 0x47, peakLedsInd1 );
+		midi.sendShortMsg(0x92, 0x47, peakLedsInd2 );
+		midi.sendShortMsg(0x93, 0x47, peakLedsInd3 );
+		midi.sendShortMsg(0x94, 0x47, peakLedsInd4 );
+	} else {
+		NumarkMixTrackQuad.restoreHLEDsState ();
+	}
 }

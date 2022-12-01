@@ -24,6 +24,11 @@
 //  Improved controls and LED animation with scratching especially in reverse
 //  Shutdown function added to turn off all possible LEDs with Mixxx app shutdown
 //  FX 123 knobs now change what effects are assigned to the pads, 4th knob still controls gain so it works great
+//  incorrectly mapped keys found and fixed
+//  scratch direction when not in scratching mode was wrong now fixed
+//  fixed some timer kill spam
+//  added signal clipping indicators to the folder/file LEDs for the master gain to keep you from blowing your shit up
+//  added signal clipping indicators to the headphone LEDs for each channel to keep you from overdoing it on the equalizer to keep you from blowing your shit up
 //
 // Features:
 //  Supports 4 decks

@@ -21,6 +21,7 @@ Whats New?
   - fixed some timer kill spam
   - added signal clipping indicators to the folder/file LEDs for the master gain
   - added signal clipping indicators to the headphone LEDs for each channel
+  - cue now flashes at end of track and stutter flashes BPM
   
 Features:
   - Supports 4 decks

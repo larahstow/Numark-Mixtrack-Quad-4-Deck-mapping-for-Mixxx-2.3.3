@@ -11,7 +11,7 @@
 // Updated on 06/23/2022 by datlaunchystark on Mixxx 2.3.3 (mostly cleaned up the code)
 // https://github.com/datlaunchystark
 //
-// Updated on 11/27/2022 by DJ KWKSND (changed a bunch of code)
+// Updated on 12/1/2022 by DJ KWKSND (changed a bunch of code)
 //
 // Numark Mixtrack Quad 4 Deck mapping for Mixxx 2.3.3
 //
@@ -67,26 +67,47 @@ NumarkMixTrackQuad.init = function(id) {	// called when the MIDI device is opene
 	NumarkMixTrackQuad.channel = [0];	
 	NumarkMixTrackQuad.untouched = [1];
 	NumarkMixTrackQuad.interuptLEDShow = [0];
+	NumarkMixTrackQuad.bypass = [0];
+	NumarkMixTrackQuad.flasher1 = 1
+	NumarkMixTrackQuad.flasher2 = 1
+	NumarkMixTrackQuad.flasher3 = 1
+	NumarkMixTrackQuad.flasher4 = 1
 	
 	NumarkMixTrackQuad.leds = [
 		{ "directory": 0x4B, "file": 0x4C },
 	];
-	
+		
+	engine.setValue('[Master]', 'volume', 0)
 	engine.beginTimer(20, "NumarkMixTrackQuad.shutdown()", true);
 	engine.beginTimer(100, "NumarkMixTrackQuad.lightShow ()" , true);
-	engine.beginTimer(5000, "NumarkMixTrackQuad.kwkautodjfix('[Channel1]') ", true); // FINALLY got deck 1 working with autoDJ no user input required
-	engine.beginTimer(5000, "NumarkMixTrackQuad.kwkautodjfix('[Channel2]') ", true); // WTF why does deck2 not work with the same code OMG user input still required(press play with loaded track deck2)
+	
+	engine.beginTimer(5000, "NumarkMixTrackQuad.autoDjLedFix('[Channel1]') ", true); // FINALLY got deck 1 LEDs working with autoDJ no user input required
+	//engine.beginTimer(6000, "NumarkMixTrackQuad.autoDjLedFix('[Channel2]') ", true); // WTF why does deck2 not work with the same code OMG user input still required(use controller press play with loaded track in deck2 rolls eyes)
+	//engine.beginTimer(7000, "NumarkMixTrackQuad.autoDjLedFix('[Channel3]') ", true); // WTF why does deck3 not work with the same code OMG user input still required(use controller press play with loaded track in deck3 rolls eyes)
+	//engine.beginTimer(8000, "NumarkMixTrackQuad.autoDjLedFix('[Channel4]') ", true); // WTF why does deck4 not work with the same code OMG user input still required(use controller press play with loaded track in deck4 rolls eyes)
+
+	engine.beginTimer(9000, "engine.setValue('[AutoDJ]', 'enabled', 1)", true);
+	engine.beginTimer(8000, "engine.setValue('[Channel1]', 'play', 1)", true); // keep remove before release test code
+	//engine.beginTimer(11000, "engine.setValue('[Channel2]', 'play', 1)", true); // keep remove before release test code
+
+	engine.beginTimer(11000, "MVolUp", true); var volCnt = 0; MVolUp = function() { volUpTimer = engine.beginTimer(100, "MVolUp", true); volCnt = volCnt + 0.01; if (volCnt > 0.65) { engine.stopTimer(volUpTimer); } engine.setValue('[Master]', 'volume', volCnt);} // keep enable before release
 }
 
-NumarkMixTrackQuad.kwkautodjfix = function(group) {
+NumarkMixTrackQuad.autoDjLedFix = function(group) { /////////////////////////////////////
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
 	if (group == '[Channel1]') {
-		NumarkMixTrackQuad.channel[deck-1] = 1;
+		NumarkMixTrackQuad.channel[deck-1] = 1;	// if this works just fine
 	}
 	if (group == '[Channel2]') {
 		NumarkMixTrackQuad.channel[deck-1] = 2;  // how the hell does this not work? wtf my head hertz :(
 	}
-	NumarkMixTrackQuad.flashOnceOn(deck, group)
+	if (group == '[Channel3]') {
+		NumarkMixTrackQuad.channel[deck-1] = 3;
+	}
+	if (group == '[Channel4]') {
+		NumarkMixTrackQuad.channel[deck-1] = 4;
+	}
+	NumarkMixTrackQuad.flashOnceOn(deck , group);
 }
 
 NumarkMixTrackQuad.setLED = function(value, status) {
@@ -101,6 +122,7 @@ NumarkMixTrackQuad.groupToDeck = function(group) {
 	} else {
 		return matches[1];
 	}
+	
 }
 
 NumarkMixTrackQuad.selectKnob = function(channel, control, value, status, group) {
@@ -123,11 +145,10 @@ NumarkMixTrackQuad.selectKnob = function(channel, control, value, status, group)
 	}
 }
 
-
 NumarkMixTrackQuad.flashOnceOn = function(deck, group) {
 	NumarkMixTrackQuad.peakIndicator();
 	if (NumarkMixTrackQuad.interuptLEDShow == 1) {
-		if (engine.getValue(group, "play", 1) || NumarkMixTrackQuad.touch[deck-1] == 1) {
+		if (engine.getValue(group, "play", 1) || NumarkMixTrackQuad.touch[deck-1] == 1 || NumarkMixTrackQuad.bypass[deck-1] == 1){
 			midi.sendShortMsg(0xB0+(NumarkMixTrackQuad.channel[deck-1]), 0x3D, NumarkMixTrackQuad.jogled[deck-1]);
 		}else{
 			midi.sendShortMsg(0xB0+(NumarkMixTrackQuad.channel[deck-1]), 0x3C, 0);
@@ -154,7 +175,6 @@ NumarkMixTrackQuad.playbutton = function(channel, control, value, status, group)
 	if (engine.getValue(group, "play")) {
 		engine.setValue(group, "play", 0);
 		NumarkMixTrackQuad.channel[deck-1] = 0;
-		midi.sendShortMsg(0xB0+(channel), 0x3C, 0);
 	}else{
 		engine.setValue(group, "play", 1);
 		NumarkMixTrackQuad.channel[deck-1] = channel;
@@ -162,6 +182,8 @@ NumarkMixTrackQuad.playbutton = function(channel, control, value, status, group)
 		if (NumarkMixTrackQuad.flashOnceTimer[deck-1]) {engine.stopTimer(NumarkMixTrackQuad.flashOnceTimer[deck-1]); NumarkMixTrackQuad.flashOnceTimer[deck-1] = 0};
 		NumarkMixTrackQuad.flashOnceOn(deck, group);
 	}
+	NumarkMixTrackQuad.restoreCULEDsState()
+	NumarkMixTrackQuad.restorePLEDsState()
 }
 
 NumarkMixTrackQuad.reversebutton = function(channel, control, value, status, group) {
@@ -182,14 +204,16 @@ NumarkMixTrackQuad.reversebutton = function(channel, control, value, status, gro
 	}
 }
 
-NumarkMixTrackQuad.cuebutton = function(channel, control, value, status, group) {
+NumarkMixTrackQuad.cuebutton = function(channel, control, value, status, group) {	
 	NumarkMixTrackQuad.untouched = 0;
+	NumarkMixTrackQuad.bypass[deck-1] = 1;
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
-	// Don't set Cue accidentaly at the end of the song
 	if (engine.getValue(group, "playposition") <= 0.97) {
 			engine.setValue(group, "cue_default", value ? 1 : 0);
 			NumarkMixTrackQuad.channel[deck-1] = 0;
-			midi.sendShortMsg(0xB0+(channel), 0x3C, 0);
+		if (engine.getValue(group, "reverse")) {
+			engine.setValue(group, "reverse", 1);
+		}
 	} else {
 		engine.setValue(group, "cue_preview", value ? 1 : 0);
 	}
@@ -396,7 +420,7 @@ NumarkMixTrackQuad.lightShow = function() {
 		engine.beginTimer(1700, "midi.sendShortMsg(0xB1, 0x3D, 5)", true);
 		engine.beginTimer(1800, "midi.sendShortMsg(0xB1, 0x3D, 6)", true);
 		engine.beginTimer(1900, "midi.sendShortMsg(0xB1, 0x3C, 1)", true);
-		engine.beginTimer(2000, "midi.sendShortMsg(0xB1, 0x3C, 2)", true);
+		engine.beginTimer(2000, "midi.sendShortMsg(0xB1, 0x3C, 2)", true);	// Hey did it just smile at me? :D
 		engine.beginTimer(3000, "midi.sendShortMsg(0xB1, 0x3C, 3)", true);
 		engine.beginTimer(3100, "midi.sendShortMsg(0xB1, 0x3C, 4)", true);
 		engine.beginTimer(3150, "midi.sendShortMsg(0xB1, 0x3C, 5)", true);
@@ -427,7 +451,7 @@ NumarkMixTrackQuad.lightShow = function() {
 		engine.beginTimer(1800, "midi.sendShortMsg(0xB2, 0x3D, 7)", true);
 		engine.beginTimer(1900, "midi.sendShortMsg(0xB2, 0x3C, 1)", true);
 		engine.beginTimer(2000, "midi.sendShortMsg(0xB2, 0x3C, 2)", true);
-		engine.beginTimer(3000, "midi.sendShortMsg(0xB2, 0x3C, 3)", true);
+		engine.beginTimer(3000, "midi.sendShortMsg(0xB2, 0x3C, 3)", true);	// Hey did it just smile at me? :D
 		engine.beginTimer(3100, "midi.sendShortMsg(0xB2, 0x3C, 4)", true);
 		engine.beginTimer(3150, "midi.sendShortMsg(0xB2, 0x3C, 5)", true);
 		engine.beginTimer(3200, "midi.sendShortMsg(0xB2, 0x3C, 6)", true);
@@ -456,7 +480,7 @@ NumarkMixTrackQuad.lightShow = function() {
 		engine.beginTimer(1700, "midi.sendShortMsg(0xB3, 0x3D, 5)", true);
 		engine.beginTimer(1800, "midi.sendShortMsg(0xB3, 0x3D, 6)", true);
 		engine.beginTimer(1900, "midi.sendShortMsg(0xB3, 0x3C, 1)", true);
-		engine.beginTimer(2000, "midi.sendShortMsg(0xB3, 0x3C, 2)", true);
+		engine.beginTimer(2000, "midi.sendShortMsg(0xB3, 0x3C, 2)", true);	// Hey did it just smile at me? :D
 		engine.beginTimer(3000, "midi.sendShortMsg(0xB3, 0x3C, 3)", true);
 		engine.beginTimer(3100, "midi.sendShortMsg(0xB3, 0x3C, 4)", true);
 		engine.beginTimer(3150, "midi.sendShortMsg(0xB3, 0x3C, 5)", true);
@@ -486,7 +510,7 @@ NumarkMixTrackQuad.lightShow = function() {
 		engine.beginTimer(1700, "midi.sendShortMsg(0xB4, 0x3D, 8)", true);
 		engine.beginTimer(1800, "midi.sendShortMsg(0xB4, 0x3D, 7)", true);
 		engine.beginTimer(1900, "midi.sendShortMsg(0xB4, 0x3C, 1)", true);
-		engine.beginTimer(2000, "midi.sendShortMsg(0xB4, 0x3C, 2)", true);
+		engine.beginTimer(2000, "midi.sendShortMsg(0xB4, 0x3C, 2)", true);	// Hey did it just smile at me? :D
 		engine.beginTimer(3000, "midi.sendShortMsg(0xB4, 0x3C, 3)", true);
 		engine.beginTimer(3100, "midi.sendShortMsg(0xB4, 0x3C, 4)", true);
 		engine.beginTimer(3150, "midi.sendShortMsg(0xB4, 0x3C, 5)", true);
@@ -496,7 +520,6 @@ NumarkMixTrackQuad.lightShow = function() {
 		engine.beginTimer(3350, "midi.sendShortMsg(0xB4, 0x3C, 3)", true);
 		engine.beginTimer(3400, "midi.sendShortMsg(0xB4, 0x3C, 2)", true);
 		engine.beginTimer(3450, "midi.sendShortMsg(0xB4, 0x3C, 1)", true);
-		// Hey did it just smile at me? :D
 		
 		// Turns on Scratch LEDs
 		engine.beginTimer(300, "midi.sendShortMsg(0x91, 0x48, 1)", true);
@@ -613,77 +636,61 @@ NumarkMixTrackQuad.lightShow = function() {
 		engine.beginTimer(3700, "midi.sendShortMsg(0x94, 0x47, 0)", true);
 		
 		// Turns off Sync LEDs
-		engine.beginTimer(3800, "midi.sendShortMsg(0x91, 0x40, 0)", true);
-		engine.beginTimer(3800, "midi.sendShortMsg(0x92, 0x40, 0)", true);
-		engine.beginTimer(3800, "midi.sendShortMsg(0x93, 0x40, 0)", true);
-		engine.beginTimer(3800, "midi.sendShortMsg(0x94, 0x40, 0)", true);
+		engine.beginTimer(3900, "NumarkMixTrackQuad.restoreSYLEDsState()", true);
 			
-		// Turns off Play/Pause LEDs
-		engine.beginTimer(3900, "midi.sendShortMsg(0x91, 0x42, 0)", true);
-		engine.beginTimer(3900, "midi.sendShortMsg(0x92, 0x42, 0)", true);
-		engine.beginTimer(3900, "midi.sendShortMsg(0x93, 0x42, 0)", true);
-		engine.beginTimer(3900, "midi.sendShortMsg(0x94, 0x42, 0)", true);
+		// Sets Cue LEDs to match app
+		engine.beginTimer(3900, "NumarkMixTrackQuad.restoreCULEDsState()", true);
+
+		// Sets Play/Pause LEDs to match app
+		engine.beginTimer(4000, "NumarkMixTrackQuad.restorePLEDsState()", true);
 		
 		// Turns off Stutter LEDs
-		engine.beginTimer(4000, "midi.sendShortMsg(0x91, 0x4A, 0)", true);
-		engine.beginTimer(4000, "midi.sendShortMsg(0x92, 0x4A, 0)", true);
-		engine.beginTimer(4000, "midi.sendShortMsg(0x93, 0x4A, 0)", true);
-		engine.beginTimer(4000, "midi.sendShortMsg(0x94, 0x4A, 0)", true);
+		engine.beginTimer(4100, "midi.sendShortMsg(0x91, 0x4A, 0)", true);
+		engine.beginTimer(4100, "midi.sendShortMsg(0x92, 0x4A, 0)", true);
+		engine.beginTimer(4100, "midi.sendShortMsg(0x93, 0x4A, 0)", true);
+		engine.beginTimer(4100, "midi.sendShortMsg(0x94, 0x4A, 0)", true);
 		
-		//----------- Sets LEDs to startup colors ----------------------->>
+		//----------- Sets LEDs to match colors ----------------------->>
 		
 		// Sets FX1 LEDs to match app
-		engine.beginTimer(4100, "midi.sendShortMsg(0x91, 0x59, 9)", true);
-		engine.beginTimer(4100, "midi.sendShortMsg(0x92, 0x59, 9)", true);
-		engine.beginTimer(4100, "midi.sendShortMsg(0x93, 0x59, 9)", true);
-		engine.beginTimer(4100, "midi.sendShortMsg(0x94, 0x59, 9)", true);
-		//engine.beginTimer(4100, "NumarkMixTrackQuad.restoreFX1LEDsState()", true);
+		engine.beginTimer(4200, "NumarkMixTrackQuad.restoreFX1LEDsState()", true);
 
 		// Sets FX2 LEDs to match .xml
-		engine.beginTimer(4200, "midi.sendShortMsg(0x91, 0x5A, 9)", true);
-		engine.beginTimer(4200, "midi.sendShortMsg(0x92, 0x5A, 9)", true);
-		engine.beginTimer(4200, "midi.sendShortMsg(0x93, 0x5A, 9)", true);
-		engine.beginTimer(4200, "midi.sendShortMsg(0x94, 0x5A, 9)", true);
+		engine.beginTimer(4300, "NumarkMixTrackQuad.restoreFX2LEDsState()", true);
 		
 		// Sets FX3 LEDs to match .xml
-		engine.beginTimer(4300, "midi.sendShortMsg(0x91, 0x5B, 9)", true);
-		engine.beginTimer(4300, "midi.sendShortMsg(0x92, 0x5B, 9)", true);
-		engine.beginTimer(4300, "midi.sendShortMsg(0x93, 0x5B, 9)", true);
-		engine.beginTimer(4300, "midi.sendShortMsg(0x94, 0x5B, 9)", true);
+		engine.beginTimer(4400, "NumarkMixTrackQuad.restoreFX3LEDsState()", true);
 		
 		// Sets Reset LEDs to match .xml
-		engine.beginTimer(4400, "midi.sendShortMsg(0x91, 0x5C, 5)", true);
-		engine.beginTimer(4400, "midi.sendShortMsg(0x92, 0x5C, 5)", true);
-		engine.beginTimer(4400, "midi.sendShortMsg(0x93, 0x5C, 8)", true);
-		engine.beginTimer(4400, "midi.sendShortMsg(0x94, 0x5C, 8)", true);
+		engine.beginTimer(4500, "NumarkMixTrackQuad.restoreFXRLEDsState()", true);
 		
 		// Sets Loop_IN LEDs to match .xml
-		engine.beginTimer(4500, "midi.sendShortMsg(0x91, 0x53, 7)", true);
-		engine.beginTimer(4500, "midi.sendShortMsg(0x92, 0x53, 7)", true);
-		engine.beginTimer(4500, "midi.sendShortMsg(0x93, 0x53, 7)", true);
-		engine.beginTimer(4500, "midi.sendShortMsg(0x94, 0x53, 7)", true);
+		engine.beginTimer(4600, "midi.sendShortMsg(0x91, 0x53, 7)", true);
+		engine.beginTimer(4600, "midi.sendShortMsg(0x92, 0x53, 7)", true);
+		engine.beginTimer(4600, "midi.sendShortMsg(0x93, 0x53, 7)", true);
+		engine.beginTimer(4600, "midi.sendShortMsg(0x94, 0x53, 7)", true);
 		
 		// Sets Loop_OUT LEDs to match .xml
-		engine.beginTimer(4600, "midi.sendShortMsg(0x91, 0x54, 7)", true);
-		engine.beginTimer(4600, "midi.sendShortMsg(0x92, 0x54, 7)", true);
-		engine.beginTimer(4600, "midi.sendShortMsg(0x93, 0x54, 7)", true);
-		engine.beginTimer(4600, "midi.sendShortMsg(0x94, 0x54, 7)", true);
+		engine.beginTimer(4700, "midi.sendShortMsg(0x91, 0x54, 7)", true);
+		engine.beginTimer(4700, "midi.sendShortMsg(0x92, 0x54, 7)", true);
+		engine.beginTimer(4700, "midi.sendShortMsg(0x93, 0x54, 7)", true);
+		engine.beginTimer(4700, "midi.sendShortMsg(0x94, 0x54, 7)", true);
 		
 		// Sets Reloop LEDs to match .xml
-		engine.beginTimer(4700, "midi.sendShortMsg(0x91, 0x55, 11)", true);
-		engine.beginTimer(4700, "midi.sendShortMsg(0x92, 0x55, 11)", true);
-		engine.beginTimer(4700, "midi.sendShortMsg(0x93, 0x55, 11)", true);
-		engine.beginTimer(4700, "midi.sendShortMsg(0x94, 0x55, 11)", true);
+		engine.beginTimer(4800, "midi.sendShortMsg(0x91, 0x55, 11)", true);
+		engine.beginTimer(4800, "midi.sendShortMsg(0x92, 0x55, 11)", true);
+		engine.beginTimer(4800, "midi.sendShortMsg(0x93, 0x55, 11)", true);
+		engine.beginTimer(4800, "midi.sendShortMsg(0x94, 0x55, 11)", true);
 		
 		// Sets Loop_Size LEDs to match .xml
-		engine.beginTimer(4800, "midi.sendShortMsg(0x91, 0x63, 10)", true);
-		engine.beginTimer(4800, "midi.sendShortMsg(0x92, 0x63, 10)", true);
-		engine.beginTimer(4800, "midi.sendShortMsg(0x93, 0x63, 10)", true);
-		engine.beginTimer(4800, "midi.sendShortMsg(0x94, 0x63, 10)", true);
+		engine.beginTimer(4900, "midi.sendShortMsg(0x91, 0x63, 10)", true);
+		engine.beginTimer(4900, "midi.sendShortMsg(0x92, 0x63, 10)", true);
+		engine.beginTimer(4900, "midi.sendShortMsg(0x93, 0x63, 10)", true);
+		engine.beginTimer(4900, "midi.sendShortMsg(0x94, 0x63, 10)", true);
 		
 		// Sets Folder/File LEDs to match Mixxx app
-		engine.beginTimer(4800, "NumarkMixTrackQuad.restoreDLEDsState()", true);
-		engine.beginTimer(4800, "NumarkMixTrackQuad.interuptLEDShow = [1]", true);
+		engine.beginTimer(5000, "NumarkMixTrackQuad.restoreDRLEDsState()", true);
+		engine.beginTimer(5000, "NumarkMixTrackQuad.interuptLEDShow = [1]", true);
 	}
 }
 
@@ -792,7 +799,115 @@ NumarkMixTrackQuad.shutdown = function() {
 	midi.sendShortMsg(0x90, 0x4C, 0);
 }
 
-NumarkMixTrackQuad.restoreDLEDsState = function(){
+NumarkMixTrackQuad.restoreFX1LEDsState = function(){
+	var stateFX11 = engine.getValue('[EffectRack1_EffectUnit1_Effect1]', "enabled");
+	var stateFX12 = engine.getValue('[EffectRack1_EffectUnit2_Effect1]', "enabled");
+	var stateFX13 = engine.getValue('[EffectRack1_EffectUnit3_Effect1]', "enabled");
+	var stateFX14 = engine.getValue('[EffectRack1_EffectUnit4_Effect1]', "enabled");
+	if (stateFX11) { 
+		midi.sendShortMsg(0x91, 0x59, 5); // match to .xml vvv
+	} else {
+		midi.sendShortMsg(0x91, 0x59, 9);
+	}
+	if (stateFX12) { 
+		midi.sendShortMsg(0x92, 0x59, 5);
+	} else {
+		midi.sendShortMsg(0x92, 0x59, 9);
+	}
+	if (stateFX13) { 
+		midi.sendShortMsg(0x93, 0x59, 8);
+	} else {
+		midi.sendShortMsg(0x93, 0x59, 9);
+	}
+	if (stateFX14) { 
+		midi.sendShortMsg(0x94, 0x59, 8);
+	} else {
+		midi.sendShortMsg(0x94, 0x59, 9);
+	}
+}
+
+NumarkMixTrackQuad.restoreFX2LEDsState = function(){
+	var stateFX21 = engine.getValue('[EffectRack1_EffectUnit1_Effect2]', "enabled");
+	var stateFX22 = engine.getValue('[EffectRack1_EffectUnit2_Effect2]', "enabled");
+	var stateFX23 = engine.getValue('[EffectRack1_EffectUnit3_Effect2]', "enabled");
+	var stateFX24 = engine.getValue('[EffectRack1_EffectUnit4_Effect2]', "enabled");
+	if (stateFX21) { 
+		midi.sendShortMsg(0x91, 0x5A, 5); // match to .xml vvv
+	} else {
+		midi.sendShortMsg(0x91, 0x5A, 9);
+	}
+	if (stateFX22) { 
+		midi.sendShortMsg(0x92, 0x5A, 5);
+	} else {
+		midi.sendShortMsg(0x92, 0x5A, 9);
+	}
+	if (stateFX23) { 
+		midi.sendShortMsg(0x93, 0x5A, 8);
+	} else {
+		midi.sendShortMsg(0x93, 0x5A, 9);
+	}
+	if (stateFX24) { 
+		midi.sendShortMsg(0x94, 0x5A, 8);
+	} else {
+		midi.sendShortMsg(0x94, 0x5A, 9);
+	}
+}
+
+NumarkMixTrackQuad.restoreFX3LEDsState = function(){
+	var stateFX31 = engine.getValue('[EffectRack1_EffectUnit1_Effect3]', "enabled");
+	var stateFX32 = engine.getValue('[EffectRack1_EffectUnit2_Effect3]', "enabled");
+	var stateFX33 = engine.getValue('[EffectRack1_EffectUnit3_Effect3]', "enabled");
+	var stateFX34 = engine.getValue('[EffectRack1_EffectUnit4_Effect3]', "enabled");
+	if (stateFX31) { 
+		midi.sendShortMsg(0x91, 0x5B, 5); // match to .xml vvv
+	} else {
+		midi.sendShortMsg(0x91, 0x5B, 9);
+	}
+	if (stateFX32) { 
+		midi.sendShortMsg(0x92, 0x5B, 5);
+	} else {
+		midi.sendShortMsg(0x92, 0x5B, 9);
+	}
+	if (stateFX33) { 
+		midi.sendShortMsg(0x93, 0x5B, 8);
+	} else {
+		midi.sendShortMsg(0x93, 0x5B, 9);
+	}
+	if (stateFX34) { 
+		midi.sendShortMsg(0x94, 0x5B, 8);
+	} else {
+		midi.sendShortMsg(0x94, 0x5B, 9);
+	}
+}
+
+NumarkMixTrackQuad.restoreFXRLEDsState = function(){
+	var stateFXR1 = engine.getValue('[EffectRack1_EffectUnit1]', "group_[Channel1]_enable");
+	var stateFXR2 = engine.getValue('[EffectRack1_EffectUnit2]', "group_[Channel2]_enable");
+	var stateFXR3 = engine.getValue('[EffectRack1_EffectUnit3]', "group_[Channel3]_enable");
+	var stateFXR4 = engine.getValue('[EffectRack1_EffectUnit4]', "group_[Channel4]_enable");
+	if (stateFXR1) { 
+		midi.sendShortMsg(0x91, 0x5C, 5); // match to .xml vvv
+	} else {
+		midi.sendShortMsg(0x91, 0x5C, 9);
+	}
+	if (stateFXR2) { 
+		midi.sendShortMsg(0x92, 0x5C, 5);
+	} else {
+		midi.sendShortMsg(0x92, 0x5C, 9);
+	}
+	if (stateFXR3) { 
+		midi.sendShortMsg(0x93, 0x5C, 8);
+	} else {
+		midi.sendShortMsg(0x93, 0x5C, 9);
+	}
+	if (stateFXR4) { 
+		midi.sendShortMsg(0x94, 0x5C, 8);
+	} else {
+		midi.sendShortMsg(0x94, 0x5C, 9);
+	}
+}
+
+NumarkMixTrackQuad.restoreDRLEDsState = function(){
 	NumarkMixTrackQuad.setLED(NumarkMixTrackQuad.leds[0]["directory"], NumarkMixTrackQuad.directoryMode);
 	NumarkMixTrackQuad.setLED(NumarkMixTrackQuad.leds[0]["file"], !NumarkMixTrackQuad.directoryMode);
 }
@@ -808,37 +923,41 @@ NumarkMixTrackQuad.restoreHLEDsState = function(){
 	midi.sendShortMsg(0x94, 0x47, statePLF4 );
 }
 
-//NumarkMixTrackQuad.restoreFX1LEDsState = function(){
-//var stateFX1 = engine.getValue('[QuickEffectRack_[EffectUnit1]_Effect1]', "enabled");
-	//if (stateFX1 == 1) {	
-	
-	//	midi.sendShortMsg(0x91, 0x59, 5) // make sure to match .xml
-	//} else {
-	//	midi.sendShortMsg(0x91, 0x59, 9)  // make sure to match .xml
-	//}
-	//var stateFX2 = engine.getValue('[EffectRack1_EffectUnit2_Effect1]', 1);
-	//if (stateFX2) {	
-	//	midi.sendShortMsg(0x92, 0x59, 5)  // make sure to match .xml
-	//} else {
-	//	midi.sendShortMsg(0x92, 0x59, 9)  // make sure to match .xml
-	//}
-	
-	//var stateFX3 = engine.getValue('[EffectRack1_EffectUnit3_Effect1]', 1);
-	//if (stateFX3) {	
-	//	midi.sendShortMsg(0x93, 0x59, 8)  // make sure to match .xml
-	//} else {
-	//	midi.sendShortMsg(0x93, 0x59, 9)  // make sure to match .xml
-	//}
-	
-	//var stateFX4 = engine.getValue('[EffectRack1_EffectUnit4_Effect1]', 1);
-	//if (stateFX1) {	
-	//	midi.sendShortMsg(0x94, 0x59, 8)  // make sure to match .xml
-	//} else {
-	//	midi.sendShortMsg(0x94, 0x59, 9)  // make sure to match .xml
-	//}
-//} -- still need to figure out
+NumarkMixTrackQuad.restoreSYLEDsState = function(){
+	var stateSYNC1 = engine.getValue('[Channel1]', "sync_enabled",1);
+	var stateSYNC2 = engine.getValue('[Channel2]', "sync_enabled",1);
+	var stateSYNC3 = engine.getValue('[Channel3]', "sync_enabled",1);
+	var stateSYNC4 = engine.getValue('[Channel4]', "sync_enabled",1);
+	midi.sendShortMsg(0x91, 0x40, stateSYNC1); 
+	midi.sendShortMsg(0x92, 0x40, stateSYNC2); 
+	midi.sendShortMsg(0x93, 0x40, stateSYNC3);
+	midi.sendShortMsg(0x94, 0x40, stateSYNC4);
+}
+
+NumarkMixTrackQuad.restoreCULEDsState = function(){
+	var stateCue1 = engine.getValue('[Channel1]', "play");
+	var stateCue2 = engine.getValue('[Channel2]', "play");
+	var stateCue3 = engine.getValue('[Channel3]', "play");
+	var stateCue4 = engine.getValue('[Channel4]', "play");
+	if (stateCue1 == 1) {midi.sendShortMsg(0x91, 0x33, 0); }else { midi.sendShortMsg(0x91, 0x33, 1 );}
+	if (stateCue2 == 1) {midi.sendShortMsg(0x92, 0x33, 0); }else { midi.sendShortMsg(0x92, 0x33, 1 );}
+	if (stateCue3 == 1) {midi.sendShortMsg(0x93, 0x33, 0); }else { midi.sendShortMsg(0x93, 0x33, 1 );}
+	if (stateCue4 == 1) {midi.sendShortMsg(0x94, 0x33, 0); }else { midi.sendShortMsg(0x94, 0x33, 1 );}
+}
+
+NumarkMixTrackQuad.restorePLEDsState = function(){
+	var statePlay1 = engine.getValue('[Channel1]', "play");
+	var statePlay2 = engine.getValue('[Channel2]', "play");
+	var statePlay3 = engine.getValue('[Channel3]', "play");
+	var statePlay4 = engine.getValue('[Channel4]', "play");
+	midi.sendShortMsg(0x91, 0x42, statePlay1);
+	midi.sendShortMsg(0x92, 0x42, statePlay2);
+	midi.sendShortMsg(0x93, 0x42, statePlay3);
+	midi.sendShortMsg(0x94, 0x42, statePlay4);
+}	
 
 NumarkMixTrackQuad.peakIndicator = function(){
+	
 	var peakLedsInd = engine.getValue('[Master]', "PeakIndicator");
 	var peakLedsInd1 = engine.getValue('[Channel1]', "PeakIndicator");
 	var peakLedsInd2= engine.getValue('[Channel2]', "PeakIndicator");
@@ -850,7 +969,7 @@ NumarkMixTrackQuad.peakIndicator = function(){
 		midi.sendShortMsg(0x90, 0x4B, peakLedsInd );
 		midi.sendShortMsg(0x90, 0x4C, peakLedsInd );
 	} else {
-		NumarkMixTrackQuad.restoreDLEDsState ();
+		NumarkMixTrackQuad.restoreDRLEDsState ();
 	}
 	if (engine.getValue('[Channel1]', "PeakIndicator") || engine.getValue('[Channel2]', "PeakIndicator") || engine.getValue('[Channel3]', "PeakIndicator") || engine.getValue('[Channel4]', "PeakIndicator")) {
 		midi.sendShortMsg(0x91, 0x47, 0);
@@ -865,3 +984,89 @@ NumarkMixTrackQuad.peakIndicator = function(){
 		NumarkMixTrackQuad.restoreHLEDsState ();
 	}
 }
+
+NumarkMixTrackQuad.leftSync1Led = function (channel, control, value, status, group) {
+	var activebeat=engine.getValue('[Channel1]',"beat_active");
+	if (activebeat)	{
+		midi.sendShortMsg(0x91,0x4A,1);}
+	else {
+		midi.sendShortMsg(0x91,0x4A,0);
+	}
+	var secondsBlink = 30;
+	var secondsToEnd = engine.getValue('[Channel1]', "duration") * (1-engine.getValue('[Channel1]', "playposition"));
+	if (secondsToEnd < secondsBlink && secondsToEnd > 1 && engine.getValue('[Channel1]', "play")) { // The song is going to end
+		NumarkMixTrackQuad.flasher1 = NumarkMixTrackQuad.flasher1 + 1;
+		if (NumarkMixTrackQuad.flasher1 == 1) {
+			midi.sendShortMsg(0x91,0x33, 1);
+		} else {
+			midi.sendShortMsg(0x91,0x33, 0);
+		}
+		if (NumarkMixTrackQuad.flasher1 >= 1) NumarkMixTrackQuad.flasher1 = -1;
+	}
+}
+
+NumarkMixTrackQuad.rightSync2Led = function (channel, control, value, status, group) {
+	var activebeat=engine.getValue('[Channel2]',"beat_active");
+	if (activebeat)	{
+		midi.sendShortMsg(0x92,0x4A,1);}
+	else {
+		midi.sendShortMsg(0x92,0x4A,0);
+	}
+	var secondsBlink = 30;
+	var secondsToEnd = engine.getValue('[Channel2]', "duration") * (1-engine.getValue('[Channel2]', "playposition"));
+	if (secondsToEnd < secondsBlink && secondsToEnd > 1 && engine.getValue('[Channel2]', "play")) { // The song is going to end
+		NumarkMixTrackQuad.flasher2 = NumarkMixTrackQuad.flasher2 + 1;
+		if (NumarkMixTrackQuad.flasher2 == 1) {
+			midi.sendShortMsg(0x92,0x33, 1);
+		} else {
+			midi.sendShortMsg(0x92,0x33, 0);
+		}
+		if (NumarkMixTrackQuad.flasher2 >= 1) NumarkMixTrackQuad.flasher2 = -1;
+	}
+}
+
+NumarkMixTrackQuad.leftSync3Led = function (channel, control, value, status, group) {
+	var activebeat=engine.getValue('[Channel3]',"beat_active");
+	if (activebeat)	{
+		midi.sendShortMsg(0x93,0x4A,1);}
+	else {
+		midi.sendShortMsg(0x93,0x4A,0);
+	}
+	var secondsBlink = 30;
+	var secondsToEnd = engine.getValue('[Channel3]', "duration") * (1-engine.getValue('[Channel3]', "playposition"));
+	if (secondsToEnd < secondsBlink && secondsToEnd > 1 && engine.getValue('[Channel3]', "play")) { // The song is going to end
+		NumarkMixTrackQuad.flasher3 = NumarkMixTrackQuad.flasher3 + 1;
+		if (NumarkMixTrackQuad.flasher3 == 1) {
+			midi.sendShortMsg(0x93,0x33, 1);
+		} else {
+			midi.sendShortMsg(0x93,0x33, 0);
+		}
+		if (NumarkMixTrackQuad.flasher3 >= 1) NumarkMixTrackQuad.flasher3 = -1;
+	}
+}
+
+NumarkMixTrackQuad.rightSync4Led = function (channel, control, value, status, group) {
+	var activebeat=engine.getValue('[Channel4]',"beat_active");
+	if (activebeat)	{
+		midi.sendShortMsg(0x94,0x4A,1);}
+	else {
+		midi.sendShortMsg(0x94,0x4A,0);
+	}
+	var secondsBlink = 30;
+	var secondsToEnd = engine.getValue('[Channel4]', "duration") * (1-engine.getValue('[Channel4]', "playposition"));
+	if (secondsToEnd < secondsBlink && secondsToEnd > 1 && engine.getValue('[Channel4]', "play")) { // The song is going to end
+		NumarkMixTrackQuad.flasher4 = NumarkMixTrackQuad.flasher4 + 1;
+		if (NumarkMixTrackQuad.flasher4 == 1) {
+			midi.sendShortMsg(0x94,0x33, 1);
+		} else {
+			midi.sendShortMsg(0x94,0x33, 0);
+		}
+		if (NumarkMixTrackQuad.flasher4 >= 1) NumarkMixTrackQuad.flasher4 = -1;
+	}
+}
+
+engine.connectControl("[Channel1]","beat_active","NumarkMixTrackQuad.leftSync1Led");
+engine.connectControl("[Channel2]","beat_active","NumarkMixTrackQuad.rightSync2Led");
+engine.connectControl("[Channel3]","beat_active","NumarkMixTrackQuad.leftSync3Led");
+engine.connectControl("[Channel4]","beat_active","NumarkMixTrackQuad.rightSync4Led");
+

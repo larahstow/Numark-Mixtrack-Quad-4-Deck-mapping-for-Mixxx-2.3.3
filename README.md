@@ -11,17 +11,17 @@ Whats New?
   - New colors on most pads
   - Fully animated LEDs
   - Beautiful intro on Mixxx startup
-  - Idle mode added to keep the LED show going until you start DJing
+  - Idle mode added to keep the LED show going until you start DJing also now resumes if idle again 
   - LEDs work with scratching, end of track, and AutoDJ
   - Improved controls and LED animation with scratching especially in reverse
   - Shutdown function added to turn off all possible LEDs with Mixxx app shutdown 
   - FX 123 knobs change what effect is assigned to the pad, 4th knob still controls gain it works great
-  - incorrectly mapped keys found and fixed
-  - scratch direction when not in scratching mode was wrong now fixed
-  - fixed some timer kill spam
-  - added signal clipping indicators to the folder/file LEDs for the master gain
-  - added signal clipping indicators to the headphone LEDs for each channel
-  - cue now flashes at end of track and stutter flashes BPM
+  - Incorrectly mapped keys found and fixed
+  - Scratch direction when not in scratching mode was wrong now fixed
+  - Fixed some timer kill spam
+  - Added master clipping indicators to the folder/file LEDs for the master gain
+  - Added channel clipping indicators to the headphone LEDs for each channel
+  - Cue now flashes to indicate 30 seconds from end of track and stutter flashes BPM
   
 Features:
   - Supports 4 decks
@@ -40,8 +40,7 @@ Features:
     
 Known Bugs:
   -	Each slide/knob needs to be moved on Mixxx startup to match levels with the Mixxx UI.
-  - LEDs wont animate on deck 2 with AutoDJ? 
-    (Load track in deck 2, play deck 2(controller), click AutoDJ)
+  - LEDs wont animate on deck 2 with AutoDJ? (Load track in deck 2, play deck 2(controller), click AutoDJ)
 
 Credits to:
   - Datlaunchystark

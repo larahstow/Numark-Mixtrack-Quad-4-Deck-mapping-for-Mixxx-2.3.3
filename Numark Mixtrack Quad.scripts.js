@@ -11,7 +11,7 @@
 // Updated on 06/23/2022 by datlaunchystark on Mixxx 2.3.3 (mostly cleaned up the code)
 // https://github.com/datlaunchystark
 //
-// Updated on 12/1/2022 by DJ KWKSND (changed a bunch of code)
+// Updated on 12/1/2022 by DJ KWKSND (changed a bunch of code and mappings)
 //
 // Numark Mixtrack Quad 4 Deck mapping for Mixxx 2.3.3
 //
@@ -24,11 +24,11 @@
 //  Improved controls and LED animation with scratching especially in reverse
 //  Shutdown function added to turn off all possible LEDs with Mixxx app shutdown
 //  FX 123 knobs now change what effects are assigned to the pads, 4th knob still controls gain so it works great
-//  incorrectly mapped keys found and fixed
-//  scratch direction when not in scratching mode was wrong now fixed
-//  fixed some timer kill spam
-//  added signal clipping indicators to the folder/file LEDs for the master gain to keep you from blowing your shit up
-//  added signal clipping indicators to the headphone LEDs for each channel to keep you from overdoing it on the equalizer to keep you from blowing your shit up
+//  Incorrectly mapped keys found and fixed
+//  Scratch direction when not in scratching mode was wrong now fixed
+//  Fixed some timer kill spam
+//  Added master clipping indicators to the folder/file LEDs for the master gain to keep you from blowing your shit up
+//  Added channel clipping indicators to the headphone LEDs for each channel to keep you from overdoing it on the equalizer to keep you from blowing your shit up
 //
 // Features:
 //  Supports 4 decks
@@ -40,11 +40,11 @@
 //  Effects (Using 4 effect units)
 //  Cue 1-4 hot cues
 //
-//  Loops
-//   (1) Loop in (Loop halves)
-//   (2) Loop out (Loop double)
-//   (3) Re-loop (Starts loop at current playback point)
-//   (4) Loop Delete (Deactivates loop)
+// Loops
+//  (1) Loop in (Loop halves)
+//  (2) Loop out (Loop double)
+//  (3) Re-loop (Starts loop at current playback point)
+//  (4) Loop Delete (Deactivates loop)
 //
 // Known Bugs:
 //  Each slide/knob needs to be moved on Mixxx startup to match levels with the Mixxx UI.
@@ -65,7 +65,7 @@ NumarkMixTrackQuad.init = function(id) {	// called when the MIDI device is opene
 	NumarkMixTrackQuad.reverse = [1];
 	NumarkMixTrackQuad.flashOnceTimer = [0];
 	NumarkMixTrackQuad.channel = [0];	
-	NumarkMixTrackQuad.untouched = [1];
+	NumarkMixTrackQuad.untouched = [0];
 	NumarkMixTrackQuad.interuptLEDShow = [0];
 	NumarkMixTrackQuad.bypass = [0];
 	NumarkMixTrackQuad.flasher1 = 1
@@ -87,10 +87,14 @@ NumarkMixTrackQuad.init = function(id) {	// called when the MIDI device is opene
 	//engine.beginTimer(8000, "NumarkMixTrackQuad.autoDjLedFix('[Channel4]') ", true); // WTF why does deck4 not work with the same code OMG user input still required(use controller press play with loaded track in deck4 rolls eyes)
 
 	engine.beginTimer(9000, "engine.setValue('[AutoDJ]', 'enabled', 1)", true);
-	engine.beginTimer(8000, "engine.setValue('[Channel1]', 'play', 1)", true); // keep remove before release test code
-	//engine.beginTimer(11000, "engine.setValue('[Channel2]', 'play', 1)", true); // keep remove before release test code
+	//engine.beginTimer(8000, "engine.setValue('[Channel1]', 'play', 1)", true); // keep remove before release //test code
+	//engine.beginTimer(11000, "engine.setValue('[Channel2]', 'play', 1)", true); // keep remove before release //test code
+	engine.beginTimer(15000, "MVolUp", true); var volCnt = 0; MVolUp = function() { volUpTimer = engine.beginTimer(100, "MVolUp", true); volCnt = volCnt + 0.01; if (volCnt > 1) { engine.stopTimer(volUpTimer); } engine.setValue('[Master]', 'volume', volCnt);} // keep enable before release  // block when testing
 
-	engine.beginTimer(11000, "MVolUp", true); var volCnt = 0; MVolUp = function() { volUpTimer = engine.beginTimer(100, "MVolUp", true); volCnt = volCnt + 0.01; if (volCnt > 0.65) { engine.stopTimer(volUpTimer); } engine.setValue('[Master]', 'volume', volCnt);} // keep enable before release
+	engine.connectControl("[Channel1]","beat_active","NumarkMixTrackQuad.leftSync1Led");
+	engine.connectControl("[Channel2]","beat_active","NumarkMixTrackQuad.rightSync2Led");
+	engine.connectControl("[Channel3]","beat_active","NumarkMixTrackQuad.leftSync3Led");
+	engine.connectControl("[Channel4]","beat_active","NumarkMixTrackQuad.rightSync4Led");
 }
 
 NumarkMixTrackQuad.autoDjLedFix = function(group) { /////////////////////////////////////
@@ -126,7 +130,7 @@ NumarkMixTrackQuad.groupToDeck = function(group) {
 }
 
 NumarkMixTrackQuad.selectKnob = function(channel, control, value, status, group) {
-	NumarkMixTrackQuad.untouched = 0;
+	NumarkMixTrackQuad.untouched = -4;
 	if (value > 63) {
 		value = value - 128;
 	}
@@ -168,10 +172,10 @@ NumarkMixTrackQuad.flashOnceOff = function(deck, group) {
 }
 
 NumarkMixTrackQuad.playbutton = function(channel, control, value, status, group) {
-	NumarkMixTrackQuad.untouched = 0;
+	NumarkMixTrackQuad.untouched = -4;
 	if (!value) return;
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
-	NumarkMixTrackQuad.jogled[deck-1] = 1;
+	if (!NumarkMixTrackQuad.jogled[deck-1]) {NumarkMixTrackQuad.jogled[deck-1] = 1;}
 	if (engine.getValue(group, "play")) {
 		engine.setValue(group, "play", 0);
 		NumarkMixTrackQuad.channel[deck-1] = 0;
@@ -187,7 +191,7 @@ NumarkMixTrackQuad.playbutton = function(channel, control, value, status, group)
 }
 
 NumarkMixTrackQuad.reversebutton = function(channel, control, value, status, group) {
-	NumarkMixTrackQuad.untouched = 0;
+	NumarkMixTrackQuad.untouched = -4;
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
 	if (engine.getValue(group, "play")) {
 		if (engine.getValue(group, "reverse")) {
@@ -205,7 +209,7 @@ NumarkMixTrackQuad.reversebutton = function(channel, control, value, status, gro
 }
 
 NumarkMixTrackQuad.cuebutton = function(channel, control, value, status, group) {	
-	NumarkMixTrackQuad.untouched = 0;
+	NumarkMixTrackQuad.untouched = -4;
 	NumarkMixTrackQuad.bypass[deck-1] = 1;
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
 	if (engine.getValue(group, "playposition") <= 0.97) {
@@ -220,7 +224,7 @@ NumarkMixTrackQuad.cuebutton = function(channel, control, value, status, group) 
 }
 
 NumarkMixTrackQuad.jogWheel = function(channel, control, value, status, group) {
-	NumarkMixTrackQuad.untouched = 0;
+	NumarkMixTrackQuad.untouched = -4;
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
 	var adjustedJog = parseFloat(value);
 	var posNeg = 1;
@@ -318,14 +322,9 @@ NumarkMixTrackQuad.jogWheelStopScratch = function(deck, group) {
 }
 
 NumarkMixTrackQuad.wheelTouch = function(channel, control, value, status, group){
-	NumarkMixTrackQuad.untouched = 0;
+	NumarkMixTrackQuad.untouched = -4;
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
 	if(!value){
-		if (engine.getValue(group, "play", 1)) {
-			
-		}else{
-			midi.sendShortMsg(0xB0+(channel), 0x3C, 0);
-		}
 		NumarkMixTrackQuad.touch[deck-1]= false;
 		if (NumarkMixTrackQuad.scratchTimer[deck-1] != -1) engine.stopTimer(NumarkMixTrackQuad.scratchTimer[deck-1]);
 		NumarkMixTrackQuad.scratchTimer[deck-1] = engine.beginTimer(20, "NumarkMixTrackQuad.jogWheelStopScratch(" + deck + ")", true);
@@ -353,7 +352,7 @@ NumarkMixTrackQuad.toggleDirectoryMode = function(channel, control, value, statu
 }
 
 NumarkMixTrackQuad.toggleScratchMode = function(channel, control, value, status, group) {
-	NumarkMixTrackQuad.untouched = 0;
+	NumarkMixTrackQuad.untouched = -4;
 	if (!value) return;
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
 	// Toggle setting and light
@@ -369,7 +368,8 @@ NumarkMixTrackQuad.toggleScratchMode = function(channel, control, value, status,
 }
 
 NumarkMixTrackQuad.lightShow = function() {
-	if (NumarkMixTrackQuad.untouched == 1) {
+	NumarkMixTrackQuad.untouched = (NumarkMixTrackQuad.untouched + 1);
+	if (NumarkMixTrackQuad.untouched >= 1) {
 		NumarkMixTrackQuad.shutdown()
 		engine.beginTimer(60000, "NumarkMixTrackQuad.lightShow()", true);
 
@@ -1064,9 +1064,3 @@ NumarkMixTrackQuad.rightSync4Led = function (channel, control, value, status, gr
 		if (NumarkMixTrackQuad.flasher4 >= 1) NumarkMixTrackQuad.flasher4 = -1;
 	}
 }
-
-engine.connectControl("[Channel1]","beat_active","NumarkMixTrackQuad.leftSync1Led");
-engine.connectControl("[Channel2]","beat_active","NumarkMixTrackQuad.rightSync2Led");
-engine.connectControl("[Channel3]","beat_active","NumarkMixTrackQuad.leftSync3Led");
-engine.connectControl("[Channel4]","beat_active","NumarkMixTrackQuad.rightSync4Led");
-

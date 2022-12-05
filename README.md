@@ -59,4 +59,3 @@
 -
 - What could still be done?
 -  I may add support for the shift buttons but not sure there is any reason 
--  The only other thing i can think of is how to speed up the knobs for FX 123F

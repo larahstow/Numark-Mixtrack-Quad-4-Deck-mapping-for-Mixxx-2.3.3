@@ -37,6 +37,7 @@
 -  And finally i get to announce all jogwheel LEDs now work without having to press play on the controller :D
 -  Hit play on the controller, or with the mouse on the Mixxx app, or let AutoDJ do it for you it all works YES!!!
 -  Filter knob speed is fixed
+-  Soft Takeover added to all slider and knob bindings, no more extreme jumps in volumes or rates
 -
 - Features:
 -  Supports 4 decks

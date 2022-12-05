@@ -88,18 +88,18 @@ NumarkMixTrackQuad.init = function(id) {
 	
 	engine.setValue('[Master]', 'volume', 0)
 	engine.beginTimer(20, "NumarkMixTrackQuad.shutdown()", true);
-	engine.beginTimer(100, "NumarkMixTrackQuad.lightShow ()" , true);
-	engine.beginTimer(5000, "NumarkMixTrackQuad.autoDjLedFix('[Channel1]') ", true);
-	engine.beginTimer(6000, "NumarkMixTrackQuad.autoDjLedFix('[Channel2]') ", true);
-	engine.beginTimer(7000, "NumarkMixTrackQuad.autoDjLedFix('[Channel3]') ", true);
-	engine.beginTimer(8000, "NumarkMixTrackQuad.autoDjLedFix('[Channel4]') ", true);
-	engine.beginTimer(9000, "engine.setValue('[AutoDJ]', 'enabled', 1)", true);
-	engine.beginTimer(10000, "MVolUp", true); var volCnt = 0; MVolUp = function() { volUpTimer = engine.beginTimer(100, "MVolUp", true); volCnt = volCnt + 0.01; if (volCnt > 1) { engine.stopTimer(volUpTimer); } engine.setValue('[Master]', 'volume', volCnt);}
+	engine.beginTimer(10000, "NumarkMixTrackQuad.lightShow ()" , true);
+	engine.beginTimer(11000, "NumarkMixTrackQuad.autoDjLedFix('[Channel1]') ", true);
+	engine.beginTimer(11100, "NumarkMixTrackQuad.autoDjLedFix('[Channel2]') ", true);
+	engine.beginTimer(11200, "NumarkMixTrackQuad.autoDjLedFix('[Channel3]') ", true);
+	engine.beginTimer(11300, "NumarkMixTrackQuad.autoDjLedFix('[Channel4]') ", true);
+	engine.beginTimer(15000, "engine.setValue('[AutoDJ]', 'enabled', 1)", true);
+	engine.beginTimer(16000, "MVolUp", true); var volCnt = 0; MVolUp = function() { volUpTimer = engine.beginTimer(250, "MVolUp", true); volCnt = volCnt + 0.01; if (volCnt > 1) { engine.stopTimer(volUpTimer); } engine.setValue('[Master]', 'volume', volCnt);}
 
-	engine.connectControl("[Channel1]","beat_active","NumarkMixTrackQuad.leftSync1Led");
-	engine.connectControl("[Channel2]","beat_active","NumarkMixTrackQuad.rightSync2Led");
-	engine.connectControl("[Channel3]","beat_active","NumarkMixTrackQuad.leftSync3Led");
-	engine.connectControl("[Channel4]","beat_active","NumarkMixTrackQuad.rightSync4Led");
+	engine.connectControl("[Channel1]","beat_active","NumarkMixTrackQuad.sync1Led");
+	engine.connectControl("[Channel2]","beat_active","NumarkMixTrackQuad.sync2Led");
+	engine.connectControl("[Channel3]","beat_active","NumarkMixTrackQuad.sync3Led");
+	engine.connectControl("[Channel4]","beat_active","NumarkMixTrackQuad.sync4Led");
 }
 
 NumarkMixTrackQuad.autoDjLedFix = function(group) {
@@ -988,8 +988,8 @@ NumarkMixTrackQuad.peakIndicator = function(){
 	}
 }
 
-NumarkMixTrackQuad.leftSync1Led = function (channel, control, value, status, group) {
-	var activebeat=engine.getValue('[Channel1]',"beat_active");
+NumarkMixTrackQuad.sync1Led = function (channel, control, value, status, group) {
+	var activebeat = engine.getValue('[Channel1]',"beat_active");
 	if (activebeat)	{
 		midi.sendShortMsg(0x91,0x4A,1);}
 	else {
@@ -1008,8 +1008,8 @@ NumarkMixTrackQuad.leftSync1Led = function (channel, control, value, status, gro
 	}
 }
 
-NumarkMixTrackQuad.rightSync2Led = function (channel, control, value, status, group) {
-	var activebeat=engine.getValue('[Channel2]',"beat_active");
+NumarkMixTrackQuad.sync2Led = function (channel, control, value, status, group) {
+	var activebeat = engine.getValue('[Channel2]',"beat_active");
 	if (activebeat)	{
 		midi.sendShortMsg(0x92,0x4A,1);}
 	else {
@@ -1028,8 +1028,8 @@ NumarkMixTrackQuad.rightSync2Led = function (channel, control, value, status, gr
 	}
 }
 
-NumarkMixTrackQuad.leftSync3Led = function (channel, control, value, status, group) {
-	var activebeat=engine.getValue('[Channel3]',"beat_active");
+NumarkMixTrackQuad.sync3Led = function (channel, control, value, status, group) {
+	var activebeat = engine.getValue('[Channel3]',"beat_active");
 	if (activebeat)	{
 		midi.sendShortMsg(0x93,0x4A,1);}
 	else {
@@ -1048,8 +1048,8 @@ NumarkMixTrackQuad.leftSync3Led = function (channel, control, value, status, gro
 	}
 }
 
-NumarkMixTrackQuad.rightSync4Led = function (channel, control, value, status, group) {
-	var activebeat=engine.getValue('[Channel4]',"beat_active");
+NumarkMixTrackQuad.sync4Led = function (channel, control, value, status, group) {
+	var activebeat = engine.getValue('[Channel4]',"beat_active");
 	if (activebeat)	{
 		midi.sendShortMsg(0x94,0x4A,1);}
 	else {
@@ -1066,5 +1066,33 @@ NumarkMixTrackQuad.rightSync4Led = function (channel, control, value, status, gr
 		}
 		if (NumarkMixTrackQuad.flasher4 >= 1) NumarkMixTrackQuad.flasher4 = -1;
 	}
+}
+
+NumarkMixTrackQuad.FX1F = function (channel, control, value, status, group) {
+	var add = 0;
+    var oldFX1F = engine.getValue('[EffectRack1_EffectUnit1]',"super1");
+	if (value > 63) {add = -0.05 } else { add = 0.05 }
+    engine.setValue('[EffectRack1_EffectUnit1]',"super1",oldFX1F + add);
+}
+
+NumarkMixTrackQuad.FX2F = function (channel, control, value, status, group) {
+	var add = 0;
+    var oldFX1F = engine.getValue('[EffectRack1_EffectUnit2]',"super1");
+	if (value > 63) {add = -0.05 } else { add = 0.05 }
+    engine.setValue('[EffectRack1_EffectUnit2]',"super1",oldFX1F + add);
+}
+
+NumarkMixTrackQuad.FX3F = function (channel, control, value, status, group) {
+	var add = 0;
+    var oldFX1F = engine.getValue('[EffectRack1_EffectUnit3]',"super1");
+	if (value > 63) {add = -0.05 } else { add = 0.05 }
+    engine.setValue('[EffectRack1_EffectUnit3]',"super1",oldFX1F + add);
+}
+
+NumarkMixTrackQuad.FX4F = function (channel, control, value, status, group) {
+	var add = 0;
+    var oldFX1F = engine.getValue('[EffectRack1_EffectUnit4]',"super1");
+	if (value > 63) {add = -0.05 } else { add = 0.05 }
+    engine.setValue('[EffectRack1_EffectUnit4]',"super1",oldFX1F + add);
 }
 

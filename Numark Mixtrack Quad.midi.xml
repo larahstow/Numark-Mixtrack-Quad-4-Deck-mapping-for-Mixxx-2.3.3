@@ -7,7 +7,7 @@
     </info>
     <controller id="MixTrack_Quad">
         <scriptfiles>
-            <file filename="Numark Mixtrack Quad.scripts.js" functionprefix="NumarkMixTrackQuad"/>
+            <file functionprefix="NumarkMixTrackQuad" filename="Numark Mixtrack Quad.scripts.js"/>
         </scriptfiles>
         <controls>
             <control>
@@ -251,7 +251,7 @@
                 </options>
             </control>
             <control>
-				<group>[Channel1]</group>
+                <group>[Channel1]</group>
                 <key>NumarkMixTrackQuad.jogWheel</key>
                 <status>0xB1</status>
                 <midino>0x25</midino>
@@ -269,7 +269,7 @@
                 </options>
             </control>
             <control>
-				<group>[Channel3]</group>
+                <group>[Channel3]</group>
                 <key>NumarkMixTrackQuad.jogWheel</key>
                 <status>0xB3</status>
                 <midino>0x25</midino>
@@ -408,42 +408,42 @@
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit1]</group>
-                <key>super1</key>
+                <key>NumarkMixTrackQuad.FX1F</key>
                 <description>MIDI Learned from 230 messages.</description>
                 <status>0xB1</status>
                 <midino>0x29</midino>
                 <options>
-                    <hercjog/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit2]</group>
-                <key>super1</key>
+                <key>NumarkMixTrackQuad.FX2F</key>
                 <description>MIDI Learned from 323 messages.</description>
                 <status>0xB2</status>
                 <midino>0x29</midino>
                 <options>
-                    <hercjog/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit3]</group>
-                <key>super1</key>
+                <key>NumarkMixTrackQuad.FX3F</key>
                 <description>MIDI Learned from 220 messages.</description>
                 <status>0xB3</status>
                 <midino>0x29</midino>
                 <options>
-                    <hercjog/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit4]</group>
-                <key>super1</key>
+                <key>NumarkMixTrackQuad.FX4F</key>
                 <description>MIDI Learned from 219 messages.</description>
                 <status>0xB4</status>
                 <midino>0x29</midino>
                 <options>
-                    <hercjog/>
+                    <script-binding/>
                 </options>
             </control>
             <control>

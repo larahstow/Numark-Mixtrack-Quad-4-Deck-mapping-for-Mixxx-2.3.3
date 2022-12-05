@@ -1,19 +1,15 @@
 // Based on Mixxx default controller settings for
 // Numark Mixtrack Mapping and Numark Mixtrack Pro Script Functions
+// Numark Mixtrack Quad 4 Deck mapping for Mixxx 2.3.3
 //
 // 1/11/2010 - v0.1 - Matteo <matteo@magm3.com>
 // 5/18/2011 - Changed by James Ralston 
 // 05/26/2012 to 06/27/2012 - Changed by Darío José Freije <dario2004@gmail.com>
-//
 // 30/10/2014  Einar Alex - einar@gmail.com
-//
 // 08/14/2021-08/17/2021 - Edited by datlaunchystark (DJ LaunchStar) and added 4 deck support/LEDs... yeah.
-// Updated on 06/23/2022 by datlaunchystark on Mixxx 2.3.3 (mostly cleaned up the code)
-// https://github.com/datlaunchystark
+// Updated on 06/23/2022 by datlaunchystark on Mixxx 2.3.3 (mostly cleaned up the code) https://github.com/datlaunchystark
 //
-// Updated on 12/4/2022 by DJ KWKSND (changed a bunch of code and mappings)
-//
-// Numark Mixtrack Quad 4 Deck mapping for Mixxx 2.3.3
+// Updated on 12/4/2022 by DJ KWKSND (changed a bunch of code and mappings) https://github.com/KWKSND/Numark-Mixtrack-Quad-4-Deck-mapping-for-Mixxx-2.3.3
 //
 // Whats New?
 //  New colors on most pads
@@ -32,6 +28,10 @@
 //  AutoDJ now auto enabled with nice slow fade in when Mixxx starts so you can start Mixxx and walk away
 //  Cue now flashes to indicate 30 seconds from end of track and stutter flashes BPM
 //  And now i finally get to announce all jogwheel LEDs are now working without any input from you or the controller :D
+//	All 4 Decks LEDs now animate without having to press play on the controller :D
+//  Hit play on the controller, or with the mouse on the Mixxx app, or let AutoDJ do it for you it all works YYYYYYYYYYYYYYYYEEEEEEEEEEEEEESSSSSSSSS !!!!!!!!!!!!!!!!!!!
+//  I may add support for the shift button soon but not sure there is any reason 
+//  The only other thing i can think of is how to speed up the knobs for FX 123
 //
 // Features:
 //  Supports 4 decks
@@ -77,6 +77,7 @@ NumarkMixTrackQuad.init = function(id) {
 	NumarkMixTrackQuad.leds = [
 		{ "directory": 0x4B, "file": 0x4C },
 	];
+	
 		
 	engine.setValue('[Master]', 'volume', 0)
 	engine.beginTimer(20, "NumarkMixTrackQuad.shutdown()", true);
@@ -1058,46 +1059,4 @@ NumarkMixTrackQuad.rightSync4Led = function (channel, control, value, status, gr
 		}
 		if (NumarkMixTrackQuad.flasher4 >= 1) NumarkMixTrackQuad.flasher4 = -1;
 	}
-}
-
-
-// A container for the functions of the active layer.
-// In the XML file, map the MIDI input handling functions to
-// properties of this object, for example, MyController.activeButtons.buttonA
-NumarkMixTrackQuad.activeButtons = {};
-
-NumarkMixTrackQuad.unshiftedButtons = {
-    buttonA = function (channel, control, value, status, group) {
-        //code to be executed when buttonA is pressed without shift
-    },
-    buttonB = function (channel, control, value, status, group) {
-        //code to be executed when buttonB is pressed without shift
-    }
-};
-
-NumarkMixTrackQuad.shiftedButtons = {
-    buttonA = function (channel, control, value, status, group) {
-        //code to be executed when buttonA is pressed with shift
-    },
-    buttonB = function (channel, control, value, status, group) {
-        //code to be executed when buttonB is pressed with shift
-    }
-};
-
-NumarkMixTrackQuad.init = function(id, debugging) {
-    NumarkMixTrackQuad.activeButtons = NumarkMixTrackQuad.unshiftedButtons;
-}
-
-NumarkMixTrackQuad.shiftButton = function (channel, control, value, status, group) {
-    // This function is mapped to the incoming MIDI signals for the shift button in the XML file
-    if (value === 127) { // shift button pressed
-        engine.connectControl(group, key, true); // disconnect callbacks for unshifted layer
-        // see "Automatic reactions to changes in Mixxx" section above
-        NumarkMixTrackQuad.activeButtons = NumarkMixTrackQuad.shiftedButtons;
-        engine.connectControl(group, key); // connect callbacks for shifted layer
-    } else { // shift button released
-        engine.connectControl(group, key, true); // disconnect callbacks for shifted layer
-        NumarkMixTrackQuad.activeButtons = NumarkMixTrackQuad.unshiftedButtons;
-        engine.connectControl(group, key); // connect callbacks for unshifted layer
-    }
 }

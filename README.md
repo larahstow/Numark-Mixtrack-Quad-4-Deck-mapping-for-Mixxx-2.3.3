@@ -31,11 +31,11 @@
 -  Jogwheel direction when not in scratch mode was wrong now fixed
 -  Fixed some timer kill spam
 -  Added master clipping indicators to the folder/file LEDs to keep you from blowing your shit up
--  Added channel clipping indicators to the headphone LEDs for each channel to pevent overdoing it on the equalizer 
+-  Added channel clipping indicators to the headphone LEDs for each channel to pevent overdoing it on the EQ
 -  AutoDJ now auto enabled with nice slow fade in when Mixxx starts so you can start Mixxx and walk away
 -  Stutter the flashes BPM and Cue now flashes to indicate 30 seconds from end of track
--  And finally i get to announce all jogwheel LEDs are now working without having to press play on the controller :D
--  Hit play on the controller, or with the mouse on the Mixxx app, or let AutoDJ do it for you it all works YEEEEESSSSS!!!
+-  And finally i get to announce all jogwheel LEDs now work without having to press play on the controller :D
+-  Hit play on the controller, or with the mouse on the Mixxx app, or let AutoDJ do it for you it all works YES!!!
 -
 - Features:
 -  Supports 4 decks

@@ -14,7 +14,7 @@
 - Updated on 12/4/2022 by DJ KWKSND (changed a bunch of code and mappings) 
 - https://github.com/KWKSND/Numark-Mixtrack-Quad-4-Deck-mapping-for-Mixxx-2.3.3
 - I agree with the above statement.
-- I had never worked with midi or javascript before, still more done in the last week than you all did in the last 12 years ROFL
+- I had not worked with midi or javascript, still more done in the last week than you all did in 12 years ROFL
 - You all drove my O.C.D. crazy enough to get it done for everyone thanks for the inspiration.
 - I hope many people get to enjoy this wonderfull controller for years to come without being robbed by VDJ
 - 
@@ -30,12 +30,12 @@
 -  Incorrectly mapped buttons were found and fixed
 -  Jogwheel direction when not in scratch mode was wrong now fixed
 -  Fixed some timer kill spam
--  Added master clipping indicators to the folder/file LEDs for the master gain to keep you from blowing your shit up
--  Added channel clipping indicators to the headphone LEDs for each channel to keep you from overdoing it on the equalizer 
+-  Added master clipping indicators to the folder/file LEDs to keep you from blowing your shit up
+-  Added channel clipping indicators to the headphone LEDs for each channel to pevent overdoing it on the equalizer 
 -  AutoDJ now auto enabled with nice slow fade in when Mixxx starts so you can start Mixxx and walk away
 -  Stutter the flashes BPM and Cue now flashes to indicate 30 seconds from end of track
 -  And finally i get to announce all jogwheel LEDs are now working without having to press play on the controller :D
--  Hit play on the controller, or with the mouse on the Mixxx app, or let AutoDJ do it for you it all works YYYYEEEEESSSSS !!!
+-  Hit play on the controller, or with the mouse on the Mixxx app, or let AutoDJ do it for you it all works YEEEEESSSSS!!!
 -
 - Features:
 -  Supports 4 decks

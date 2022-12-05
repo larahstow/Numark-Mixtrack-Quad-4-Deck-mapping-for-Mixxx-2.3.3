@@ -36,6 +36,7 @@
 -  Stutter the flashes BPM and Cue now flashes to indicate 30 seconds from end of track
 -  And finally i get to announce all jogwheel LEDs now work without having to press play on the controller :D
 -  Hit play on the controller, or with the mouse on the Mixxx app, or let AutoDJ do it for you it all works YES!!!
+-  Filter knob speed is fixed
 -
 - Features:
 -  Supports 4 decks

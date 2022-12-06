@@ -1,65 +1,63 @@
 //- Based on Mixxx default controller settings for
 //- Numark Mixtrack Mapping and Numark Mixtrack Pro Script Functions
 //- Numark Mixtrack Quad 4 Deck mapping for Mixxx 2.3.3
-//- 
+//-
 //- 1/11/2010 - v0.1 - Matteo <matteo@magm3.com>
-//- 5/18/2011 - Changed by James Ralston 
+//- 5/18/2011 - Changed by James Ralston
 //- 05/26/2012 to 06/27/2012 - Changed by Darío José Freije <dario2004@gmail.com>
-//- 30/10/2014  Einar Alex - einar@gmail.com
+//- 30/10/2014 Einar Alex - einar@gmail.com
 //- 08/14/2021-08/17/2021 - Edited by datlaunchystark (DJ LaunchStar) and added 4 deck support/LEDs... yeah.
 //- Updated on 06/23/2022 by datlaunchystark on Mixxx 2.3.3 (mostly cleaned up the code)
 //- https://github.com/datlaunchystark
+//-
 //- For the original code and the idea to get this controller functional in Mixxx. You guys are awesome! :)
-//- 
-//- Updated on 12/4/2022 by DJ KWKSND (changed a bunch of code and mappings) 
+//-
+//- Updated on 12/6/2022 by DJ KWKSND (changed a bunch of code and mappings)
 //- https://github.com/KWKSND/Numark-Mixtrack-Quad-4-Deck-mapping-for-Mixxx-2.3.3
 //- I agree with the above statement.
-//- I had not worked with midi or javascript, still more done in the last week than you all did in 12 years ROFL
-//- You all drove my O.C.D. crazy enough to get it done for everyone thanks for the inspiration.
-//- I hope many people get to enjoy this wonderfull controller for years to come without being robbed by VDJ
-//- 
+//- I had not worked with midi or javascript, still more done in the last week or so than all you in 12 years ROFL
+//- You guys drove my O.C.D. crazy enough to get it done for everyone thanks for the inspiration.
+//- I hope many people get to enjoy this wonderful controller for years to come without being robbed by VDJ
+//-
 //- Whats New?
-//-  New colors on most pads
-//-  Fully animated LEDs
-//-  Beautiful intro on Mixxx startup
-//-  Idle mode added to keep the LED show going until you start DJing also now resumes if idle again
-//-  LEDs work with scratching, end of track, and AutoDJ
-//-  Improved controls and LED animation with scratching especially in reverse
-//-  Shutdown function added to turn off all possible LEDs with Mixxx app shutdown
-//-  FX 123 knobs now change what effects are assigned to the pads, 4th knob still controls filter so it works great
-//-  Incorrectly mapped buttons were found and fixed
-//-  Jogwheel direction when not in scratch mode was wrong now fixed
-//-  Fixed some timer kill spam
-//-  Added master clipping indicators to the folder/file LEDs to keep you from blowing your shit up
-//-  Added channel clipping indicators to the headphone LEDs for each channel to pevent overdoing it on the EQ
-//-  AutoDJ now auto enabled with nice slow fade in when Mixxx starts so you can start Mixxx and walk away
-//-  Stutter the flashes BPM and Cue now flashes to indicate 30 seconds from end of track
-//-  And finally i get to announce all jogwheel LEDs now work without having to press play on the controller :D
-//-  Hit play on the controller, or with the mouse on the Mixxx app, or let AutoDJ do it for you it all works YES!!!
-//-  Filter knob speed is fixed
-//-  Soft Takeover added to all slider and knob bindings, no more extreme jumps in volumes or rates
+//- Incorrectly mapped buttons were found and fixed
+//- FX123 & Filter knob speed is fixed
+//- Pressing shift + turning FX123 knobs now change what effects are assigned to the pads
+//- Pressing shift + keylock now enables / disables keylock
+//- Pressing shift + Range now scales the range of the pitch slider
+//- Soft takeover added to all sliders and knobs, so there is no more extreme jumps in volumes or filters etc
+//- Jogwheel direction when not in scratch mode was wrong now fixed
+//- Fixed some timer kill errors
+//- AutoDJ now auto enabled with nice slow fade in when Mixxx starts so you can start Mixxx and walk away
+//- New colors on most pads
+//- Beautiful LED intro on Mixxx startup
+//- Idle mode added to keep the LED show going until you start DJing, also now resumes if idle again
+//- Improved controls and LED animation with scratching especially in reverse
+//- LEDs now work with scratching and stop with end of track
+//- Added master clipping indicators to the folder/file LEDs to keep you from blowing your shit up
+//- Added channel clipping indicators to the headphone LEDs for each channel to prevent overdoing it on the EQ
+//- Shutdown function added to turn off all possible LEDs with Mixxx app shutdown
+//- Stutter flashes the BPM and Cue flashes to indicate 30 seconds from end of track
+//- And finally i get to announce all jogwheel LEDs now work without having to press play on the controller :D
+//- Hit play on the controller, or with the mouse on the Mixxx app, or let AutoDJ do it for you it all works YES!!!
 //-
 //- Features:
-//-  Supports 4 decks
-//-  Library browse knob + load A/B
-//-  Channel volume, cross fader, cue gain / mix, Master gain, filters, pitch and pitch bend
-//-  Scratch/CD mode toggle
-//-  Headphone output toggle
-//-  Samples (Using 16 samples)
-//-  Effects (Using 4 effect units)
-//-  Cue 1-4 hot cues
-//- 
-//- Loops
-//-  (1) Loop in (Loop halves)
-//-  (2) Loop out (Loop double)
-//-  (3) Re-loop (Starts loop at current playback point)
-//-  (4) Loop Delete (Deactivates loop)
-//- 
+//- Supports 4 decks
+//- Library browse knob + load A/B
+//- Channel volume, cross fader, cue gain / mix, Master gain, filters, pitch and pitch bend
+//- Scratch/CD mode toggle
+//- Headphone output toggle
+//- Samples (Using 16 samples)
+//- Effects (Using 4 effect units)
+//- Cue 1-4 hot cues
+//- Loops:
+//- 	Loop in (Loop halves)
+//- 	Loop out (Loop doubles)
+//- 	Re-loop (Starts loop at current playback point)
+//- 	Loop Delete (Deactivates loop)
+//-
 //- Known Bugs:
-//-  Each slide/knob needs to be moved on Mixxx startup to match levels with the Mixxx UI
-//- 
-//- What could still be done?
-//-  I may add support for the shift buttons but not sure there is any reason 
+//- Each slide/knob needs to be moved on Mixxx startup to match levels with the Mixxx UI
 
 function NumarkMixTrackQuad() {}
 
@@ -95,14 +93,30 @@ NumarkMixTrackQuad.init = function(id) {
 	engine.beginTimer(11200, "NumarkMixTrackQuad.autoDjLedFix('[Channel3]') ", true);
 	engine.beginTimer(11300, "NumarkMixTrackQuad.autoDjLedFix('[Channel4]') ", true);
 	engine.beginTimer(15000, "engine.setValue('[AutoDJ]', 'enabled', 1)", true);
-	engine.beginTimer(16000, "MVolUp", true); var volCnt = 0; MVolUp = function() { volUpTimer = engine.beginTimer(250, "MVolUp", true); volCnt = volCnt + 0.01; if (volCnt > 1) { engine.stopTimer(volUpTimer); } engine.setValue('[Master]', 'volume', volCnt);}
+	NumarkMixTrackQuad.volUpTimer = engine.beginTimer(16000, "MVolUp", true); var volCnt = 0; MVolUp = function() { NumarkMixTrackQuad.volUpTimer = engine.beginTimer(250, "MVolUp", true); volCnt = volCnt + 0.01; if (volCnt > 1) { engine.stopTimer(NumarkMixTrackQuad.volUpTimer); } engine.setValue('[Master]', 'volume', volCnt);}
 
 	engine.connectControl("[Channel1]","beat_active","NumarkMixTrackQuad.sync1Led");
 	engine.connectControl("[Channel2]","beat_active","NumarkMixTrackQuad.sync2Led");
 	engine.connectControl("[Channel3]","beat_active","NumarkMixTrackQuad.sync3Led");
 	engine.connectControl("[Channel4]","beat_active","NumarkMixTrackQuad.sync4Led");
+	
+    NumarkMixTrackQuad.activeButtonsR1 = NumarkMixTrackQuad.unshiftedButtonsR1;
+    NumarkMixTrackQuad.activeButtonsR2 = NumarkMixTrackQuad.unshiftedButtonsR2;
+    NumarkMixTrackQuad.activeButtonsR3 = NumarkMixTrackQuad.unshiftedButtonsR3;
+    NumarkMixTrackQuad.activeButtonsR4 = NumarkMixTrackQuad.unshiftedButtonsR4;
 }
 
+NumarkMixTrackQuad.gain = function(channel, control, value, status, group) {
+	if (value < 64) {
+		multiplier = 0.015625 * value ;
+		engine.setValue(group, "volume", multiplier);
+	} else { 
+		multiplier = (0.0625 * (value-64)) + 1;
+		engine.setValue(group, "volume", multiplier);
+	};
+	if (NumarkMixTrackQuad.volUpTimer) {engine.stopTimer(NumarkMixTrackQuad.volUpTimer); NumarkMixTrackQuad.volUpTimer = 0};
+}
+	
 NumarkMixTrackQuad.autoDjLedFix = function(group) {
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
 	if (group == '[Channel1]') {
@@ -138,7 +152,7 @@ NumarkMixTrackQuad.groupToDeck = function(group) {
 }
 
 NumarkMixTrackQuad.selectKnob = function(channel, control, value, status, group) {
-	NumarkMixTrackQuad.untouched = -4;
+	NumarkMixTrackQuad.untouched = -3;
 	if (value > 63) {
 		value = value - 128;
 	}
@@ -180,7 +194,7 @@ NumarkMixTrackQuad.flashOnceOff = function(deck, group) {
 }
 
 NumarkMixTrackQuad.playbutton = function(channel, control, value, status, group) {
-	NumarkMixTrackQuad.untouched = -4;
+	NumarkMixTrackQuad.untouched = -3;
 	if (!value) return;
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
 	if (!NumarkMixTrackQuad.jogled[deck-1]) {NumarkMixTrackQuad.jogled[deck-1] = 1;}
@@ -198,7 +212,7 @@ NumarkMixTrackQuad.playbutton = function(channel, control, value, status, group)
 }
 
 NumarkMixTrackQuad.reversebutton = function(channel, control, value, status, group) {
-	NumarkMixTrackQuad.untouched = -4;
+	NumarkMixTrackQuad.untouched = -3;
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
 	if (engine.getValue(group, "play")) {
 		if (engine.getValue(group, "reverse")) {
@@ -216,7 +230,7 @@ NumarkMixTrackQuad.reversebutton = function(channel, control, value, status, gro
 }
 
 NumarkMixTrackQuad.cuebutton = function(channel, control, value, status, group) {	
-	NumarkMixTrackQuad.untouched = -4;
+	NumarkMixTrackQuad.untouched = -3;
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
 	if (engine.getValue(group, "playposition") <= 0.97) {
 			engine.setValue(group, "cue_default", value ? 1 : 0);
@@ -229,7 +243,7 @@ NumarkMixTrackQuad.cuebutton = function(channel, control, value, status, group) 
 }
 
 NumarkMixTrackQuad.jogWheel = function(channel, control, value, status, group) {
-	NumarkMixTrackQuad.untouched = -4;
+	NumarkMixTrackQuad.untouched = -3;
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
 	var adjustedJog = parseFloat(value);
 	var posNeg = 1;
@@ -327,7 +341,7 @@ NumarkMixTrackQuad.jogWheelStopScratch = function(deck, group) {
 }
 
 NumarkMixTrackQuad.wheelTouch = function(channel, control, value, status, group){
-	NumarkMixTrackQuad.untouched = -4;
+	NumarkMixTrackQuad.untouched = -3;
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
 	if(!value){
 		NumarkMixTrackQuad.touch[deck-1]= false;
@@ -356,7 +370,7 @@ NumarkMixTrackQuad.toggleDirectoryMode = function(channel, control, value, statu
 }
 
 NumarkMixTrackQuad.toggleScratchMode = function(channel, control, value, status, group) {
-	NumarkMixTrackQuad.untouched = -4;
+	NumarkMixTrackQuad.untouched = -3;
 	if (!value) return;
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
 	NumarkMixTrackQuad.scratchMode[deck-1] = !NumarkMixTrackQuad.scratchMode[deck-1];
@@ -961,31 +975,32 @@ NumarkMixTrackQuad.restorePLEDsState = function(){
 }	
 
 NumarkMixTrackQuad.peakIndicator = function(){
-	
-	var peakLedsInd = engine.getValue('[Master]', "PeakIndicator");
-	var peakLedsInd1 = engine.getValue('[Channel1]', "PeakIndicator");
-	var peakLedsInd2= engine.getValue('[Channel2]', "PeakIndicator");
-	var peakLedsInd3 = engine.getValue('[Channel3]', "PeakIndicator");
-	var peakLedsInd4= engine.getValue('[Channel4]', "PeakIndicator");
-	if (engine.getValue('[Master]', "PeakIndicator")) {
-		midi.sendShortMsg(0x90, 0x4B, 0);
-		midi.sendShortMsg(0x90, 0x4C, 0);
-		midi.sendShortMsg(0x90, 0x4B, peakLedsInd );
-		midi.sendShortMsg(0x90, 0x4C, peakLedsInd );
-	} else {
-		NumarkMixTrackQuad.restoreDRLEDsState ();
-	}
-	if (engine.getValue('[Channel1]', "PeakIndicator") || engine.getValue('[Channel2]', "PeakIndicator") || engine.getValue('[Channel3]', "PeakIndicator") || engine.getValue('[Channel4]', "PeakIndicator")) {
-		midi.sendShortMsg(0x91, 0x47, 0);
-		midi.sendShortMsg(0x92, 0x47, 0);
-		midi.sendShortMsg(0x93, 0x47, 0);
-		midi.sendShortMsg(0x94, 0x47, 0);
-		midi.sendShortMsg(0x91, 0x47, peakLedsInd1 );
-		midi.sendShortMsg(0x92, 0x47, peakLedsInd2 );
-		midi.sendShortMsg(0x93, 0x47, peakLedsInd3 );
-		midi.sendShortMsg(0x94, 0x47, peakLedsInd4 );
-	} else {
-		NumarkMixTrackQuad.restoreHPLEDsState ();
+	if (NumarkMixTrackQuad.interuptLEDShow == 1)  {
+		
+		var peakLedsInd1 = engine.getValue('[Channel1]', "PeakIndicator");
+		var peakLedsInd2= engine.getValue('[Channel2]', "PeakIndicator");
+		var peakLedsInd3 = engine.getValue('[Channel3]', "PeakIndicator");
+		var peakLedsInd4= engine.getValue('[Channel4]', "PeakIndicator");
+		if (engine.getValue('[Master]', "PeakIndicator")) {
+			midi.sendShortMsg(0x90, 0x4B, 1);
+			midi.sendShortMsg(0x90, 0x4C, 0);
+			engine.beginTimer(20, "midi.sendShortMsg(0x90, 0x4B, 0 );", true);
+			engine.beginTimer(20, "midi.sendShortMsg(0x90, 0x4C, 1 );", true);
+		} else {
+			NumarkMixTrackQuad.restoreDRLEDsState ();
+		}
+		if (engine.getValue('[Channel1]', "PeakIndicator") || engine.getValue('[Channel2]', "PeakIndicator") || engine.getValue('[Channel3]', "PeakIndicator") || engine.getValue('[Channel4]', "PeakIndicator")) {
+			midi.sendShortMsg(0x91, 0x47, 0);
+			midi.sendShortMsg(0x92, 0x47, 0);
+			midi.sendShortMsg(0x93, 0x47, 0);
+			midi.sendShortMsg(0x94, 0x47, 0);
+			midi.sendShortMsg(0x91, 0x47, peakLedsInd1 );
+			midi.sendShortMsg(0x92, 0x47, peakLedsInd2 );
+			midi.sendShortMsg(0x93, 0x47, peakLedsInd3 );
+			midi.sendShortMsg(0x94, 0x47, peakLedsInd4 );
+		} else {
+			NumarkMixTrackQuad.restoreHPLEDsState ();
+		}
 	}
 }
 
@@ -1095,5 +1110,397 @@ NumarkMixTrackQuad.FX4F = function (channel, control, value, status, group) {
     var oldFX1F = engine.getValue('[EffectRack1_EffectUnit4]',"super1");
 	if (value > 63) {add = -0.05 } else { add = 0.05 }
     engine.setValue('[EffectRack1_EffectUnit4]',"super1",oldFX1F + add);
+}
+
+NumarkMixTrackQuad.activeButtonsR1 = {};
+NumarkMixTrackQuad.unshiftedButtonsR1 = {
+	knobR1FX1 : function (channel, control, value, status, group) {
+		var add = 0;
+		var oldR1FX1 = engine.getValue('[EffectRack1_EffectUnit1_Effect1]',"meta");
+		if (value > 63) {add = -0.05 } else { add = 0.05 };
+		engine.setValue('[EffectRack1_EffectUnit1_Effect1]',"meta",oldR1FX1 + add);
+	},
+	knobR1FX2 : function (channel, control, value, status, group) {
+		var add = 0;
+		var oldR1FX2 = engine.getValue('[EffectRack1_EffectUnit1_Effect2]',"meta");
+		if (value > 63) {add = -0.05 } else { add = 0.05 };
+		engine.setValue('[EffectRack1_EffectUnit1_Effect2]',"meta",oldR1FX2 + add);
+	},
+    knobR1FX3 : function (channel, control, value, status, group) {
+		var add = 0;
+		var oldR1FX3 = engine.getValue('[EffectRack1_EffectUnit1_Effect3]',"meta");
+		if (value > 63) {add = -0.05 } else { add = 0.05 };
+		engine.setValue('[EffectRack1_EffectUnit1_Effect3]',"meta",oldR1FX3 + add);
+    },
+    buttonR1Keylock : function (channel, control, value, status, group) {
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (value > 63) {set = 1; NumarkMixTrackQuad.reverse[deck-1] = 0.65; } else { set = 0; NumarkMixTrackQuad.reverse[deck-1] = 1;};
+		engine.setValue('[Channel1]',"rate_temp_down",set);
+    },
+    buttonR1Range : function (channel, control, value, status, group) {
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (value > 63) {set = 1; NumarkMixTrackQuad.reverse[deck-1] = 1.35; } else { set = 0; NumarkMixTrackQuad.reverse[deck-1] = 1;};
+		engine.setValue('[Channel1]',"rate_temp_up",set);
+    }
+};
+NumarkMixTrackQuad.shiftedButtonsR1 = {
+    knobR1FX1 : function (channel, control, value, status, group) {
+		if (value > 63) {
+			engine.setValue('[EffectRack1_EffectUnit1_Effect1]',"effect_selector",1);
+		} else {
+			engine.setValue('[EffectRack1_EffectUnit1_Effect1]',"effect_selector",-1);
+		};
+    },
+    knobR1FX2 : function (channel, control, value, status, group) {
+		if (value > 63) {
+			engine.setValue('[EffectRack1_EffectUnit1_Effect2]',"effect_selector",1);
+		} else {
+			engine.setValue('[EffectRack1_EffectUnit1_Effect2]',"effect_selector",-1);
+		};
+    },
+    knobR1FX3 : function (channel, control, value, status, group) {
+		if (value > 63) {
+			engine.setValue('[EffectRack1_EffectUnit1_Effect3]',"effect_selector",1);
+		} else {
+			engine.setValue('[EffectRack1_EffectUnit1_Effect3]',"effect_selector",-1);
+		};
+    },
+    buttonR1Keylock : function (channel, control, value, status, group) {
+		if (value == 127) {
+			var oldKLset = engine.getValue('[Channel1]',"keylock");
+			if (oldKLset == 0) {set = 1 } else { set = 0 };
+			engine.setValue('[Channel1]',"keylock",set);
+		}
+    },
+    buttonR1Range : function (channel, control, value, status, group) {
+		if (value == 127) {
+			var oldRGset = engine.getValue('[Channel1]',"rateRange");
+			if (oldRGset == 0.06) {
+				set = 0.08;
+			} else if (oldRGset == 0.08) {
+				set = 0.10;
+			} else if (oldRGset == 0.10) {
+				set = 0.12;
+			} else if (oldRGset == 0.12) {
+				set = 0.20;
+			} else if (oldRGset == 0.20) {
+				set = 0.25;
+			} else if (oldRGset == 0.25) {
+				set = 0.33;
+			} else if (oldRGset == 0.33) {
+				set = 0.50;
+			} else if (oldRGset == 0.50) {
+				set = 1.00;
+			} else if (oldRGset == 1.00) {
+				set = 2.00;
+			} else if (oldRGset == 2.00) {
+				set = 4.00;
+			} else if (oldRGset == 4.00) {
+				set = 0.06;
+			}
+			engine.setValue('[Channel1]',"rateRange",set);
+		}
+    }
+};
+NumarkMixTrackQuad.SHFT1 = function (channel, control, value, status, group) {
+    if (value === 127) {
+        NumarkMixTrackQuad.activeButtonsR1 = NumarkMixTrackQuad.shiftedButtonsR1;
+    } else {
+        NumarkMixTrackQuad.activeButtonsR1 = NumarkMixTrackQuad.unshiftedButtonsR1;
+    }
+}
+
+NumarkMixTrackQuad.activeButtonsR2 = {};
+NumarkMixTrackQuad.unshiftedButtonsR2 = {
+	knobR2FX1 : function (channel, control, value, status, group) {
+		var add = 0;
+		var oldR2FX1 = engine.getValue('[EffectRack1_EffectUnit2_Effect1]',"meta");
+		if (value > 63) {add = -0.05 } else { add = 0.05 };
+		engine.setValue('[EffectRack1_EffectUnit2_Effect1]',"meta",oldR2FX1 + add);
+	},
+	knobR2FX2 : function (channel, control, value, status, group) {
+		var add = 0;
+		var oldR2FX2 = engine.getValue('[EffectRack1_EffectUnit2_Effect2]',"meta");
+		if (value > 63) {add = -0.05 } else { add = 0.05 };
+		engine.setValue('[EffectRack1_EffectUnit2_Effect2]',"meta",oldR2FX2 + add);
+	},
+    knobR2FX3 : function (channel, control, value, status, group) {
+		var add = 0;
+		var oldR2FX3 = engine.getValue('[EffectRack1_EffectUnit2_Effect3]',"meta");
+		if (value > 63) {add = -0.05 } else { add = 0.05 };
+		engine.setValue('[EffectRack1_EffectUnit2_Effect3]',"meta",oldR2FX3 + add);
+    },
+    buttonR2Keylock : function (channel, control, value, status, group) {
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (value > 63) {set = 1; NumarkMixTrackQuad.reverse[deck-1] = 0.65; } else { set = 0; NumarkMixTrackQuad.reverse[deck-1] = 1;};
+		engine.setValue('[Channel2]',"rate_temp_down",set);
+    },
+    buttonR2Range : function (channel, control, value, status, group) {
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (value > 63) {set = 1; NumarkMixTrackQuad.reverse[deck-1] = 1.35; } else { set = 0; NumarkMixTrackQuad.reverse[deck-1] = 1;};
+		engine.setValue('[Channel2]',"rate_temp_up",set);
+    }
+};
+NumarkMixTrackQuad.shiftedButtonsR2 = {
+    knobR2FX1 : function (channel, control, value, status, group) {
+		if (value > 63) {
+			engine.setValue('[EffectRack1_EffectUnit2_Effect1]',"effect_selector",1);
+		} else {
+			engine.setValue('[EffectRack1_EffectUnit2_Effect1]',"effect_selector",-1);
+		}
+    },
+    knobR2FX2 : function (channel, control, value, status, group) {
+		if (value > 63) {
+			engine.setValue('[EffectRack1_EffectUnit2_Effect2]',"effect_selector",1);
+		} else {
+			engine.setValue('[EffectRack1_EffectUnit2_Effect2]',"effect_selector",-1);
+		}
+    },
+    knobR2FX3 : function (channel, control, value, status, group) {
+		if (value > 63) {
+			engine.setValue('[EffectRack1_EffectUnit2_Effect3]',"effect_selector",1);
+		} else {
+			engine.setValue('[EffectRack1_EffectUnit2_Effect3]',"effect_selector",-1);
+		}
+    },
+    buttonR2Keylock : function (channel, control, value, status, group) {
+		if (value == 127) {
+			var oldKLset = engine.getValue('[Channel2]',"keylock");
+			if (oldKLset == 0) {set = 1 } else { set = 0 };
+			engine.setValue('[Channel2]',"keylock",set);
+		}
+    },
+    buttonR2Range : function (channel, control, value, status, group) {
+		if (value == 127) {
+			var oldRGset = engine.getValue('[Channel2]',"rateRange");
+			if (oldRGset == 0.06) {
+				set = 0.08;
+			} else if (oldRGset == 0.08) {
+				set = 0.10;
+			} else if (oldRGset == 0.10) {
+				set = 0.12;
+			} else if (oldRGset == 0.12) {
+				set = 0.20;
+			} else if (oldRGset == 0.20) {
+				set = 0.25;
+			} else if (oldRGset == 0.25) {
+				set = 0.33;
+			} else if (oldRGset == 0.33) {
+				set = 0.50;
+			} else if (oldRGset == 0.50) {
+				set = 1.00;
+			} else if (oldRGset == 1.00) {
+				set = 2.00;
+			} else if (oldRGset == 2.00) {
+				set = 4.00;
+			} else if (oldRGset == 4.00) {
+				set = 0.06;
+			}
+			engine.setValue('[Channel2]',"rateRange",set);
+		}
+	}
+};
+NumarkMixTrackQuad.SHFT2 = function (channel, control, value, status, group) {
+    if (value === 127) {
+        NumarkMixTrackQuad.activeButtonsR2 = NumarkMixTrackQuad.shiftedButtonsR2;
+    } else {
+        NumarkMixTrackQuad.activeButtonsR2 = NumarkMixTrackQuad.unshiftedButtonsR2;
+    }
+}
+
+NumarkMixTrackQuad.activeButtonsR3 = {};
+NumarkMixTrackQuad.unshiftedButtonsR3 = {
+	knobR3FX1 : function (channel, control, value, status, group) {
+		var add = 0;
+		var oldR3FX1 = engine.getValue('[EffectRack1_EffectUnit3_Effect1]',"meta");
+		if (value > 63) {add = -0.05 } else { add = 0.05 };
+		engine.setValue('[EffectRack1_EffectUnit3_Effect1]',"meta",oldR3FX1 + add);
+	},
+	knobR3FX2 : function (channel, control, value, status, group) {
+		var add = 0;
+		var oldR3FX2 = engine.getValue('[EffectRack1_EffectUnit3_Effect2]',"meta");
+		if (value > 63) {add = -0.05 } else { add = 0.05 };
+		engine.setValue('[EffectRack1_EffectUnit3_Effect2]',"meta",oldR3FX2 + add);
+	},
+    knobR3FX3 : function (channel, control, value, status, group) {
+		var add = 0;
+		var oldR3FX3 = engine.getValue('[EffectRack1_EffectUnit3_Effect3]',"meta");
+		if (value > 63) {add = -0.05 } else { add = 0.05 };
+		engine.setValue('[EffectRack1_EffectUnit3_Effect3]',"meta",oldR3FX3 + add);
+    },
+    buttonR3Keylock : function (channel, control, value, status, group) {
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (value > 63) {set = 1; NumarkMixTrackQuad.reverse[deck-1] = 0.65; } else { set = 0; NumarkMixTrackQuad.reverse[deck-1] = 1;};
+		engine.setValue('[Channel3]',"rate_temp_down",set);
+    },
+    buttonR3Range : function (channel, control, value, status, group) {
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (value > 63) {set = 1; NumarkMixTrackQuad.reverse[deck-1] = 1.35; } else { set = 0; NumarkMixTrackQuad.reverse[deck-1] = 1;};
+		engine.setValue('[Channel3]',"rate_temp_up",set);
+    }
+};
+NumarkMixTrackQuad.shiftedButtonsR3 = {
+    knobR3FX1 : function (channel, control, value, status, group) {
+		if (value > 63) {
+			engine.setValue('[EffectRack1_EffectUnit3_Effect1]',"effect_selector",1);
+		} else {
+			engine.setValue('[EffectRack1_EffectUnit3_Effect1]',"effect_selector",-1);
+		}
+    },
+    knobR3FX2 : function (channel, control, value, status, group) {
+		if (value > 63) {
+			engine.setValue('[EffectRack1_EffectUnit3_Effect2]',"effect_selector",1);
+		} else {
+			engine.setValue('[EffectRack1_EffectUnit3_Effect2]',"effect_selector",-1);
+		}
+    },
+    knobR3FX3 : function (channel, control, value, status, group) {
+		if (value > 63) {
+			engine.setValue('[EffectRack1_EffectUnit3_Effect3]',"effect_selector",1);
+		} else {
+			engine.setValue('[EffectRack1_EffectUnit3_Effect3]',"effect_selector",-1);
+		}
+    },
+    buttonR3Keylock : function (channel, control, value, status, group) {
+		if (value == 127) {
+			var oldKLset = engine.getValue('[Channel3]',"keylock");
+			if (oldKLset == 0) {set = 1 } else { set = 0 };
+			engine.setValue('[Channel3]',"keylock",set);
+		}
+    },
+    buttonR3Range : function (channel, control, value, status, group) {
+		if (value == 127) {
+			var oldRGset = engine.getValue('[Channel3]',"rateRange");
+			if (oldRGset == 0.06) {
+				set = 0.08;
+			} else if (oldRGset == 0.08) {
+				set = 0.10;
+			} else if (oldRGset == 0.10) {
+				set = 0.12;
+			} else if (oldRGset == 0.12) {
+				set = 0.20;
+			} else if (oldRGset == 0.20) {
+				set = 0.25;
+			} else if (oldRGset == 0.25) {
+				set = 0.33;
+			} else if (oldRGset == 0.33) {
+				set = 0.50;
+			} else if (oldRGset == 0.50) {
+				set = 1.00;
+			} else if (oldRGset == 1.00) {
+				set = 2.00;
+			} else if (oldRGset == 2.00) {
+				set = 4.00;
+			} else if (oldRGset == 4.00) {
+				set = 0.06;
+			}
+			engine.setValue('[Channel3]',"rateRange",set);
+		}
+	}
+};
+NumarkMixTrackQuad.SHFT3 = function (channel, control, value, status, group) {
+    if (value === 127) {
+        NumarkMixTrackQuad.activeButtonsR3 = NumarkMixTrackQuad.shiftedButtonsR3;
+    } else {
+        NumarkMixTrackQuad.activeButtonsR3 = NumarkMixTrackQuad.unshiftedButtonsR3;
+    }
+}
+
+NumarkMixTrackQuad.activeButtonsR4 = {};
+NumarkMixTrackQuad.unshiftedButtonsR4 = {
+	knobR4FX1 : function (channel, control, value, status, group) {
+		var add = 0;
+		var oldR4FX1 = engine.getValue('[EffectRack1_EffectUnit4_Effect1]',"meta");
+		if (value > 63) {add = -0.05 } else { add = 0.05 };
+		engine.setValue('[EffectRack1_EffectUnit4_Effect1]',"meta",oldR4FX1 + add);
+	},
+	knobR4FX2 : function (channel, control, value, status, group) {
+		var add = 0;
+		var oldR4FX2 = engine.getValue('[EffectRack1_EffectUnit4_Effect2]',"meta");
+		if (value > 63) {add = -0.05 } else { add = 0.05 };
+		engine.setValue('[EffectRack1_EffectUnit4_Effect2]',"meta",oldR4FX2 + add);
+	},
+    knobR4FX3 : function (channel, control, value, status, group) {
+		var add = 0;
+		var oldR4FX3 = engine.getValue('[EffectRack1_EffectUnit4_Effect3]',"meta");
+		if (value > 63) {add = -0.05 } else { add = 0.05 };
+		engine.setValue('[EffectRack1_EffectUnit4_Effect3]',"meta",oldR4FX3 + add);
+    },
+    buttonR4Keylock : function (channel, control, value, status, group) {
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (value > 63) {set = 1; NumarkMixTrackQuad.reverse[deck-1] = 0.65; } else { set = 0; NumarkMixTrackQuad.reverse[deck-1] = 1;};
+		engine.setValue('[Channel4]',"rate_temp_down",set);
+    },
+    buttonR4Range : function (channel, control, value, status, group) {
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (value > 63) {set = 1; NumarkMixTrackQuad.reverse[deck-1] = 1.35; } else { set = 0; NumarkMixTrackQuad.reverse[deck-1] = 1;};
+		engine.setValue('[Channel4]',"rate_temp_up",set);
+    }
+};
+NumarkMixTrackQuad.shiftedButtonsR4 = {
+    knobR4FX1 : function (channel, control, value, status, group) {
+		if (value > 63) {
+			engine.setValue('[EffectRack1_EffectUnit4_Effect1]',"effect_selector",1);
+		} else {
+			engine.setValue('[EffectRack1_EffectUnit4_Effect1]',"effect_selector",-1);
+		}
+    },
+    knobR4FX2 : function (channel, control, value, status, group) {
+		if (value > 63) {
+			engine.setValue('[EffectRack1_EffectUnit4_Effect2]',"effect_selector",1);
+		} else {
+			engine.setValue('[EffectRack1_EffectUnit4_Effect2]',"effect_selector",-1);
+		}
+    },
+    knobR4FX3 : function (channel, control, value, status, group) {
+		if (value > 63) {
+			engine.setValue('[EffectRack1_EffectUnit4_Effect3]',"effect_selector",1);
+		} else {
+			engine.setValue('[EffectRack1_EffectUnit4_Effect3]',"effect_selector",-1);
+		}
+    },
+    buttonR4Keylock : function (channel, control, value, status, group) {
+		if (value == 127) {
+			var oldKLset = engine.getValue('[Channel4]',"keylock");
+			if (oldKLset == 0) {set = 1 } else { set = 0 };
+			engine.setValue('[Channel4]',"keylock",set);
+		}
+    },
+    buttonR4Range : function (channel, control, value, status, group) {
+		if (value == 127) {
+			var oldRGset = engine.getValue('[Channel4]',"rateRange");
+			if (oldRGset == 0.06) {
+				set = 0.08;
+			} else if (oldRGset == 0.08) {
+				set = 0.10;
+			} else if (oldRGset == 0.10) {
+				set = 0.12;
+			} else if (oldRGset == 0.12) {
+				set = 0.20;
+			} else if (oldRGset == 0.20) {
+				set = 0.25;
+			} else if (oldRGset == 0.25) {
+				set = 0.33;
+			} else if (oldRGset == 0.33) {
+				set = 0.50;
+			} else if (oldRGset == 0.50) {
+				set = 1.00;
+			} else if (oldRGset == 1.00) {
+				set = 2.00;
+			} else if (oldRGset == 2.00) {
+				set = 4.00;
+			} else if (oldRGset == 4.00) {
+				set = 0.06;
+			}
+			engine.setValue('[Channel4]',"rateRange",set);
+		}
+	}
+};
+NumarkMixTrackQuad.SHFT4 = function (channel, control, value, status, group) {
+    if (value === 127) {
+        NumarkMixTrackQuad.activeButtonsR4 = NumarkMixTrackQuad.shiftedButtonsR4;
+    } else {
+        NumarkMixTrackQuad.activeButtonsR4 = NumarkMixTrackQuad.unshiftedButtonsR4;
+    }
 }
 

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<MixxxControllerPreset mixxxVersion="" schemaVersion="1">
+<MixxxControllerPreset schemaVersion="1" mixxxVersion="">
     <info>
         <name>Numark Mixtrack Quad by DJ KWKSND</name>
         <author>DJ KWKSND (credit to datlaunchystark, Einar Alex, Matteo, James Ralston, and Darío José Freije for the original script) Just modified it a lot..</author>
@@ -7,7 +7,7 @@
     </info>
     <controller id="MixTrack_Quad">
         <scriptfiles>
-            <file functionprefix="NumarkMixTrackQuad" filename="Numark Mixtrack Quad.scripts.js"/>
+            <file filename="Numark Mixtrack Quad.scripts.js" functionprefix="NumarkMixTrackQuad"/>
         </scriptfiles>
         <controls>
             <control>
@@ -28,7 +28,6 @@
                 <status>0xB0</status>
                 <midino>0x0B</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -39,7 +38,6 @@
                 <status>0xB0</status>
                 <midino>0x0C</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -50,7 +48,6 @@
                 <status>0xB1</status>
                 <midino>0x0D</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -61,7 +58,6 @@
                 <status>0xB2</status>
                 <midino>0x0D</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -72,7 +68,6 @@
                 <status>0xB3</status>
                 <midino>0x0D</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -83,7 +78,6 @@
                 <status>0xB4</status>
                 <midino>0x0D</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -94,7 +88,6 @@
                 <status>0xB0</status>
                 <midino>0x10</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -105,7 +98,6 @@
                 <status>0xB0</status>
                 <midino>0x11</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -116,7 +108,6 @@
                 <status>0xB0</status>
                 <midino>0x12</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -127,7 +118,6 @@
                 <status>0xB0</status>
                 <midino>0x14</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -138,7 +128,6 @@
                 <status>0xB0</status>
                 <midino>0x15</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -149,7 +138,6 @@
                 <status>0xB0</status>
                 <midino>0x16</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -160,7 +148,6 @@
                 <status>0xB0</status>
                 <midino>0x17</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -171,7 +158,6 @@
                 <status>0xB0</status>
                 <midino>0x19</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -182,7 +168,6 @@
                 <status>0xB0</status>
                 <midino>0x1A</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -193,7 +178,6 @@
                 <status>0xB0</status>
                 <midino>0x1B</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -204,7 +188,6 @@
                 <status>0xB0</status>
                 <midino>0x1C</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -215,7 +198,6 @@
                 <status>0xB0</status>
                 <midino>0x1E</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -226,7 +208,6 @@
                 <status>0xB0</status>
                 <midino>0x1F</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -237,7 +218,6 @@
                 <status>0xB0</status>
                 <midino>0x20</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -248,7 +228,6 @@
                 <status>0xB0</status>
                 <midino>0x21</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -259,7 +238,6 @@
                 <status>0xB0</status>
                 <midino>0x23</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
                 </options>
             </control>
@@ -311,122 +289,122 @@
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit1_Effect1]</group>
-                <key>effect_selector</key>
+                <key>NumarkMixTrackQuad.activeButtonsR1.knobR1FX1</key>
                 <description>MIDI Learned from 2 messages.</description>
                 <status>0xB1</status>
                 <midino>0x26</midino>
                 <options>
-                    <selectknob/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit2_Effect1]</group>
-                <key>effect_selector</key>
+                <key>NumarkMixTrackQuad.activeButtonsR2.knobR2FX1</key>
                 <description>MIDI Learned from 6 messages.</description>
                 <status>0xB2</status>
                 <midino>0x26</midino>
                 <options>
-                    <selectknob/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit3_Effect1]</group>
-                <key>effect_selector</key>
+                <key>NumarkMixTrackQuad.activeButtonsR3.knobR3FX1</key>
                 <description>MIDI Learned from 8 messages.</description>
                 <status>0xB3</status>
                 <midino>0x26</midino>
                 <options>
-                    <selectknob/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit4_Effect1]</group>
-                <key>effect_selector</key>
+                <key>NumarkMixTrackQuad.activeButtonsR4.knobR4FX1</key>
                 <description>MIDI Learned from 7 messages.</description>
                 <status>0xB4</status>
                 <midino>0x26</midino>
                 <options>
-                    <selectknob/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit1_Effect2]</group>
-                <key>effect_selector</key>
+                <key>NumarkMixTrackQuad.activeButtonsR1.knobR1FX2</key>
                 <description>MIDI Learned from 10 messages.</description>
                 <status>0xB1</status>
                 <midino>0x27</midino>
                 <options>
-                    <selectknob/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit2_Effect2]</group>
-                <key>effect_selector</key>
+                <key>NumarkMixTrackQuad.activeButtonsR2.knobR2FX2</key>
                 <description>MIDI Learned from 8 messages.</description>
                 <status>0xB2</status>
                 <midino>0x27</midino>
                 <options>
-                    <selectknob/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit3_Effect2]</group>
-                <key>effect_selector</key>
+                <key>NumarkMixTrackQuad.activeButtonsR3.knobR3FX2</key>
                 <description>MIDI Learned from 3 messages.</description>
                 <status>0xB3</status>
                 <midino>0x27</midino>
                 <options>
-                    <selectknob/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit4_Effect2]</group>
-                <key>effect_selector</key>
+                <key>NumarkMixTrackQuad.activeButtonsR4.knobR4FX2</key>
                 <description>MIDI Learned from 2 messages.</description>
                 <status>0xB4</status>
                 <midino>0x27</midino>
                 <options>
-                    <selectknob/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit1_Effect3]</group>
-                <key>effect_selector</key>
+                <key>NumarkMixTrackQuad.activeButtonsR1.knobR1FX3</key>
                 <description>MIDI Learned from 4 messages.</description>
                 <status>0xB1</status>
                 <midino>0x28</midino>
                 <options>
-                    <selectknob/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit2_Effect3]</group>
-                <key>effect_selector</key>
+                <key>NumarkMixTrackQuad.activeButtonsR2.knobR2FX3</key>
                 <description>MIDI Learned from 3 messages.</description>
                 <status>0xB2</status>
                 <midino>0x28</midino>
                 <options>
-                    <selectknob/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit3_Effect3]</group>
-                <key>effect_selector</key>
+                <key>NumarkMixTrackQuad.activeButtonsR3.knobR3FX3</key>
                 <description>MIDI Learned from 7 messages.</description>
                 <status>0xB3</status>
                 <midino>0x28</midino>
                 <options>
-                    <selectknob/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit4_Effect3]</group>
-                <key>effect_selector</key>
+                <key>NumarkMixTrackQuad.activeButtonsR4.knobR4FX3</key>
                 <description>MIDI Learned from 5 messages.</description>
                 <status>0xB4</status>
                 <midino>0x28</midino>
                 <options>
-                    <selectknob/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -471,13 +449,13 @@
             </control>
             <control>
                 <group>[Master]</group>
-                <key>gain</key>
+                <key>NumarkMixTrackQuad.gain</key>
                 <description>MIDI Learned from 237 messages.</description>
                 <status>0xB0</status>
                 <midino>0x2A</midino>
                 <options>
-                    <normal/>
                     <soft-takeover/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -602,82 +580,82 @@
             </control>
             <control>
                 <group>[Channel1]</group>
-                <key>rate_temp_down</key>
+                <key>NumarkMixTrackQuad.activeButtonsR1.buttonR1Keylock</key>
                 <description>MIDI Learned from 2 messages.</description>
                 <status>0x91</status>
                 <midino>0x43</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[Channel2]</group>
-                <key>rate_temp_down</key>
+                <key>NumarkMixTrackQuad.activeButtonsR2.buttonR2Keylock</key>
                 <description>MIDI Learned from 2 messages.</description>
                 <status>0x92</status>
                 <midino>0x43</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[Channel3]</group>
-                <key>rate_temp_down</key>
+                <key>NumarkMixTrackQuad.activeButtonsR3.buttonR3Keylock</key>
                 <description>MIDI Learned from 2 messages.</description>
                 <status>0x93</status>
                 <midino>0x43</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[Channel4]</group>
-                <key>rate_temp_down</key>
+                <key>NumarkMixTrackQuad.activeButtonsR4.buttonR4Keylock</key>
                 <description>MIDI Learned from 2 messages.</description>
                 <status>0x94</status>
                 <midino>0x43</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[Channel1]</group>
-                <key>rate_temp_up</key>
+                <key>NumarkMixTrackQuad.activeButtonsR1.buttonR1Range </key>
                 <description>MIDI Learned from 2 messages.</description>
                 <status>0x91</status>
                 <midino>0x44</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[Channel2]</group>
-                <key>rate_temp_up</key>
+                <key>NumarkMixTrackQuad.activeButtonsR2.buttonR2Range </key>
                 <description>MIDI Learned from 2 messages.</description>
                 <status>0x92</status>
                 <midino>0x44</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[Channel3]</group>
-                <key>rate_temp_up</key>
+                <key>NumarkMixTrackQuad.activeButtonsR3.buttonR3Range </key>
                 <description>MIDI Learned from 2 messages.</description>
                 <status>0x93</status>
                 <midino>0x44</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[Channel4]</group>
-                <key>rate_temp_up</key>
+                <key>NumarkMixTrackQuad.activeButtonsR4.buttonR4Range </key>
                 <description>MIDI Learned from 2 messages.</description>
                 <status>0x94</status>
                 <midino>0x44</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -1160,6 +1138,46 @@
                 <midino>0x5C</midino>
                 <options>
                     <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[]</group>
+                <key>NumarkMixTrackQuad.SHFT1</key>
+                <description>MIDI Learned from 12 messages.</description>
+                <status>0x91</status>
+                <midino>0x61</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[]</group>
+                <key>NumarkMixTrackQuad.SHFT3</key>
+                <description>MIDI Learned from 20 messages.</description>
+                <status>0x93</status>
+                <midino>0x61</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[]</group>
+                <key>NumarkMixTrackQuad.SHFT2</key>
+                <description>MIDI Learned from 26 messages.</description>
+                <status>0x92</status>
+                <midino>0x62</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[]</group>
+                <key>NumarkMixTrackQuad.SHFT4</key>
+                <description>MIDI Learned from 24 messages.</description>
+                <status>0x94</status>
+                <midino>0x62</midino>
+                <options>
+                    <script-binding/>
                 </options>
             </control>
             <control>

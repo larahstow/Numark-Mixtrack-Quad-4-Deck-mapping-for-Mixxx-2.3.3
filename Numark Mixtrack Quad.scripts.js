@@ -7,9 +7,7 @@
 //- 05/26/2012 to 06/27/2012 - Changed by Darío José Freije <dario2004@gmail.com>
 //- 30/10/2014 Einar Alex - einar@gmail.com
 //- 08/14/2021-08/17/2021 - Edited by datlaunchystark (DJ LaunchStar) and added 4 deck support/LEDs... yeah.
-//- Updated on 06/23/2022 by datlaunchystark on Mixxx 2.3.3 (mostly cleaned up the code)
-//- https://github.com/datlaunchystark
-//-
+//- 06/23/2022 by datlaunchystark on Mixxx 2.3.3 (mostly cleaned up the code) https://github.com/datlaunchystark
 //- For the original code and the idea to get this controller functional in Mixxx. You guys are awesome! :)
 //-
 //- Updated on 12/6/2022 by DJ KWKSND (changed a bunch of code and mappings)
@@ -26,7 +24,7 @@
 //-  Pressing shift + turning FXF knobs now mix the dry / wet level of the FX123 unit
 //-  Pressing shift + keylock now enables / disables keylock
 //-  Pressing shift + range now scales the range of the pitch slider
-//-  Pressing left shift + right shift now enables / disables AutoDJ
+//-  Pressing left shift + right shift now enables / disables AutoDJ (option, preference, AutoDJ, add random tracks)
 //-  AutoDJ now auto enabled with nice slow fade in when Mixxx starts so you can start Mixxx and walk away
 //-  Soft takeover added to all sliders and knobs, so there is no more extreme jumps in volumes or filters etc
 //-  Jogwheel direction when not in scratch mode was wrong now fixed

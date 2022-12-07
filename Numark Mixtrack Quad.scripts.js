@@ -211,8 +211,6 @@ NumarkMixTrackQuad.playbutton = function(channel, control, value, status, group)
 		engine.setValue(group, "play", 1);
 		NumarkMixTrackQuad.channel[deck-1] = channel;
 		NumarkMixTrackQuad.reverse[deck-1] = 1;
-		if (NumarkMixTrackQuad.flashOnceTimer[deck-1]) {engine.stopTimer(NumarkMixTrackQuad.flashOnceTimer[deck-1]); NumarkMixTrackQuad.flashOnceTimer[deck-1] = 0};
-		NumarkMixTrackQuad.flashOnceOn(deck, group);
 	}
 	NumarkMixTrackQuad.restoreCULEDsState()
 	NumarkMixTrackQuad.restorePLEDsState()

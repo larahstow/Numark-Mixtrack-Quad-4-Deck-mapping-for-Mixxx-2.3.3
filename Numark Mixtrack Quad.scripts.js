@@ -107,13 +107,15 @@ NumarkMixTrackQuad.init = function(id) {
 }
 
 NumarkMixTrackQuad.gain = function(channel, control, value, status, group) {
+	var curgain = engine.getValue(group, "volume");
 	if (value < 64) {
 		multiplier = 0.015625 * value ;
-		engine.setValue(group, "volume", multiplier);
 	} else { 
 		multiplier = (0.0625 * (value-64)) + 1;
-		engine.setValue(group, "volume", multiplier);
 	};
+	if (curgain - multiplier <= 0.2 && curgain - multiplier >= -0.2) {
+		engine.setValue(group, "volume", multiplier);
+	}
 	if (NumarkMixTrackQuad.volUpTimer) {engine.stopTimer(NumarkMixTrackQuad.volUpTimer); NumarkMixTrackQuad.volUpTimer = 0};
 }
 	

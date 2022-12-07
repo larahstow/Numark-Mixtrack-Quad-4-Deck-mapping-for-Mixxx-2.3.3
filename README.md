@@ -23,6 +23,7 @@
 -  Incorrectly mapped buttons were found and fixed
 -  FX123 & Filter knob speed is fixed
 -  Pressing shift + turning FX123 knobs now change what effects are assigned to the pads
+-  Pressing shift + turning FXF knobs now mix the dry / wet level of the FX123 unit
 -  Pressing shift + keylock now enables / disables keylock
 -  Pressing shift + Range now scales the range of the pitch slider
 -  Pressing left shift + right shift now enables / disables AutoDJ

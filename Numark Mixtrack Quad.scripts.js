@@ -93,6 +93,7 @@ NumarkMixTrackQuad.init = function(id) {
 	
 	engine.setValue('[Master]', 'volume', 0)
 	engine.beginTimer(20, "NumarkMixTrackQuad.shutdown()", true);
+	engine.beginTimer(200, "NumarkMixTrackQuad.peakIndicator()", false);
 	engine.beginTimer(10000, "NumarkMixTrackQuad.lightShow ()" , true);
 	engine.beginTimer(11000, "NumarkMixTrackQuad.autoDjLedFix('[Channel1]') ", true);
 	engine.beginTimer(11100, "NumarkMixTrackQuad.autoDjLedFix('[Channel2]') ", true);
@@ -145,7 +146,7 @@ NumarkMixTrackQuad.autoDjLedFix = function(group) {
 	}
 	if (!NumarkMixTrackQuad.jogled[deck-1]) {NumarkMixTrackQuad.jogled[deck-1] = 1;}
 	NumarkMixTrackQuad.reverse[deck-1] = 1;
-	NumarkMixTrackQuad.flashOnceOn(deck , group);
+	NumarkMixTrackQuad.flashOnceTimer[deck-1] = engine.beginTimer(50, "NumarkMixTrackQuad.flashOnceOn('" + deck + "', '" + group + "')", false); // make this timer shorter if you want faster LEDs on jogwheels
 }
 
 NumarkMixTrackQuad.setLED = function(value, status) {
@@ -184,7 +185,6 @@ NumarkMixTrackQuad.selectKnob = function(channel, control, value, status, group)
 }
 
 NumarkMixTrackQuad.flashOnceOn = function(deck, group) {
-	NumarkMixTrackQuad.peakIndicator();
 	if (NumarkMixTrackQuad.interuptLEDShow == 1)  {
 		if (engine.getValue(group, "play", 1) || NumarkMixTrackQuad.touch[deck-1] == 1 ){
 			midi.sendShortMsg(0xB0+(NumarkMixTrackQuad.channel[deck-1]), 0x3D, NumarkMixTrackQuad.jogled[deck-1]);
@@ -192,17 +192,12 @@ NumarkMixTrackQuad.flashOnceOn = function(deck, group) {
 			midi.sendShortMsg(0xB0+(NumarkMixTrackQuad.channel[deck-1]), 0x3C, 0);
 		}
 	}
-	NumarkMixTrackQuad.flashOnceTimer[deck-1] = engine.beginTimer(50, "NumarkMixTrackQuad.flashOnceOff('" + deck + "', '" + group + "')", true); // make this timer shorter if you want faster LEDs on jogwheels
-}
-
-NumarkMixTrackQuad.flashOnceOff = function(deck, group) {	
 	NumarkMixTrackQuad.jogled[deck-1] = NumarkMixTrackQuad.jogled[deck-1] + NumarkMixTrackQuad.reverse[deck-1]
 	if (NumarkMixTrackQuad.jogled[deck-1] > 12.99) {
 		NumarkMixTrackQuad.jogled[deck-1] = 1;
 	} else if (NumarkMixTrackQuad.jogled[deck-1] < 1) {
 		NumarkMixTrackQuad.jogled[deck-1] = 12.99;
 	}
-	NumarkMixTrackQuad.flashOnceOn(deck, group)
 }
 
 NumarkMixTrackQuad.playbutton = function(channel, control, value, status, group) {

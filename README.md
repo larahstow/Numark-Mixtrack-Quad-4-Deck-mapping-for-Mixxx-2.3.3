@@ -35,7 +35,7 @@
 -  Idle mode added to keep the LED show going until you start DJing, also now resumes if idle again
 -  Improved controls and LED animation with scratching especially in reverse
 -  LEDs now work with scratching and stop with end of track
--  Added master clipping indicators to the folder/file LEDs to keep you from blowing your shit up
+-  Added master clipping indicators to the folder / file LEDs to keep you from blowing your shit up
 -  Added channel clipping indicators to the headphone LEDs for each channel to prevent overdoing it on the EQ
 -  Shutdown function added to turn off all possible LEDs with Mixxx app shutdown
 -  Stutter flashes the BPM and Cue flashes to indicate 30 seconds from end of track

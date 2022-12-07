@@ -46,7 +46,7 @@
 -  Supports 4 decks
 -  Library browse knob + load A/B
 -  Channel volume, cross fader, cue gain / mix, master gain, filters, pitch and pitch bend
--  Scratch/CD mode toggle
+-  Scratch / CD mode toggle
 -  Headphone output toggle
 -  Samples (Using 16 samples)
 -  Effects (Using 4 effect units)

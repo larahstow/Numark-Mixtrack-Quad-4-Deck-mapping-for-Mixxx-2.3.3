@@ -24,12 +24,12 @@
 //-  FX123 & Filter knob speed is fixed
 //-  Pressing shift + turning FX123 knobs now change what effects are assigned to the pads
 //-  Pressing shift + keylock now enables / disables keylock
-//-  Pressing shift + Range now scales the range of the pitch slider
+//-  Pressing shift + range now scales the range of the pitch slider
+//-  Pressing left shift + right shift now enables / disables AutoDJ
+//-  AutoDJ now auto enabled with nice slow fade in when Mixxx starts so you can start Mixxx and walk away
 //-  Soft takeover added to all sliders and knobs, so there is no more extreme jumps in volumes or filters etc
 //-  Jogwheel direction when not in scratch mode was wrong now fixed
 //-  Fixed some timer kill errors
-//-  AutoDJ now auto enabled with nice slow fade in when Mixxx starts so you can start Mixxx and walk away
-//-  Left shift + right shift now enables / disables AutoDJ
 //-  New colors on most pads
 //-  Beautiful LED intro on Mixxx startup
 //-  Idle mode added to keep the LED show going until you start DJing, also now resumes if idle again

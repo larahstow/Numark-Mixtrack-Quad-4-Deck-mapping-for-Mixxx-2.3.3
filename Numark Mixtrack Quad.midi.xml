@@ -409,7 +409,7 @@
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit1]</group>
-                <key>NumarkMixTrackQuad.FX1F</key>
+                <key>NumarkMixTrackQuad.activeButtonsR1.knobR1FXF</key>
                 <description>MIDI Learned from 230 messages.</description>
                 <status>0xB1</status>
                 <midino>0x29</midino>
@@ -419,7 +419,7 @@
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit2]</group>
-                <key>NumarkMixTrackQuad.FX2F</key>
+                <key>NumarkMixTrackQuad.activeButtonsR2.knobR2FXF</key>
                 <description>MIDI Learned from 323 messages.</description>
                 <status>0xB2</status>
                 <midino>0x29</midino>
@@ -429,7 +429,7 @@
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit3]</group>
-                <key>NumarkMixTrackQuad.FX3F</key>
+                <key>NumarkMixTrackQuad.activeButtonsR3.knobR3FXF</key>
                 <description>MIDI Learned from 220 messages.</description>
                 <status>0xB3</status>
                 <midino>0x29</midino>
@@ -439,7 +439,7 @@
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit4]</group>
-                <key>NumarkMixTrackQuad.FX4F</key>
+                <key>NumarkMixTrackQuad.activeButtonsR4.knobR4FXF</key>
                 <description>MIDI Learned from 219 messages.</description>
                 <status>0xB4</status>
                 <midino>0x29</midino>

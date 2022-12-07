@@ -44,7 +44,7 @@
 - Features:
 -  Supports 4 decks
 -  Library browse knob + load A/B
--  Channel volume, cross fader, cue gain / mix, Master gain, filters, pitch and pitch bend
+-  Channel volume, cross fader, cue gain / mix, master gain, filters, pitch and pitch bend
 -  Scratch/CD mode toggle
 -  Headphone output toggle
 -  Samples (Using 16 samples)
@@ -58,3 +58,7 @@
 -
 - Known Bugs:
 -  Each slide/knob needs to be moved on Mixxx startup to match levels with the Mixxx UI
+
+
+https://user-images.githubusercontent.com/33409134/206051970-442262ff-fbdc-4e64-b608-6db78af59a30.mp4
+

@@ -19,16 +19,17 @@
 - I had not worked with midi or javascript, still more done in the last week or so than all you in 12 years ROFL
 - I hope many people get to enjoy this wonderful controller for years to come without being robbed by VDJ
 -
-- Whats New?
+- Whats new?
 -  Incorrectly mapped buttons were found and fixed
 -  FX123 & Filter knob speed is fixed
 -  Pressing shift + turning FX123 knobs now change what effects are assigned to the pads
 -  Pressing shift + keylock now enables / disables keylock
 -  Pressing shift + Range now scales the range of the pitch slider
+-  Pressing left shift + right shift now enables / disables AutoDJ
+-  AutoDJ now auto enabled with nice slow fade in when Mixxx starts so you can start Mixxx and walk away
 -  Soft takeover added to all sliders and knobs, so there is no more extreme jumps in volumes or filters etc
 -  Jogwheel direction when not in scratch mode was wrong now fixed
 -  Fixed some timer kill errors
--  AutoDJ now auto enabled with nice slow fade in when Mixxx starts so you can start Mixxx and walk away
 -  New colors on most pads
 -  Beautiful LED intro on Mixxx startup
 -  Idle mode added to keep the LED show going until you start DJing, also now resumes if idle again
@@ -56,9 +57,7 @@
 -   Re-loop (Starts loop at current playback point)
 -   Loop Delete (Deactivates loop)
 -
-- Known Bugs:
+- Known bug with all midi devices:
 -  Each slide/knob needs to be moved on Mixxx startup to match levels with the Mixxx UI
 
-
 https://user-images.githubusercontent.com/33409134/206051970-442262ff-fbdc-4e64-b608-6db78af59a30.mp4
-

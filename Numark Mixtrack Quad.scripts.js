@@ -29,6 +29,7 @@
 //-  Jogwheel direction when not in scratch mode was wrong now fixed
 //-  Fixed some timer kill errors
 //-  AutoDJ now auto enabled with nice slow fade in when Mixxx starts so you can start Mixxx and walk away
+//-  Left shift + right shift now enables / disables AutoDJ
 //-  New colors on most pads
 //-  Beautiful LED intro on Mixxx startup
 //-  Idle mode added to keep the LED show going until you start DJing, also now resumes if idle again
@@ -80,6 +81,10 @@ NumarkMixTrackQuad.init = function(id) {
 	NumarkMixTrackQuad.flasher2 = 1;
 	NumarkMixTrackQuad.flasher3 = 1;
 	NumarkMixTrackQuad.flasher4 = 1;
+	SHFTD1 = 0
+	SHFTD2 = 0
+	SHFTD3 = 0
+	SHFTD4 = 0
 	
 	NumarkMixTrackQuad.leds = [
 		{ "directory": 0x4B, "file": 0x4C },
@@ -92,8 +97,9 @@ NumarkMixTrackQuad.init = function(id) {
 	engine.beginTimer(11100, "NumarkMixTrackQuad.autoDjLedFix('[Channel2]') ", true);
 	engine.beginTimer(11200, "NumarkMixTrackQuad.autoDjLedFix('[Channel3]') ", true);
 	engine.beginTimer(11300, "NumarkMixTrackQuad.autoDjLedFix('[Channel4]') ", true);
-	engine.beginTimer(15000, "engine.setValue('[AutoDJ]', 'enabled', 1)", true);
-	NumarkMixTrackQuad.volUpTimer = engine.beginTimer(16000, "MVolUp", true); var volCnt = 0; MVolUp = function() { NumarkMixTrackQuad.volUpTimer = engine.beginTimer(250, "MVolUp", true); volCnt = volCnt + 0.01; if (volCnt > 1) { engine.stopTimer(NumarkMixTrackQuad.volUpTimer); } engine.setValue('[Master]', 'volume', volCnt);}
+	engine.beginTimer(18000, "engine.setValue('[Library]', 'MoveDown', 1)", true);
+	engine.beginTimer(19000, "engine.setValue('[AutoDJ]', 'enabled', 1)", true);
+	NumarkMixTrackQuad.volUpTimer = engine.beginTimer(20000, "MVolUp", true); var volCnt = 0; MVolUp = function() { NumarkMixTrackQuad.volUpTimer = engine.beginTimer(250, "MVolUp", true); volCnt = volCnt + 0.01; if (volCnt > 1) { engine.stopTimer(NumarkMixTrackQuad.volUpTimer); } engine.setValue('[Master]', 'volume', volCnt);}
 
 	engine.connectControl("[Channel1]","beat_active","NumarkMixTrackQuad.sync1Led");
 	engine.connectControl("[Channel2]","beat_active","NumarkMixTrackQuad.sync2Led");
@@ -1205,6 +1211,14 @@ NumarkMixTrackQuad.shiftedButtonsR1 = {
     }
 };
 NumarkMixTrackQuad.SHFT1 = function (channel, control, value, status, group) {
+	SHFTD1 = value;
+	if ((SHFTD1 == 127 && SHFTD2 == 127) || (SHFTD1 == 127 && SHFTD4 == 127) || (SHFTD3 == 127 && SHFTD2 == 127) || (SHFTD3 == 127 && SHFTD4 == 127)) {
+		if (engine.getValue('[AutoDJ]', 'enabled') != 1) {
+			engine.setValue('[AutoDJ]', 'enabled', 1);
+		} else {
+			engine.setValue('[AutoDJ]', 'enabled', 0);
+		}
+	}
     if (value === 127) {
         NumarkMixTrackQuad.activeButtonsR1 = NumarkMixTrackQuad.shiftedButtonsR1;
     } else {
@@ -1303,6 +1317,14 @@ NumarkMixTrackQuad.shiftedButtonsR2 = {
 	}
 };
 NumarkMixTrackQuad.SHFT2 = function (channel, control, value, status, group) {
+	SHFTD2 = value;
+	if ((SHFTD1 == 127 && SHFTD2 == 127) || (SHFTD1 == 127 && SHFTD4 == 127) || (SHFTD3 == 127 && SHFTD2 == 127) || (SHFTD3 == 127 && SHFTD4 == 127)) {
+		if (engine.getValue('[AutoDJ]', 'enabled') != 1) {
+			engine.setValue('[AutoDJ]', 'enabled', 1);
+		} else {
+			engine.setValue('[AutoDJ]', 'enabled', 0);
+		}
+	}
     if (value === 127) {
         NumarkMixTrackQuad.activeButtonsR2 = NumarkMixTrackQuad.shiftedButtonsR2;
     } else {
@@ -1401,6 +1423,14 @@ NumarkMixTrackQuad.shiftedButtonsR3 = {
 	}
 };
 NumarkMixTrackQuad.SHFT3 = function (channel, control, value, status, group) {
+	SHFTD3 = value;
+	if ((SHFTD1 == 127 && SHFTD2 == 127) || (SHFTD1 == 127 && SHFTD4 == 127) || (SHFTD3 == 127 && SHFTD2 == 127) || (SHFTD3 == 127 && SHFTD4 == 127)) {
+		if (engine.getValue('[AutoDJ]', 'enabled') != 1) {
+			engine.setValue('[AutoDJ]', 'enabled', 1);
+		} else {
+			engine.setValue('[AutoDJ]', 'enabled', 0);
+		}
+	}
     if (value === 127) {
         NumarkMixTrackQuad.activeButtonsR3 = NumarkMixTrackQuad.shiftedButtonsR3;
     } else {
@@ -1499,6 +1529,14 @@ NumarkMixTrackQuad.shiftedButtonsR4 = {
 	}
 };
 NumarkMixTrackQuad.SHFT4 = function (channel, control, value, status, group) {
+	SHFTD4 = value;
+	if ((SHFTD1 == 127 && SHFTD2 == 127) || (SHFTD1 == 127 && SHFTD4 == 127) || (SHFTD3 == 127 && SHFTD2 == 127) || (SHFTD3 == 127 && SHFTD4 == 127)) {
+		if (engine.getValue('[AutoDJ]', 'enabled') != 1) {
+			engine.setValue('[AutoDJ]', 'enabled', 1);
+		} else {
+			engine.setValue('[AutoDJ]', 'enabled', 0);
+		}
+	}
     if (value === 127) {
         NumarkMixTrackQuad.activeButtonsR4 = NumarkMixTrackQuad.shiftedButtonsR4;
     } else {

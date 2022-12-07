@@ -454,8 +454,8 @@
                 <status>0xB0</status>
                 <midino>0x2A</midino>
                 <options>
-                    <soft-takeover/>
                     <script-binding/>
+                    <soft-takeover/>
                 </options>
             </control>
             <control>

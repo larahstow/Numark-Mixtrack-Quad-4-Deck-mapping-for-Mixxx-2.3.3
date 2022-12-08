@@ -7,7 +7,7 @@
 //- 05/26/2012 to 06/27/2012 - Changed by Darío José Freije <dario2004@gmail.com>
 //- 30/10/2014 Einar Alex - einar@gmail.com
 //- 08/14/2021-08/17/2021 - Edited by datlaunchystark (DJ LaunchStar) and added 4 deck support/LEDs... yeah.
-//- 06/23/2022 by datlaunchystark on Mixxx 2.3.3 (mostly cleaned up the code) https://github.com/datlaunchystark
+//- 06/23/2022 by datlaunchystark on Mixxx 2.3.3 (mostly cleaned up code) https://github.com/datlaunchystark
 //- For the original code and the idea to get this controller functional in Mixxx. You guys are awesome! :)
 //-
 //- Updated on 12/6/2022 by DJ KWKSND (changed a bunch of code and mappings)
@@ -76,6 +76,7 @@ NumarkMixTrackQuad.init = function(id) {
 	NumarkMixTrackQuad.channel = [0];	
 	NumarkMixTrackQuad.untouched = 0;
 	NumarkMixTrackQuad.interuptLEDShow = 0;
+	NumarkMixTrackQuad.peakLEDShow = 0;
 	NumarkMixTrackQuad.flasher1 = 1;
 	NumarkMixTrackQuad.flasher2 = 1;
 	NumarkMixTrackQuad.flasher3 = 1;
@@ -92,7 +93,7 @@ NumarkMixTrackQuad.init = function(id) {
 	engine.setValue('[Master]', 'volume', 0)
 	engine.beginTimer(20, "NumarkMixTrackQuad.shutdown()", true);
 	engine.beginTimer(200, "NumarkMixTrackQuad.peakIndicator()", false);
-	engine.beginTimer(10000, "NumarkMixTrackQuad.lightShow ()" , true);
+	engine.beginTimer(300, "NumarkMixTrackQuad.lightShow ()" , true);
 	engine.beginTimer(11000, "NumarkMixTrackQuad.autoDjLedFix('[Channel1]') ", true);
 	engine.beginTimer(11100, "NumarkMixTrackQuad.autoDjLedFix('[Channel2]') ", true);
 	engine.beginTimer(11200, "NumarkMixTrackQuad.autoDjLedFix('[Channel3]') ", true);
@@ -113,6 +114,7 @@ NumarkMixTrackQuad.init = function(id) {
 }
 
 NumarkMixTrackQuad.gain = function(channel, control, value, status, group) {
+	NumarkMixTrackQuad.untouched = -1;
 	var curgain = engine.getValue(group, "volume");
 	if (value < 64) {
 		multiplier = 0.015625 * value ;
@@ -632,8 +634,8 @@ NumarkMixTrackQuad.lightShow = function() {
 		engine.beginTimer(1000, "LSLEDsd", true); var cnt32 = 0; LSLEDsd = function() { colorTimer32 = engine.beginTimer(100, "LSLEDsd", true); cnt32 = cnt32 + 1; if (cnt32 > 16) { engine.stopTimer(colorTimer32); } midi.sendShortMsg(0x94, 0x63, cnt32);}
 		
 		// Turns on Folder/File LEDs
-		engine.beginTimer(3100, "midi.sendShortMsg(0x90, 0x4B, 1)", true);
-		engine.beginTimer(3100, "midi.sendShortMsg(0x90, 0x4C, 1)", true);
+		engine.beginTimer(3000, "midi.sendShortMsg(0x90, 0x4B, 1)", true);
+		engine.beginTimer(3000, "midi.sendShortMsg(0x90, 0x4C, 1)", true);
 		
 		//---------------- Turns off unused LEDs ----------------------->>
 		
@@ -642,17 +644,7 @@ NumarkMixTrackQuad.lightShow = function() {
 		engine.beginTimer(3500, "midi.sendShortMsg(0xB2, 0x3C, 0)", true);
 		engine.beginTimer(3500, "midi.sendShortMsg(0xB3, 0x3C, 0)", true);
 		engine.beginTimer(3500, "midi.sendShortMsg(0xB4, 0x3C, 0)", true);
-		
-		
-		// Turns off Headphone LEDs
-		engine.beginTimer(3700, "midi.sendShortMsg(0x91, 0x47, 0)", true);
-		engine.beginTimer(3700, "midi.sendShortMsg(0x92, 0x47, 0)", true);
-		engine.beginTimer(3700, "midi.sendShortMsg(0x93, 0x47, 0)", true);
-		engine.beginTimer(3700, "midi.sendShortMsg(0x94, 0x47, 0)", true);
-		
-		// Turns off Sync LEDs
-		engine.beginTimer(3900, "NumarkMixTrackQuad.restoreSYLEDsState()", true);
-		
+				
 		// Turns off Stutter LEDs
 		engine.beginTimer(4100, "midi.sendShortMsg(0x91, 0x4A, 0)", true);
 		engine.beginTimer(4100, "midi.sendShortMsg(0x92, 0x4A, 0)", true);
@@ -660,6 +652,12 @@ NumarkMixTrackQuad.lightShow = function() {
 		engine.beginTimer(4100, "midi.sendShortMsg(0x94, 0x4A, 0)", true);
 		
 		//----------- Sets LEDs to match colors ----------------------->>
+		
+		// Sets State off Headphone LEDs to match app
+		engine.beginTimer(3700, "NumarkMixTrackQuad.restoreHPLEDsState()", true);
+		
+		// Sets State off Sync LEDs to match app
+		engine.beginTimer(3900, "NumarkMixTrackQuad.restoreSYLEDsState()", true);
 		
 		// Sets State off Scratch LEDs to match app
 		engine.beginTimer(3600, "midi.sendShortMsg(0x91, 0x48, 0)", true);
@@ -711,7 +709,7 @@ NumarkMixTrackQuad.lightShow = function() {
 		
 		// Sets Folder/File LEDs to match Mixxx app
 		engine.beginTimer(5000, "NumarkMixTrackQuad.restoreDRLEDsState()", true);
-		engine.beginTimer(5000, "NumarkMixTrackQuad.interuptLEDShow = [1]", true);
+		engine.beginTimer(5000, "NumarkMixTrackQuad.interuptLEDShow = 1", true);
 	}
 }
 
@@ -979,12 +977,8 @@ NumarkMixTrackQuad.restorePLEDsState = function(){
 
 NumarkMixTrackQuad.peakIndicator = function(){
 	if (NumarkMixTrackQuad.interuptLEDShow == 1)  {
-		
-		var peakLedsInd1 = engine.getValue('[Channel1]', "PeakIndicator");
-		var peakLedsInd2= engine.getValue('[Channel2]', "PeakIndicator");
-		var peakLedsInd3 = engine.getValue('[Channel3]', "PeakIndicator");
-		var peakLedsInd4= engine.getValue('[Channel4]', "PeakIndicator");
-		if (engine.getValue('[Master]', "PeakIndicator")) {
+		if (engine.getValue('[Master]', "PeakIndicator") && NumarkMixTrackQuad.peakLEDShow == 0) {
+			NumarkMixTrackQuad.peakLEDShow = 1;
 			midi.sendShortMsg(0x90, 0x4B, 1);
 			midi.sendShortMsg(0x90, 0x4C, 0);
 			
@@ -1013,16 +1007,29 @@ NumarkMixTrackQuad.peakIndicator = function(){
 			NumarkMixTrackQuad.peakLEDs60Timer = engine.beginTimer(60, "NumarkMixTrackQuad.peakLEDs60()", true);
 			NumarkMixTrackQuad.peakLEDs80Timer = engine.beginTimer(80, "NumarkMixTrackQuad.peakLEDs80()", true);
 		}
-		if (engine.getValue('[Channel1]', "PeakIndicator") || engine.getValue('[Channel2]', "PeakIndicator") || engine.getValue('[Channel3]', "PeakIndicator") || engine.getValue('[Channel4]', "PeakIndicator")) {
+		var peakLedsInd1 = engine.getValue('[Channel1]', "PeakIndicator");
+		var peakLedsInd2 = engine.getValue('[Channel2]', "PeakIndicator");
+		var peakLedsInd3 = engine.getValue('[Channel3]', "PeakIndicator");
+		var peakLedsInd4 = engine.getValue('[Channel4]', "PeakIndicator");
+		if (peakLedsInd1) {
 			midi.sendShortMsg(0x91, 0x47, 0);
+			engine.beginTimer(50, "midi.sendShortMsg(0x91, 0x47, 1);", true);
+			engine.beginTimer(100, "NumarkMixTrackQuad.restoreHPLEDsState ();", true);
+		}
+		if (peakLedsInd2) {
 			midi.sendShortMsg(0x92, 0x47, 0);
+			engine.beginTimer(50, "midi.sendShortMsg(0x92, 0x47, 1);", true);
+			engine.beginTimer(100, "NumarkMixTrackQuad.restoreHPLEDsState ();", true);
+		}
+		if (peakLedsInd3) {
 			midi.sendShortMsg(0x93, 0x47, 0);
+			engine.beginTimer(50, "midi.sendShortMsg(0x93, 0x47, 1);", true);
+			engine.beginTimer(100, "NumarkMixTrackQuad.restoreHPLEDsState ();", true);
+		}
+		if (peakLedsInd4) {
 			midi.sendShortMsg(0x94, 0x47, 0);
-			midi.sendShortMsg(0x91, 0x47, peakLedsInd1 );
-			midi.sendShortMsg(0x92, 0x47, peakLedsInd2 );
-			midi.sendShortMsg(0x93, 0x47, peakLedsInd3 );
-			midi.sendShortMsg(0x94, 0x47, peakLedsInd4 );
-			engine.beginTimer(200, "NumarkMixTrackQuad.restoreHPLEDsState ();", true);
+			engine.beginTimer(50, "midi.sendShortMsg(0x94, 0x47, 1);", true);
+			engine.beginTimer(100, "NumarkMixTrackQuad.restoreHPLEDsState ();", true);
 		}
 	}
 }
@@ -1038,17 +1045,17 @@ NumarkMixTrackQuad.peakLEDs20 = function () {
 }
 
 NumarkMixTrackQuad.peakLEDs40 = function () {
-	midi.sendShortMsg(0x91, 0x55, 3);
-	midi.sendShortMsg(0x92, 0x54, 3);
-	midi.sendShortMsg(0x93, 0x55, 3);
-	midi.sendShortMsg(0x94, 0x54, 3);
+	midi.sendShortMsg(0x91, 0x55, 4);
+	midi.sendShortMsg(0x92, 0x54, 4);
+	midi.sendShortMsg(0x93, 0x55, 4);
+	midi.sendShortMsg(0x94, 0x54, 4);
 }
 
 NumarkMixTrackQuad.peakLEDs60 = function () {
-	midi.sendShortMsg(0x91, 0x54, 2);
-	midi.sendShortMsg(0x92, 0x55, 2);
-	midi.sendShortMsg(0x93, 0x54, 2);
-	midi.sendShortMsg(0x94, 0x55, 2);
+	midi.sendShortMsg(0x91, 0x54, 1);
+	midi.sendShortMsg(0x92, 0x55, 1);
+	midi.sendShortMsg(0x93, 0x54, 1);
+	midi.sendShortMsg(0x94, 0x55, 1);
 }
 
 NumarkMixTrackQuad.peakLEDs80 = function () {
@@ -1056,10 +1063,11 @@ NumarkMixTrackQuad.peakLEDs80 = function () {
 	midi.sendShortMsg(0x92, 0x63, 1);
 	midi.sendShortMsg(0x93, 0x53, 1);
 	midi.sendShortMsg(0x94, 0x63, 1);
-	engine.beginTimer(500, "NumarkMixTrackQuad.peakLEDsReset()", true);
+	engine.beginTimer(200, "NumarkMixTrackQuad.peakLEDsReset()", true);
 }
 
 NumarkMixTrackQuad.peakLEDsReset = function () {
+	NumarkMixTrackQuad.peakLEDShow = 0;
 	midi.sendShortMsg(0x91, 0x53, 7); // match to .xml vvv
 	midi.sendShortMsg(0x92, 0x53, 7);
 	midi.sendShortMsg(0x93, 0x53, 7);
@@ -1270,6 +1278,7 @@ NumarkMixTrackQuad.SHFT1 = function (channel, control, value, status, group) {
 	if ((SHFTD1 == 127 && SHFTD2 == 127) || (SHFTD1 == 127 && SHFTD4 == 127) || (SHFTD3 == 127 && SHFTD2 == 127) || (SHFTD3 == 127 && SHFTD4 == 127)) {
 		if (engine.getValue('[AutoDJ]', 'enabled') != 1) {
 			engine.setValue('[AutoDJ]', 'enabled', 1);
+			NumarkMixTrackQuad.untouched = 1;
 		} else {
 			engine.setValue('[AutoDJ]', 'enabled', 0);
 		}
@@ -1393,6 +1402,7 @@ NumarkMixTrackQuad.SHFT2 = function (channel, control, value, status, group) {
 	if ((SHFTD1 == 127 && SHFTD2 == 127) || (SHFTD1 == 127 && SHFTD4 == 127) || (SHFTD3 == 127 && SHFTD2 == 127) || (SHFTD3 == 127 && SHFTD4 == 127)) {
 		if (engine.getValue('[AutoDJ]', 'enabled') != 1) {
 			engine.setValue('[AutoDJ]', 'enabled', 1);
+			NumarkMixTrackQuad.untouched = 1;
 		} else {
 			engine.setValue('[AutoDJ]', 'enabled', 0);
 		}
@@ -1516,6 +1526,7 @@ NumarkMixTrackQuad.SHFT3 = function (channel, control, value, status, group) {
 	if ((SHFTD1 == 127 && SHFTD2 == 127) || (SHFTD1 == 127 && SHFTD4 == 127) || (SHFTD3 == 127 && SHFTD2 == 127) || (SHFTD3 == 127 && SHFTD4 == 127)) {
 		if (engine.getValue('[AutoDJ]', 'enabled') != 1) {
 			engine.setValue('[AutoDJ]', 'enabled', 1);
+			NumarkMixTrackQuad.untouched = 1;
 		} else {
 			engine.setValue('[AutoDJ]', 'enabled', 0);
 		}
@@ -1639,6 +1650,7 @@ NumarkMixTrackQuad.SHFT4 = function (channel, control, value, status, group) {
 	if ((SHFTD1 == 127 && SHFTD2 == 127) || (SHFTD1 == 127 && SHFTD4 == 127) || (SHFTD3 == 127 && SHFTD2 == 127) || (SHFTD3 == 127 && SHFTD4 == 127)) {
 		if (engine.getValue('[AutoDJ]', 'enabled') != 1) {
 			engine.setValue('[AutoDJ]', 'enabled', 1);
+			NumarkMixTrackQuad.untouched = 1;
 		} else {
 			engine.setValue('[AutoDJ]', 'enabled', 0);
 		}

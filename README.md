@@ -1,5 +1,5 @@
+- Numark Mixtrack Quad 4 Deck Mapping and Script for Mixxx 2.3.3 Complete By DJ KWKSND
 - Based on Mixxx default controller settings, Numark Mixtrack Mapping, and Numark Mixtrack Pro Script
-- Numark Mixtrack Quad 4 Deck Mapping and Script for Mixxx 2.3.3
 -
 - 1/11/2010 - v0.1 - Matteo <matteo@magm3.com>
 - 5/18/2011 - Changed by James Ralston
@@ -11,7 +11,7 @@
 -
 - Updated on 12/6/2022 by DJ KWKSND (changed a bunch of code and mappings)
 - https://github.com/KWKSND/Numark-Mixtrack-Quad-4-Deck-mapping-for-Mixxx-2.3.3
-- I agree with the above statement.
+- I agree with the above statement
 - You guys drove my O.C.D. crazy enough to get it done for everyone thanks for the inspiration
 - I had not worked with midi or javascript, still more done in the last week or so than all you in 12 years ROFL
 - I hope many people get to enjoy this wonderful controller for years to come without being robbed by VDJ

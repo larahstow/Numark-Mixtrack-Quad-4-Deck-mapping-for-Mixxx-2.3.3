@@ -1,19 +1,18 @@
-- Based on Mixxx default controller settings for
-- Numark Mixtrack Mapping and Numark Mixtrack Pro Script Functions
+- Based on Mixxx default controller settings, Numark Mixtrack Mapping and Numark Mixtrack Pro Script Functions
 - Numark Mixtrack Quad 4 Deck mapping for Mixxx 2.3.3
 -
 - 1/11/2010 - v0.1 - Matteo <matteo@magm3.com>
 - 5/18/2011 - Changed by James Ralston
 - 05/26/2012 to 06/27/2012 - Changed by Darío José Freije <dario2004@gmail.com>
 - 30/10/2014 Einar Alex - einar@gmail.com
-- 08/14/2021-08/17/2021 - Edited by datlaunchystark (DJ LaunchStar) and added 4 deck support/LEDs... yeah.
+- 08/14/2021-08/17/2021 - Edited by datlaunchystark (DJ LaunchStar) and added 4 deck support/LEDs... yeah
 - 06/23/2022 by datlaunchystark on Mixxx 2.3.3 (mostly cleaned up code) https://github.com/datlaunchystark
 - For the original code and the idea to get this controller functional in Mixxx. You guys are awesome! :)
 -
 - Updated on 12/6/2022 by DJ KWKSND (changed a bunch of code and mappings)
 - https://github.com/KWKSND/Numark-Mixtrack-Quad-4-Deck-mapping-for-Mixxx-2.3.3
 - I agree with the above statement.
-- You guys drove my O.C.D. crazy enough to get it done for everyone thanks for the inspiration.
+- You guys drove my O.C.D. crazy enough to get it done for everyone thanks for the inspiration
 - I had not worked with midi or javascript, still more done in the last week or so than all you in 12 years ROFL
 - I hope many people get to enjoy this wonderful controller for years to come without being robbed by VDJ
 -

@@ -1,5 +1,5 @@
-- Based on Mixxx default controller settings, Numark Mixtrack Mapping and Numark Mixtrack Pro Script Functions
-- Numark Mixtrack Quad 4 Deck mapping for Mixxx 2.3.3
+- Based on Mixxx default controller settings, Numark Mixtrack Mapping, and Numark Mixtrack Pro Script
+- Numark Mixtrack Quad 4 Deck Mapping and Script for Mixxx 2.3.3
 -
 - 1/11/2010 - v0.1 - Matteo <matteo@magm3.com>
 - 5/18/2011 - Changed by James Ralston

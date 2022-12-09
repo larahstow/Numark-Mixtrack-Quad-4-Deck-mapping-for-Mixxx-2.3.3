@@ -23,7 +23,7 @@
 -  Pressing shift + turning FX123 knobs now change what effects are assigned to the pads
 -  Pressing shift + turning FXF knobs now mix the dry / wet level of the FX123 unit
 -  Pressing shift + keylock now enables / disables keylock
--  Pressing shift + Range now scales the range of the pitch slider
+-  Pressing shift + range now scales the range of the pitch slider
 -  Pressing left shift + right shift now enables / disables AutoDJ (option, preference, AutoDJ, add random tracks)
 -  AutoDJ now auto enabled with nice slow fade in when Mixxx starts so you can start Mixxx and walk away
 -  Soft takeover added to all sliders and knobs, so there is no more extreme jumps in volumes or filters etc

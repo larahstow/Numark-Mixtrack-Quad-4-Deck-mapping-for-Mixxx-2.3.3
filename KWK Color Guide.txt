@@ -19,6 +19,25 @@ Colors List For Pads on Numark Mix Track Quad
 15  0x0F PEACH
 16  0x10 L PEACH
 
+The colors in the Mixxx app dont match the Mixtrack Quad exactly so i used the best match with Recordbox Hot cue colors
+APP COLOR	APP ARG		USED INSTEAD
+#e62828 	15083560	0x01 RED
+#e0641b		14705691	0x02 ORANGE
+#c3af04		12824324	0x04 YELLOW
+#b4be04		11845124   	0x04 YELLOW
+#28e214		2679316		0x05 GREEN
+#10b176		1094006		0x06 L GREEN
+#1fa382		2073474		0x06 L GREEN
+#50b4ff		5289215		0x08 L BLUE
+#305aff		3169023		0x09 BLUE
+#aa42ff	 	11158271	0x0A PURPLE
+#de44cf		14566607	0x0F PEACH
+#ff127b		16716411	0x0B PINK
+#8432ff		11809535	0x0A PURPLE
+#a5e116		10871062	0x0E L YELLOW
+#6473ff		6583295		0x08 L BLUE
+#00e0ff		57599	 	0x07 G BLUE
+
 Hate the colors i picked?
 Look in the .xml file about 2/3 of the way down it switches from <control> to <output> this is where you can change colors :D
 Look for:
@@ -49,7 +68,7 @@ In the .xml the Mixxx app and what the pad does defines what the group is called
 But
 The in the .js i grouped the code so its using the name of the button on the controller itself
 	// Sets Reset LEDs to match .xml
-It's easier read "Reset LEDs" than to read 0x91, 0x5C lol
+It's easier to read "Reset LEDs" than to read 0x91, 0x5C lol
 
 The easiest way to do a color change might be to decide your pads resting colors in the .js
 Take note of the old colors you remove and what you replced them with

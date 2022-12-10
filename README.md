@@ -32,7 +32,7 @@
 -  Jogwheel direction when not in scratch mode was wrong now fixed
 -  Fixed some timer kill errors
 -  New colors on most pads
--  Hot cue LEDs now match the colors in the app ( IMPORTANT use Recordbox hot cue colors to match this script )
+-  Hot cue LEDs now match the colors in the app (IMPORTANT use Recordbox hot cue colors to match this script)
 -  Beautiful LED intro on Mixxx startup
 -  Idle mode added to keep the LED show going until you start DJing, also now resumes if idle again
 -  Improved controls and LED animation with scratching especially in reverse

@@ -1,4 +1,4 @@
-//- Numark Mixtrack Quad 4 Deck Mapping and Script for Mixxx 2.3.3 Complete By DJ KWKSND
+//- Numark Mixtrack Quad 4 Deck Mapping and Script for Mixxx 2.3.3 Complex By DJ KWKSND
 //- Based on Mixxx default controller settings, Numark Mixtrack Mapping, and Numark Mixtrack Pro Script
 //-
 //- 1/11/2010 - v0.1 - Matteo <matteo@magm3.com>
@@ -17,6 +17,7 @@
 //- I hope many people get to enjoy this wonderful controller for years to come without being robbed by VDJ
 //-
 //- Whats new?
+//-  There is now 2 versions of this script, Basic (the old easy controls), and Complex (as the manual describes)
 //-  Incorrectly mapped buttons were found and fixed
 //-  FX123 & Filter knob speed is fixed
 //-  Pressing shift + turning FX123 knobs now change what effects are assigned to the pads
@@ -31,7 +32,7 @@
 //-  Jogwheel direction when not in scratch mode was wrong now fixed
 //-  Fixed some timer kill errors
 //-  New colors on most pads
-//-  Hot cue LEDs now match the colors in the app ( IMPORTANT use Recordbox hot cue colors to match this script )
+//-  Hot cue LEDs now match the colors in the app (IMPORTANT use Recordbox hot cue colors to match this script)
 //-  Beautiful LED intro on Mixxx startup
 //-  Idle mode added to keep the LED show going until you start DJing, also now resumes if idle again
 //-  Improved controls and LED animation with scratching especially in reverse
@@ -69,6 +70,7 @@ NumarkMixTrackQuad.init = function(id) {
 	NumarkMixTrackQuad.scratchMode = [false, false];
 	NumarkMixTrackQuad.touch = [false, false];
 	NumarkMixTrackQuad.scratchTimer = [-1, -1];
+	NumarkMixTrackQuad.isKeyLocked = [0, 0];
 	NumarkMixTrackQuad.jogled = [1];
 	NumarkMixTrackQuad.reverse = [1];
 	NumarkMixTrackQuad.flashOnceTimer = [0];

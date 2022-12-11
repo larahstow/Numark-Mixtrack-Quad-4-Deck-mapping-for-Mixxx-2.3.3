@@ -59,7 +59,7 @@
 -   Re-loop (Starts loop at current playback point)
 -   Loop Delete (Deactivates loop)
 -
-- Known bug with all midi devices:
+- Known feature with all midi devices:
 -  Each slide / knob needs to be moved on Mixxx startup to match levels with the Mixxx UI
 
 https://user-images.githubusercontent.com/33409134/206051970-442262ff-fbdc-4e64-b608-6db78af59a30.mp4

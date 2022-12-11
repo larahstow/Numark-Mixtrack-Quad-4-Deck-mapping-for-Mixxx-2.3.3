@@ -74,6 +74,11 @@ NumarkMixTrackQuad.init = function(id) {
 	NumarkMixTrackQuad.jogled = [1];
 	NumarkMixTrackQuad.reverse = [1];
 	NumarkMixTrackQuad.flashOnceTimer = [0];
+	NumarkMixTrackQuad.flashCu1Timer = [0];
+	NumarkMixTrackQuad.flashCu2Timer = [0];
+	NumarkMixTrackQuad.flashCu3Timer = [0];
+	NumarkMixTrackQuad.flashCu4Timer = [0];
+	NumarkMixTrackQuad.deleteModeSwitch = [0];
 	NumarkMixTrackQuad.channel = [0];	
 	NumarkMixTrackQuad.untouched = 0;
 	NumarkMixTrackQuad.interuptLEDShow = 0;
@@ -94,7 +99,11 @@ NumarkMixTrackQuad.init = function(id) {
 	engine.setValue('[Master]', 'volume', 0)
 	engine.beginTimer(20, "NumarkMixTrackQuad.shutdown()", true);
 	engine.beginTimer(200, "NumarkMixTrackQuad.peakIndicator()", false);
-	engine.beginTimer(300, "NumarkMixTrackQuad.lightShow ()" , true);
+	engine.beginTimer(300, "NumarkMixTrackQuad.lightShow()" , true);
+	engine.beginTimer(500, "NumarkMixTrackQuad.buttonR1CuesLeds()", false);
+	engine.beginTimer(500, "NumarkMixTrackQuad.buttonR2CuesLeds()", false);
+	engine.beginTimer(500, "NumarkMixTrackQuad.buttonR3CuesLeds()", false);
+	engine.beginTimer(500, "NumarkMixTrackQuad.buttonR4CuesLeds()", false);
 	engine.beginTimer(11000, "NumarkMixTrackQuad.autoDjLedFix('[Channel1]') ", true);
 	engine.beginTimer(11100, "NumarkMixTrackQuad.autoDjLedFix('[Channel2]') ", true);
 	engine.beginTimer(11200, "NumarkMixTrackQuad.autoDjLedFix('[Channel3]') ", true);
@@ -1172,6 +1181,130 @@ NumarkMixTrackQuad.sync4Led = function (channel, control, value, status, group) 
 	}
 }
 
+NumarkMixTrackQuad.buttonR1CuesLeds = function (){
+	if (engine.getValue('[Channel1]',"hotcue_1_enabled")) {
+		var R1C1Col = engine.getValue('[Channel1]',"hotcue_1_color")
+		var R1C1NewCol= outputColor (R1C1Col);
+		midi.sendShortMsg(0x91, 0x6D, R1C1NewCol);
+	} else {
+		midi.sendShortMsg(0x91, 0x6D, 9);	
+	}
+	if (engine.getValue('[Channel1]',"hotcue_2_enabled")) {
+		var R1C2Col = engine.getValue('[Channel1]',"hotcue_2_color")
+		var R1C2NewCol= outputColor (R1C2Col);
+		midi.sendShortMsg(0x91, 0x6E, R1C2NewCol);
+	} else {
+		midi.sendShortMsg(0x91, 0x6E, 9);	
+	}
+	if (engine.getValue('[Channel1]',"hotcue_3_enabled")) {
+		var R1C3Col = engine.getValue('[Channel1]',"hotcue_3_color")
+		var R1C3NewCol= outputColor (R1C3Col);
+		midi.sendShortMsg(0x91, 0x6F, R1C3NewCol);
+	} else {
+		midi.sendShortMsg(0x91, 0x6F, 9);	
+	}
+	if (engine.getValue('[Channel1]',"hotcue_4_enabled")) {
+		var R1C4Col = engine.getValue('[Channel1]',"hotcue_4_color")
+		var R1C4NewCol= outputColor (R1C4Col);
+		midi.sendShortMsg(0x91, 0x70, R1C4NewCol);
+	} else {
+		midi.sendShortMsg(0x91, 0x70, 9);	
+	}
+}
+
+NumarkMixTrackQuad.buttonR2CuesLeds = function (){
+	if (engine.getValue('[Channel2]',"hotcue_1_enabled")) {
+		var R2C1Col = engine.getValue('[Channel2]',"hotcue_1_color")
+		var R2C1NewCol= outputColor (R2C1Col);
+		midi.sendShortMsg(0x92, 0x6D, R2C1NewCol);
+	} else {
+		midi.sendShortMsg(0x92, 0x6D, 9);	
+	}
+	if (engine.getValue('[Channel2]',"hotcue_2_enabled")) {
+		var R2C2Col = engine.getValue('[Channel2]',"hotcue_2_color")
+		var R2C2NewCol= outputColor (R2C2Col);
+		midi.sendShortMsg(0x92, 0x6E, R2C2NewCol);
+	} else {
+		midi.sendShortMsg(0x92, 0x6E, 9);	
+	}
+	if (engine.getValue('[Channel2]',"hotcue_3_enabled")) {
+		var R2C3Col = engine.getValue('[Channel2]',"hotcue_3_color")
+		var R2C3NewCol= outputColor (R2C3Col);
+		midi.sendShortMsg(0x92, 0x6F, R2C3NewCol);
+	} else {
+		midi.sendShortMsg(0x92, 0x6F, 9);	
+	}
+	if (engine.getValue('[Channel2]',"hotcue_4_enabled")) {
+		var R2C4Col = engine.getValue('[Channel2]',"hotcue_4_color")
+		var R2C4NewCol= outputColor (R2C4Col);
+		midi.sendShortMsg(0x92, 0x70, R2C4NewCol);
+	} else {
+		midi.sendShortMsg(0x92, 0x70, 9);	
+	}
+}
+
+NumarkMixTrackQuad.buttonR3CuesLeds = function (){
+	if (engine.getValue('[Channel3]',"hotcue_1_enabled")) {
+		var R3C1Col = engine.getValue('[Channel3]',"hotcue_1_color")
+		var R3C1NewCol= outputColor (R3C1Col);
+		midi.sendShortMsg(0x93, 0x6D, R3C1NewCol);
+	} else {
+		midi.sendShortMsg(0x93, 0x6D, 9);	
+	}
+	if (engine.getValue('[Channel3]',"hotcue_2_enabled")) {
+		var R3C2Col = engine.getValue('[Channel3]',"hotcue_2_color")
+		var R3C2NewCol= outputColor (R3C2Col);
+		midi.sendShortMsg(0x93, 0x6E, R3C2NewCol);
+	} else {
+		midi.sendShortMsg(0x93, 0x6E, 9);	
+	}
+	if (engine.getValue('[Channel3]',"hotcue_3_enabled")) {
+		var R3C3Col = engine.getValue('[Channel3]',"hotcue_3_color")
+		var R3C3NewCol= outputColor (R3C3Col);
+		midi.sendShortMsg(0x93, 0x6F, R3C3NewCol);
+	} else {
+		midi.sendShortMsg(0x93, 0x6F, 9);	
+	}
+	if (engine.getValue('[Channel3]',"hotcue_4_enabled")) {
+		var R3C4Col = engine.getValue('[Channel3]',"hotcue_4_color")
+		var R3C4NewCol= outputColor (R3C4Col);
+		midi.sendShortMsg(0x93, 0x70, R3C4NewCol);
+	} else {
+		midi.sendShortMsg(0x93, 0x70, 9);	
+	}
+}
+
+NumarkMixTrackQuad.buttonR4CuesLeds = function (){
+	if (engine.getValue('[Channel4]',"hotcue_1_enabled")) {
+		var R4C1Col = engine.getValue('[Channel4]',"hotcue_1_color")
+		var R4C1NewCol= outputColor (R4C1Col);
+		midi.sendShortMsg(0x94, 0x6D, R4C1NewCol);
+	} else {
+		midi.sendShortMsg(0x94, 0x6D, 9);	
+	}
+	if (engine.getValue('[Channel4]',"hotcue_2_enabled")) {
+		var R4C2Col = engine.getValue('[Channel4]',"hotcue_2_color")
+		var R4C2NewCol= outputColor (R4C2Col);
+		midi.sendShortMsg(0x94, 0x6E, R4C2NewCol);
+	} else {
+		midi.sendShortMsg(0x94, 0x6E, 9);	
+	}
+	if (engine.getValue('[Channel4]',"hotcue_3_enabled")) {
+		var R4C3Col = engine.getValue('[Channel4]',"hotcue_3_color")
+		var R4C3NewCol= outputColor (R4C3Col);
+		midi.sendShortMsg(0x94, 0x6F, R4C3NewCol);
+	} else {
+		midi.sendShortMsg(0x94, 0x6F, 9);	
+	}
+	if (engine.getValue('[Channel4]',"hotcue_4_enabled")) {
+		var R4C4Col = engine.getValue('[Channel4]',"hotcue_4_color")
+		var R4C4NewCol= outputColor (R4C4Col);
+		midi.sendShortMsg(0x94, 0x70, R4C4NewCol);
+	} else {
+		midi.sendShortMsg(0x94, 0x70, 9);	
+	}
+}
+
 NumarkMixTrackQuad.activeButtonsR1 = {};
 NumarkMixTrackQuad.unshiftedButtonsR1 = {
 	knobR1FX1 : function (channel, control, value, status, group) {
@@ -1221,78 +1354,114 @@ NumarkMixTrackQuad.unshiftedButtonsR1 = {
 		}
 	},
 	buttonR1C1 : function (channel, control, value, status, group) {
-		if (value > 63) {
-			if (engine.getValue('[Channel1]',"hotcue_1_enabled")) {
-				engine.setValue('[Channel1]',"hotcue_1_activate",1);
-				midi.sendShortMsg(0x91, 0x6D, 2);
-			} else {
-				engine.setValue('[Channel1]',"hotcue_1_set",1);	
-				midi.sendShortMsg(0x91, 0x6D, 5);
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (NumarkMixTrackQuad.deleteModeSwitch[deck-1] == channel) {
+			engine.setValue(group,"hotcue_1_clear",1);
+			midi.sendShortMsg((0x90 + channel ), 0x6D, 9);
+			if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+			if ( !engine.getValue(group,"hotcue_1_enabled") && !engine.getValue(group,"hotcue_2_enabled") && !engine.getValue(group,"hotcue_3_enabled") && !engine.getValue(group,"hotcue_4_enabled")){ 
+				NumarkMixTrackQuad.deleteModeSwitch[deck-1] = -1
+				if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
 			}
 		} else {
-			if (engine.getValue('[Channel1]',"hotcue_1_set")) {
-				var R1C1Col = engine.getValue('[Channel1]',"hotcue_1_color")
-				var R1C1NewCol= outputColor (R1C1Col);
-				midi.sendShortMsg(0x91, 0x6D, R1C1NewCol);
+			if (value > 63) {
+				if (engine.getValue('[Channel1]',"hotcue_1_enabled")) {
+					engine.setValue('[Channel1]',"hotcue_1_activate",1);
+					midi.sendShortMsg(0x91, 0x6D, 2);
+				} else {
+					engine.setValue('[Channel1]',"hotcue_1_set",1);	
+					midi.sendShortMsg(0x91, 0x6D, 5);
+				}
 			} else {
-				midi.sendShortMsg(0x91, 0x6D, 9);	
+				NumarkMixTrackQuad.buttonR1CuesLeds()
+				engine.setValue('[Channel1]',"hotcue_1_activate",0);
 			}
 		}
 	},   
 	buttonR1C2 : function (channel, control, value, status, group) {
-		if (value > 63) {
-			if (engine.getValue('[Channel1]',"hotcue_2_enabled")) {
-				engine.setValue('[Channel1]',"hotcue_2_activate",1);
-				midi.sendShortMsg(0x91, 0x6E, 2);
-			} else {
-				engine.setValue('[Channel1]',"hotcue_2_set",1);	
-				midi.sendShortMsg(0x91, 0x6E, 5);
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (NumarkMixTrackQuad.deleteModeSwitch[deck-1] == channel) {
+			engine.setValue(group,"hotcue_2_clear",1);
+			midi.sendShortMsg((0x90 + channel ), 0x6E, 9);
+			if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+			if ( !engine.getValue(group,"hotcue_1_enabled") && !engine.getValue(group,"hotcue_2_enabled") && !engine.getValue(group,"hotcue_3_enabled") && !engine.getValue(group,"hotcue_4_enabled")){ 
+				NumarkMixTrackQuad.deleteModeSwitch[deck-1] = -1
+				if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
 			}
 		} else {
-			if (engine.getValue('[Channel1]',"hotcue_2_set")) {
-				var R1C2Col = engine.getValue('[Channel1]',"hotcue_2_color")
-				var R1C2NewCol= outputColor (R1C2Col);
-				midi.sendShortMsg(0x91, 0x6E, R1C2NewCol);
+			if (value > 63) {
+				if (engine.getValue('[Channel1]',"hotcue_2_enabled")) {
+					engine.setValue('[Channel1]',"hotcue_2_activate",1);
+					midi.sendShortMsg(0x91, 0x6E, 2);
+				} else {
+					engine.setValue('[Channel1]',"hotcue_2_set",1);	
+					midi.sendShortMsg(0x91, 0x6E, 5);
+				}
 			} else {
-				midi.sendShortMsg(0x91, 0x6E, 9);	
+				NumarkMixTrackQuad.buttonR1CuesLeds()
+				engine.setValue('[Channel1]',"hotcue_2_activate",0);
 			}
 		}
 	},   
 	buttonR1C3 : function (channel, control, value, status, group) {
-		if (value > 63) {
-			if (engine.getValue('[Channel1]',"hotcue_3_enabled")) {
-				engine.setValue('[Channel1]',"hotcue_3_activate",1);
-				midi.sendShortMsg(0x91, 0x6F, 2);
-			} else {
-				engine.setValue('[Channel1]',"hotcue_3_set",1);	
-				midi.sendShortMsg(0x91, 0x6F, 5);
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (NumarkMixTrackQuad.deleteModeSwitch[deck-1] == channel) {
+			engine.setValue(group,"hotcue_3_clear",1);
+			midi.sendShortMsg((0x90 + channel ), 0x6F, 9);
+			if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+			if ( !engine.getValue(group,"hotcue_1_enabled") && !engine.getValue(group,"hotcue_2_enabled") && !engine.getValue(group,"hotcue_3_enabled") && !engine.getValue(group,"hotcue_4_enabled")){ 
+				NumarkMixTrackQuad.deleteModeSwitch[deck-1] = -1
+				if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
 			}
 		} else {
-			if (engine.getValue('[Channel1]',"hotcue_3_set")) {
-				var R1C3Col = engine.getValue('[Channel1]',"hotcue_3_color")
-				var R1C3NewCol= outputColor (R1C3Col);
-				midi.sendShortMsg(0x91, 0x6F, R1C3NewCol);
+			if (value > 63) {
+				if (engine.getValue('[Channel1]',"hotcue_3_enabled")) {
+					engine.setValue('[Channel1]',"hotcue_3_activate",1);
+					midi.sendShortMsg(0x91, 0x6F, 2);
+				} else {
+					engine.setValue('[Channel1]',"hotcue_3_set",1);	
+					midi.sendShortMsg(0x91, 0x6F, 5);
+				}
 			} else {
-				midi.sendShortMsg(0x91, 0x6F, 9);	
+				NumarkMixTrackQuad.buttonR1CuesLeds()
+				engine.setValue('[Channel1]',"hotcue_3_activate",0);
 			}
 		}
 	},
 	buttonR1C4 : function (channel, control, value, status, group) {
-		if (value > 63) {
-			if (engine.getValue('[Channel1]',"hotcue_4_enabled")) {
-				engine.setValue('[Channel1]',"hotcue_4_activate",1);
-				midi.sendShortMsg(0x91, 0x70, 2);
-			} else {
-				engine.setValue('[Channel1]',"hotcue_4_set",1);	
-				midi.sendShortMsg(0x91, 0x70, 5);
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (NumarkMixTrackQuad.deleteModeSwitch[deck-1] == channel) {
+			engine.setValue(group,"hotcue_4_clear",1);
+			midi.sendShortMsg((0x90 + channel ), 0x70, 9);
+			if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
+			if ( !engine.getValue(group,"hotcue_1_enabled") && !engine.getValue(group,"hotcue_2_enabled") && !engine.getValue(group,"hotcue_3_enabled") && !engine.getValue(group,"hotcue_4_enabled")){ 
+				NumarkMixTrackQuad.deleteModeSwitch[deck-1] = -1
+				if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
 			}
 		} else {
-			if (engine.getValue('[Channel1]',"hotcue_4_set")) {
-				var R1C4Col = engine.getValue('[Channel1]',"hotcue_4_color")
-				var R1C4NewCol= outputColor (R1C4Col);
-				midi.sendShortMsg(0x91, 0x70, R1C4NewCol);
+			if (value > 63) {
+				if (engine.getValue('[Channel1]',"hotcue_4_enabled")) {
+					engine.setValue('[Channel1]',"hotcue_4_activate",1);
+					midi.sendShortMsg(0x91, 0x70, 2);
+				} else {
+					engine.setValue('[Channel1]',"hotcue_4_set",1);	
+					midi.sendShortMsg(0x91, 0x70, 5);
+				}
 			} else {
-				midi.sendShortMsg(0x91, 0x70, 9);	
+				NumarkMixTrackQuad.buttonR1CuesLeds()
+				engine.setValue('[Channel1]',"hotcue_4_activate",0);
 			}
 		}
 	}
@@ -1456,78 +1625,114 @@ NumarkMixTrackQuad.unshiftedButtonsR2 = {
 		}
 	},
 	buttonR2C1 : function (channel, control, value, status, group) {
-		if (value > 63) {
-			if (engine.getValue('[Channel2]',"hotcue_1_enabled")) {
-				engine.setValue('[Channel2]',"hotcue_1_activate",1);
-				midi.sendShortMsg(0x92, 0x6D, 2);
-			} else {
-				engine.setValue('[Channel2]',"hotcue_1_set",1);	
-				midi.sendShortMsg(0x92, 0x6D, 5);
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (NumarkMixTrackQuad.deleteModeSwitch[deck-1] == channel) {
+			engine.setValue(group,"hotcue_1_clear",1);
+			midi.sendShortMsg((0x90 + channel ), 0x6D, 9);
+			if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+			if ( !engine.getValue(group,"hotcue_1_enabled") && !engine.getValue(group,"hotcue_2_enabled") && !engine.getValue(group,"hotcue_3_enabled") && !engine.getValue(group,"hotcue_4_enabled")){ 
+				NumarkMixTrackQuad.deleteModeSwitch[deck-1] = -1
+				if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
 			}
 		} else {
-			if (engine.getValue('[Channel2]',"hotcue_1_set")) {
-				var R2C1Col = engine.getValue('[Channel2]',"hotcue_1_color")
-				var R2C1NewCol= outputColor (R2C1Col);
-				midi.sendShortMsg(0x92, 0x6D, R2C1NewCol);
+			if (value > 63) {
+				if (engine.getValue('[Channel2]',"hotcue_1_enabled")) {
+					engine.setValue('[Channel2]',"hotcue_1_activate",1);
+					midi.sendShortMsg(0x92, 0x6D, 2);
+				} else {
+					engine.setValue('[Channel2]',"hotcue_1_set",1);	
+					midi.sendShortMsg(0x92, 0x6D, 5);
+				}
 			} else {
-				midi.sendShortMsg(0x92, 0x6D, 9);	
+				NumarkMixTrackQuad.buttonR2CuesLeds()
+				engine.setValue('[Channel2]',"hotcue_1_activate",0);
 			}
 		}
 	},   
 	buttonR2C2 : function (channel, control, value, status, group) {
-		if (value > 63) {
-			if (engine.getValue('[Channel2]',"hotcue_2_enabled")) {
-				engine.setValue('[Channel2]',"hotcue_2_activate",1);
-				midi.sendShortMsg(0x92, 0x6E, 2);
-			} else {
-				engine.setValue('[Channel2]',"hotcue_2_set",1);	
-				midi.sendShortMsg(0x92, 0x6E, 5);
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (NumarkMixTrackQuad.deleteModeSwitch[deck-1] == channel) {
+			engine.setValue(group,"hotcue_2_clear",1);
+			midi.sendShortMsg((0x90 + channel ), 0x6E, 9);
+			if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+			if ( !engine.getValue(group,"hotcue_1_enabled") && !engine.getValue(group,"hotcue_2_enabled") && !engine.getValue(group,"hotcue_3_enabled") && !engine.getValue(group,"hotcue_4_enabled")){ 
+				NumarkMixTrackQuad.deleteModeSwitch[deck-1] = -1
+				if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
 			}
 		} else {
-			if (engine.getValue('[Channel2]',"hotcue_2_set")) {
-				var R2C2Col = engine.getValue('[Channel2]',"hotcue_2_color")
-				var R2C2NewCol= outputColor (R2C2Col);
-				midi.sendShortMsg(0x92, 0x6E, R2C2NewCol);
+			if (value > 63) {
+				if (engine.getValue('[Channel2]',"hotcue_2_enabled")) {
+					engine.setValue('[Channel2]',"hotcue_2_activate",1);
+					midi.sendShortMsg(0x92, 0x6E, 2);
+				} else {
+					engine.setValue('[Channel2]',"hotcue_2_set",1);	
+					midi.sendShortMsg(0x92, 0x6E, 5);
+				}
 			} else {
-				midi.sendShortMsg(0x92, 0x6E, 9);	
+				NumarkMixTrackQuad.buttonR2CuesLeds()
+				engine.setValue('[Channel2]',"hotcue_2_activate",0);
 			}
 		}
 	},   
 	buttonR2C3 : function (channel, control, value, status, group) {
-		if (value > 63) {
-			if (engine.getValue('[Channel2]',"hotcue_3_enabled")) {
-				engine.setValue('[Channel2]',"hotcue_3_activate",1);
-				midi.sendShortMsg(0x92, 0x6F, 2);
-			} else {
-				engine.setValue('[Channel2]',"hotcue_3_set",1);	
-				midi.sendShortMsg(0x92, 0x6F, 5);
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (NumarkMixTrackQuad.deleteModeSwitch[deck-1] == channel) {
+			engine.setValue(group,"hotcue_3_clear",1);
+			midi.sendShortMsg((0x90 + channel ), 0x6F, 9);
+			if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+			if ( !engine.getValue(group,"hotcue_1_enabled") && !engine.getValue(group,"hotcue_2_enabled") && !engine.getValue(group,"hotcue_3_enabled") && !engine.getValue(group,"hotcue_4_enabled")){ 
+				NumarkMixTrackQuad.deleteModeSwitch[deck-1] = -1
+				if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
 			}
 		} else {
-			if (engine.getValue('[Channel2]',"hotcue_3_set")) {
-				var R2C3Col = engine.getValue('[Channel2]',"hotcue_3_color")
-				var R2C3NewCol= outputColor (R2C3Col);
-				midi.sendShortMsg(0x92, 0x6F, R2C3NewCol);
+			if (value > 63) {
+				if (engine.getValue('[Channel2]',"hotcue_3_enabled")) {
+					engine.setValue('[Channel2]',"hotcue_3_activate",1);
+					midi.sendShortMsg(0x92, 0x6F, 2);
+				} else {
+					engine.setValue('[Channel2]',"hotcue_3_set",1);	
+					midi.sendShortMsg(0x92, 0x6F, 5);
+				}
 			} else {
-				midi.sendShortMsg(0x92, 0x6F, 9);	
+				NumarkMixTrackQuad.buttonR2CuesLeds()
+				engine.setValue('[Channel2]',"hotcue_3_activate",0);
 			}
 		}
 	},
 	buttonR2C4 : function (channel, control, value, status, group) {
-		if (value > 63) {
-			if (engine.getValue('[Channel2]',"hotcue_4_enabled")) {
-				engine.setValue('[Channel2]',"hotcue_4_activate",1);
-				midi.sendShortMsg(0x92, 0x70, 2);
-			} else {
-				engine.setValue('[Channel2]',"hotcue_4_set",1);	
-				midi.sendShortMsg(0x92, 0x70, 5);
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (NumarkMixTrackQuad.deleteModeSwitch[deck-1] == channel) {
+			engine.setValue(group,"hotcue_4_clear",1);
+			midi.sendShortMsg((0x90 + channel ), 0x70, 9);
+			if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
+			if ( !engine.getValue(group,"hotcue_1_enabled") && !engine.getValue(group,"hotcue_2_enabled") && !engine.getValue(group,"hotcue_3_enabled") && !engine.getValue(group,"hotcue_4_enabled")){ 
+				NumarkMixTrackQuad.deleteModeSwitch[deck-1] = -1
+				if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
 			}
 		} else {
-			if (engine.getValue('[Channel2]',"hotcue_4_set")) {
-				var R2C4Col = engine.getValue('[Channel2]',"hotcue_4_color")
-				var R2C4NewCol= outputColor (R2C4Col);
-				midi.sendShortMsg(0x92, 0x70, R2C4NewCol);
+			if (value > 63) {
+				if (engine.getValue('[Channel2]',"hotcue_4_enabled")) {
+					engine.setValue('[Channel2]',"hotcue_4_activate",1);
+					midi.sendShortMsg(0x92, 0x70, 2);
+				} else {
+					engine.setValue('[Channel2]',"hotcue_4_set",1);	
+					midi.sendShortMsg(0x92, 0x70, 5);
+				}
 			} else {
-				midi.sendShortMsg(0x92, 0x70, 9);	
+				NumarkMixTrackQuad.buttonR2CuesLeds()
+				engine.setValue('[Channel2]',"hotcue_4_activate",0);
 			}
 		}
 	}
@@ -1691,78 +1896,114 @@ NumarkMixTrackQuad.unshiftedButtonsR3 = {
 		}
 	},
 	buttonR3C1 : function (channel, control, value, status, group) {
-		if (value > 63) {
-			if (engine.getValue('[Channel3]',"hotcue_1_enabled")) {
-				engine.setValue('[Channel3]',"hotcue_1_activate",1);
-				midi.sendShortMsg(0x93, 0x6D, 2);
-			} else {
-				engine.setValue('[Channel3]',"hotcue_1_set",1);	
-				midi.sendShortMsg(0x93, 0x6D, 5);
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (NumarkMixTrackQuad.deleteModeSwitch[deck-1] == channel) {
+			engine.setValue(group,"hotcue_1_clear",1);
+			midi.sendShortMsg((0x90 + channel ), 0x6D, 9);
+			if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+			if ( !engine.getValue(group,"hotcue_1_enabled") && !engine.getValue(group,"hotcue_2_enabled") && !engine.getValue(group,"hotcue_3_enabled") && !engine.getValue(group,"hotcue_4_enabled")){ 
+				NumarkMixTrackQuad.deleteModeSwitch[deck-1] = -1
+				if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
 			}
 		} else {
-			if (engine.getValue('[Channel3]',"hotcue_1_set")) {
-				var R3C1Col = engine.getValue('[Channel3]',"hotcue_1_color")
-				var R3C1NewCol= outputColor (R3C1Col);
-				midi.sendShortMsg(0x93, 0x6D, R3C1NewCol);
+			if (value > 63) {
+				if (engine.getValue('[Channel3]',"hotcue_1_enabled")) {
+					engine.setValue('[Channel3]',"hotcue_1_activate",1);
+					midi.sendShortMsg(0x93, 0x6D, 2);
+				} else {
+					engine.setValue('[Channel3]',"hotcue_1_set",1);	
+					midi.sendShortMsg(0x93, 0x6D, 5);
+				}
 			} else {
-				midi.sendShortMsg(0x93, 0x6D, 9);	
+				NumarkMixTrackQuad.buttonR3CuesLeds()
+				engine.setValue('[Channel3]',"hotcue_1_activate",0);
 			}
 		}
 	},   
 	buttonR3C2 : function (channel, control, value, status, group) {
-		if (value > 63) {
-			if (engine.getValue('[Channel3]',"hotcue_2_enabled")) {
-				engine.setValue('[Channel3]',"hotcue_2_activate",1);
-				midi.sendShortMsg(0x93, 0x6E, 2);
-			} else {
-				engine.setValue('[Channel3]',"hotcue_2_set",1);	
-				midi.sendShortMsg(0x93, 0x6E, 5);
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (NumarkMixTrackQuad.deleteModeSwitch[deck-1] == channel) {
+			engine.setValue(group,"hotcue_2_clear",1);
+			midi.sendShortMsg((0x90 + channel ), 0x6E, 9);
+			if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+			if ( !engine.getValue(group,"hotcue_1_enabled") && !engine.getValue(group,"hotcue_2_enabled") && !engine.getValue(group,"hotcue_3_enabled") && !engine.getValue(group,"hotcue_4_enabled")){ 
+				NumarkMixTrackQuad.deleteModeSwitch[deck-1] = -1
+				if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
 			}
 		} else {
-			if (engine.getValue('[Channel3]',"hotcue_2_set")) {
-				var R3C2Col = engine.getValue('[Channel3]',"hotcue_2_color")
-				var R3C2NewCol= outputColor (R3C2Col);
-				midi.sendShortMsg(0x93, 0x6E, R3C2NewCol);
+			if (value > 63) {
+				if (engine.getValue('[Channel3]',"hotcue_2_enabled")) {
+					engine.setValue('[Channel3]',"hotcue_2_activate",1);
+					midi.sendShortMsg(0x93, 0x6E, 2);
+				} else {
+					engine.setValue('[Channel3]',"hotcue_2_set",1);	
+					midi.sendShortMsg(0x93, 0x6E, 5);
+				}
 			} else {
-				midi.sendShortMsg(0x93, 0x6E, 9);	
+				NumarkMixTrackQuad.buttonR3CuesLeds()
+				engine.setValue('[Channel3]',"hotcue_2_activate",0);
 			}
 		}
 	},   
 	buttonR3C3 : function (channel, control, value, status, group) {
-		if (value > 63) {
-			if (engine.getValue('[Channel3]',"hotcue_3_enabled")) {
-				engine.setValue('[Channel3]',"hotcue_3_activate",1);
-				midi.sendShortMsg(0x93, 0x6F, 2);
-			} else {
-				engine.setValue('[Channel3]',"hotcue_3_set",1);	
-				midi.sendShortMsg(0x93, 0x6F, 5);
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (NumarkMixTrackQuad.deleteModeSwitch[deck-1] == channel) {
+			engine.setValue(group,"hotcue_3_clear",1);
+			midi.sendShortMsg((0x90 + channel ), 0x6F, 9);
+			if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+			if ( !engine.getValue(group,"hotcue_1_enabled") && !engine.getValue(group,"hotcue_2_enabled") && !engine.getValue(group,"hotcue_3_enabled") && !engine.getValue(group,"hotcue_4_enabled")){ 
+				NumarkMixTrackQuad.deleteModeSwitch[deck-1] = -1
+				if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
 			}
 		} else {
-			if (engine.getValue('[Channel3]',"hotcue_3_set")) {
-				var R3C3Col = engine.getValue('[Channel3]',"hotcue_3_color")
-				var R3C3NewCol= outputColor (R3C3Col);
-				midi.sendShortMsg(0x93, 0x6F, R3C3NewCol);
+			if (value > 63) {
+				if (engine.getValue('[Channel3]',"hotcue_3_enabled")) {
+					engine.setValue('[Channel3]',"hotcue_3_activate",1);
+					midi.sendShortMsg(0x93, 0x6F, 2);
+				} else {
+					engine.setValue('[Channel3]',"hotcue_3_set",1);	
+					midi.sendShortMsg(0x93, 0x6F, 5);
+				}
 			} else {
-				midi.sendShortMsg(0x93, 0x6F, 9);	
+				NumarkMixTrackQuad.buttonR3CuesLeds()
+				engine.setValue('[Channel3]',"hotcue_3_activate",0);
 			}
 		}
 	},
 	buttonR3C4 : function (channel, control, value, status, group) {
-		if (value > 63) {
-			if (engine.getValue('[Channel3]',"hotcue_4_enabled")) {
-				engine.setValue('[Channel3]',"hotcue_4_activate",1);
-				midi.sendShortMsg(0x93, 0x70, 2);
-			} else {
-				engine.setValue('[Channel3]',"hotcue_4_set",1);	
-				midi.sendShortMsg(0x93, 0x70, 5);
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (NumarkMixTrackQuad.deleteModeSwitch[deck-1] == channel) {
+			engine.setValue(group,"hotcue_4_clear",1);
+			midi.sendShortMsg((0x90 + channel ), 0x70, 9);
+			if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
+			if ( !engine.getValue(group,"hotcue_1_enabled") && !engine.getValue(group,"hotcue_2_enabled") && !engine.getValue(group,"hotcue_3_enabled") && !engine.getValue(group,"hotcue_4_enabled")){ 
+				NumarkMixTrackQuad.deleteModeSwitch[deck-1] = -1
+				if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
 			}
 		} else {
-			if (engine.getValue('[Channel3]',"hotcue_4_set")) {
-				var R3C4Col = engine.getValue('[Channel3]',"hotcue_4_color")
-				var R3C4NewCol= outputColor (R3C4Col);
-				midi.sendShortMsg(0x93, 0x70, R3C4NewCol);
+			if (value > 63) {
+				if (engine.getValue('[Channel3]',"hotcue_4_enabled")) {
+					engine.setValue('[Channel3]',"hotcue_4_activate",1);
+					midi.sendShortMsg(0x93, 0x70, 2);
+				} else {
+					engine.setValue('[Channel3]',"hotcue_4_set",1);	
+					midi.sendShortMsg(0x93, 0x70, 5);
+				}
 			} else {
-				midi.sendShortMsg(0x93, 0x70, 9);	
+				NumarkMixTrackQuad.buttonR3CuesLeds()
+				engine.setValue('[Channel3]',"hotcue_4_activate",0);
 			}
 		}
 	}
@@ -1926,78 +2167,114 @@ NumarkMixTrackQuad.unshiftedButtonsR4 = {
 		}
 	},
 	buttonR4C1 : function (channel, control, value, status, group) {
-		if (value > 63) {
-			if (engine.getValue('[Channel4]',"hotcue_1_enabled")) {
-				engine.setValue('[Channel4]',"hotcue_1_activate",1);
-				midi.sendShortMsg(0x94, 0x6D, 2);
-			} else {
-				engine.setValue('[Channel4]',"hotcue_1_set",1);	
-				midi.sendShortMsg(0x94, 0x6D, 5);
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (NumarkMixTrackQuad.deleteModeSwitch[deck-1] == channel) {
+			engine.setValue(group,"hotcue_1_clear",1);
+			midi.sendShortMsg((0x90 + channel ), 0x6D, 9);
+			if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+			if ( !engine.getValue(group,"hotcue_1_enabled") && !engine.getValue(group,"hotcue_2_enabled") && !engine.getValue(group,"hotcue_3_enabled") && !engine.getValue(group,"hotcue_4_enabled")){ 
+				NumarkMixTrackQuad.deleteModeSwitch[deck-1] = -1
+				if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
 			}
 		} else {
-			if (engine.getValue('[Channel4]',"hotcue_1_set")) {
-				var R4C1Col = engine.getValue('[Channel4]',"hotcue_1_color")
-				var R4C1NewCol= outputColor (R4C1Col);
-				midi.sendShortMsg(0x94, 0x6D, R4C1NewCol);
+			if (value > 63) {
+				if (engine.getValue('[Channel4]',"hotcue_1_enabled")) {
+					engine.setValue('[Channel4]',"hotcue_1_activate",1);
+					midi.sendShortMsg(0x94, 0x6D, 2);
+				} else {
+					engine.setValue('[Channel4]',"hotcue_1_set",1);	
+					midi.sendShortMsg(0x94, 0x6D, 5);
+				}
 			} else {
-				midi.sendShortMsg(0x94, 0x6D, 9);	
+				NumarkMixTrackQuad.buttonR4CuesLeds()
+				engine.setValue('[Channel4]',"hotcue_1_activate",0);
 			}
 		}
 	},   
 	buttonR4C2 : function (channel, control, value, status, group) {
-		if (value > 63) {
-			if (engine.getValue('[Channel4]',"hotcue_2_enabled")) {
-				engine.setValue('[Channel4]',"hotcue_2_activate",1);
-				midi.sendShortMsg(0x94, 0x6E, 2);
-			} else {
-				engine.setValue('[Channel4]',"hotcue_2_set",1);	
-				midi.sendShortMsg(0x94, 0x6E, 5);
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (NumarkMixTrackQuad.deleteModeSwitch[deck-1] == channel) {
+			engine.setValue(group,"hotcue_2_clear",1);
+			midi.sendShortMsg((0x90 + channel ), 0x6E, 9);
+			if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+			if ( !engine.getValue(group,"hotcue_1_enabled") && !engine.getValue(group,"hotcue_2_enabled") && !engine.getValue(group,"hotcue_3_enabled") && !engine.getValue(group,"hotcue_4_enabled")){ 
+				NumarkMixTrackQuad.deleteModeSwitch[deck-1] = -1
+				if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
 			}
 		} else {
-			if (engine.getValue('[Channel4]',"hotcue_2_set")) {
-				var R4C2Col = engine.getValue('[Channel4]',"hotcue_2_color")
-				var R4C2NewCol= outputColor (R4C2Col);
-				midi.sendShortMsg(0x94, 0x6E, R4C2NewCol);
+			if (value > 63) {
+				if (engine.getValue('[Channel4]',"hotcue_2_enabled")) {
+					engine.setValue('[Channel4]',"hotcue_2_activate",1);
+					midi.sendShortMsg(0x94, 0x6E, 2);
+				} else {
+					engine.setValue('[Channel4]',"hotcue_2_set",1);	
+					midi.sendShortMsg(0x94, 0x6E, 5);
+				}
 			} else {
-				midi.sendShortMsg(0x94, 0x6E, 9);	
+				NumarkMixTrackQuad.buttonR4CuesLeds()
+				engine.setValue('[Channel4]',"hotcue_2_activate",0);
 			}
 		}
 	},   
 	buttonR4C3 : function (channel, control, value, status, group) {
-		if (value > 63) {
-			if (engine.getValue('[Channel4]',"hotcue_3_enabled")) {
-				engine.setValue('[Channel4]',"hotcue_3_activate",1);
-				midi.sendShortMsg(0x94, 0x6F, 2);
-			} else {
-				engine.setValue('[Channel4]',"hotcue_3_set",1);	
-				midi.sendShortMsg(0x94, 0x6F, 5);
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (NumarkMixTrackQuad.deleteModeSwitch[deck-1] == channel) {
+			engine.setValue(group,"hotcue_3_clear",1);
+			midi.sendShortMsg((0x90 + channel ), 0x6F, 9);
+			if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+			if ( !engine.getValue(group,"hotcue_1_enabled") && !engine.getValue(group,"hotcue_2_enabled") && !engine.getValue(group,"hotcue_3_enabled") && !engine.getValue(group,"hotcue_4_enabled")){ 
+				NumarkMixTrackQuad.deleteModeSwitch[deck-1] = -1
+				if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
 			}
 		} else {
-			if (engine.getValue('[Channel1]',"hotcue_3_set")) {
-				var R4C3Col = engine.getValue('[Channel4]',"hotcue_3_color")
-				var R4C3NewCol= outputColor (R4C3Col);
-				midi.sendShortMsg(0x94, 0x6F, R4C3NewCol);
+			if (value > 63) {
+				if (engine.getValue('[Channel4]',"hotcue_3_enabled")) {
+					engine.setValue('[Channel4]',"hotcue_3_activate",1);
+					midi.sendShortMsg(0x94, 0x6F, 2);
+				} else {
+					engine.setValue('[Channel4]',"hotcue_3_set",1);	
+					midi.sendShortMsg(0x94, 0x6F, 5);
+				}
 			} else {
-				midi.sendShortMsg(0x94, 0x6F, 9);	
+				NumarkMixTrackQuad.buttonR4CuesLeds()
+				engine.setValue('[Channel4]',"hotcue_3_activate",0);
 			}
 		}
 	},
 	buttonR4C4 : function (channel, control, value, status, group) {
-		if (value > 63) {
-			if (engine.getValue('[Channel4]',"hotcue_4_enabled")) {
-				engine.setValue('[Channel4]',"hotcue_4_activate",1);
-				midi.sendShortMsg(0x94, 0x70, 2);
-			} else {
-				engine.setValue('[Channel4]',"hotcue_4_set",1);	
-				midi.sendShortMsg(0x94, 0x70, 5);
+		var deck = NumarkMixTrackQuad.groupToDeck(group);
+		if (NumarkMixTrackQuad.deleteModeSwitch[deck-1] == channel) {
+			engine.setValue(group,"hotcue_4_clear",1);
+			midi.sendShortMsg((0x90 + channel ), 0x70, 9);
+			if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
+			if ( !engine.getValue(group,"hotcue_1_enabled") && !engine.getValue(group,"hotcue_2_enabled") && !engine.getValue(group,"hotcue_3_enabled") && !engine.getValue(group,"hotcue_4_enabled")){ 
+				NumarkMixTrackQuad.deleteModeSwitch[deck-1] = -1
+				if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+				if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
 			}
 		} else {
-			if (engine.getValue('[Channel4]',"hotcue_4_set")) {
-				var R4C4Col = engine.getValue('[Channel4]',"hotcue_4_color")
-				var R4C4NewCol= outputColor (R4C4Col);
-				midi.sendShortMsg(0x94, 0x70, R4C4NewCol);
+			if (value > 63) {
+				if (engine.getValue('[Channel4]',"hotcue_4_enabled")) {
+					engine.setValue('[Channel4]',"hotcue_4_activate",1);
+					midi.sendShortMsg(0x94, 0x70, 2);
+				} else {
+					engine.setValue('[Channel4]',"hotcue_4_set",1);	
+					midi.sendShortMsg(0x94, 0x70, 5);
+				}
 			} else {
-				midi.sendShortMsg(0x94, 0x70, 9);	
+				NumarkMixTrackQuad.buttonR4CuesLeds()
+				engine.setValue('[Channel4]',"hotcue_4_activate",0);
 			}
 		}
 	}
@@ -2152,20 +2429,33 @@ outputColor = function(colorCode) {
 }
 
 NumarkMixTrackQuad.deleteMode = function(group, channel) {
-	if (engine.getValue(group,"hotcue_1_set")) { 
-		engine.setValue(group,"hotcue_1_clear",1);
-		midi.sendShortMsg((0x90 + channel ), 0x6D, 9);
+	var deck = NumarkMixTrackQuad.groupToDeck(group);
+	if (NumarkMixTrackQuad.deleteModeSwitch[deck-1] != channel) {
+		NumarkMixTrackQuad.deleteModeSwitch[deck-1] = channel
+		if ( engine.getValue(group,"hotcue_1_enabled")) { 
+			NumarkMixTrackQuad.flashCu1Timer[deck-1] = engine.beginTimer(250, "midi.sendShortMsg(0x90 + " + channel + ", 0x6D, 0);", false);
+		}
+		if ( engine.getValue(group,"hotcue_2_enabled")) {
+			NumarkMixTrackQuad.flashCu2Timer[deck-1] = engine.beginTimer(250, "midi.sendShortMsg(0x90 + " + channel + ", 0x6E, 0);", false);
+		}
+		if ( engine.getValue(group,"hotcue_3_enabled")) {
+			NumarkMixTrackQuad.flashCu3Timer[deck-1] = engine.beginTimer(250, "midi.sendShortMsg(0x90 + " + channel + ", 0x6F, 0);", false);
+		}
+		if ( engine.getValue(group,"hotcue_4_enabled")) {
+			NumarkMixTrackQuad.flashCu4Timer[deck-1] = engine.beginTimer(250, "midi.sendShortMsg(0x90 + " + channel + ", 0x70, 0);", false);
+		}
+	} else {
+		NumarkMixTrackQuad.deleteModeSwitch[deck-1] = -1
+		if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+		if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+		if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+		if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
 	}
-	if ( engine.getValue(group,"hotcue_2_set")) {
-		engine.setValue(group,"hotcue_2_clear",1);
-		midi.sendShortMsg((0x90 + channel ), 0x6E, 9);
-	}
-	if ( engine.getValue(group,"hotcue_3_set")) {
-		engine.setValue(group,"hotcue_3_clear",1);
-		midi.sendShortMsg((0x90 + channel ), 0x6F, 9);
-	}
-	if ( engine.getValue(group,"hotcue_4_set")) {
-		engine.setValue(group,"hotcue_4_clear",1);
-		midi.sendShortMsg((0x90 + channel ), 0x70, 9);
+	if ( !engine.getValue(group,"hotcue_1_enabled") && !engine.getValue(group,"hotcue_2_enabled") && !engine.getValue(group,"hotcue_3_enabled") && !engine.getValue(group,"hotcue_4_enabled")){ 
+		NumarkMixTrackQuad.deleteModeSwitch[deck-1] = -1
+		if (NumarkMixTrackQuad.flashCu1Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu1Timer[deck-1]);NumarkMixTrackQuad.flashCu1Timer[deck-1] = -1;}
+		if (NumarkMixTrackQuad.flashCu2Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu2Timer[deck-1]);NumarkMixTrackQuad.flashCu2Timer[deck-1] = -1;}
+		if (NumarkMixTrackQuad.flashCu3Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu3Timer[deck-1]);NumarkMixTrackQuad.flashCu3Timer[deck-1] = -1;}
+		if (NumarkMixTrackQuad.flashCu4Timer[deck-1] != -1) {engine.stopTimer(NumarkMixTrackQuad.flashCu4Timer[deck-1]);NumarkMixTrackQuad.flashCu4Timer[deck-1] = -1;}
 	}
 }

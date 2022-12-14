@@ -982,162 +982,162 @@
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit1_Effect1]</group>
-                <key>enabled</key>
+                <key>NumarkMixTrackQuad.activeButtonsR1.buttonR1FX1</key>
                 <description>MIDI Learned from 1 messages.</description>
                 <status>0x91</status>
                 <midino>0x59</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit2_Effect1]</group>
-                <key>enabled</key>
+                <key>NumarkMixTrackQuad.activeButtonsR2.buttonR2FX1</key>
                 <description>MIDI Learned from 1 messages.</description>
                 <status>0x92</status>
                 <midino>0x59</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit3_Effect1]</group>
-                <key>enabled</key>
+                <key>NumarkMixTrackQuad.activeButtonsR3.buttonR3FX1</key>
                 <description>MIDI Learned from 5 messages.</description>
                 <status>0x93</status>
                 <midino>0x59</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit4_Effect1]</group>
-                <key>enabled</key>
+                <key>NumarkMixTrackQuad.activeButtonsR4.buttonR4FX1</key>
                 <description>MIDI Learned from 1 messages.</description>
                 <status>0x94</status>
                 <midino>0x59</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit1_Effect2]</group>
-                <key>enabled</key>
+                <key>NumarkMixTrackQuad.activeButtonsR1.buttonR1FX2</key>
                 <description>MIDI Learned from 1 messages.</description>
                 <status>0x91</status>
                 <midino>0x5A</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit2_Effect2]</group>
-                <key>enabled</key>
+                <key>NumarkMixTrackQuad.activeButtonsR2.buttonR2FX2</key>
                 <description>MIDI Learned from 1 messages.</description>
                 <status>0x92</status>
                 <midino>0x5A</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit3_Effect2]</group>
-                <key>enabled</key>
+                <key>NumarkMixTrackQuad.activeButtonsR3.buttonR3FX2</key>
                 <description>MIDI Learned from 7 messages.</description>
                 <status>0x93</status>
                 <midino>0x5A</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit4_Effect2]</group>
-                <key>enabled</key>
+                <key>NumarkMixTrackQuad.activeButtonsR4.buttonR4FX2</key>
                 <description>MIDI Learned from 1 messages.</description>
                 <status>0x94</status>
                 <midino>0x5A</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit1_Effect3]</group>
-                <key>enabled</key>
+                <key>NumarkMixTrackQuad.activeButtonsR1.buttonR1FX3</key>
                 <description>MIDI Learned from 1 messages.</description>
                 <status>0x91</status>
                 <midino>0x5B</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit2_Effect3]</group>
-                <key>enabled</key>
+                <key>NumarkMixTrackQuad.activeButtonsR2.buttonR2FX3</key>
                 <description>MIDI Learned from 1 messages.</description>
                 <status>0x92</status>
                 <midino>0x5B</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit3_Effect3]</group>
-                <key>enabled</key>
+                <key>NumarkMixTrackQuad.activeButtonsR3.buttonR3FX3</key>
                 <description>MIDI Learned from 1 messages.</description>
                 <status>0x93</status>
                 <midino>0x5B</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit4_Effect3]</group>
-                <key>enabled</key>
+                <key>NumarkMixTrackQuad.activeButtonsR4.buttonR4FX3</key>
                 <description>MIDI Learned from 1 messages.</description>
                 <status>0x94</status>
                 <midino>0x5B</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit1]</group>
-                <key>group_[Channel1]_enable</key>
+                <key>NumarkMixTrackQuad.activeButtonsR1.buttonR1FXR</key>
                 <description>MIDI Learned from 1 messages.</description>
                 <status>0x91</status>
                 <midino>0x5C</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit2]</group>
-                <key>group_[Channel2]_enable</key>
+                <key>NumarkMixTrackQuad.activeButtonsR2.buttonR2FXR</key>
                 <description>MIDI Learned from 1 messages.</description>
                 <status>0x92</status>
                 <midino>0x5C</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit3]</group>
-                <key>group_[Channel3]_enable</key>
+                <key>NumarkMixTrackQuad.activeButtonsR3.buttonR3FXR</key>
                 <description>MIDI Learned from 1 messages.</description>
                 <status>0x93</status>
                 <midino>0x5C</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[EffectRack1_EffectUnit4]</group>
-                <key>group_[Channel4]_enable</key>
+                <key>NumarkMixTrackQuad.activeButtonsR4.buttonR4FXR</key>
                 <description>MIDI Learned from 1 messages.</description>
                 <status>0x94</status>
                 <midino>0x5C</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -1222,8 +1222,8 @@
             </control>
             <control>
                 <group>[Sampler1]</group>
-                <key>play</key>
-                <description>MIDI Learned from 1 messages.</description>
+                <key>start_play</key>
+                <description>MIDI Learned from 4 messages.</description>
                 <status>0x91</status>
                 <midino>0x65</midino>
                 <options>
@@ -1232,8 +1232,8 @@
             </control>
             <control>
                 <group>[Sampler5]</group>
-                <key>play</key>
-                <description>MIDI Learned from 1 messages.</description>
+                <key>start_play</key>
+                <description>MIDI Learned from 4 messages.</description>
                 <status>0x92</status>
                 <midino>0x65</midino>
                 <options>
@@ -1242,8 +1242,8 @@
             </control>
             <control>
                 <group>[Sampler9]</group>
-                <key>play</key>
-                <description>MIDI Learned from 1 messages.</description>
+                <key>start_play</key>
+                <description>MIDI Learned from 6 messages.</description>
                 <status>0x93</status>
                 <midino>0x65</midino>
                 <options>
@@ -1252,8 +1252,8 @@
             </control>
             <control>
                 <group>[Sampler13]</group>
-                <key>play</key>
-                <description>MIDI Learned from 1 messages.</description>
+                <key>start_play</key>
+                <description>MIDI Learned from 4 messages.</description>
                 <status>0x94</status>
                 <midino>0x65</midino>
                 <options>
@@ -1262,8 +1262,8 @@
             </control>
             <control>
                 <group>[Sampler2]</group>
-                <key>play</key>
-                <description>MIDI Learned from 1 messages.</description>
+                <key>start_play</key>
+                <description>MIDI Learned from 6 messages.</description>
                 <status>0x91</status>
                 <midino>0x66</midino>
                 <options>
@@ -1272,8 +1272,8 @@
             </control>
             <control>
                 <group>[Sampler6]</group>
-                <key>play</key>
-                <description>MIDI Learned from 1 messages.</description>
+                <key>start_play</key>
+                <description>MIDI Learned from 6 messages.</description>
                 <status>0x92</status>
                 <midino>0x66</midino>
                 <options>
@@ -1282,8 +1282,8 @@
             </control>
             <control>
                 <group>[Sampler10]</group>
-                <key>play</key>
-                <description>MIDI Learned from 1 messages.</description>
+                <key>start_play</key>
+                <description>MIDI Learned from 2 messages.</description>
                 <status>0x93</status>
                 <midino>0x66</midino>
                 <options>
@@ -1292,8 +1292,8 @@
             </control>
             <control>
                 <group>[Sampler14]</group>
-                <key>play</key>
-                <description>MIDI Learned from 1 messages.</description>
+                <key>start_play</key>
+                <description>MIDI Learned from 4 messages.</description>
                 <status>0x94</status>
                 <midino>0x66</midino>
                 <options>
@@ -1302,8 +1302,8 @@
             </control>
             <control>
                 <group>[Sampler3]</group>
-                <key>play</key>
-                <description>MIDI Learned from 1 messages.</description>
+                <key>start_play</key>
+                <description>MIDI Learned from 6 messages.</description>
                 <status>0x91</status>
                 <midino>0x67</midino>
                 <options>
@@ -1312,8 +1312,8 @@
             </control>
             <control>
                 <group>[Sampler7]</group>
-                <key>play</key>
-                <description>MIDI Learned from 1 messages.</description>
+                <key>start_play</key>
+                <description>MIDI Learned from 4 messages.</description>
                 <status>0x92</status>
                 <midino>0x67</midino>
                 <options>
@@ -1322,8 +1322,8 @@
             </control>
             <control>
                 <group>[Sampler11]</group>
-                <key>play</key>
-                <description>MIDI Learned from 1 messages.</description>
+                <key>start_play</key>
+                <description>MIDI Learned from 4 messages.</description>
                 <status>0x93</status>
                 <midino>0x67</midino>
                 <options>
@@ -1332,8 +1332,8 @@
             </control>
             <control>
                 <group>[Sampler15]</group>
-                <key>play</key>
-                <description>MIDI Learned from 1 messages.</description>
+                <key>start_play</key>
+                <description>MIDI Learned from 4 messages.</description>
                 <status>0x94</status>
                 <midino>0x67</midino>
                 <options>
@@ -1343,7 +1343,7 @@
             <control>
                 <group>[Sampler4]</group>
                 <key>play</key>
-                <description>MIDI Learned from 1 messages.</description>
+                <description>MIDI Learned from 4 messages.</description>
                 <status>0x91</status>
                 <midino>0x68</midino>
                 <options>
@@ -1353,7 +1353,7 @@
             <control>
                 <group>[Sampler8]</group>
                 <key>play</key>
-                <description>MIDI Learned from 1 messages.</description>
+                <description>MIDI Learned from 6 messages.</description>
                 <status>0x92</status>
                 <midino>0x68</midino>
                 <options>
@@ -1363,7 +1363,7 @@
             <control>
                 <group>[Sampler12]</group>
                 <key>play</key>
-                <description>MIDI Learned from 1 messages.</description>
+                <description>MIDI Learned from 8 messages.</description>
                 <status>0x93</status>
                 <midino>0x68</midino>
                 <options>
@@ -1373,7 +1373,7 @@
             <control>
                 <group>[Sampler16]</group>
                 <key>play</key>
-                <description>MIDI Learned from 1 messages.</description>
+                <description>MIDI Learned from 6 messages.</description>
                 <status>0x94</status>
                 <midino>0x68</midino>
                 <options>
@@ -1547,7 +1547,7 @@
                 <key>hotcue_1_activate</key>
                 <status>0x91</status>
                 <midino>0x6D</midino>
-                <on>0x09</on>
+                <on>0x0D</on>
                 <off>0x02</off>
                 <maximum>0</maximum>
             </output>
@@ -1556,7 +1556,7 @@
                 <key>hotcue_2_activate</key>
                 <status>0x91</status>
                 <midino>0x6E</midino>
-                <on>0x09</on>
+                <on>0x0D</on>
                 <off>0x02</off>
                 <maximum>0</maximum>
             </output>
@@ -1565,7 +1565,7 @@
                 <key>hotcue_3_activate</key>
                 <status>0x91</status>
                 <midino>0x6F</midino>
-                <on>0x09</on>
+                <on>0x0D</on>
                 <off>0x02</off>
                 <maximum>0</maximum>
             </output>
@@ -1574,7 +1574,7 @@
                 <key>hotcue_4_activate</key>
                 <status>0x91</status>
                 <midino>0x70</midino>
-                <on>0x09</on>
+                <on>0x0D</on>
                 <off>0x02</off>
                 <maximum>0</maximum>
             </output>
@@ -1671,7 +1671,7 @@
                 <key>hotcue_1_activate</key>
                 <status>0x92</status>
                 <midino>0x6D</midino>
-                <on>0x09</on>
+                <on>0x0D</on>
                 <off>0x02</off>
                 <maximum>0</maximum>
             </output>
@@ -1680,7 +1680,7 @@
                 <key>hotcue_2_activate</key>
                 <status>0x92</status>
                 <midino>0x6E</midino>
-                <on>0x09</on>
+                <on>0x0D</on>
                 <off>0x02</off>
                 <maximum>0</maximum>
             </output>
@@ -1689,7 +1689,7 @@
                 <key>hotcue_3_activate</key>
                 <status>0x92</status>
                 <midino>0x6F</midino>
-                <on>0x09</on>
+                <on>0x0D</on>
                 <off>0x02</off>
                 <maximum>0</maximum>
             </output>
@@ -1698,7 +1698,7 @@
                 <key>hotcue_4_activate</key>
                 <status>0x92</status>
                 <midino>0x70</midino>
-                <on>0x09</on>
+                <on>0x0D</on>
                 <off>0x02</off>
                 <maximum>0</maximum>
             </output>
@@ -1795,7 +1795,7 @@
                 <key>hotcue_1_activate</key>
                 <status>0x93</status>
                 <midino>0x6D</midino>
-                <on>0x09</on>
+                <on>0x0D</on>
                 <off>0x02</off>
                 <maximum>0</maximum>
             </output>
@@ -1804,7 +1804,7 @@
                 <key>hotcue_2_activate</key>
                 <status>0x93</status>
                 <midino>0x6E</midino>
-                <on>0x09</on>
+                <on>0x0D</on>
                 <off>0x02</off>
                 <maximum>0</maximum>
             </output>
@@ -1813,7 +1813,7 @@
                 <key>hotcue_3_activate</key>
                 <status>0x93</status>
                 <midino>0x6F</midino>
-                <on>0x09</on>
+                <on>0x0D</on>
                 <off>0x02</off>
                 <maximum>0</maximum>
             </output>
@@ -1822,7 +1822,7 @@
                 <key>hotcue_4_activate</key>
                 <status>0x93</status>
                 <midino>0x70</midino>
-                <on>0x09</on>
+                <on>0x0D</on>
                 <off>0x02</off>
                 <maximum>0</maximum>
             </output>
@@ -1919,7 +1919,7 @@
                 <key>hotcue_1_activate</key>
                 <status>0x94</status>
                 <midino>0x6D</midino>
-                <on>0x09</on>
+                <on>0x0D</on>
                 <off>0x02</off>
                 <maximum>0</maximum>
             </output>
@@ -1928,7 +1928,7 @@
                 <key>hotcue_2_activate</key>
                 <status>0x94</status>
                 <midino>0x6E</midino>
-                <on>0x09</on>
+                <on>0x0D</on>
                 <off>0x02</off>
                 <maximum>0</maximum>
             </output>
@@ -1937,7 +1937,7 @@
                 <key>hotcue_3_activate</key>
                 <status>0x94</status>
                 <midino>0x6F</midino>
-                <on>0x09</on>
+                <on>0x0D</on>
                 <off>0x02</off>
                 <maximum>0</maximum>
             </output>
@@ -1946,7 +1946,7 @@
                 <key>hotcue_4_activate</key>
                 <status>0x94</status>
                 <midino>0x70</midino>
-                <on>0x09</on>
+                <on>0x0D</on>
                 <off>0x02</off>
                 <maximum>0</maximum>
             </output>
@@ -2205,7 +2205,7 @@
                 <key>play</key>
                 <status>0x93</status>
                 <midino>0x68</midino>
-                <on>0x09</on>
+                <on>0x0A</on>
                 <off>0x02</off>
                 <maximum>0</maximum>
             </output>
@@ -2241,7 +2241,7 @@
                 <key>play</key>
                 <status>0x94</status>
                 <midino>0x68</midino>
-                <on>0x09</on>
+                <on>0x0A</on>
                 <off>0x02</off>
                 <maximum>0</maximum>
             </output>
@@ -2277,7 +2277,7 @@
                 <key>play</key>
                 <status>0x91</status>
                 <midino>0x68</midino>
-                <on>0x09</on>
+                <on>0x0A</on>
                 <off>0x02</off>
                 <maximum>0</maximum>
             </output>
@@ -2313,7 +2313,7 @@
                 <key>play</key>
                 <status>0x92</status>
                 <midino>0x68</midino>
-                <on>0x09</on>
+                <on>0x0A</on>
                 <off>0x02</off>
                 <maximum>0</maximum>
             </output>

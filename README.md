@@ -17,7 +17,7 @@
 - I hope many people get to enjoy this wonderful controller for years to come without being robbed by VDJ
 -
 - Whats new?
--  There is now 2 versions of this script, Basic (the old easy controls), and Complex (as the manual describes)
+-  There is now 2 versions, Basic (the old easy controls), and Complex (more like the manual describes)
 -  Incorrectly mapped buttons were found and fixed
 -  Samples S1 - S3 repeat as you tap the pad, S4 starts / stops the sample, great for drum loops set on repeat
 -  FX123 & Filter knob speed is fixed

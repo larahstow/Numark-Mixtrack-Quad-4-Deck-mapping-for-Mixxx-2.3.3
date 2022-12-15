@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<MixxxControllerPreset mixxxVersion="" schemaVersion="1">
+<MixxxControllerPreset schemaVersion="1" mixxxVersion="">
     <info>
         <name>Numark Mixtrack Quad Complex by DJ KWKSND</name>
         <author>DJ KWKSND (credit to datlaunchystark, Einar Alex, Matteo, James Ralston, and Darío José Freije for the original script) Just modified it a lot..</author>
@@ -7,7 +7,7 @@
     </info>
     <controller id="MixTrack_Quad">
         <scriptfiles>
-            <file functionprefix="NumarkMixTrackQuad" filename="Numark Mixtrack Quad Complex.scripts.js"/>
+            <file filename="Numark Mixtrack Quad Complex.scripts.js" functionprefix="NumarkMixTrackQuad"/>
         </scriptfiles>
         <controls>
             <control>
@@ -846,6 +846,26 @@
                 <key>NumarkMixTrackQuad.wheelTouch</key>
                 <status>0x94</status>
                 <midino>0x4D</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[AutoDJ]</group>
+                <key>NumarkMixTrackQuad.buttonLayer</key>
+                <description>MIDI Learned from 10 messages.</description>
+                <status>0x90</status>
+                <midino>0x50</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[AutoDJ]</group>
+                <key>NumarkMixTrackQuad.buttonLayer</key>
+                <description>MIDI Learned from 12 messages.</description>
+                <status>0x90</status>
+                <midino>0x51</midino>
                 <options>
                     <script-binding/>
                 </options>

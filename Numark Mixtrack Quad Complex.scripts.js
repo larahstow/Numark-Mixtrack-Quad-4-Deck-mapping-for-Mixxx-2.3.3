@@ -3391,6 +3391,21 @@ NumarkMixTrackQuad.SHFT4 = function (channel, control, value, status, group) {
     }
 }
 
+NumarkMixTrackQuad.buttonLayer = function (channel, control, value, status, group) {
+	if (NumarkMixTrackQuad.SHFTD1 == 127) {
+		NumarkMixTrackQuad.SHFTD1 = 0;
+	}
+	if (NumarkMixTrackQuad.SHFTD2 == 127) {
+		NumarkMixTrackQuad.SHFTD2 = 0;
+	}
+	if (NumarkMixTrackQuad.SHFTD3 == 127) {
+		NumarkMixTrackQuad.SHFTD3 = 0;
+	}
+	if (NumarkMixTrackQuad.SHFTD4 == 127) {
+		NumarkMixTrackQuad.SHFTD4 = 0;
+	}
+}
+
 NumarkMixTrackQuad.deleteMode = function(group, channel) {
 	NumarkMixTrackQuad.untouched = -3;
 	var deck = NumarkMixTrackQuad.groupToDeck(group);
@@ -3463,4 +3478,4 @@ outputColor = function(colorCode) {
 	}
 }
 
-//- And they lived happily ever after the end :D 12/14/22 DJ KWKSND
+//- And they lived happily ever after, the end :D 12/15/22 DJ KWKSND

@@ -951,110 +951,118 @@ NumarkMixTrackQuad.shutdown = function() {
 }
 
 NumarkMixTrackQuad.restoreFX1LEDsState = function(){
-	var stateFX11 = engine.getValue('[EffectRack1_EffectUnit1_Effect1]', "enabled");
-	var stateFX12 = engine.getValue('[EffectRack1_EffectUnit2_Effect1]', "enabled");
-	var stateFX13 = engine.getValue('[EffectRack1_EffectUnit3_Effect1]', "enabled");
-	var stateFX14 = engine.getValue('[EffectRack1_EffectUnit4_Effect1]', "enabled");
-	if (stateFX11) { 
-		midi.sendShortMsg(0x91, 0x59, 5); // match to .xml vvv
-	} else {
-		midi.sendShortMsg(0x91, 0x59, 9);
-	}
-	if (stateFX12) { 
-		midi.sendShortMsg(0x92, 0x59, 5);
-	} else {
-		midi.sendShortMsg(0x92, 0x59, 9);
-	}
-	if (stateFX13) { 
-		midi.sendShortMsg(0x93, 0x59, 8);
-	} else {
-		midi.sendShortMsg(0x93, 0x59, 9);
-	}
-	if (stateFX14) { 
-		midi.sendShortMsg(0x94, 0x59, 8);
-	} else {
-		midi.sendShortMsg(0x94, 0x59, 9);
+	if (NumarkMixTrackQuad.interuptLEDShow == 1)  {
+		var stateFX11 = engine.getValue('[EffectRack1_EffectUnit1_Effect1]', "enabled");
+		var stateFX12 = engine.getValue('[EffectRack1_EffectUnit2_Effect1]', "enabled");
+		var stateFX13 = engine.getValue('[EffectRack1_EffectUnit3_Effect1]', "enabled");
+		var stateFX14 = engine.getValue('[EffectRack1_EffectUnit4_Effect1]', "enabled");
+		if (stateFX11) { 
+			midi.sendShortMsg(0x91, 0x59, 5); // match to .xml vvv
+		} else {
+			midi.sendShortMsg(0x91, 0x59, 9);
+		}
+		if (stateFX12) { 
+			midi.sendShortMsg(0x92, 0x59, 5);
+		} else {
+			midi.sendShortMsg(0x92, 0x59, 9);
+		}
+		if (stateFX13) { 
+			midi.sendShortMsg(0x93, 0x59, 8);
+		} else {
+			midi.sendShortMsg(0x93, 0x59, 9);
+		}
+		if (stateFX14) { 
+			midi.sendShortMsg(0x94, 0x59, 8);
+		} else {
+			midi.sendShortMsg(0x94, 0x59, 9);
+		}
 	}
 }
 
 NumarkMixTrackQuad.restoreFX2LEDsState = function(){
-	var stateFX21 = engine.getValue('[EffectRack1_EffectUnit1_Effect2]', "enabled");
-	var stateFX22 = engine.getValue('[EffectRack1_EffectUnit2_Effect2]', "enabled");
-	var stateFX23 = engine.getValue('[EffectRack1_EffectUnit3_Effect2]', "enabled");
-	var stateFX24 = engine.getValue('[EffectRack1_EffectUnit4_Effect2]', "enabled");
-	if (stateFX21) { 
-		midi.sendShortMsg(0x91, 0x5A, 5); // match to .xml vvv
-	} else {
-		midi.sendShortMsg(0x91, 0x5A, 9);
-	}
-	if (stateFX22) { 
-		midi.sendShortMsg(0x92, 0x5A, 5);
-	} else {
-		midi.sendShortMsg(0x92, 0x5A, 9);
-	}
-	if (stateFX23) { 
-		midi.sendShortMsg(0x93, 0x5A, 8);
-	} else {
-		midi.sendShortMsg(0x93, 0x5A, 9);
-	}
-	if (stateFX24) { 
-		midi.sendShortMsg(0x94, 0x5A, 8);
-	} else {
-		midi.sendShortMsg(0x94, 0x5A, 9);
+	if (NumarkMixTrackQuad.interuptLEDShow == 1)  {
+		var stateFX21 = engine.getValue('[EffectRack1_EffectUnit1_Effect2]', "enabled");
+		var stateFX22 = engine.getValue('[EffectRack1_EffectUnit2_Effect2]', "enabled");
+		var stateFX23 = engine.getValue('[EffectRack1_EffectUnit3_Effect2]', "enabled");
+		var stateFX24 = engine.getValue('[EffectRack1_EffectUnit4_Effect2]', "enabled");
+		if (stateFX21) { 
+			midi.sendShortMsg(0x91, 0x5A, 5); // match to .xml vvv
+		} else {
+			midi.sendShortMsg(0x91, 0x5A, 9);
+		}
+		if (stateFX22) { 
+			midi.sendShortMsg(0x92, 0x5A, 5);
+		} else {
+			midi.sendShortMsg(0x92, 0x5A, 9);
+		}
+		if (stateFX23) { 
+			midi.sendShortMsg(0x93, 0x5A, 8);
+		} else {
+			midi.sendShortMsg(0x93, 0x5A, 9);
+		}
+		if (stateFX24) { 
+			midi.sendShortMsg(0x94, 0x5A, 8);
+		} else {
+			midi.sendShortMsg(0x94, 0x5A, 9);
+		}
 	}
 }
 
 NumarkMixTrackQuad.restoreFX3LEDsState = function(){
-	var stateFX31 = engine.getValue('[EffectRack1_EffectUnit1_Effect3]', "enabled");
-	var stateFX32 = engine.getValue('[EffectRack1_EffectUnit2_Effect3]', "enabled");
-	var stateFX33 = engine.getValue('[EffectRack1_EffectUnit3_Effect3]', "enabled");
-	var stateFX34 = engine.getValue('[EffectRack1_EffectUnit4_Effect3]', "enabled");
-	if (stateFX31) { 
-		midi.sendShortMsg(0x91, 0x5B, 5); // match to .xml vvv
-	} else {
-		midi.sendShortMsg(0x91, 0x5B, 9);
-	}
-	if (stateFX32) { 
-		midi.sendShortMsg(0x92, 0x5B, 5);
-	} else {
-		midi.sendShortMsg(0x92, 0x5B, 9);
-	}
-	if (stateFX33) { 
-		midi.sendShortMsg(0x93, 0x5B, 8);
-	} else {
-		midi.sendShortMsg(0x93, 0x5B, 9);
-	}
-	if (stateFX34) { 
-		midi.sendShortMsg(0x94, 0x5B, 8);
-	} else {
-		midi.sendShortMsg(0x94, 0x5B, 9);
+	if (NumarkMixTrackQuad.interuptLEDShow == 1)  {
+		var stateFX31 = engine.getValue('[EffectRack1_EffectUnit1_Effect3]', "enabled");
+		var stateFX32 = engine.getValue('[EffectRack1_EffectUnit2_Effect3]', "enabled");
+		var stateFX33 = engine.getValue('[EffectRack1_EffectUnit3_Effect3]', "enabled");
+		var stateFX34 = engine.getValue('[EffectRack1_EffectUnit4_Effect3]', "enabled");
+		if (stateFX31) { 
+			midi.sendShortMsg(0x91, 0x5B, 5); // match to .xml vvv
+		} else {
+			midi.sendShortMsg(0x91, 0x5B, 9);
+		}
+		if (stateFX32) { 
+			midi.sendShortMsg(0x92, 0x5B, 5);
+		} else {
+			midi.sendShortMsg(0x92, 0x5B, 9);
+		}
+		if (stateFX33) { 
+			midi.sendShortMsg(0x93, 0x5B, 8);
+		} else {
+			midi.sendShortMsg(0x93, 0x5B, 9);
+		}
+		if (stateFX34) { 
+			midi.sendShortMsg(0x94, 0x5B, 8);
+		} else {
+			midi.sendShortMsg(0x94, 0x5B, 9);
+		}
 	}
 }
 
 NumarkMixTrackQuad.restoreFXRLEDsState = function(){
-	var stateFXR1 = engine.getValue('[EffectRack1_EffectUnit1]', "group_[Channel1]_enable");
-	var stateFXR2 = engine.getValue('[EffectRack1_EffectUnit2]', "group_[Channel2]_enable");
-	var stateFXR3 = engine.getValue('[EffectRack1_EffectUnit3]', "group_[Channel3]_enable");
-	var stateFXR4 = engine.getValue('[EffectRack1_EffectUnit4]', "group_[Channel4]_enable");
-	if (stateFXR1) { 
-		midi.sendShortMsg(0x91, 0x5C, 5); // match to .xml vvv
-	} else {
-		midi.sendShortMsg(0x91, 0x5C, 9);
-	}
-	if (stateFXR2) { 
-		midi.sendShortMsg(0x92, 0x5C, 5);
-	} else {
-		midi.sendShortMsg(0x92, 0x5C, 9);
-	}
-	if (stateFXR3) { 
-		midi.sendShortMsg(0x93, 0x5C, 8);
-	} else {
-		midi.sendShortMsg(0x93, 0x5C, 9);
-	}
-	if (stateFXR4) { 
-		midi.sendShortMsg(0x94, 0x5C, 8);
-	} else {
-		midi.sendShortMsg(0x94, 0x5C, 9);
+	if (NumarkMixTrackQuad.interuptLEDShow == 1)  {
+		var stateFXR1 = engine.getValue('[EffectRack1_EffectUnit1]', "group_[Channel1]_enable");
+		var stateFXR2 = engine.getValue('[EffectRack1_EffectUnit2]', "group_[Channel2]_enable");
+		var stateFXR3 = engine.getValue('[EffectRack1_EffectUnit3]', "group_[Channel3]_enable");
+		var stateFXR4 = engine.getValue('[EffectRack1_EffectUnit4]', "group_[Channel4]_enable");
+		if (stateFXR1) { 
+			midi.sendShortMsg(0x91, 0x5C, 5); // match to .xml vvv
+		} else {
+			midi.sendShortMsg(0x91, 0x5C, 9);
+		}
+		if (stateFXR2) { 
+			midi.sendShortMsg(0x92, 0x5C, 5);
+		} else {
+			midi.sendShortMsg(0x92, 0x5C, 9);
+		}
+		if (stateFXR3) { 
+			midi.sendShortMsg(0x93, 0x5C, 8);
+		} else {
+			midi.sendShortMsg(0x93, 0x5C, 9);
+		}
+		if (stateFXR4) { 
+			midi.sendShortMsg(0x94, 0x5C, 8);
+		} else {
+			midi.sendShortMsg(0x94, 0x5C, 9);
+		}
 	}
 }
 
@@ -1442,55 +1450,59 @@ NumarkMixTrackQuad.buttonR1CuesLeds = function (){
 	}
 }
 NumarkMixTrackQuad.buttonR1SamplesLeds = function (){
-	if (engine.getValue('[Sampler1]',"track_loaded")) {
-		if (engine.getValue('[Sampler1]',"play")) {
-			midi.sendShortMsg(0x91, 0x65, 2);
+	if (NumarkMixTrackQuad.interuptLEDShow == 1)  {
+		if (engine.getValue('[Sampler1]',"track_loaded")) {
+			if (engine.getValue('[Sampler1]',"play")) {
+				midi.sendShortMsg(0x91, 0x65, 2);
+			} else {
+				midi.sendShortMsg(0x91, 0x65, 9);
+			}
 		} else {
-			midi.sendShortMsg(0x91, 0x65, 9);
+			midi.sendShortMsg(0x91, 0x65, 13);	
 		}
-	} else {
-		midi.sendShortMsg(0x91, 0x65, 13);	
-	}
-	if (engine.getValue('[Sampler2]',"track_loaded")) {
-		if (engine.getValue('[Sampler2]',"play")) {
-			midi.sendShortMsg(0x91, 0x66, 2);
+		if (engine.getValue('[Sampler2]',"track_loaded")) {
+			if (engine.getValue('[Sampler2]',"play")) {
+				midi.sendShortMsg(0x91, 0x66, 2);
+			} else {
+				midi.sendShortMsg(0x91, 0x66, 9);
+			}
 		} else {
-			midi.sendShortMsg(0x91, 0x66, 9);
+			midi.sendShortMsg(0x91, 0x66, 13);	
 		}
-	} else {
-		midi.sendShortMsg(0x91, 0x66, 13);	
-	}
-	if (engine.getValue('[Sampler3]',"track_loaded")) {
-		if (engine.getValue('[Sampler3]',"play")) {
-			midi.sendShortMsg(0x91, 0x67, 2);
+		if (engine.getValue('[Sampler3]',"track_loaded")) {
+			if (engine.getValue('[Sampler3]',"play")) {
+				midi.sendShortMsg(0x91, 0x67, 2);
+			} else {
+				midi.sendShortMsg(0x91, 0x67, 9);
+			}
 		} else {
-			midi.sendShortMsg(0x91, 0x67, 9);
+			midi.sendShortMsg(0x91, 0x67, 13);	
 		}
-	} else {
-		midi.sendShortMsg(0x91, 0x67, 13);	
-	}
-	if (engine.getValue('[Sampler4]',"track_loaded")) {
-		if (engine.getValue('[Sampler4]',"play")) {
-			midi.sendShortMsg(0x91, 0x68, 2);
+		if (engine.getValue('[Sampler4]',"track_loaded")) {
+			if (engine.getValue('[Sampler4]',"play")) {
+				midi.sendShortMsg(0x91, 0x68, 2);
+			} else {
+				midi.sendShortMsg(0x91, 0x68, 10);
+			}
 		} else {
-			midi.sendShortMsg(0x91, 0x68, 10);
+			midi.sendShortMsg(0x91, 0x68, 13);	
 		}
-	} else {
-		midi.sendShortMsg(0x91, 0x68, 13);	
+		NumarkMixTrackQuad.buttonR1FXLeds()
 	}
-	NumarkMixTrackQuad.buttonR1FXLeds()
 }
 NumarkMixTrackQuad.buttonR1FXLeds = function (){
-	if (engine.getValue('[Channel1]',"slip_enabled") || NumarkMixTrackQuad.SHFTD1) {
-		midi.sendShortMsg(0x91, 0x59, 11);
-		midi.sendShortMsg(0x91, 0x5A, 11);
-		midi.sendShortMsg(0x91, 0x5B, 11);
-		midi.sendShortMsg(0x91, 0x5C, 11);		
-	} else {
-		engine.beginTimer(100, "NumarkMixTrackQuad.restoreFX1LEDsState()", true);
-		engine.beginTimer(200, "NumarkMixTrackQuad.restoreFX2LEDsState()", true);
-		engine.beginTimer(300, "NumarkMixTrackQuad.restoreFX3LEDsState()", true);
-		engine.beginTimer(400, "NumarkMixTrackQuad.restoreFXRLEDsState()", true);
+	if (NumarkMixTrackQuad.interuptLEDShow == 1)  {
+		if (engine.getValue('[Channel1]',"slip_enabled") || NumarkMixTrackQuad.SHFTD1) {
+			midi.sendShortMsg(0x91, 0x59, 11);
+			midi.sendShortMsg(0x91, 0x5A, 11);
+			midi.sendShortMsg(0x91, 0x5B, 11);
+			midi.sendShortMsg(0x91, 0x5C, 11);		
+		} else {
+			engine.beginTimer(100, "NumarkMixTrackQuad.restoreFX1LEDsState()", true);
+			engine.beginTimer(200, "NumarkMixTrackQuad.restoreFX2LEDsState()", true);
+			engine.beginTimer(300, "NumarkMixTrackQuad.restoreFX3LEDsState()", true);
+			engine.beginTimer(400, "NumarkMixTrackQuad.restoreFXRLEDsState()", true);
+		}
 	}
 }
 
@@ -1565,55 +1577,59 @@ NumarkMixTrackQuad.buttonR2CuesLeds = function (){
 	}
 }
 NumarkMixTrackQuad.buttonR2SamplesLeds = function (){
-	if (engine.getValue('[Sampler5]',"track_loaded")) {
-		if (engine.getValue('[Sampler5]',"play")) {
-			midi.sendShortMsg(0x92, 0x65, 2);
+	if (NumarkMixTrackQuad.interuptLEDShow == 1)  {
+		if (engine.getValue('[Sampler5]',"track_loaded")) {
+			if (engine.getValue('[Sampler5]',"play")) {
+				midi.sendShortMsg(0x92, 0x65, 2);
+			} else {
+				midi.sendShortMsg(0x92, 0x65, 9);
+			}
 		} else {
-			midi.sendShortMsg(0x92, 0x65, 9);
+			midi.sendShortMsg(0x92, 0x65, 13);	
 		}
-	} else {
-		midi.sendShortMsg(0x92, 0x65, 13);	
-	}
-	if (engine.getValue('[Sampler6]',"track_loaded")) {
-		if (engine.getValue('[Sampler6]',"play")) {
-			midi.sendShortMsg(0x92, 0x66, 2);
+		if (engine.getValue('[Sampler6]',"track_loaded")) {
+			if (engine.getValue('[Sampler6]',"play")) {
+				midi.sendShortMsg(0x92, 0x66, 2);
+			} else {
+				midi.sendShortMsg(0x92, 0x66, 9);
+			}
 		} else {
-			midi.sendShortMsg(0x92, 0x66, 9);
+			midi.sendShortMsg(0x92, 0x66, 13);	
 		}
-	} else {
-		midi.sendShortMsg(0x92, 0x66, 13);	
-	}
-	if (engine.getValue('[Sampler7]',"track_loaded")) {
-		if (engine.getValue('[Sampler7]',"play")) {
-			midi.sendShortMsg(0x92, 0x67, 2);
+		if (engine.getValue('[Sampler7]',"track_loaded")) {
+			if (engine.getValue('[Sampler7]',"play")) {
+				midi.sendShortMsg(0x92, 0x67, 2);
+			} else {
+				midi.sendShortMsg(0x92, 0x67, 9);
+			}
 		} else {
-			midi.sendShortMsg(0x92, 0x67, 9);
+			midi.sendShortMsg(0x92, 0x67, 13);	
 		}
-	} else {
-		midi.sendShortMsg(0x92, 0x67, 13);	
-	}
-	if (engine.getValue('[Sampler8]',"track_loaded")) {
-		if (engine.getValue('[Sampler8]',"play")) {
-			midi.sendShortMsg(0x92, 0x68, 2);
+		if (engine.getValue('[Sampler8]',"track_loaded")) {
+			if (engine.getValue('[Sampler8]',"play")) {
+				midi.sendShortMsg(0x92, 0x68, 2);
+			} else {
+				midi.sendShortMsg(0x92, 0x68, 10);
+			}
 		} else {
-			midi.sendShortMsg(0x92, 0x68, 10);
+			midi.sendShortMsg(0x92, 0x68, 13);	
 		}
-	} else {
-		midi.sendShortMsg(0x92, 0x68, 13);	
+		NumarkMixTrackQuad.buttonR2FXLeds()
 	}
-	NumarkMixTrackQuad.buttonR2FXLeds()
 }
 NumarkMixTrackQuad.buttonR2FXLeds = function (){
-	if (engine.getValue('[Channel2]',"slip_enabled") || NumarkMixTrackQuad.SHFTD2) {
-		midi.sendShortMsg(0x92, 0x59, 11);
-		midi.sendShortMsg(0x92, 0x5A, 11);
-		midi.sendShortMsg(0x92, 0x5B, 11);
-		midi.sendShortMsg(0x92, 0x5C, 11);
-	} else {
-		engine.beginTimer(100, "NumarkMixTrackQuad.restoreFX1LEDsState()", true);
-		engine.beginTimer(200, "NumarkMixTrackQuad.restoreFX2LEDsState()", true);
-		engine.beginTimer(300, "NumarkMixTrackQuad.restoreFX3LEDsState()", true);
-		engine.beginTimer(400, "NumarkMixTrackQuad.restoreFXRLEDsState()", true);
+	if (NumarkMixTrackQuad.interuptLEDShow == 1)  {
+		if (engine.getValue('[Channel2]',"slip_enabled") || NumarkMixTrackQuad.SHFTD2) {
+			midi.sendShortMsg(0x92, 0x59, 11);
+			midi.sendShortMsg(0x92, 0x5A, 11);
+			midi.sendShortMsg(0x92, 0x5B, 11);
+			midi.sendShortMsg(0x92, 0x5C, 11);
+		} else {
+			engine.beginTimer(100, "NumarkMixTrackQuad.restoreFX1LEDsState()", true);
+			engine.beginTimer(200, "NumarkMixTrackQuad.restoreFX2LEDsState()", true);
+			engine.beginTimer(300, "NumarkMixTrackQuad.restoreFX3LEDsState()", true);
+			engine.beginTimer(400, "NumarkMixTrackQuad.restoreFXRLEDsState()", true);
+		}
 	}
 }
 
@@ -1688,55 +1704,59 @@ NumarkMixTrackQuad.buttonR3CuesLeds = function (){
 	}
 }
 NumarkMixTrackQuad.buttonR3SamplesLeds = function (){
-	if (engine.getValue('[Sampler9]',"track_loaded")) {
-		if (engine.getValue('[Sampler9]',"play")) {
-			midi.sendShortMsg(0x93, 0x65, 2);
+	if (NumarkMixTrackQuad.interuptLEDShow == 1)  {
+		if (engine.getValue('[Sampler9]',"track_loaded")) {
+			if (engine.getValue('[Sampler9]',"play")) {
+				midi.sendShortMsg(0x93, 0x65, 2);
+			} else {
+				midi.sendShortMsg(0x93, 0x65, 9);
+			}
 		} else {
-			midi.sendShortMsg(0x93, 0x65, 9);
+			midi.sendShortMsg(0x93, 0x65, 13);	
 		}
-	} else {
-		midi.sendShortMsg(0x93, 0x65, 13);	
-	}
-	if (engine.getValue('[Sampler10]',"track_loaded")) {
-		if (engine.getValue('[Sampler10]',"play")) {
-			midi.sendShortMsg(0x93, 0x66, 2);
+		if (engine.getValue('[Sampler10]',"track_loaded")) {
+			if (engine.getValue('[Sampler10]',"play")) {
+				midi.sendShortMsg(0x93, 0x66, 2);
+			} else {
+				midi.sendShortMsg(0x93, 0x66, 9);
+			}
 		} else {
-			midi.sendShortMsg(0x93, 0x66, 9);
+			midi.sendShortMsg(0x93, 0x66, 13);	
 		}
-	} else {
-		midi.sendShortMsg(0x93, 0x66, 13);	
-	}
-	if (engine.getValue('[Sampler11]',"track_loaded")) {
-		if (engine.getValue('[Sampler11]',"play")) {
-			midi.sendShortMsg(0x93, 0x67, 2);
+		if (engine.getValue('[Sampler11]',"track_loaded")) {
+			if (engine.getValue('[Sampler11]',"play")) {
+				midi.sendShortMsg(0x93, 0x67, 2);
+			} else {
+				midi.sendShortMsg(0x93, 0x67, 9);
+			}
 		} else {
-			midi.sendShortMsg(0x93, 0x67, 9);
+			midi.sendShortMsg(0x93, 0x67, 13);	
 		}
-	} else {
-		midi.sendShortMsg(0x93, 0x67, 13);	
-	}
-	if (engine.getValue('[Sampler12]',"track_loaded")) {
-		if (engine.getValue('[Sampler12]',"play")) {
-			midi.sendShortMsg(0x93, 0x68, 2);
+		if (engine.getValue('[Sampler12]',"track_loaded")) {
+			if (engine.getValue('[Sampler12]',"play")) {
+				midi.sendShortMsg(0x93, 0x68, 2);
+			} else {
+				midi.sendShortMsg(0x93, 0x68, 10);
+			}
 		} else {
-			midi.sendShortMsg(0x93, 0x68, 10);
+			midi.sendShortMsg(0x93, 0x68, 13);	
 		}
-	} else {
-		midi.sendShortMsg(0x93, 0x68, 13);	
+		NumarkMixTrackQuad.buttonR3FXLeds()
 	}
-	NumarkMixTrackQuad.buttonR3FXLeds()
 }
 NumarkMixTrackQuad.buttonR3FXLeds = function (){
-	if (engine.getValue('[Channel3]',"slip_enabled") || NumarkMixTrackQuad.SHFTD3) {
-		midi.sendShortMsg(0x93, 0x59, 11);
-		midi.sendShortMsg(0x93, 0x5A, 11);
-		midi.sendShortMsg(0x93, 0x5B, 11);
-		midi.sendShortMsg(0x93, 0x5C, 11);
-	} else {
-		engine.beginTimer(100, "NumarkMixTrackQuad.restoreFX1LEDsState()", true);
-		engine.beginTimer(200, "NumarkMixTrackQuad.restoreFX2LEDsState()", true);
-		engine.beginTimer(300, "NumarkMixTrackQuad.restoreFX3LEDsState()", true);
-		engine.beginTimer(400, "NumarkMixTrackQuad.restoreFXRLEDsState()", true);
+	if (NumarkMixTrackQuad.interuptLEDShow == 1)  {
+		if (engine.getValue('[Channel3]',"slip_enabled") || NumarkMixTrackQuad.SHFTD3) {
+			midi.sendShortMsg(0x93, 0x59, 11);
+			midi.sendShortMsg(0x93, 0x5A, 11);
+			midi.sendShortMsg(0x93, 0x5B, 11);
+			midi.sendShortMsg(0x93, 0x5C, 11);
+		} else {
+			engine.beginTimer(100, "NumarkMixTrackQuad.restoreFX1LEDsState()", true);
+			engine.beginTimer(200, "NumarkMixTrackQuad.restoreFX2LEDsState()", true);
+			engine.beginTimer(300, "NumarkMixTrackQuad.restoreFX3LEDsState()", true);
+			engine.beginTimer(400, "NumarkMixTrackQuad.restoreFXRLEDsState()", true);
+		}
 	}
 }
 
@@ -1811,55 +1831,59 @@ NumarkMixTrackQuad.buttonR4CuesLeds = function (){
 	}
 }
 NumarkMixTrackQuad.buttonR4SamplesLeds = function (){
-	if (engine.getValue('[Sampler13]',"track_loaded")) {
-		if (engine.getValue('[Sampler13]',"play")) {
-			midi.sendShortMsg(0x94, 0x65, 2);
+	if (NumarkMixTrackQuad.interuptLEDShow == 1)  {
+		if (engine.getValue('[Sampler13]',"track_loaded")) {
+			if (engine.getValue('[Sampler13]',"play")) {
+				midi.sendShortMsg(0x94, 0x65, 2);
+			} else {
+				midi.sendShortMsg(0x94, 0x65, 9);
+			}
 		} else {
-			midi.sendShortMsg(0x94, 0x65, 9);
+			midi.sendShortMsg(0x94, 0x65, 13);	
 		}
-	} else {
-		midi.sendShortMsg(0x94, 0x65, 13);	
-	}
-	if (engine.getValue('[Sampler14]',"track_loaded")) {
-		if (engine.getValue('[Sampler14]',"play")) {
-			midi.sendShortMsg(0x94, 0x66, 2);
+		if (engine.getValue('[Sampler14]',"track_loaded")) {
+			if (engine.getValue('[Sampler14]',"play")) {
+				midi.sendShortMsg(0x94, 0x66, 2);
+			} else {
+				midi.sendShortMsg(0x94, 0x66, 9);
+			}
 		} else {
-			midi.sendShortMsg(0x94, 0x66, 9);
+			midi.sendShortMsg(0x94, 0x66, 13);	
 		}
-	} else {
-		midi.sendShortMsg(0x94, 0x66, 13);	
-	}
-	if (engine.getValue('[Sampler15]',"track_loaded")) {
-		if (engine.getValue('[Sampler15]',"play")) {
-			midi.sendShortMsg(0x94, 0x67, 2);
+		if (engine.getValue('[Sampler15]',"track_loaded")) {
+			if (engine.getValue('[Sampler15]',"play")) {
+				midi.sendShortMsg(0x94, 0x67, 2);
+			} else {
+				midi.sendShortMsg(0x94, 0x67, 9);
+			}
 		} else {
-			midi.sendShortMsg(0x94, 0x67, 9);
+			midi.sendShortMsg(0x94, 0x67, 13);	
 		}
-	} else {
-		midi.sendShortMsg(0x94, 0x67, 13);	
-	}
-	if (engine.getValue('[Sampler16]',"track_loaded")) {
-		if (engine.getValue('[Sampler16]',"play")) {
-			midi.sendShortMsg(0x94, 0x68, 2);
+		if (engine.getValue('[Sampler16]',"track_loaded")) {
+			if (engine.getValue('[Sampler16]',"play")) {
+				midi.sendShortMsg(0x94, 0x68, 2);
+			} else {
+				midi.sendShortMsg(0x94, 0x68, 10);
+			}
 		} else {
-			midi.sendShortMsg(0x94, 0x68, 10);
+			midi.sendShortMsg(0x94, 0x68, 13);	
 		}
-	} else {
-		midi.sendShortMsg(0x94, 0x68, 13);	
+		NumarkMixTrackQuad.buttonR4FXLeds()
 	}
-	NumarkMixTrackQuad.buttonR4FXLeds()
 }
 NumarkMixTrackQuad.buttonR4FXLeds = function (){
-	if (engine.getValue('[Channel4]',"slip_enabled") || NumarkMixTrackQuad.SHFTD4) {
-		midi.sendShortMsg(0x94, 0x59, 11);
-		midi.sendShortMsg(0x94, 0x5A, 11);
-		midi.sendShortMsg(0x94, 0x5B, 11);
-		midi.sendShortMsg(0x94, 0x5C, 11);
-	} else {
-		engine.beginTimer(100, "NumarkMixTrackQuad.restoreFX1LEDsState()", true);
-		engine.beginTimer(200, "NumarkMixTrackQuad.restoreFX2LEDsState()", true);
-		engine.beginTimer(300, "NumarkMixTrackQuad.restoreFX3LEDsState()", true);
-		engine.beginTimer(400, "NumarkMixTrackQuad.restoreFXRLEDsState()", true);
+	if (NumarkMixTrackQuad.interuptLEDShow == 1)  {
+		if (engine.getValue('[Channel4]',"slip_enabled") || NumarkMixTrackQuad.SHFTD4) {
+			midi.sendShortMsg(0x94, 0x59, 11);
+			midi.sendShortMsg(0x94, 0x5A, 11);
+			midi.sendShortMsg(0x94, 0x5B, 11);
+			midi.sendShortMsg(0x94, 0x5C, 11);
+		} else {
+			engine.beginTimer(100, "NumarkMixTrackQuad.restoreFX1LEDsState()", true);
+			engine.beginTimer(200, "NumarkMixTrackQuad.restoreFX2LEDsState()", true);
+			engine.beginTimer(300, "NumarkMixTrackQuad.restoreFX3LEDsState()", true);
+			engine.beginTimer(400, "NumarkMixTrackQuad.restoreFXRLEDsState()", true);
+		}
 	}
 }
 
